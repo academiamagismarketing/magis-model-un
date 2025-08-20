@@ -30,13 +30,7 @@ const Sobre = () => {
           
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
-              <Button
-                onClick={() => navigate('/')}
-                className="mb-8 btn-white"
-              >
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Voltar ao Início
-              </Button>
+              
               
               <h1 className="text-5xl md:text-6xl font-display font-bold mb-6">
                 Sobre a Academia Magis
@@ -207,13 +201,6 @@ const Sobre = () => {
                   alt="História da Academia Magis" 
                   className="rounded-2xl shadow-diplomatic"
                 />
-                <div className="absolute -bottom-6 -right-6 bg-primary text-primary-foreground p-6 rounded-2xl">
-                  <div className="text-center">
-                    <div className="text-3xl font-bold">5</div>
-                    <div className="text-sm">Anos de</div>
-                    <div className="text-sm">História</div>
-                  </div>
-                </div>
               </div>
               <div>
                 <h2 className="text-3xl font-display font-bold mb-6 text-foreground">

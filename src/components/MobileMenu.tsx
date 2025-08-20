@@ -10,9 +10,10 @@ import {
   ShoppingBag,
   Mail,
   MapPin,
-  ChevronRight
+  ChevronRight,
+  Handshake
 } from 'lucide-react';
-import Logo from './Logo';
+import Logo from '@/components/Logo';
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -26,10 +27,11 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, currentPath })
     onClose();
   };
 
-  const navigation = [
+  const navigationLinks = [
     { name: 'Início', href: '/#inicio', icon: Home },
     { name: 'Sobre', href: '/sobre', icon: Users },
     { name: 'Eventos', href: '/eventos', icon: Calendar },
+    { name: 'Parceiros', href: '/#parceiros', icon: Handshake },
     { name: 'Pins', href: '/pins', icon: ShoppingBag },
     { name: 'Contato', href: '/contato', icon: Mail },
   ];
@@ -60,7 +62,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, currentPath })
         <div className="flex flex-col h-full">
           {/* Header */}
           <div className="flex items-center justify-between p-6 border-b border-border">
-            <Logo logoType="logo-preta-png" />
+            <Logo variant="default" />
             <Button
               onClick={onClose}
               variant="ghost"
@@ -74,7 +76,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, currentPath })
           {/* Navigation */}
           <nav className="flex-1 px-6 py-8 overflow-y-auto">
             <div className="space-y-2">
-              {navigation.map((item) => (
+              {navigationLinks.map((item) => (
                 <a
                   key={item.name}
                   href={item.href}
@@ -124,7 +126,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, currentPath })
                 <Button
                   onClick={() => handleNavigation('/eventos')}
                   variant="outline"
-                  className="w-full justify-start"
+                  className="w-full justify-start btn-outline"
                 >
                   <Calendar className="w-4 h-4 mr-2" />
                   Ver Eventos
@@ -132,7 +134,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, currentPath })
                 <Button
                   onClick={() => handleNavigation('/pins')}
                   variant="outline"
-                  className="w-full justify-start"
+                  className="w-full justify-start btn-outline"
                 >
                   <ShoppingBag className="w-4 h-4 mr-2" />
                   Comprar Pins
@@ -145,6 +147,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, currentPath })
           <div className="p-6 border-t border-border space-y-3">
             <Button
               onClick={handleWhatsApp}
+              variant="default"
               className="w-full btn-primary"
             >
               <MessageSquare className="w-4 h-4 mr-2" />

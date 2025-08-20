@@ -1,10 +1,10 @@
 import React from 'react';
-import imagotipoLogo from '@/assets/logo/IMAGOTIPO - ACADEMIA MAGIS.png';
-import tipograficaLogo from '@/assets/logo/TIPOGRAFICA - ACADEMIA MAGIS.png';
-import logoPretaSvg from '@/assets/logo/LOGO PRETA - ACADEMIA MAGIS.svg';
-import logoPretaPng from '@/assets/logo/logo_preta.png';
-import logoMagis from '@/assets/logo/logo_magis.svg';
-import logoMagisOptimized from '@/assets/logo/logo_magis_optimized.svg';
+import imagotipoLogo from '../assets/logo/IMAGOTIPO - ACADEMIA MAGIS.png';
+import tipograficaLogo from '../assets/logo/TIPOGRAFICA - ACADEMIA MAGIS.png';
+import logoPretaSvg from '../assets/logo/LOGO PRETA - ACADEMIA MAGIS.svg';
+import logoPretaPng from '../assets/logo/logo_preta.png';
+import logoMagis from '../assets/logo/logo_magis.svg';
+import logoMagisOptimized from '../assets/logo/logo_magis_optimized.svg';
 
 interface SimpleLogoProps {
   type?: 'imagotipo' | 'logo-preta' | 'logo-preta-png' | 'tipografica' | 'logo_magis' | 'logo_magis_optimized';

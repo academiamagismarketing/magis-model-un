@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import aboutImage from '@/assets/imagens/1.jpg';
+import aboutImage from '../assets/imagens/1.jpg';
 
 const AboutSection = () => {
   const navigate = useNavigate();
@@ -44,7 +44,7 @@ const AboutSection = () => {
             size="lg" 
             onClick={handleLearnMore}
             variant="outline"
-            className="border-white text-white hover:bg-white/10 hover:text-white px-8 py-4 text-lg font-semibold transition-all duration-300"
+            className="btn-white px-8 py-4 text-lg font-semibold transition-all duration-300"
           >
             Saiba Mais
             <ArrowRight className="ml-2 w-5 h-5" />

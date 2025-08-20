@@ -5,8 +5,8 @@ import {
   Phone, 
   MessageSquare
 } from 'lucide-react';
-import Logo from './Logo';
-import MobileMenu from './MobileMenu';
+import Logo from '@/components/Logo';
+import MobileMenu from '@/components/MobileMenu';
 import { useLocation } from 'react-router-dom';
 
 const Navbar = () => {
@@ -36,6 +36,7 @@ const Navbar = () => {
     { name: 'Início', href: '/#inicio' },
     { name: 'Sobre', href: '/sobre' },
     { name: 'Eventos', href: '/eventos' },
+    { name: 'Parceiros', href: '/#parceiros' },
     { name: 'Pins', href: '/pins' },
     { name: 'Contato', href: '/contato' },
   ];
@@ -57,7 +58,7 @@ const Navbar = () => {
             {/* Logo */}
             <div className="flex-shrink-0">
               <Logo 
-                logoType="logo-preta-png" 
+                variant="default"
                 size="sm"
                 className="h-10 w-auto"
               />
@@ -85,6 +86,7 @@ const Navbar = () => {
               <Button
                 onClick={handleWhatsApp}
                 size="sm"
+                variant="outline"
                 className="btn-outline"
               >
                 <Phone className="w-4 h-4 mr-2" />
@@ -93,6 +95,7 @@ const Navbar = () => {
               <Button
                 onClick={handleWhatsApp}
                 size="sm"
+                variant="default"
                 className="btn-primary"
               >
                 <MessageSquare className="w-4 h-4 mr-2" />

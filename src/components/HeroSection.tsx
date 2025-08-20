@@ -2,18 +2,12 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Users, Award, Globe } from 'lucide-react';
 import Logo from './Logo';
-import heroImage from '@/assets/hero-diplomatic.jpg';
+import heroImage from '../assets/hero-diplomatic.jpg';
 
 const HeroSection = () => {
   const handleWhatsApp = () => {
     window.open('https://wa.me/553191578389?text=Olá! Gostaria de saber mais sobre a Academia Magis.', '_blank');
   };
-
-  const stats = [
-    { icon: Users, value: "500+", label: "Estudantes Formados" },
-    { icon: Award, value: "50+", label: "Eventos Realizados" },
-    { icon: Globe, value: "15+", label: "Países Representados" }
-  ];
 
   return (
     <section id="inicio" className="relative min-h-screen flex items-center overflow-hidden">
@@ -32,48 +26,59 @@ const HeroSection = () => {
         <div className="max-w-4xl mx-auto text-center text-white">
           {/* Main Heading */}
           <div className="mb-8">
-            <Logo variant="white" size="lg" className="justify-center mb-6" logoType="logo-preta-png" />
+            <Logo variant="white" size="lg" className="justify-center mb-6" />
           </div>
           
           {/* Slogan */}
-          <p className="text-xl md:text-2xl font-display italic mb-8 animate-fade-in opacity-90 leading-relaxed">
+          <p className="text-xl md:text-2xl font-display italic mb-8 opacity-90 leading-relaxed">
             "Não queremos realizar sonhos,<br />
             queremos permitir que as pessoas sonhem."
           </p>
           
           {/* Description */}
-          <p className="text-lg md:text-xl mb-12 animate-fade-in max-w-3xl mx-auto leading-relaxed opacity-95">
+          <p className="text-lg md:text-xl mb-12 max-w-3xl mx-auto leading-relaxed opacity-95">
             Preparamos jovens líderes para simulações da ONU, desenvolvendo habilidades de diplomacia, 
             negociação e liderança internacional. Junte-se à nossa academia e transforme seu futuro.
           </p>
           
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-fade-in">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
             <Button 
               size="lg" 
               onClick={handleWhatsApp}
-              className="btn-outline px-8 py-4 text-lg font-semibold transition-all duration-300"
+              variant="outline"
+              className="btn-white px-8 py-4 text-lg font-semibold transition-all duration-300"
             >
               Fale Conosco
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
             <Button 
               size="lg" 
-              className="btn-white px-8 py-4 text-lg font-semibold transition-all duration-300"
+              onClick={() => window.location.href = '/#eventos'}
+              variant="default"
+              className="btn-primary px-8 py-4 text-lg"
             >
               Conheça Nossos Eventos
             </Button>
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 animate-fade-in">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center backdrop-blur-sm bg-white/10 rounded-lg p-6 border border-white/20">
-                <stat.icon className="w-8 h-8 mx-auto mb-3 text-white/80" />
-                <div className="text-3xl font-bold mb-1">{stat.value}</div>
-                <div className="text-sm opacity-90">{stat.label}</div>
-              </div>
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="text-center backdrop-blur-sm bg-white/10 rounded-lg p-6 border border-white/20">
+              <Users className="w-8 h-8 mx-auto mb-3 text-white/80" />
+              <div className="text-3xl font-bold mb-1">500+</div>
+              <div className="text-sm opacity-90">Estudantes Formados</div>
+            </div>
+            <div className="text-center backdrop-blur-sm bg-white/10 rounded-lg p-6 border border-white/20">
+              <Award className="w-8 h-8 mx-auto mb-3 text-white/80" />
+              <div className="text-3xl font-bold mb-1">50+</div>
+              <div className="text-sm opacity-90">Eventos Realizados</div>
+            </div>
+            <div className="text-center backdrop-blur-sm bg-white/10 rounded-lg p-6 border border-white/20">
+              <Globe className="w-8 h-8 mx-auto mb-3 text-white/80" />
+              <div className="text-3xl font-bold mb-1">15+</div>
+              <div className="text-sm opacity-90">Países Representados</div>
+            </div>
           </div>
         </div>
       </div>

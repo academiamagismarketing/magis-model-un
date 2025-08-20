@@ -104,13 +104,7 @@ Enviado através do site da Academia Magis`;
           
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
-              <Button
-                onClick={() => navigate('/')}
-                className="mb-8 btn-white"
-              >
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Voltar ao Início
-              </Button>
+              
               
               <h1 className="text-5xl md:text-6xl font-display font-bold mb-6">
                 Entre em Contato
@@ -202,7 +196,7 @@ Enviado através do site da Academia Magis`;
                     />
                   </div>
                   
-                  <Button type="submit" className="w-full btn-primary">
+                  <Button type="submit" variant="diplomatic" className="w-full">
                     <Send className="w-4 h-4 mr-2" />
                     Enviar Mensagem
                   </Button>
@@ -272,7 +266,8 @@ Enviado através do site da Academia Magis`;
                     </p>
                     <Button
                       onClick={() => window.open('https://wa.me/553191578389?text=Olá! Gostaria de saber mais sobre a Academia Magis.', '_blank')}
-                      className="bg-green-600 hover:bg-green-700 text-white border-0"
+                      variant="whatsapp"
+                      className="bg-green-600 hover:bg-green-700 text-white"
                     >
                       <MessageSquare className="w-4 h-4 mr-2" />
                       Falar no WhatsApp
@@ -332,6 +327,7 @@ Enviado através do site da Academia Magis`;
               <Button
                 onClick={() => window.open('https://wa.me/553191578389?text=Olá! Gostaria de saber mais sobre a Academia Magis.', '_blank')}
                 size="lg"
+                variant="outline"
                 className="btn-white"
               >
                 <MessageSquare className="w-4 h-4 mr-2" />
@@ -340,7 +336,8 @@ Enviado através do site da Academia Magis`;
               <Button
                 onClick={() => navigate('/eventos')}
                 size="lg"
-                className="btn-outline"
+                variant="outline"
+                className="btn-white"
               >
                 Ver Eventos
               </Button>

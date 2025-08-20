@@ -21,6 +21,7 @@ const Footer = () => {
     { name: 'Início', href: '/#inicio' },
     { name: 'Sobre', href: '/sobre' },
     { name: 'Eventos', href: '/eventos' },
+    { name: 'Parceiros', href: '/#parceiros' },
     { name: 'Pins', href: '/pins' },
     { name: 'Contato', href: '/contato' }
   ];
@@ -34,11 +35,11 @@ const Footer = () => {
 
   return (
     <footer className="bg-primary text-primary-foreground">
-      <div className="container mx-auto px-4 py-12 lg:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+      <div className="container mx-auto px-4 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Logo e Descrição */}
           <div className="lg:col-span-1">
-            <Logo logoType="logo-preta-png" />
+            <Logo variant="white" />
             <p className="mt-4 text-primary-foreground/80 leading-relaxed">
               Formando líderes diplomáticos e cidadãos globais através da excelência 
               em simulações da ONU e educação em relações internacionais.
@@ -62,13 +63,10 @@ const Footer = () => {
           {/* Links Rápidos */}
           <div>
             <h3 className="text-lg font-semibold mb-4">Links Rápidos</h3>
-            <ul className="space-y-3">
+            <ul className="space-y-2">
               {quickLinks.map((link) => (
                 <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
-                  >
+                  <a href={link.href} className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
                     {link.name}
                   </a>
                 </li>
@@ -103,7 +101,8 @@ const Footer = () => {
             </p>
             <Button
               onClick={handleWhatsApp}
-              className="w-full btn-white"
+              variant="outline"
+              className="btn-white w-full"
             >
               <MessageSquare className="w-4 h-4 mr-2" />
               WhatsApp

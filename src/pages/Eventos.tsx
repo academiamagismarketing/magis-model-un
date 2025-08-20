@@ -207,13 +207,7 @@ const Eventos = () => {
           
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
-              <Button
-                onClick={() => navigate('/')}
-                className="mb-8 btn-white"
-              >
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Voltar ao Início
-              </Button>
+              
               
               <h1 className="text-5xl md:text-6xl font-display font-bold mb-6">
                 Nossos Eventos
@@ -357,7 +351,8 @@ const Eventos = () => {
                         <div className="flex flex-col gap-2">
                           <Button 
                             onClick={() => handleWhatsApp(event)}
-                            className="w-full btn-outline"
+                            variant="outline"
+                            className="btn-outline"
                           >
                             Quero Participar
                           </Button>
@@ -390,6 +385,7 @@ const Eventos = () => {
               <Button
                 onClick={() => window.open('https://wa.me/553191578389?text=Olá! Gostaria de saber sobre eventos personalizados da Academia Magis.', '_blank')}
                 size="lg"
+                variant="default"
                 className="btn-primary"
               >
                 Falar no WhatsApp
@@ -397,6 +393,7 @@ const Eventos = () => {
               <Button
                 onClick={() => navigate('/contato')}
                 size="lg"
+                variant="outline"
                 className="btn-outline"
               >
                 Outras Formas de Contato

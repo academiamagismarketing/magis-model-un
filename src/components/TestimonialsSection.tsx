@@ -1,89 +1,114 @@
 import React from 'react';
-import { Star, Quote } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { 
+  Star, 
+  Quote, 
+  Users,
+  Calendar
+} from 'lucide-react';
 
 const TestimonialsSection = () => {
   const testimonials = [
     {
       id: 1,
-      name: "Ana Carolina Silva",
-      role: "Ex-aluna • Agora em Relações Internacionais - USP",
-      content: "A Academia Magis transformou minha visão sobre diplomacia. As simulações me prepararam não só para a universidade, mas para pensar criticamente sobre questões globais. Hoje sou bolsista em RI graças ao que aprendi aqui.",
+      name: 'Maria Silva',
+      role: 'Ex-Delegada',
+      university: 'USP - Relações Internacionais',
+      content: 'A Academia Magis transformou minha visão sobre diplomacia. Os eventos são incríveis e a equipe é muito profissional. Recomendo para todos que querem se destacar.',
       rating: 5,
-      image: "https://images.unsplash.com/photo-1494790108755-2616c6d8e35b?w=150&h=150&fit=crop&crop=face"
+      event: 'SIMONU São Paulo 2023',
+      achievement: 'Melhor Delegada - Conselho de Segurança'
     },
     {
       id: 2,
-      name: "Pedro Henrique Costa",
-      role: "Atual aluno • 3º ano Ensino Médio",
-      content: "Nunca pensei que pudesse falar em público com tanta confiança. Os professores da Academia Magis me ensinaram não só sobre diplomacia, mas sobre liderança. Agora sou presidente do grêmio da minha escola!",
+      name: 'João Santos',
+      role: 'Ex-Participante',
+      university: 'PUC-SP - Direito',
+      content: 'Participar dos workshops da Academia Magis foi fundamental para meu desenvolvimento. Aprendi técnicas de negociação que uso até hoje na minha carreira.',
       rating: 5,
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
+      event: 'Workshop de Diplomacia',
+      achievement: 'Destaque em Negociação'
     },
     {
       id: 3,
-      name: "Mariana Oliveira",
-      role: "Ex-aluna • Aprovada em Direito - FGV",
-      content: "As simulações da ONU da Academia Magis me deram uma visão global que foi essencial na minha aprovação em Direito. O método de ensino é único - aprendi negociação, oratória e pensamento estratégico.",
+      name: 'Ana Costa',
+      role: 'Ex-Coordenadora',
+      university: 'FGV - Administração',
+      content: 'Como coordenadora de eventos, posso dizer que a Academia Magis é referência em qualidade. A organização é impecável e os resultados sempre superam as expectativas.',
       rating: 5,
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face"
+      event: 'Conferência Internacional 2023',
+      achievement: 'Melhor Organização'
+    }
+  ];
+
+  const highlights = [
+    {
+      icon: Users,
+      value: '200+',
+      label: 'Alunos por Ano',
+      description: 'Participantes em nossos programas'
     },
     {
-      id: 4,
-      name: "Gabriel Santos",
-      role: "Ex-aluno • Intercâmbio EUA",
-      content: "Graças à Academia Magis, consegui uma bolsa de intercâmbio nos EUA. As habilidades de comunicação internacional que desenvolvi aqui foram fundamentais. Recomendo para qualquer jovem que quer fazer diferença no mundo.",
-      rating: 5,
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
+      icon: Star,
+      value: '4.9/5',
+      label: 'Avaliação Geral',
+      description: 'Nota média nas avaliações'
     }
   ];
 
   return (
-    <section className="py-20 bg-background">
+    <section className="py-20 bg-gradient-to-br from-muted/30 to-background">
       <div className="container mx-auto px-4">
-        {/* Section Header */}
+        {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-foreground">
-            O que Nossos <span className="text-primary">Alunos Dizem</span>
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Histórias reais de transformação através da diplomacia e do desenvolvimento 
-            de liderança internacional.
+          <div className="flex items-center justify-center mb-4">
+            <Quote className="w-8 h-8 text-primary mr-3" />
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
+              O Que Dizem Sobre Nós
+            </h2>
+          </div>
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            Depoimentos de ex-participantes que transformaram suas carreiras 
+            através dos nossos programas e eventos.
           </p>
         </div>
 
-        {/* Testimonials Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Depoimentos */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
           {testimonials.map((testimonial) => (
-            <Card key={testimonial.id} className="group hover:shadow-diplomatic transition-diplomatic border-0 bg-card relative overflow-hidden">
-              {/* Quote decoration */}
-              <div className="absolute top-4 right-4 opacity-10">
-                <Quote className="w-16 h-16 text-primary" />
-              </div>
-              
-              <CardContent className="p-8 relative z-10">
-                {/* Stars */}
-                <div className="flex space-x-1 mb-4">
+            <Card key={testimonial.id} className="hover:shadow-lg transition-all duration-300 group">
+              <CardContent className="p-6">
+                {/* Rating */}
+                <div className="flex items-center mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-yellow-500 text-yellow-500" />
+                    <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
                   ))}
                 </div>
-                
+
                 {/* Content */}
-                <blockquote className="text-foreground mb-6 leading-relaxed italic">
+                <blockquote className="text-muted-foreground mb-4 italic">
                   "{testimonial.content}"
                 </blockquote>
-                
+
+                {/* Event Info */}
+                <div className="mb-4">
+                  <div className="flex items-center text-sm text-muted-foreground mb-1">
+                    <Calendar className="w-3 h-3 mr-1" />
+                    {testimonial.event}
+                  </div>
+                  <Badge variant="secondary" className="text-xs">
+                    {testimonial.achievement}
+                  </Badge>
+                </div>
+
                 {/* Author */}
-                <div className="flex items-center">
-                  <img 
-                    src={testimonial.image} 
-                    alt={testimonial.name}
-                    className="w-12 h-12 rounded-full object-cover mr-4"
-                  />
-                  <div>
-                    <div className="font-semibold text-foreground">{testimonial.name}</div>
-                    <div className="text-sm text-muted-foreground">{testimonial.role}</div>
+                <div className="border-t pt-4">
+                  <div className="font-semibold text-foreground">
+                    {testimonial.name}
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    {testimonial.role} • {testimonial.university}
                   </div>
                 </div>
               </CardContent>
@@ -91,28 +116,29 @@ const TestimonialsSection = () => {
           ))}
         </div>
 
-        {/* Stats Section */}
-        <div className="mt-16 bg-primary text-primary-foreground rounded-2xl p-12 text-center">
-          <h3 className="text-3xl font-display font-bold mb-8">
-            Resultados que Falam por Si
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
-              <div className="text-4xl font-bold mb-2">95%</div>
-              <div className="text-primary-foreground/80">Taxa de Aprovação em Vestibulares</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold mb-2">85%</div>
-              <div className="text-primary-foreground/80">Alunos em Universidades de Prestígio</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold mb-2">500+</div>
-              <div className="text-primary-foreground/80">Alunos Transformados</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold mb-2">50+</div>
-              <div className="text-primary-foreground/80">Eventos Realizados</div>
-            </div>
+        {/* Destaques */}
+        <div className="mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+            {highlights.map((highlight, index) => (
+              <Card key={index} className="text-center hover:shadow-md transition-all duration-300">
+                <CardContent className="p-6">
+                  <div className="mb-4">
+                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
+                      <highlight.icon className="w-6 h-6 text-primary" />
+                    </div>
+                  </div>
+                  <div className="text-2xl font-bold text-primary mb-2">
+                    {highlight.value}
+                  </div>
+                  <div className="text-sm font-semibold text-foreground mb-1">
+                    {highlight.label}
+                  </div>
+                  <div className="text-xs text-muted-foreground">
+                    {highlight.description}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </div>

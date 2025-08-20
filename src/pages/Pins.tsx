@@ -115,13 +115,7 @@ const Pins = () => {
           
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
-              <Button
-                onClick={() => navigate('/')}
-                className="mb-8 btn-white"
-              >
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Voltar ao Início
-              </Button>
+              
               
               <h1 className="text-5xl md:text-6xl font-display font-bold mb-6">
                 Pins Exclusivos
@@ -287,6 +281,7 @@ const Pins = () => {
               <Button
                 onClick={() => handleWhatsApp("Coleção Diplomática")}
                 size="lg"
+                variant="outline"
                 className="btn-white"
               >
                 <MessageSquare className="w-4 h-4 mr-2" />
@@ -295,7 +290,8 @@ const Pins = () => {
               <Button
                 onClick={() => navigate('/contato')}
                 size="lg"
-                className="btn-outline"
+                variant="outline"
+                className="btn-white"
               >
                 Outras Formas de Contato
               </Button>

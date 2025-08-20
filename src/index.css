@@ -211,48 +211,64 @@ All colors MUST be HSL for consistency.
     background-clip: text;
   }
 
-  /* Custom button styles */
+  /* Custom Button Classes */
   .btn-primary {
-    background-color: #3096cc;
-    color: white;
-    border: 2px solid #3096cc;
+    background-color: hsl(var(--primary));
+    color: white !important;
+    border: 1px solid hsl(var(--primary));
+    font-weight: 600;
+    transition: all 0.3s ease;
   }
-
+  
   .btn-primary:hover {
-    background-color: #2a85b8;
-    border-color: #2a85b8;
+    background-color: hsl(var(--primary) / 0.9);
+    color: white !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px hsl(var(--primary) / 0.3);
   }
 
   .btn-outline {
     background-color: transparent;
-    color: #3096cc;
-    border: 2px solid #3096cc;
+    color: hsl(var(--primary)) !important;
+    border: 2px solid hsl(var(--primary));
+    font-weight: 600;
+    transition: all 0.3s ease;
   }
-
+  
   .btn-outline:hover {
-    background-color: #3096cc;
-    color: white;
+    background-color: hsl(var(--primary));
+    color: white !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px hsl(var(--primary) / 0.3);
   }
 
   .btn-white {
     background-color: white;
-    color: #3096cc;
-    border: 2px solid white;
+    color: hsl(var(--primary)) !important;
+    border: 1px solid white;
+    font-weight: 600;
+    transition: all 0.3s ease;
   }
-
+  
   .btn-white:hover {
-    background-color: #f8f9fa;
-    border-color: #f8f9fa;
+    background-color: hsl(var(--muted));
+    color: hsl(var(--primary)) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 
   .btn-dark {
-    background-color: #220 13% 18%;
-    color: white;
-    border: 2px solid #220 13% 18%;
+    background-color: hsl(var(--foreground));
+    color: white !important;
+    border: 1px solid hsl(var(--foreground));
+    font-weight: 600;
+    transition: all 0.3s ease;
   }
-
+  
   .btn-dark:hover {
-    background-color: #1a1a1a;
-    border-color: #1a1a1a;
+    background-color: hsl(var(--foreground) / 0.9);
+    color: white !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   }
 }
