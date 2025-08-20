@@ -7,7 +7,7 @@ interface LogoProps {
   size?: 'sm' | 'md' | 'lg';
   showText?: boolean;
   className?: string;
-  logoType?: 'icon' | 'imagotipo' | 'logo-preta' | 'tipografica' | 'logo_magis' | 'logo_magis_optimized';
+  logoType?: 'icon' | 'imagotipo' | 'logo-preta' | 'logo-preta-png' | 'tipografica' | 'logo_magis' | 'logo_magis_optimized';
 }
 
 const Logo: React.FC<LogoProps> = ({ 
@@ -15,7 +15,7 @@ const Logo: React.FC<LogoProps> = ({
   size = 'md', 
   showText = true,
   className = '',
-  logoType = 'logo_magis_optimized'
+  logoType = 'logo-preta-png'
 }) => {
   const getSizes = () => {
     switch (size) {

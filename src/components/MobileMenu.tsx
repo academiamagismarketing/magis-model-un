@@ -60,7 +60,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, currentPath })
         <div className="flex flex-col h-full">
           {/* Header */}
           <div className="flex items-center justify-between p-6 border-b border-border">
-            <Logo />
+            <Logo logoType="logo-preta-png" />
             <Button
               onClick={onClose}
               variant="ghost"

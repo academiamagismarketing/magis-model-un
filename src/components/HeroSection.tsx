@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Users, Award, Globe } from 'lucide-react';
-import Logo from '@/components/Logo';
+import Logo from './Logo';
 import heroImage from '@/assets/hero-diplomatic.jpg';
 
 const HeroSection = () => {
@@ -32,7 +32,7 @@ const HeroSection = () => {
         <div className="max-w-4xl mx-auto text-center text-white">
           {/* Main Heading */}
           <div className="mb-8">
-            <Logo variant="white" size="lg" className="justify-center mb-6" />
+            <Logo variant="white" size="lg" className="justify-center mb-6" logoType="logo-preta-png" />
           </div>
           
           {/* Slogan */}

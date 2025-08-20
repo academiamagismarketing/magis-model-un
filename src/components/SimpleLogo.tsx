@@ -1,7 +1,13 @@
 import React from 'react';
+import imagotipoLogo from '@/assets/logo/IMAGOTIPO - ACADEMIA MAGIS.png';
+import tipograficaLogo from '@/assets/logo/TIPOGRAFICA - ACADEMIA MAGIS.png';
+import logoPretaSvg from '@/assets/logo/LOGO PRETA - ACADEMIA MAGIS.svg';
+import logoPretaPng from '@/assets/logo/logo_preta.png';
+import logoMagis from '@/assets/logo/logo_magis.svg';
+import logoMagisOptimized from '@/assets/logo/logo_magis_optimized.svg';
 
 interface SimpleLogoProps {
-  type?: 'imagotipo' | 'logo-preta' | 'tipografica' | 'logo_magis' | 'logo_magis_optimized';
+  type?: 'imagotipo' | 'logo-preta' | 'logo-preta-png' | 'tipografica' | 'logo_magis' | 'logo_magis_optimized';
   size?: 'sm' | 'md' | 'lg';
   className?: string;
 }
@@ -25,15 +31,17 @@ const SimpleLogo: React.FC<SimpleLogoProps> = ({
   const getImagePath = () => {
     switch (type) {
       case 'imagotipo':
-        return '/src/assets/logo/IMAGOTIPO - ACADEMIA MAGIS.png';
+        return imagotipoLogo;
       case 'tipografica':
-        return '/src/assets/logo/TIPOGRAFICA - ACADEMIA MAGIS.png';
+        return tipograficaLogo;
       case 'logo-preta':
-        return '/src/assets/logo/LOGO PRETA - ACADEMIA MAGIS.svg';
+        return logoPretaSvg;
+      case 'logo-preta-png':
+        return logoPretaPng;
       case 'logo_magis':
-        return '/src/assets/logo/logo_magis.svg';
+        return logoMagis;
       default:
-        return '/src/assets/logo/logo_magis_optimized.svg';
+        return logoMagisOptimized;
     }
   };
 

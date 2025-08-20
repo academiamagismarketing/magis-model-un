@@ -38,7 +38,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Logo e Descrição */}
           <div className="lg:col-span-1">
-            <Logo />
+            <Logo logoType="logo-preta-png" />
             <p className="mt-4 text-primary-foreground/80 leading-relaxed">
               Formando líderes diplomáticos e cidadãos globais através da excelência 
               em simulações da ONU e educação em relações internacionais.
