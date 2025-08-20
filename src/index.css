@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Academia Magis Design System - Diplomatic & Professional Theme
+/* Academia Magis Design System - Cores oficiais da marca
+Baseado no logo oficial com colunas clássicas e swoosh
 All colors MUST be HSL for consistency.
 */
 
@@ -20,24 +21,25 @@ All colors MUST be HSL for consistency.
     --popover: 0 0% 100%;
     --popover-foreground: 215 25% 15%;
 
-    /* Primary - Diplomatic Blue */
-    --primary: 221 83% 53%;
+    /* Primary - Academia Magis Blue */
+    --primary: 207 90% 54%;
     --primary-foreground: 0 0% 98%;
-    --primary-light: 221 83% 63%;
-    --primary-dark: 221 83% 43%;
+    --primary-light: 207 90% 64%;
+    --primary-dark: 207 90% 44%;
 
-    /* Secondary - Sophisticated Gray */
-    --secondary: 215 16% 47%;
+    /* Secondary - Academia Magis Orange */
+    --secondary: 25 95% 53%;
     --secondary-foreground: 0 0% 98%;
-    --secondary-light: 215 16% 57%;
+    --secondary-light: 25 95% 63%;
+
+    /* Accent - Academia Magis Red */
+    --accent: 8 86% 59%;
+    --accent-foreground: 0 0% 98%;
+    --accent-light: 8 86% 69%;
 
     /* Muted tones */
     --muted: 217 12% 96%;
     --muted-foreground: 215 16% 47%;
-
-    /* Accent - Professional highlights */
-    --accent: 217 12% 96%;
-    --accent-foreground: 215 25% 15%;
 
     /* Status colors */
     --destructive: 0 84% 60%;
@@ -48,34 +50,37 @@ All colors MUST be HSL for consistency.
     /* Interactive elements */
     --border: 217 12% 91%;
     --input: 217 12% 91%;
-    --ring: 221 83% 53%;
+    --ring: 207 90% 54%;
 
     /* Radius system */
     --radius: 0.75rem;
 
-    /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(221 83% 53%), hsl(221 83% 43%));
-    --gradient-hero: linear-gradient(135deg, hsl(221 83% 53%) 0%, hsl(215 16% 47%) 100%);
+    /* Academia Magis Brand Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(207 90% 54%), hsl(207 90% 44%));
+    --gradient-brand: linear-gradient(135deg, hsl(25 95% 53%) 0%, hsl(8 86% 59%) 50%, hsl(207 90% 54%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(207 90% 54%) 0%, hsl(8 86% 59%) 50%, hsl(25 95% 53%) 100%);
     --gradient-subtle: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(217 12% 96%) 100%);
 
-    /* Shadows */
-    --shadow-elegant: 0 10px 30px -10px hsl(221 83% 53% / 0.3);
+    /* Sophisticated Shadows */
+    --shadow-elegant: 0 10px 30px -10px hsl(207 90% 54% / 0.3);
+    --shadow-brand: 0 8px 25px -8px hsl(8 86% 59% / 0.4);
     --shadow-diplomatic: 0 4px 20px -4px hsl(215 16% 47% / 0.25);
     --shadow-subtle: 0 2px 10px -2px hsl(215 16% 47% / 0.1);
 
-    /* Transitions */
+    /* Professional Transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-diplomatic: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --transition-brand: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 
     /* Sidebar (maintaining compatibility) */
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 215 25% 15%;
-    --sidebar-primary: 221 83% 53%;
+    --sidebar-primary: 207 90% 54%;
     --sidebar-primary-foreground: 0 0% 98%;
     --sidebar-accent: 217 12% 96%;
     --sidebar-accent-foreground: 215 25% 15%;
     --sidebar-border: 217 12% 91%;
-    --sidebar-ring: 221 83% 53%;
+    --sidebar-ring: 207 90% 54%;
   }
 
   .dark {
@@ -149,6 +154,10 @@ All colors MUST be HSL for consistency.
     background: var(--gradient-primary);
   }
   
+  .bg-gradient-brand {
+    background: var(--gradient-brand);
+  }
+  
   .bg-gradient-hero {
     background: var(--gradient-hero);
   }
@@ -160,6 +169,10 @@ All colors MUST be HSL for consistency.
   /* Shadow Utilities */
   .shadow-elegant {
     box-shadow: var(--shadow-elegant);
+  }
+  
+  .shadow-brand {
+    box-shadow: var(--shadow-brand);
   }
   
   .shadow-diplomatic {
@@ -178,9 +191,20 @@ All colors MUST be HSL for consistency.
   .transition-diplomatic {
     transition: var(--transition-diplomatic);
   }
+  
+  .transition-brand {
+    transition: var(--transition-brand);
+  }
 
   /* Custom utility classes */
   .text-gradient {
+    background: var(--gradient-brand);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-primary {
     background: var(--gradient-primary);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

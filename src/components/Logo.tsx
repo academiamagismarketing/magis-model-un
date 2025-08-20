@@ -1,0 +1,69 @@
+import React from 'react';
+import LogoIcon from './LogoIcon';
+
+interface LogoProps {
+  variant?: 'default' | 'colorful' | 'white';
+  size?: 'sm' | 'md' | 'lg';
+  showText?: boolean;
+  className?: string;
+}
+
+const Logo: React.FC<LogoProps> = ({ 
+  variant = 'default', 
+  size = 'md', 
+  showText = true,
+  className = '' 
+}) => {
+  const getSizes = () => {
+    switch (size) {
+      case 'sm':
+        return {
+          icon: 'w-6 h-6',
+          text: 'text-lg',
+          container: 'gap-2'
+        };
+      case 'lg':
+        return {
+          icon: 'w-12 h-12',
+          text: 'text-4xl',
+          container: 'gap-4'
+        };
+      default:
+        return {
+          icon: 'w-8 h-8',
+          text: 'text-2xl',
+          container: 'gap-3'
+        };
+    }
+  };
+
+  const getTextColor = () => {
+    switch (variant) {
+      case 'white':
+        return 'text-white';
+      case 'colorful':
+        return 'text-foreground';
+      default:
+        return 'text-primary';
+    }
+  };
+
+  const sizes = getSizes();
+  const textColor = getTextColor();
+
+  return (
+    <div className={`flex items-center ${sizes.container} ${className}`}>
+      <LogoIcon 
+        className={sizes.icon} 
+        variant={variant}
+      />
+      {showText && (
+        <div className={`font-display font-bold ${sizes.text} ${textColor}`}>
+          ACADEMIA <span className="text-gradient-primary">MAGIS</span>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Logo;

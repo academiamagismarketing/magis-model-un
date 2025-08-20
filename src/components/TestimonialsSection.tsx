@@ -92,13 +92,13 @@ const TestimonialsSection = () => {
         </div>
 
         {/* Stats Section */}
-        <div className="mt-16 bg-gradient-primary rounded-2xl p-12 text-center text-white">
+        <div className="mt-16 bg-gradient-brand rounded-2xl p-12 text-center text-white">
           <h3 className="text-3xl font-display font-bold mb-8">
             Resultados que Falam por Si
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
-              <div className="text-4xl font-bold mb-2">98%</div>
+              <div className="text-4xl font-bold mb-2">95%</div>
               <div className="text-blue-100">Taxa de Aprovação em Vestibulares</div>
             </div>
             <div>
@@ -110,8 +110,8 @@ const TestimonialsSection = () => {
               <div className="text-blue-100">Alunos Transformados</div>
             </div>
             <div>
-              <div className="text-4xl font-bold mb-2">15+</div>
-              <div className="text-blue-100">Países Representados</div>
+              <div className="text-4xl font-bold mb-2">50+</div>
+              <div className="text-blue-100">Eventos Realizados</div>
             </div>
           </div>
         </div>

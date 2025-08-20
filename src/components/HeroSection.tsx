@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowRight, Users, Award, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import Logo from '@/components/Logo';
 import heroImage from '@/assets/hero-diplomatic.jpg';
 
 const HeroSection = () => {
@@ -30,9 +31,9 @@ const HeroSection = () => {
       <div className="relative z-10 container mx-auto px-4 py-20">
         <div className="max-w-4xl mx-auto text-center text-white">
           {/* Main Heading */}
-          <h1 className="text-5xl md:text-7xl font-display font-bold mb-6 animate-fade-in">
-            Academia <span className="text-gradient bg-clip-text text-transparent bg-gradient-to-r from-blue-200 to-white">Magis</span>
-          </h1>
+          <div className="mb-8">
+            <Logo variant="white" size="lg" className="justify-center mb-6" />
+          </div>
           
           {/* Slogan */}
           <p className="text-xl md:text-2xl font-display italic mb-8 animate-fade-in opacity-90 leading-relaxed">
@@ -51,7 +52,7 @@ const HeroSection = () => {
             <Button 
               size="lg" 
               onClick={handleWhatsApp}
-              variant="hero"
+              variant="secondary"
               className="px-8 py-4 text-lg"
             >
               Fale Conosco
@@ -59,8 +60,8 @@ const HeroSection = () => {
             </Button>
             <Button 
               size="lg" 
-              variant="outline"
-              className="border-white text-white hover:bg-white hover:text-primary font-semibold px-8 py-4 text-lg transition-diplomatic backdrop-blur-sm"
+              variant="accent"
+              className="border-white text-white hover:bg-white hover:text-accent font-semibold px-8 py-4 text-lg transition-brand backdrop-blur-sm"
             >
               Conheça Nossos Eventos
             </Button>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { MessageCircle, Mail, Phone, MapPin, Instagram, Linkedin, Facebook } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import Logo from '@/components/Logo';
 
 const Footer = () => {
   const handleWhatsApp = () => {
@@ -38,9 +39,7 @@ const Footer = () => {
             {/* Company Info */}
             <div className="space-y-6">
               <div>
-                <div className="font-display text-3xl font-bold mb-4">
-                  Academia <span className="text-blue-200">Magis</span>
-                </div>
+                <Logo variant="white" size="md" className="mb-4" />
                 <p className="text-blue-100 leading-relaxed">
                   "Não queremos realizar sonhos, queremos permitir que as pessoas sonhem."
                 </p>

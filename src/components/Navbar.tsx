@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import Logo from '@/components/Logo';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -37,9 +38,7 @@ const Navbar = () => {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <div className="flex items-center">
-              <div className="font-display text-2xl font-bold text-primary">
-                Academia <span className="text-gradient">Magis</span>
-              </div>
+              <Logo variant="default" size="md" />
             </div>
 
             {/* Desktop Navigation */}
