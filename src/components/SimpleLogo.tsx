@@ -20,11 +20,11 @@ const SimpleLogo: React.FC<SimpleLogoProps> = ({
   const getSizes = () => {
     switch (size) {
       case 'sm':
-        return 'w-16 h-16';
+        return 'w-10 h-10';
       case 'lg':
-        return 'w-32 h-32';
+        return 'w-16 h-16';
       default:
-        return 'w-24 h-24';
+        return 'w-12 h-12';
     }
   };
 

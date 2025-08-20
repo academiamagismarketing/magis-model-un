@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { useNavigate, useLocation } from 'react-router-dom';
+import Logo from '../Logo';
 
 interface AdminLayoutProps {
   children: React.ReactNode;
@@ -72,9 +73,15 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             {/* Logo e Título */}
-            <div className="flex items-center space-x-4">
-              <h1 className="text-xl font-bold">
-                Academia Magis - Eventos
+            <div className="flex items-center space-x-3">
+              <Logo 
+                variant="white" 
+                size="sm" 
+                logoType="logo-preta-png"
+                className="h-8 w-auto"
+              />
+              <h1 className="text-lg font-semibold">
+                Eventos
               </h1>
             </div>
 
