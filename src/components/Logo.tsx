@@ -1,18 +1,21 @@
 import React from 'react';
 import LogoIcon from './LogoIcon';
+import SimpleLogo from './SimpleLogo';
 
 interface LogoProps {
   variant?: 'default' | 'colorful' | 'white';
   size?: 'sm' | 'md' | 'lg';
   showText?: boolean;
   className?: string;
+  logoType?: 'icon' | 'imagotipo' | 'logo-preta' | 'tipografica' | 'logo_magis' | 'logo_magis_optimized';
 }
 
 const Logo: React.FC<LogoProps> = ({ 
   variant = 'default', 
   size = 'md', 
   showText = true,
-  className = '' 
+  className = '',
+  logoType = 'logo_magis_optimized'
 }) => {
   const getSizes = () => {
     switch (size) {
@@ -51,6 +54,19 @@ const Logo: React.FC<LogoProps> = ({
   const sizes = getSizes();
   const textColor = getTextColor();
 
+  // Se for uma das logos completas, usamos o componente SimpleLogo
+  if (logoType !== 'icon') {
+    return (
+      <div className={`flex items-center ${className}`}>
+        <SimpleLogo 
+          type={logoType as any}
+          size={size}
+        />
+      </div>
+    );
+  }
+
+  // Para o ícone, mantemos o comportamento original
   return (
     <div className={`flex items-center ${sizes.container} ${className}`}>
       <LogoIcon 

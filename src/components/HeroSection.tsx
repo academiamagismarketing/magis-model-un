@@ -6,7 +6,7 @@ import heroImage from '@/assets/hero-diplomatic.jpg';
 
 const HeroSection = () => {
   const handleWhatsApp = () => {
-    window.open('https://wa.me/5511999999999?text=Olá! Gostaria de saber mais sobre a Academia Magis.', '_blank');
+    window.open('https://wa.me/553191578389?text=Olá! Gostaria de saber mais sobre a Academia Magis.', '_blank');
   };
 
   const stats = [
@@ -24,7 +24,7 @@ const HeroSection = () => {
           alt="Academia Magis - Diplomacia Internacional"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-hero opacity-80"></div>
+        <div className="absolute inset-0 bg-black/60"></div>
       </div>
 
       {/* Content */}
@@ -52,16 +52,14 @@ const HeroSection = () => {
             <Button 
               size="lg" 
               onClick={handleWhatsApp}
-              variant="secondary"
-              className="px-8 py-4 text-lg"
+              className="btn-outline px-8 py-4 text-lg font-semibold transition-all duration-300"
             >
               Fale Conosco
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
             <Button 
               size="lg" 
-              variant="accent"
-              className="border-white text-white hover:bg-white hover:text-accent font-semibold px-8 py-4 text-lg transition-brand backdrop-blur-sm"
+              className="btn-white px-8 py-4 text-lg font-semibold transition-all duration-300"
             >
               Conheça Nossos Eventos
             </Button>
@@ -71,7 +69,7 @@ const HeroSection = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 animate-fade-in">
             {stats.map((stat, index) => (
               <div key={index} className="text-center backdrop-blur-sm bg-white/10 rounded-lg p-6 border border-white/20">
-                <stat.icon className="w-8 h-8 mx-auto mb-3 text-blue-200" />
+                <stat.icon className="w-8 h-8 mx-auto mb-3 text-white/80" />
                 <div className="text-3xl font-bold mb-1">{stat.value}</div>
                 <div className="text-sm opacity-90">{stat.label}</div>
               </div>

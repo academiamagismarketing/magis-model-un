@@ -16,15 +16,15 @@ const Navbar = () => {
   }, []);
 
   const navigation = [
-    { name: 'Início', href: '#inicio' },
-    { name: 'Quem Somos', href: '#quem-somos' },
-    { name: 'Eventos', href: '#eventos' },
-    { name: 'Pins', href: '#pins' },
-    { name: 'Contato', href: '#contato' },
+    { name: 'Início', href: '/#inicio' },
+    { name: 'Sobre', href: '/sobre' },
+    { name: 'Eventos', href: '/eventos' },
+    { name: 'Pins', href: '/pins' },
+    { name: 'Contato', href: '/contato' },
   ];
 
   const handleWhatsApp = () => {
-    window.open('https://wa.me/5511999999999?text=Olá! Gostaria de saber mais sobre a Academia Magis.', '_blank');
+    window.open('https://wa.me/553191578389?text=Olá! Gostaria de saber mais sobre a Academia Magis.', '_blank');
   };
 
   return (
@@ -50,7 +50,7 @@ const Navbar = () => {
                   className="text-foreground hover:text-primary transition-smooth font-medium relative group"
                 >
                   {item.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-primary group-hover:w-full transition-smooth"></span>
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-smooth"></span>
                 </a>
               ))}
             </div>
@@ -59,7 +59,7 @@ const Navbar = () => {
             <div className="hidden md:flex items-center">
             <Button
               onClick={handleWhatsApp}
-              variant="diplomatic"
+              className="btn-outline"
             >
               <MessageCircle className="w-4 h-4 mr-2" />
               WhatsApp
@@ -95,8 +95,7 @@ const Navbar = () => {
               ))}
               <Button
                 onClick={handleWhatsApp}
-                variant="diplomatic"
-                className="w-full mt-4"
+                className="w-full mt-4 btn-outline"
               >
                 <MessageCircle className="w-4 h-4 mr-2" />
                 Falar no WhatsApp
@@ -110,9 +109,8 @@ const Navbar = () => {
       <div className="fixed bottom-6 right-6 z-50">
         <Button
           onClick={handleWhatsApp}
-          variant="whatsapp"
           size="lg"
-          className="rounded-full shadow-elegant hover:shadow-xl p-4"
+          className="rounded-full shadow-elegant hover:shadow-xl p-4 bg-green-600 hover:bg-green-700 text-white"
         >
           <MessageCircle className="w-6 h-6" />
         </Button>

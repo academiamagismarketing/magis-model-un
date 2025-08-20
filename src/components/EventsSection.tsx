@@ -39,16 +39,16 @@ const EventsSection = () => {
   ];
 
   const handleWhatsApp = () => {
-    window.open('https://wa.me/5511999999999?text=Olá! Gostaria de saber mais sobre os eventos da Academia Magis.', '_blank');
+    window.open('https://wa.me/553191578389?text=Olá! Gostaria de saber mais sobre os eventos da Academia Magis.', '_blank');
   };
 
   return (
-    <section id="eventos" className="py-20 bg-gradient-subtle">
+    <section id="eventos" className="py-20 bg-muted">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-foreground">
-            Próximos <span className="text-gradient">Eventos</span>
+            Próximos <span className="text-primary">Eventos</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Participe de simulações da ONU e workshops especializados que preparam você 
@@ -101,8 +101,7 @@ const EventsSection = () => {
                 
                 <Button 
                   onClick={handleWhatsApp}
-                  variant="diplomatic"
-                  className="w-full"
+                  className="w-full btn-outline"
                 >
                   Quero Participar
                 </Button>
@@ -124,15 +123,14 @@ const EventsSection = () => {
             <Button 
               size="lg"
               onClick={handleWhatsApp}
-              variant="diplomatic"
+              className="btn-outline"
             >
               <Clock className="w-4 h-4 mr-2" />
               Agenda uma Conversa
             </Button>
             <Button 
               size="lg"
-              variant="outline"
-              className="border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-diplomatic font-semibold"
+              className="btn-primary font-semibold"
             >
               Ver Todos os Eventos
             </Button>

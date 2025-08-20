@@ -5,15 +5,15 @@ import Logo from '@/components/Logo';
 
 const Footer = () => {
   const handleWhatsApp = () => {
-    window.open('https://wa.me/5511999999999?text=Olá! Gostaria de saber mais sobre a Academia Magis.', '_blank');
+    window.open('https://wa.me/553191578389?text=Olá! Gostaria de saber mais sobre a Academia Magis.', '_blank');
   };
 
   const quickLinks = [
-    { name: 'Início', href: '#inicio' },
-    { name: 'Quem Somos', href: '#quem-somos' },
-    { name: 'Eventos', href: '#eventos' },
-    { name: 'Pins', href: '#pins' },
-    { name: 'Contato', href: '#contato' }
+    { name: 'Início', href: '/#inicio' },
+    { name: 'Sobre', href: '/sobre' },
+    { name: 'Eventos', href: '/eventos' },
+    { name: 'Pins', href: '/pins' },
+    { name: 'Contato', href: '/contato' }
   ];
 
   const services = [
@@ -40,22 +40,22 @@ const Footer = () => {
             <div className="space-y-6">
               <div>
                 <Logo variant="white" size="md" className="mb-4" />
-                <p className="text-blue-100 leading-relaxed">
+                <p className="text-primary-foreground/80 leading-relaxed">
                   "Não queremos realizar sonhos, queremos permitir que as pessoas sonhem."
                 </p>
               </div>
               <div className="space-y-3">
-                <div className="flex items-center text-blue-100">
+                <div className="flex items-center text-primary-foreground/80">
                   <Phone className="w-5 h-5 mr-3" />
-                  (11) 99999-9999
+                  +55 31 9157-8389
                 </div>
-                <div className="flex items-center text-blue-100">
+                <div className="flex items-center text-primary-foreground/80">
                   <Mail className="w-5 h-5 mr-3" />
                   contato@academiamagis.com.br
                 </div>
-                <div className="flex items-center text-blue-100">
+                <div className="flex items-center text-primary-foreground/80">
                   <MapPin className="w-5 h-5 mr-3" />
-                  São Paulo, SP - Brasil
+                  Belo Horizonte, BH - Brasil
                 </div>
               </div>
             </div>
@@ -68,7 +68,7 @@ const Footer = () => {
                   <a
                     key={link.name}
                     href={link.href}
-                    className="block text-blue-100 hover:text-white transition-smooth"
+                    className="block text-primary-foreground/80 hover:text-primary-foreground transition-smooth"
                   >
                     {link.name}
                   </a>
@@ -81,7 +81,7 @@ const Footer = () => {
               <h3 className="font-montserrat text-lg font-semibold mb-6">Nossos Serviços</h3>
               <ul className="space-y-3">
                 {services.map((service) => (
-                  <li key={service} className="text-blue-100">
+                  <li key={service} className="text-primary-foreground/80">
                     {service}
                   </li>
                 ))}
@@ -91,13 +91,12 @@ const Footer = () => {
             {/* Contact CTA */}
             <div>
               <h3 className="font-montserrat text-lg font-semibold mb-6">Fale Conosco</h3>
-              <p className="text-blue-100 mb-6 leading-relaxed">
+              <p className="text-primary-foreground/80 mb-6 leading-relaxed">
                 Ready to start your diplomatic journey? Entre em contato conosco hoje mesmo!
               </p>
               <Button
                 onClick={handleWhatsApp}
-                variant="whatsapp"
-                className="w-full font-semibold mb-6"
+                className="w-full font-semibold mb-6 btn-white"
               >
                 <MessageCircle className="w-4 h-4 mr-2" />
                 WhatsApp
@@ -109,7 +108,7 @@ const Footer = () => {
                   <a
                     key={social.label}
                     href={social.href}
-                    className="text-blue-100 hover:text-white transition-smooth"
+                    className="text-primary-foreground/80 hover:text-primary-foreground transition-smooth"
                     aria-label={social.label}
                   >
                     <social.icon className="w-5 h-5" />
@@ -121,19 +120,19 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-blue-400/20 py-8">
+        <div className="border-t border-primary-foreground/20 py-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="text-blue-100 text-sm">
+            <div className="text-primary-foreground/80 text-sm">
               © 2024 Academia Magis. Todos os direitos reservados.
             </div>
             <div className="flex space-x-6 text-sm">
-              <a href="#" className="text-blue-100 hover:text-white transition-smooth">
+              <a href="#" className="text-primary-foreground/80 hover:text-primary-foreground transition-smooth">
                 Política de Privacidade
               </a>
-              <a href="#" className="text-blue-100 hover:text-white transition-smooth">
+              <a href="#" className="text-primary-foreground/80 hover:text-primary-foreground transition-smooth">
                 Termos de Uso
               </a>
-              <a href="#" className="text-blue-100 hover:text-white transition-smooth">
+              <a href="#" className="text-primary-foreground/80 hover:text-primary-foreground transition-smooth">
                 FAQ
               </a>
             </div>

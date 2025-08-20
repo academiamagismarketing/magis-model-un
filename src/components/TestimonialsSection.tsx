@@ -44,7 +44,7 @@ const TestimonialsSection = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-foreground">
-            O que Nossos <span className="text-gradient">Alunos Dizem</span>
+            O que Nossos <span className="text-primary">Alunos Dizem</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Histórias reais de transformação através da diplomacia e do desenvolvimento 
@@ -65,7 +65,7 @@ const TestimonialsSection = () => {
                 {/* Stars */}
                 <div className="flex space-x-1 mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                    <Star key={i} className="w-5 h-5 fill-yellow-500 text-yellow-500" />
                   ))}
                 </div>
                 
@@ -92,26 +92,26 @@ const TestimonialsSection = () => {
         </div>
 
         {/* Stats Section */}
-        <div className="mt-16 bg-gradient-brand rounded-2xl p-12 text-center text-white">
+        <div className="mt-16 bg-primary text-primary-foreground rounded-2xl p-12 text-center">
           <h3 className="text-3xl font-display font-bold mb-8">
             Resultados que Falam por Si
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
               <div className="text-4xl font-bold mb-2">95%</div>
-              <div className="text-blue-100">Taxa de Aprovação em Vestibulares</div>
+              <div className="text-primary-foreground/80">Taxa de Aprovação em Vestibulares</div>
             </div>
             <div>
               <div className="text-4xl font-bold mb-2">85%</div>
-              <div className="text-blue-100">Alunos em Universidades de Prestígio</div>
+              <div className="text-primary-foreground/80">Alunos em Universidades de Prestígio</div>
             </div>
             <div>
               <div className="text-4xl font-bold mb-2">500+</div>
-              <div className="text-blue-100">Alunos Transformados</div>
+              <div className="text-primary-foreground/80">Alunos Transformados</div>
             </div>
             <div>
               <div className="text-4xl font-bold mb-2">50+</div>
-              <div className="text-blue-100">Eventos Realizados</div>
+              <div className="text-primary-foreground/80">Eventos Realizados</div>
             </div>
           </div>
         </div>

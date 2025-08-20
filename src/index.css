@@ -2,44 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Academia Magis Design System - Cores oficiais da marca
-Baseado no logo oficial com colunas clássicas e swoosh
+/* Academia Magis Design System - Cores profissionais e sérias
+Baseado no estilo da Harvard MUN com paleta neutra e elegante
 All colors MUST be HSL for consistency.
 */
 
 @layer base {
   :root {
-    /* Base colors - Clean and diplomatic */
+    /* Base colors - Clean and professional */
     --background: 0 0% 100%;
-    --foreground: 215 25% 15%;
+    --foreground: 220 13% 18%;
 
     /* Card system */
     --card: 0 0% 100%;
-    --card-foreground: 215 25% 15%;
+    --card-foreground: 220 13% 18%;
 
     /* Popovers */
     --popover: 0 0% 100%;
-    --popover-foreground: 215 25% 15%;
+    --popover-foreground: 220 13% 18%;
 
-    /* Primary - Academia Magis Blue */
-    --primary: 207 90% 54%;
+    /* Primary - Academia Magis Blue (#3096cc) */
+    --primary: 204 61% 50%;
     --primary-foreground: 0 0% 98%;
-    --primary-light: 207 90% 64%;
-    --primary-dark: 207 90% 44%;
+    --primary-light: 204 61% 60%;
+    --primary-dark: 204 61% 40%;
 
-    /* Secondary - Academia Magis Orange */
-    --secondary: 25 95% 53%;
-    --secondary-foreground: 0 0% 98%;
-    --secondary-light: 25 95% 63%;
+    /* Secondary - Academia Magis Beige */
+    --secondary: 45 20% 95%;
+    --secondary-foreground: 220 13% 18%;
+    --secondary-light: 45 20% 98%;
 
-    /* Accent - Academia Magis Red */
-    --accent: 8 86% 59%;
-    --accent-foreground: 0 0% 98%;
-    --accent-light: 8 86% 69%;
+    /* Accent - Academia Magis Light Blue */
+    --accent: 210 20% 85%;
+    --accent-foreground: 220 13% 18%;
+    --accent-light: 210 20% 90%;
 
     /* Muted tones */
-    --muted: 217 12% 96%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
 
     /* Status colors */
     --destructive: 0 84% 60%;
@@ -48,24 +48,24 @@ All colors MUST be HSL for consistency.
     --success-foreground: 0 0% 98%;
 
     /* Interactive elements */
-    --border: 217 12% 91%;
-    --input: 217 12% 91%;
-    --ring: 207 90% 54%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 204 61% 50%;
 
     /* Radius system */
-    --radius: 0.75rem;
+    --radius: 0.5rem;
 
-    /* Academia Magis Brand Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(207 90% 54%), hsl(207 90% 44%));
-    --gradient-brand: linear-gradient(135deg, hsl(25 95% 53%) 0%, hsl(8 86% 59%) 50%, hsl(207 90% 54%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(207 90% 54%) 0%, hsl(8 86% 59%) 50%, hsl(25 95% 53%) 100%);
-    --gradient-subtle: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(217 12% 96%) 100%);
+    /* Academia Magis Professional Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(204 61% 50%), hsl(204 61% 40%));
+    --gradient-brand: linear-gradient(135deg, hsl(45 20% 95%) 0%, hsl(210 20% 85%) 50%, hsl(204 61% 50%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(204 61% 50%) 0%, hsl(204 61% 40%) 50%, hsl(45 20% 95%) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(220 14% 96%) 100%);
 
     /* Sophisticated Shadows */
-    --shadow-elegant: 0 10px 30px -10px hsl(207 90% 54% / 0.3);
-    --shadow-brand: 0 8px 25px -8px hsl(8 86% 59% / 0.4);
-    --shadow-diplomatic: 0 4px 20px -4px hsl(215 16% 47% / 0.25);
-    --shadow-subtle: 0 2px 10px -2px hsl(215 16% 47% / 0.1);
+    --shadow-elegant: 0 10px 30px -10px hsl(204 61% 50% / 0.15);
+    --shadow-brand: 0 8px 25px -8px hsl(204 61% 50% / 0.2);
+    --shadow-diplomatic: 0 4px 20px -4px hsl(220 9% 46% / 0.15);
+    --shadow-subtle: 0 2px 10px -2px hsl(220 9% 46% / 0.08);
 
     /* Professional Transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -74,51 +74,51 @@ All colors MUST be HSL for consistency.
 
     /* Sidebar (maintaining compatibility) */
     --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 215 25% 15%;
-    --sidebar-primary: 207 90% 54%;
+    --sidebar-foreground: 220 13% 18%;
+    --sidebar-primary: 204 61% 50%;
     --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 217 12% 96%;
-    --sidebar-accent-foreground: 215 25% 15%;
-    --sidebar-border: 217 12% 91%;
-    --sidebar-ring: 207 90% 54%;
+    --sidebar-accent: 220 14% 96%;
+    --sidebar-accent-foreground: 220 13% 18%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 204 61% 50%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 220 13% 8%;
+    --foreground: 0 0% 98%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 220 13% 8%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 220 13% 8%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 220 13% 8%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 220 13% 12%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 220 13% 12%;
+    --muted-foreground: 220 9% 65%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 220 13% 12%;
+    --accent-foreground: 0 0% 98%;
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 220 13% 12%;
+    --input: 220 13% 12%;
+    --ring: 0 0% 98%;
+    --sidebar-background: 220 13% 8%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 0 0% 98%;
+    --sidebar-primary-foreground: 220 13% 8%;
+    --sidebar-accent: 220 13% 12%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 220 13% 12%;
+    --sidebar-ring: 0 0% 98%;
   }
 }
 
@@ -209,5 +209,50 @@ All colors MUST be HSL for consistency.
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+  }
+
+  /* Custom button styles */
+  .btn-primary {
+    background-color: #3096cc;
+    color: white;
+    border: 2px solid #3096cc;
+  }
+
+  .btn-primary:hover {
+    background-color: #2a85b8;
+    border-color: #2a85b8;
+  }
+
+  .btn-outline {
+    background-color: transparent;
+    color: #3096cc;
+    border: 2px solid #3096cc;
+  }
+
+  .btn-outline:hover {
+    background-color: #3096cc;
+    color: white;
+  }
+
+  .btn-white {
+    background-color: white;
+    color: #3096cc;
+    border: 2px solid white;
+  }
+
+  .btn-white:hover {
+    background-color: #f8f9fa;
+    border-color: #f8f9fa;
+  }
+
+  .btn-dark {
+    background-color: #220 13% 18%;
+    color: white;
+    border: 2px solid #220 13% 18%;
+  }
+
+  .btn-dark:hover {
+    background-color: #1a1a1a;
+    border-color: #1a1a1a;
   }
 }

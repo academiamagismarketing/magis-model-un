@@ -1,5 +1,6 @@
 import React from 'react';
 import { TrendingUp, Users, Award, Globe2 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import LogoIcon from '@/components/LogoIcon';
 
 const StatsSection = () => {
@@ -14,24 +15,24 @@ const StatsSection = () => {
       icon: Users,
       value: "500+",
       label: "Estudantes Transformados",
-      color: "from-secondary to-secondary-light"
+      color: "bg-secondary"
     },
     {
       icon: Award,
       value: "50+",
       label: "Eventos Realizados",
-      color: "from-accent to-accent-light"
+      color: "bg-accent"
     },
     {
       icon: Globe2,
       value: "15+",
       label: "Países Representados",
-      color: "from-primary to-primary-light"
+      color: "bg-primary"
     }
   ];
 
   return (
-    <section className="py-20 bg-gradient-subtle">
+    <section className="py-20 bg-muted">
       <div className="container mx-auto px-4">
         {/* Main Statistic */}
         <div className="text-center mb-16">
@@ -43,7 +44,7 @@ const StatsSection = () => {
             
             {/* Main Content */}
             <div className="relative bg-white rounded-3xl shadow-brand p-12 border border-primary/10">
-              <div className="text-8xl md:text-9xl font-display font-bold text-gradient-primary mb-4">
+              <div className="text-8xl md:text-9xl font-display font-bold text-primary mb-4">
                 {mainStat.value}
               </div>
               <h3 className="text-2xl md:text-3xl font-display font-bold text-foreground mb-4">
@@ -61,7 +62,7 @@ const StatsSection = () => {
           {secondaryStats.map((stat, index) => (
             <div key={index} className="group">
               <div className="bg-white rounded-2xl shadow-diplomatic hover:shadow-brand transition-brand p-8 text-center border border-border/50 h-full">
-                <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${stat.color} mx-auto mb-6 flex items-center justify-center group-hover:scale-110 transition-brand`}>
+                <div className={`w-16 h-16 rounded-full ${stat.color} mx-auto mb-6 flex items-center justify-center group-hover:scale-110 transition-brand`}>
                   <stat.icon className="w-8 h-8 text-white" />
                 </div>
                 <div className="text-4xl font-display font-bold text-foreground mb-2">
@@ -85,13 +86,14 @@ const StatsSection = () => {
             e oportunidades internacionais através da diplomacia.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button 
-              onClick={() => window.open('https://wa.me/5511999999999?text=Olá! Quero fazer parte da Academia Magis.', '_blank')}
-              className="bg-gradient-brand text-white px-8 py-3 rounded-lg font-semibold shadow-brand hover:shadow-elegant transition-brand hover:scale-105"
+            <Button 
+              onClick={() => window.open('https://wa.me/553191578389?text=Olá! Quero fazer parte da Academia Magis.', '_blank')}
+              size="lg"
+              className="btn-primary px-8 py-3 font-semibold shadow-brand hover:shadow-elegant transition-all duration-300 hover:scale-105"
             >
-              <TrendingUp className="w-5 h-5 mr-2 inline" />
+              <TrendingUp className="w-5 h-5 mr-2" />
               Quero Ser o Próximo
-            </button>
+            </Button>
           </div>
         </div>
       </div>
