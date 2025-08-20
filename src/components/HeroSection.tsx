@@ -1,6 +1,6 @@
 import React from 'react';
-import { ArrowRight, Users, Award, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { ArrowRight, Users, Award, Globe } from 'lucide-react';
 import Logo from '@/components/Logo';
 import heroImage from '@/assets/hero-diplomatic.jpg';
 

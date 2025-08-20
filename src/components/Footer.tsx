@@ -1,7 +1,16 @@
 import React from 'react';
-import { MessageCircle, Mail, Phone, MapPin, Instagram, Linkedin, Facebook } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import Logo from '@/components/Logo';
+import { 
+  Phone, 
+  Mail, 
+  MapPin, 
+  MessageSquare,
+  Facebook,
+  Instagram,
+  Linkedin,
+  Youtube
+} from 'lucide-react';
+import Logo from './Logo';
 
 const Footer = () => {
   const handleWhatsApp = () => {
@@ -16,124 +25,104 @@ const Footer = () => {
     { name: 'Contato', href: '/contato' }
   ];
 
-  const services = [
-    'Simulações da ONU',
-    'Workshops de Diplomacia',
-    'Preparação Vestibular',
-    'Mentoria Individual',
-    'Eventos Corporativos'
-  ];
-
   const socialLinks = [
-    { icon: Instagram, href: '#', label: 'Instagram' },
-    { icon: Linkedin, href: '#', label: 'LinkedIn' },
-    { icon: Facebook, href: '#', label: 'Facebook' }
+    { name: 'Facebook', href: '#', icon: Facebook },
+    { name: 'Instagram', href: '#', icon: Instagram },
+    { name: 'LinkedIn', href: '#', icon: Linkedin },
+    { name: 'YouTube', href: '#', icon: Youtube }
   ];
 
   return (
     <footer className="bg-primary text-primary-foreground">
-      <div className="container mx-auto px-4">
-        {/* Main Footer Content */}
-        <div className="py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-            {/* Company Info */}
-            <div className="space-y-6">
-              <div>
-                <Logo variant="white" size="md" className="mb-4" />
-                <p className="text-primary-foreground/80 leading-relaxed">
-                  "Não queremos realizar sonhos, queremos permitir que as pessoas sonhem."
-                </p>
-              </div>
-              <div className="space-y-3">
-                <div className="flex items-center text-primary-foreground/80">
-                  <Phone className="w-5 h-5 mr-3" />
-                  +55 31 9157-8389
-                </div>
-                <div className="flex items-center text-primary-foreground/80">
-                  <Mail className="w-5 h-5 mr-3" />
-                  contato@academiamagis.com.br
-                </div>
-                <div className="flex items-center text-primary-foreground/80">
-                  <MapPin className="w-5 h-5 mr-3" />
-                  Belo Horizonte, BH - Brasil
-                </div>
-              </div>
+      <div className="container mx-auto px-4 py-12 lg:py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+          {/* Logo e Descrição */}
+          <div className="lg:col-span-1">
+            <Logo />
+            <p className="mt-4 text-primary-foreground/80 leading-relaxed">
+              Formando líderes diplomáticos e cidadãos globais através da excelência 
+              em simulações da ONU e educação em relações internacionais.
+            </p>
+            
+            {/* Social Links */}
+            <div className="mt-6 flex space-x-4">
+              {socialLinks.map((social) => (
+                <a
+                  key={social.name}
+                  href={social.href}
+                  className="w-10 h-10 bg-primary-foreground/10 rounded-full flex items-center justify-center hover:bg-primary-foreground/20 transition-colors"
+                  aria-label={social.name}
+                >
+                  <social.icon className="w-5 h-5" />
+                </a>
+              ))}
             </div>
+          </div>
 
-            {/* Quick Links */}
-            <div>
-              <h3 className="font-montserrat text-lg font-semibold mb-6">Links Rápidos</h3>
-              <nav className="space-y-3">
-                {quickLinks.map((link) => (
+          {/* Links Rápidos */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Links Rápidos</h3>
+            <ul className="space-y-3">
+              {quickLinks.map((link) => (
+                <li key={link.name}>
                   <a
-                    key={link.name}
                     href={link.href}
-                    className="block text-primary-foreground/80 hover:text-primary-foreground transition-smooth"
+                    className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
                   >
                     {link.name}
                   </a>
-                ))}
-              </nav>
-            </div>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-            {/* Services */}
-            <div>
-              <h3 className="font-montserrat text-lg font-semibold mb-6">Nossos Serviços</h3>
-              <ul className="space-y-3">
-                {services.map((service) => (
-                  <li key={service} className="text-primary-foreground/80">
-                    {service}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Contact CTA */}
-            <div>
-              <h3 className="font-montserrat text-lg font-semibold mb-6">Fale Conosco</h3>
-              <p className="text-primary-foreground/80 mb-6 leading-relaxed">
-                Ready to start your diplomatic journey? Entre em contato conosco hoje mesmo!
-              </p>
-              <Button
-                onClick={handleWhatsApp}
-                className="w-full font-semibold mb-6 btn-white"
-              >
-                <MessageCircle className="w-4 h-4 mr-2" />
-                WhatsApp
-              </Button>
-              
-              {/* Social Links */}
-              <div className="flex space-x-4">
-                {socialLinks.map((social) => (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    className="text-primary-foreground/80 hover:text-primary-foreground transition-smooth"
-                    aria-label={social.label}
-                  >
-                    <social.icon className="w-5 h-5" />
-                  </a>
-                ))}
+          {/* Contato */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Contato</h3>
+            <div className="space-y-3">
+              <div className="flex items-center space-x-3">
+                <Phone className="w-5 h-5 text-primary-foreground/60" />
+                <span className="text-primary-foreground/80">+55 31 9157-8389</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Mail className="w-5 h-5 text-primary-foreground/60" />
+                <span className="text-primary-foreground/80">contato@academiamagis.com</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <MapPin className="w-5 h-5 text-primary-foreground/60" />
+                <span className="text-primary-foreground/80">Belo Horizonte, BH - Brasil</span>
               </div>
             </div>
+          </div>
+
+          {/* CTA */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Fale Conosco</h3>
+            <p className="text-primary-foreground/80 mb-4">
+              Entre em contato conosco e descubra como podemos transformar seu futuro.
+            </p>
+            <Button
+              onClick={handleWhatsApp}
+              className="w-full btn-white"
+            >
+              <MessageSquare className="w-4 h-4 mr-2" />
+              WhatsApp
+            </Button>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-primary-foreground/20 py-8">
+        <div className="border-t border-primary-foreground/20 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="text-primary-foreground/80 text-sm">
+            <p className="text-primary-foreground/60 text-sm">
               © 2024 Academia Magis. Todos os direitos reservados.
-            </div>
+            </p>
             <div className="flex space-x-6 text-sm">
-              <a href="#" className="text-primary-foreground/80 hover:text-primary-foreground transition-smooth">
+              <a href="#" className="text-primary-foreground/60 hover:text-primary-foreground transition-colors">
                 Política de Privacidade
               </a>
-              <a href="#" className="text-primary-foreground/80 hover:text-primary-foreground transition-smooth">
+              <a href="#" className="text-primary-foreground/60 hover:text-primary-foreground transition-colors">
                 Termos de Uso
-              </a>
-              <a href="#" className="text-primary-foreground/80 hover:text-primary-foreground transition-smooth">
-                FAQ
               </a>
             </div>
           </div>

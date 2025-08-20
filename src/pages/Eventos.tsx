@@ -194,15 +194,15 @@ const Eventos = () => {
       
       <main>
         {/* Hero Section */}
-        <section className="relative py-32 bg-gradient-to-br from-primary/95 to-primary/85 text-primary-foreground overflow-hidden">
+        <section className="relative py-32 bg-gradient-to-br from-primary/80 to-primary/60 text-primary-foreground overflow-hidden">
           {/* Background Image */}
           <div className="absolute inset-0 z-0">
             <img 
               src={eventosImage} 
               alt="Eventos Academia Magis" 
-              className="w-full h-full object-cover opacity-15"
+              className="w-full h-full object-cover opacity-10"
             />
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/90 to-primary/80"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/70 to-primary/50"></div>
           </div>
           
           <div className="container mx-auto px-4 relative z-10">
