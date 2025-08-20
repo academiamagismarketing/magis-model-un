@@ -1,48 +1,46 @@
--- Configuração da tabela de agendamentos para Academia Magis
--- Execute este SQL no SQL Editor do Supabase
+-- Configuração do Supabase para Academia Magis - Sistema de Eventos
+-- Execute este script no SQL Editor do Supabase
 
--- Criar tabela de agendamentos
-CREATE TABLE IF NOT EXISTS appointments (
+-- Drop da tabela appointments se existir
+DROP TABLE IF EXISTS appointments CASCADE;
+
+-- Criação da tabela events
+CREATE TABLE events (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    phone VARCHAR(50) NOT NULL,
-    event_type VARCHAR(100) NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
     date DATE NOT NULL,
-    time TIME NOT NULL,
-    message TEXT,
-    status VARCHAR(20) NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'confirmed', 'cancelled', 'completed')),
+    location VARCHAR(255),
+    participants VARCHAR(100),
+    image_url TEXT,
+    status VARCHAR(50) CHECK (status IN ('upcoming', 'ongoing', 'completed', 'cancelled')) DEFAULT 'upcoming',
+    category VARCHAR(100),
+    price DECIMAL(10,2),
+    registration_deadline DATE,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
--- Criar índices para melhor performance
-CREATE INDEX IF NOT EXISTS idx_appointments_date ON appointments(date);
-CREATE INDEX IF NOT EXISTS idx_appointments_status ON appointments(status);
-CREATE INDEX IF NOT EXISTS idx_appointments_email ON appointments(email);
-CREATE INDEX IF NOT EXISTS idx_appointments_created_at ON appointments(created_at);
+-- Índices para performance
+CREATE INDEX idx_events_date ON events(date);
+CREATE INDEX idx_events_status ON events(status);
+CREATE INDEX idx_events_category ON events(category);
+CREATE INDEX idx_events_created_at ON events(created_at);
 
 -- Habilitar Row Level Security (RLS)
-ALTER TABLE appointments ENABLE ROW LEVEL SECURITY;
+ALTER TABLE events ENABLE ROW LEVEL SECURITY;
 
--- Política para permitir inserção pública (formulário de contato)
-CREATE POLICY "Allow public insert" ON appointments
-    FOR INSERT WITH CHECK (true);
+-- Políticas RLS
+-- Permitir leitura pública
+CREATE POLICY "Allow public read access" ON events
+    FOR SELECT USING (true);
 
--- Política para permitir leitura apenas para usuários autenticados
-CREATE POLICY "Allow authenticated read" ON appointments
-    FOR SELECT USING (auth.role() = 'authenticated');
+-- Permitir inserção/atualização/exclusão apenas para usuários autenticados
+CREATE POLICY "Allow authenticated insert/update/delete" ON events
+    FOR ALL USING (auth.role() = 'authenticated');
 
--- Política para permitir atualização apenas para usuários autenticados
-CREATE POLICY "Allow authenticated update" ON appointments
-    FOR UPDATE USING (auth.role() = 'authenticated');
-
--- Política para permitir exclusão apenas para usuários autenticados
-CREATE POLICY "Allow authenticated delete" ON appointments
-    FOR DELETE USING (auth.role() = 'authenticated');
-
--- Função para atualizar automaticamente o campo updated_at
-CREATE OR REPLACE FUNCTION update_updated_at_column()
+-- Função para atualizar o timestamp updated_at
+CREATE OR REPLACE FUNCTION update_events_updated_at_column()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = NOW();
@@ -51,54 +49,76 @@ END;
 $$ language 'plpgsql';
 
 -- Trigger para atualizar updated_at automaticamente
-CREATE TRIGGER update_appointments_updated_at 
-    BEFORE UPDATE ON appointments 
+CREATE TRIGGER update_events_updated_at 
+    BEFORE UPDATE ON events 
     FOR EACH ROW 
-    EXECUTE FUNCTION update_updated_at_column();
+    EXECUTE FUNCTION update_events_updated_at_column();
 
 -- Inserir dados de exemplo
-INSERT INTO appointments (name, email, phone, event_type, date, time, message, status) VALUES
+INSERT INTO events (title, description, date, location, participants, status, category, price, registration_deadline) VALUES
 (
-    'João Silva',
-    'joao.silva@email.com',
-    '(11) 99999-9999',
-    'Simulação ONU',
+    'SIMONU São Paulo 2024',
+    'Simulação completa da ONU com comitês especializados em questões de segurança internacional e desenvolvimento sustentável. Evento presencial com 200+ delegados.',
     '2024-03-15',
-    '14:00:00',
-    'Gostaria de agendar uma simulação da ONU para minha turma do ensino médio.',
-    'pending'
+    'Centro de Convenções Rebouças, São Paulo',
+    '200+ delegados',
+    'completed',
+    'Simulação ONU',
+    150.00,
+    '2024-03-10'
 ),
 (
-    'Maria Santos',
-    'maria.santos@email.com',
-    '(11) 88888-8888',
     'Workshop de Diplomacia',
-    '2024-03-20',
-    '10:00:00',
-    'Interessada em um workshop sobre diplomacia para estudantes universitários.',
-    'confirmed'
+    'Curso intensivo sobre técnicas de negociação, protocolo diplomático e elaboração de resoluções. Ideal para iniciantes.',
+    '2024-04-08',
+    'Academia Magis - Online',
+    '50 estudantes',
+    'completed',
+    'Workshop',
+    80.00,
+    '2024-04-05'
 ),
 (
-    'Pedro Costa',
-    'pedro.costa@email.com',
-    '(11) 77777-7777',
-    'Mentoria Individual',
-    '2024-03-25',
-    '16:00:00',
-    'Preciso de mentoria para preparação de vestibular em relações internacionais.',
-    'pending'
+    'MINIMUN Preparatório',
+    'Evento preparatório para novos delegados com simulações práticas e mentoria especializada. Perfeito para quem está começando.',
+    '2024-05-22',
+    'Universidade de São Paulo',
+    '150 participantes',
+    'upcoming',
+    'Preparatório',
+    120.00,
+    '2024-05-15'
+),
+(
+    'Conferência de Relações Internacionais',
+    'Conferência anual com palestrantes internacionais sobre temas atuais de diplomacia e política internacional.',
+    '2024-06-10',
+    'Auditório da Academia Magis',
+    '300+ participantes',
+    'upcoming',
+    'Conferência',
+    200.00,
+    '2024-06-01'
+),
+(
+    'SIMONU Rio de Janeiro 2023',
+    'Simulação da ONU realizada no Rio de Janeiro com foco em mudanças climáticas e desenvolvimento sustentável.',
+    '2023-11-20',
+    'Centro de Convenções SulAmérica, Rio de Janeiro',
+    '180 delegados',
+    'completed',
+    'Simulação ONU',
+    180.00,
+    '2023-11-15'
+),
+(
+    'Workshop de Oratória e Debate',
+    'Workshop especializado em técnicas de oratória, argumentação e debate para simulações da ONU.',
+    '2024-07-15',
+    'Academia Magis - Presencial',
+    '80 estudantes',
+    'upcoming',
+    'Workshop',
+    95.00,
+    '2024-07-10'
 );
-
--- Comentários sobre a estrutura da tabela
-COMMENT ON TABLE appointments IS 'Tabela para armazenar agendamentos da Academia Magis';
-COMMENT ON COLUMN appointments.id IS 'ID único do agendamento (UUID)';
-COMMENT ON COLUMN appointments.name IS 'Nome completo do solicitante';
-COMMENT ON COLUMN appointments.email IS 'Email do solicitante';
-COMMENT ON COLUMN appointments.phone IS 'Telefone do solicitante';
-COMMENT ON COLUMN appointments.event_type IS 'Tipo de evento/serviço solicitado';
-COMMENT ON COLUMN appointments.date IS 'Data solicitada para o agendamento';
-COMMENT ON COLUMN appointments.time IS 'Horário solicitado para o agendamento';
-COMMENT ON COLUMN appointments.message IS 'Mensagem adicional do solicitante';
-COMMENT ON COLUMN appointments.status IS 'Status do agendamento: pending, confirmed, cancelled, completed';
-COMMENT ON COLUMN appointments.created_at IS 'Data de criação do registro';
-COMMENT ON COLUMN appointments.updated_at IS 'Data da última atualização';
