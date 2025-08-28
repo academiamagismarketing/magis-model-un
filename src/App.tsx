@@ -12,10 +12,12 @@ import EventoForm from './pages/admin/EventoForm';
 import DashboardEventos from './pages/admin/DashboardEventos';
 import AdminLayout from './components/admin/AdminLayout';
 import NotFound from './pages/NotFound';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <div className="min-h-screen">
         <Routes>
           {/* Rotas públicas com Navbar */}

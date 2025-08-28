@@ -19,12 +19,6 @@ import pinsCollectionImage from '@/assets/imagens/9.jpg';
 const Produtos = () => {
   const navigate = useNavigate();
 
-  const handleWhatsApp = (collection: string) => {
-    const message = `Olá! Gostaria de adquirir a coleção de produtos "${collection}" da Academia MAGIS. Pode me enviar mais informações sobre preços e formas de pagamento?`;
-    const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/553191578389?text=${encodedMessage}`, '_blank');
-  };
-
   const productCollections = [
     {
       id: 1,
@@ -93,6 +87,12 @@ const Produtos = () => {
     }
   ];
 
+  const handleWhatsApp = (collection: string) => {
+    const message = `Olá! Gostaria de adquirir a coleção de produtos "${collection}" da Academia MAGIS. Pode me enviar mais informações sobre preços e formas de pagamento?`;
+    const encodedMessage = encodeURIComponent(message);
+    window.open(`https://wa.me/553191578389?text=${encodedMessage}`, '_blank');
+  };
+
   return (
     <div className="min-h-screen">
       <main>
@@ -135,8 +135,11 @@ const Produtos = () => {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {productCollections.map((collection) => (
-                <Card key={collection.id} className="group overflow-hidden shadow-diplomatic hover:shadow-elegant transition-diplomatic border-0 bg-card">
+              {productCollections.map((collection, index) => (
+                <Card 
+                  key={collection.id} 
+                  className="group overflow-hidden shadow-diplomatic hover:shadow-elegant transition-diplomatic border-0 bg-card"
+                >
                   <div className="relative overflow-hidden">
                     <img 
                       src={pinsCollectionImage} 
@@ -205,7 +208,10 @@ const Produtos = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {benefits.map((benefit, index) => (
-                <div key={index} className="bg-background p-8 rounded-2xl shadow-diplomatic text-center">
+                <div 
+                  key={index} 
+                  className="bg-background p-8 rounded-2xl shadow-diplomatic text-center"
+                >
                   <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
                     <benefit.icon className="w-8 h-8 text-primary" />
                   </div>
@@ -235,7 +241,10 @@ const Produtos = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {testimonials.map((testimonial, index) => (
-                <div key={index} className="bg-muted p-8 rounded-2xl">
+                <div 
+                  key={index} 
+                  className="bg-muted p-8 rounded-2xl"
+                >
                   <div className="flex items-center mb-4">
                     <div className="flex text-yellow-400">
                       {[...Array(5)].map((_, i) => (

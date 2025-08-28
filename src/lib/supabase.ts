@@ -108,5 +108,61 @@ export const eventsApi = {
     
     if (error) throw error;
     return data || [];
+  },
+
+  // Atualizar status dos eventos automaticamente baseado na data
+  async updateEventStatuses(): Promise<void> {
+    const today = new Date();
+    const twoMonthsAgo = new Date();
+    twoMonthsAgo.setMonth(today.getMonth() - 2);
+
+    // Atualizar eventos com data passada para 'completed'
+    const { error: pastEventsError } = await supabase
+      .from('events')
+      .update({ status: 'completed' })
+      .lt('date', today.toISOString().split('T')[0])
+      .in('status', ['upcoming', 'ongoing']);
+
+    if (pastEventsError) throw pastEventsError;
+
+    // Atualizar eventos 'ongoing' com mais de 2 meses para 'completed'
+    const { error: oldOngoingError } = await supabase
+      .from('events')
+      .update({ status: 'completed' })
+      .lt('date', twoMonthsAgo.toISOString().split('T')[0])
+      .eq('status', 'ongoing');
+
+    if (oldOngoingError) throw oldOngoingError;
+  },
+
+  // Buscar eventos com ordenação inteligente (data como prioridade)
+  async getEventsWithSmartOrdering(): Promise<Event[]> {
+    // Primeiro atualizar status automaticamente
+    await this.updateEventStatuses();
+
+    // Buscar todos os eventos
+    const { data, error } = await supabase
+      .from('events')
+      .select('*')
+      .order('date', { ascending: true }); // Ordem cronológica (mais próximos primeiro)
+    
+    if (error) throw error;
+    return data || [];
+  },
+
+  // Buscar eventos públicos (apenas upcoming e ongoing)
+  async getPublicEvents(): Promise<Event[]> {
+    // Primeiro atualizar status automaticamente
+    await this.updateEventStatuses();
+
+    // Buscar eventos públicos
+    const { data, error } = await supabase
+      .from('events')
+      .select('*')
+      .in('status', ['upcoming', 'ongoing'])
+      .order('date', { ascending: true }); // Ordem cronológica
+    
+    if (error) throw error;
+    return data || [];
   }
 };

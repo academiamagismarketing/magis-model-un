@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { 
   Phone, 
@@ -7,6 +8,7 @@ import {
   MessageSquare,
   Instagram
 } from 'lucide-react';
+import { scrollToTopSmooth } from './ScrollToTop';
 
 const Footer = () => {
   const handleWhatsApp = () => {
@@ -59,9 +61,19 @@ const Footer = () => {
             <ul className="space-y-2">
               {quickLinks.map((link) => (
                 <li key={link.name}>
-                  <a href={link.href} className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
-                    {link.name}
-                  </a>
+                  {link.href.startsWith('/#') ? (
+                    <a href={link.href} className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                      {link.name}
+                    </a>
+                  ) : (
+                    <Link 
+                      to={link.href} 
+                      onClick={scrollToTopSmooth}
+                      className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+                    >
+                      {link.name}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>

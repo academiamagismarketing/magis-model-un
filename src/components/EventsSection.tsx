@@ -8,10 +8,11 @@ import {
   Users, 
   ArrowRight,
   Star,
-  Clock
+  Clock,
+  MessageSquare
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { supabase } from '@/lib/supabase';
+import { eventsApi } from '@/lib/supabase';
 
 const EventsSection = () => {
   const navigate = useNavigate();
@@ -26,18 +27,8 @@ const EventsSection = () => {
     try {
       setLoading(true);
       
-      // Buscar eventos do Supabase (apenas upcoming e ongoing)
-      const { data, error } = await supabase
-        .from('events')
-        .select('*')
-        .in('status', ['upcoming', 'ongoing'])
-        .order('date', { ascending: true })
-        .limit(3);
-
-      if (error) {
-        console.error('Erro ao buscar eventos:', error);
-        return;
-      }
+      // Buscar eventos do Supabase com ordenação inteligente
+      const data = await eventsApi.getPublicEvents();
 
       // Mapear dados do Supabase para o formato esperado
       const eventsData = (data || []).map((event, index) => ({
@@ -161,56 +152,78 @@ const EventsSection = () => {
         </div>
 
         {/* Outros Eventos */}
-        <div className="mb-12">
-          <h3 className="text-xl font-semibold text-foreground text-center mb-8">
-            Outros Eventos
-          </h3>
+        {(() => {
+          const otherEvents = upcomingEvents.filter(e => !e.featured);
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {upcomingEvents.filter(e => !e.featured).map((event) => (
-              <Card key={event.id} className="hover:shadow-lg transition-all duration-300">
-                <CardHeader className="pb-3">
-                  <div className="flex items-center justify-between">
-                    <CardTitle className="text-lg font-semibold text-foreground">
-                      {event.title}
-                    </CardTitle>
-                    <Badge variant="secondary" className="text-xs">
-                      {event.category}
-                    </Badge>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-2">
-                    <div className="flex items-center text-sm text-muted-foreground">
-                      <Calendar className="w-4 h-4 mr-2" />
-                      {event.date}
-                    </div>
-                    <div className="flex items-center text-sm text-muted-foreground">
-                      <MapPin className="w-4 h-4 mr-2" />
-                      {event.location}
-                    </div>
-                    <div className="flex items-center text-sm text-muted-foreground">
-                      <Users className="w-4 h-4 mr-2" />
-                      {event.participants}
-                    </div>
-                    <div className="mt-3">
-                      <Badge variant="outline" className="text-xs">
-                        {event.status}
-                      </Badge>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
+          // Só mostra a seção se há mais de 1 evento total ou se há outros eventos além do destacado
+          if (otherEvents.length === 0 || upcomingEvents.length <= 1) {
+            return null; // Não mostra a seção se não há outros eventos ou se há apenas 1 evento total
+          }
+          
+          return (
+            <div className="mb-12">
+              <h3 className="text-xl font-semibold text-foreground text-center mb-8">
+                Outros Eventos
+              </h3>
+              
+              <div className={`grid gap-6 max-w-4xl mx-auto ${
+                otherEvents.length === 1 
+                  ? 'grid-cols-1 md:grid-cols-1' // Centraliza quando há apenas 1 outro evento
+                  : 'grid-cols-1 md:grid-cols-2' // Grid normal quando há 2 ou mais outros eventos
+              }`}>
+                {otherEvents.map((event) => (
+                  <Card key={event.id} className="hover:shadow-lg transition-all duration-300">
+                    <CardHeader className="pb-3">
+                      <div className="flex items-center justify-between">
+                        <CardTitle className="text-lg font-semibold text-foreground">
+                          {event.title}
+                        </CardTitle>
+                        <Badge variant="secondary" className="text-xs">
+                          {event.category}
+                        </Badge>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-2">
+                        <div className="flex items-center text-sm text-muted-foreground">
+                          <Calendar className="w-4 h-4 mr-2" />
+                          {event.date}
+                        </div>
+                        <div className="flex items-center text-sm text-muted-foreground">
+                          <MapPin className="w-4 h-4 mr-2" />
+                          {event.location}
+                        </div>
+                        <div className="flex items-center text-sm text-muted-foreground">
+                          <Users className="w-4 h-4 mr-2" />
+                          {event.participants}
+                        </div>
+                        <div className="mt-3">
+                          <Badge variant="outline" className="text-xs">
+                            {event.status}
+                          </Badge>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          );
+        })()}
 
         {/* CTA */}
         <div className="text-center">
-          <Button onClick={() => navigate('/eventos')} variant="default" className="btn-primary">
-            Ver Todos os Eventos
-            <ArrowRight className="ml-2 w-4 h-4" />
-          </Button>
+          {upcomingEvents.length > 1 ? (
+            <Button onClick={() => navigate('/eventos')} variant="default" className="btn-primary">
+              Ver Todos os Eventos
+              <ArrowRight className="ml-2 w-4 h-4" />
+            </Button>
+          ) : (
+            <Button onClick={handleWhatsApp} variant="default" className="btn-primary">
+              <MessageSquare className="w-4 h-4 mr-2" />
+              Entre em Contato
+            </Button>
+          )}
         </div>
       </div>
     </section>

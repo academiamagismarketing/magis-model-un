@@ -1,20 +1,40 @@
 import React from 'react';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, Users, Target, Award, Heart, Clock, Star } from 'lucide-react';
+import { ArrowLeft, Users, Target, Award, Heart, Clock, Star, MessageSquare } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useScrollAnimation, useStaggerAnimation } from '@/hooks/useScrollAnimation';
 import sobreImage from '@/assets/imagens/2.jpg';
 import equipeImage from '@/assets/imagens/3.jpg';
 import historiaImage from '@/assets/imagens/4.jpg';
 
 const Sobre = () => {
   const navigate = useNavigate();
+  
+  // Animações
+  const { elementRef: heroRef, isVisible: heroVisible } = useScrollAnimation();
+  const { elementRef: missaoRef, isVisible: missaoVisible } = useScrollAnimation();
+  const { elementRef: valoresRef, isVisible: valoresVisible } = useScrollAnimation();
+  const { elementRef: historiaRef, isVisible: historiaVisible } = useScrollAnimation();
+  const { elementRef: equipeRef, isVisible: equipeVisible } = useScrollAnimation();
+  const { elementRef: ctaRef, isVisible: ctaVisible } = useScrollAnimation();
+
+  const handleWhatsApp = () => {
+    const message = `Olá! Gostaria de saber mais sobre a Academia MAGIS e como posso participar dos eventos.`;
+    const encodedMessage = encodeURIComponent(message);
+    window.open(`https://wa.me/553191578389?text=${encodedMessage}`, '_blank');
+  };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen page-transition">
       <main>
         {/* Hero Section */}
-        <section className="relative pt-40 pb-32 bg-gradient-to-br from-primary/80 to-primary/60 text-primary-foreground overflow-hidden">
+        <section 
+          ref={heroRef}
+          className={`relative pt-40 pb-32 bg-gradient-to-br from-primary/80 to-primary/60 text-primary-foreground overflow-hidden transition-all duration-700 ${
+            heroVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-4'
+          }`}
+        >
           {/* Background Image */}
           <div className="absolute inset-0 z-0">
             <img 
@@ -27,26 +47,29 @@ const Sobre = () => {
           
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
-              
-              
-              <h1 className="text-5xl md:text-6xl font-display font-bold mb-6">
+              <h1 className="text-5xl md:text-6xl font-display font-bold mb-6 animate-fade-in-up animate-delay-200">
                 Sobre a Academia MAGIS
               </h1>
-              <p className="text-xl md:text-2xl opacity-90 leading-relaxed max-w-3xl mx-auto">
+              <p className="text-xl md:text-2xl opacity-90 leading-relaxed max-w-3xl mx-auto animate-fade-in-up animate-delay-400">
               Buscamos divulgar e facilitar o acesso a oportunidades acadêmicas para toda a comunidade, 
-              tornando estes espaços cada vez mais democráticos e inclusivos
+              tornando estes espaços cada vez mais democráticos e inclusivos
               </p>
             </div>
           </div>
         </section>
 
         {/* Nossa Missão */}
-        <section className="py-20 bg-background section-decor">
+        <section 
+          ref={missaoRef}
+          className={`py-20 bg-background section-decor transition-all duration-700 ${
+            missaoVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-4'
+          }`}
+        >
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div>
+              <div className="animate-fade-in-left animate-delay-200">
                 <div className="flex items-center mb-6">
-                  <Target className="w-8 h-8 text-primary mr-3" />
+                  <Target className="w-8 h-8 text-primary mr-3 icon-bounce" />
                   <h2 className="text-3xl font-display font-bold text-foreground">
                     Nossa Missão
                   </h2>
@@ -56,41 +79,42 @@ const Sobre = () => {
                 para ambientes que sistematicamente são excluídos do centro do debate político.
                 </p>
                 <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                Buscamos desenvolver habilidades essenciais como pensamento crítico e liderança, preparando nossos jovens para os desafios do século XXI.
+                Buscamos desenvolver habilidades essenciais como pensamento crítico e liderança, preparando nossos jovens para os desafios do século XXI.
                 </p>
                 <Button
-                  onClick={() => navigate('/eventos')}
-                  className="btn-primary"
+                  onClick={handleWhatsApp}
+                  className="btn-primary btn-animate hover-glow"
                 >
-                  Conheça Nossos Eventos
+                  <MessageSquare className="w-4 h-4 mr-2" />
+                  Fale Conosco
                 </Button>
               </div>
-              <div className="relative">
-                <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl p-8">
+              <div className="relative animate-fade-in-right animate-delay-300">
+                <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl p-8 hover-lift">
                   <div className="grid grid-cols-2 gap-6">
                     <div className="text-center">
-                      <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 icon-bounce">
                         <Users className="w-8 h-8 text-primary" />
                       </div>
                       <h3 className="font-semibold text-foreground mb-2">+500</h3>
                       <p className="text-sm text-muted-foreground">Estudantes Formados</p>
                     </div>
                     <div className="text-center">
-                      <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 icon-bounce">
                         <Award className="w-8 h-8 text-primary" />
                       </div>
                       <h3 className="font-semibold text-foreground mb-2">50+</h3>
                       <p className="text-sm text-muted-foreground">Eventos Realizados</p>
                     </div>
                     <div className="text-center">
-                      <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 icon-bounce">
                         <Star className="w-8 h-8 text-primary" />
                       </div>
                       <h3 className="font-semibold text-foreground mb-2">95%</h3>
                       <p className="text-sm text-muted-foreground">Satisfação</p>
                     </div>
                     <div className="text-center">
-                      <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 icon-bounce">
                         <Clock className="w-8 h-8 text-primary" />
                       </div>
                       <h3 className="font-semibold text-foreground mb-2">5</h3>
@@ -104,9 +128,14 @@ const Sobre = () => {
         </section>
 
         {/* Nossos Valores */}
-        <section className="py-20 bg-muted section-decor">
+        <section 
+          ref={valoresRef}
+          className={`py-20 bg-muted section-decor transition-all duration-700 ${
+            valoresVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-4'
+          }`}
+        >
           <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
+            <div className="text-center mb-16 animate-fade-in-up animate-delay-200">
               <h2 className="text-4xl font-display font-bold mb-6 text-foreground">
                 Nossos Valores
               </h2>
@@ -116,8 +145,8 @@ const Sobre = () => {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <div className="bg-background p-8 rounded-2xl shadow-diplomatic">
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+              <div className="bg-background p-8 rounded-2xl shadow-diplomatic card-animate hover-lift animate-fade-in-up animate-delay-300">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6 icon-bounce">
                   <Target className="w-8 h-8 text-primary" />
                 </div>
                 <h3 className="text-xl font-semibold mb-4 text-foreground">Excelência</h3>
@@ -127,8 +156,8 @@ const Sobre = () => {
                 </p>
               </div>
               
-              <div className="bg-background p-8 rounded-2xl shadow-diplomatic">
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+              <div className="bg-background p-8 rounded-2xl shadow-diplomatic card-animate hover-lift animate-fade-in-up animate-delay-400">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6 icon-bounce">
                   <Heart className="w-8 h-8 text-primary" />
                 </div>
                 <h3 className="text-xl font-semibold mb-4 text-foreground">Paixão</h3>
@@ -138,8 +167,8 @@ const Sobre = () => {
                 </p>
               </div>
               
-              <div className="bg-background p-8 rounded-2xl shadow-diplomatic">
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+              <div className="bg-background p-8 rounded-2xl shadow-diplomatic card-animate hover-lift animate-fade-in-up animate-delay-500">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6 icon-bounce">
                   <Users className="w-8 h-8 text-primary" />
                 </div>
                 <h3 className="text-xl font-semibold mb-4 text-foreground">Comunidade</h3>
@@ -149,8 +178,8 @@ const Sobre = () => {
                 </p>
               </div>
               
-              <div className="bg-background p-8 rounded-2xl shadow-diplomatic">
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+              <div className="bg-background p-8 rounded-2xl shadow-diplomatic card-animate hover-lift animate-fade-in-up animate-delay-300">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6 icon-bounce">
                   <Award className="w-8 h-8 text-primary" />
                 </div>
                 <h3 className="text-xl font-semibold mb-4 text-foreground">Inovação</h3>
@@ -160,8 +189,8 @@ const Sobre = () => {
                 </p>
               </div>
               
-              <div className="bg-background p-8 rounded-2xl shadow-diplomatic">
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+              <div className="bg-background p-8 rounded-2xl shadow-diplomatic card-animate hover-lift animate-fade-in-up animate-delay-400">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6 icon-bounce">
                   <Star className="w-8 h-8 text-primary" />
                 </div>
                 <h3 className="text-xl font-semibold mb-4 text-foreground">Liderança</h3>
@@ -171,8 +200,8 @@ const Sobre = () => {
                 </p>
               </div>
               
-              <div className="bg-background p-8 rounded-2xl shadow-diplomatic">
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+              <div className="bg-background p-8 rounded-2xl shadow-diplomatic card-animate hover-lift animate-fade-in-up animate-delay-500">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6 icon-bounce">
                   <Clock className="w-8 h-8 text-primary" />
                 </div>
                 <h3 className="text-xl font-semibold mb-4 text-foreground">Sustentabilidade</h3>
@@ -186,17 +215,22 @@ const Sobre = () => {
         </section>
 
         {/* Nossa História */}
-        <section className="py-20 bg-background section-decor">
+        <section 
+          ref={historiaRef}
+          className={`py-20 bg-background section-decor transition-all duration-700 ${
+            historiaVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-4'
+          }`}
+        >
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div className="relative">
+              <div className="relative animate-fade-in-left animate-delay-200">
                 <img 
                   src={historiaImage} 
                   alt="História da Academia MAGIS" 
-                  className="rounded-2xl shadow-diplomatic"
+                  className="rounded-2xl shadow-diplomatic hover-lift"
                 />
               </div>
-              <div>
+              <div className="animate-fade-in-right animate-delay-300">
                 <h2 className="text-3xl font-display font-bold mb-6 text-foreground">
                   Nossa História
                 </h2>
@@ -216,9 +250,10 @@ const Sobre = () => {
                   com sucesso.
                 </p>
                 <Button
-                  onClick={() => navigate('/contato')}
-                  className="btn-outline"
+                  onClick={handleWhatsApp}
+                  className="btn-outline btn-animate hover-glow"
                 >
+                  <MessageSquare className="w-4 h-4 mr-2" />
                   Entre em Contato
                 </Button>
               </div>
@@ -227,9 +262,14 @@ const Sobre = () => {
         </section>
 
         {/* Nossa Equipe */}
-        <section className="py-20 bg-muted section-decor">
+        <section 
+          ref={equipeRef}
+          className={`py-20 bg-muted section-decor transition-all duration-700 ${
+            equipeVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-4'
+          }`}
+        >
           <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
+            <div className="text-center mb-16 animate-fade-in-up animate-delay-200">
               <h2 className="text-4xl font-display font-bold mb-6 text-foreground">
                 Nossa Equipe
               </h2>
@@ -240,8 +280,8 @@ const Sobre = () => {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <div className="bg-background p-8 rounded-2xl shadow-diplomatic text-center">
-                <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+              <div className="bg-background p-8 rounded-2xl shadow-diplomatic text-center card-animate hover-lift animate-fade-in-up animate-delay-300">
+                <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 icon-bounce">
                   <Users className="w-12 h-12 text-primary" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2 text-foreground">Direção Executiva</h3>
@@ -253,8 +293,8 @@ const Sobre = () => {
                 </p>
               </div>
               
-              <div className="bg-background p-8 rounded-2xl shadow-diplomatic text-center">
-                <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+              <div className="bg-background p-8 rounded-2xl shadow-diplomatic text-center card-animate hover-lift animate-fade-in-up animate-delay-400">
+                <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 icon-bounce">
                   <Award className="w-12 h-12 text-primary" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2 text-foreground">Coordenação Pedagógica</h3>
@@ -266,8 +306,8 @@ const Sobre = () => {
                 </p>
               </div>
               
-              <div className="bg-background p-8 rounded-2xl shadow-diplomatic text-center">
-                <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+              <div className="bg-background p-8 rounded-2xl shadow-diplomatic text-center card-animate hover-lift animate-fade-in-up animate-delay-500">
+                <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 icon-bounce">
                   <Star className="w-12 h-12 text-primary" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2 text-foreground">Instrutores Especializados</h3>
@@ -283,30 +323,36 @@ const Sobre = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-muted text-foreground section-decor">
+        <section 
+          ref={ctaRef}
+          className={`py-20 bg-muted text-foreground section-decor transition-all duration-700 ${
+            ctaVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-4'
+          }`}
+        >
           <div className="container mx-auto px-4 text-center">
-            <h2 className="text-4xl font-display font-bold mb-6">
+            <h2 className="text-4xl font-display font-bold mb-6 animate-fade-in-up animate-delay-200">
               Faça Parte da Nossa História
             </h2>
-            <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+            <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto animate-fade-in-up animate-delay-300">
               Junte-se à Academia MAGIS e descubra o poder da diplomacia, 
               da liderança e das relações internacionais.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up animate-delay-400">
+              <Button
+                onClick={handleWhatsApp}
+                size="lg"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 btn-animate hover-glow"
+              >
+                <MessageSquare className="w-4 h-4 mr-2" />
+                Falar no WhatsApp
+              </Button>
               <Button
                 onClick={() => navigate('/eventos')}
                 size="lg"
-                className="bg-primary text-primary-foreground hover:bg-primary/90"
+                variant="outline"
+                className="border-primary text-primary hover:bg-primary/10 btn-animate"
               >
                 Conheça Nossos Eventos
-              </Button>
-              <Button
-                onClick={() => navigate('/contato')}
-                size="lg"
-                variant="outline"
-                className="border-primary text-primary hover:bg-primary/10"
-              >
-                Entre em Contato
               </Button>
             </div>
           </div>

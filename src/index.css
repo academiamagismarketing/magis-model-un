@@ -2,6 +2,192 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Animações suaves */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Classes de animação */
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.animate-fade-in-left {
+  animation: fadeInLeft 0.6s ease-out forwards;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.animate-fade-in-right {
+  animation: fadeInRight 0.6s ease-out forwards;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.5s ease-out forwards;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.animate-slide-in-up {
+  animation: slideInUp 0.8s ease-out forwards;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Delays para animações em sequência */
+.animate-delay-100 { animation-delay: 0.1s; }
+.animate-delay-200 { animation-delay: 0.2s; }
+.animate-delay-300 { animation-delay: 0.3s; }
+.animate-delay-400 { animation-delay: 0.4s; }
+.animate-delay-500 { animation-delay: 0.5s; }
+
+/* Estados iniciais para animações */
+.animate-opacity-0 { opacity: 0; }
+.animate-translate-y-4 { transform: translateY(1rem); }
+.animate-translate-y-8 { transform: translateY(2rem); }
+.animate-translate-x-4 { transform: translateX(1rem); }
+.animate-scale-95 { transform: scale(0.95); }
+
+/* Transições suaves */
+.transition-smooth {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.transition-diplomatic {
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Hover effects */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+}
+
+/* Loading animations */
+.loading-spinner {
+  animation: spin 1s linear infinite;
+}
+
+.loading-dots::after {
+  content: '';
+  animation: dots 1.5s steps(4, end) infinite;
+}
+
+@keyframes dots {
+  0%, 20% { content: ''; }
+  40% { content: '.'; }
+  60% { content: '..'; }
+  80%, 100% { content: '...'; }
+}
+
+/* Icon animations */
+.icon-bounce {
+  transition: transform 0.2s ease;
+}
+
+.icon-bounce:hover {
+  transform: scale(1.1);
+}
+
+/* Button animations */
+.btn-animate {
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-animate::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn-animate:hover::before {
+  left: 100%;
+}
+
+/* Card animations */
+.card-animate {
+  transition: all 0.3s ease;
+}
+
+.card-animate:hover {
+  transform: translateY(-2px);
+}
+
+/* Page transitions */
+.page-transition {
+  animation: fadeInUp 0.6s ease-out;
+}
+
 /* Academia MAGIS Design System - Cores profissionais e sérias
 Baseado no estilo da Harvard MUN com paleta neutra e elegante
 All colors MUST be HSL for consistency.

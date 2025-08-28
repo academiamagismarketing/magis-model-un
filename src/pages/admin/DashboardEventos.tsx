@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { supabase } from '@/lib/supabase';
+import { eventsApi } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { 
@@ -50,15 +50,9 @@ const DashboardEventos: React.FC = () => {
   const fetchEvents = async () => {
     try {
       setLoading(true);
-      const { data, error } = await supabase
-        .from('events')
-        .select('*')
-        .order('date', { ascending: true });
+      const data = await eventsApi.getEventsWithSmartOrdering();
 
-      if (error) {
-        console.error('Erro ao buscar eventos:', error);
-        return;
-      }
+
 
       setEvents(data || []);
 

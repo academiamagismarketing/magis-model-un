@@ -13,7 +13,8 @@ import {
   Clock,
   Edit,
   Trash2,
-  Eye
+  Eye,
+  RefreshCw
 } from 'lucide-react';
 import { eventsApi, Event } from '@/lib/supabase';
 import { useNavigate } from 'react-router-dom';
@@ -38,7 +39,7 @@ const AdminEventos = () => {
   const loadEvents = async () => {
     try {
       setLoading(true);
-      const data = await eventsApi.getAllEvents();
+      const data = await eventsApi.getEventsWithSmartOrdering();
       setEvents(data);
     } catch (error) {
       console.error('Erro ao carregar eventos:', error);
@@ -134,13 +135,30 @@ const AdminEventos = () => {
             <h1 className="text-3xl font-display font-bold text-foreground">Gerenciar Eventos</h1>
             <p className="text-muted-foreground">Gerencie todos os eventos da Academia MAGIS</p>
           </div>
-          <Button
-            onClick={() => navigate('/admin/eventos/novo')}
-            className="btn-primary"
-          >
-            <Plus className="w-4 h-4 mr-2" />
-            Novo Evento
-          </Button>
+          <div className="flex gap-2">
+            <Button
+              onClick={async () => {
+                try {
+                  await eventsApi.updateEventStatuses();
+                  await loadEvents();
+                } catch (error) {
+                  console.error('Erro ao atualizar status:', error);
+                }
+              }}
+              variant="outline"
+              className="btn-outline"
+            >
+              <RefreshCw className="w-4 h-4 mr-2" />
+              Atualizar Status
+            </Button>
+            <Button
+              onClick={() => navigate('/admin/eventos/novo')}
+              className="btn-primary"
+            >
+              <Plus className="w-4 h-4 mr-2" />
+              Novo Evento
+            </Button>
+          </div>
         </div>
 
         {/* Filters */}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { 
   X, 
@@ -13,6 +14,7 @@ import {
   ChevronRight,
   Heart
 } from 'lucide-react';
+import { scrollToTopSmooth } from './ScrollToTop';
 
 
 interface MobileMenuProps {
@@ -44,6 +46,9 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, currentPath })
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
+    } else {
+      // Para links de página, fazer scroll para o topo
+      scrollToTopSmooth();
     }
   };
 
@@ -79,24 +84,38 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, currentPath })
           <nav className="flex-1 px-6 py-8 overflow-y-auto">
             <div className="space-y-2">
               {navigationLinks.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  target={item.external ? '_blank' : undefined}
-                  rel={item.external ? 'noopener noreferrer' : undefined}
-                  onClick={() => !item.external && handleNavigation(item.href)}
-                  className={`flex items-center justify-between px-4 py-3 rounded-lg text-base font-medium transition-all duration-200 ${
-                    currentPath === item.href
-                      ? 'bg-primary/10 text-primary border border-primary/20'
-                      : 'text-foreground/80 hover:bg-muted hover:text-foreground'
-                  }`}
-                >
-                  <div className="flex items-center space-x-3">
-                    <item.icon className="w-5 h-5" />
-                    <span>{item.name}</span>
-                  </div>
-                  <ChevronRight className="w-4 h-4 opacity-60" />
-                </a>
+                item.external ? (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-between px-4 py-3 rounded-lg text-base font-medium transition-all duration-200 text-foreground/80 hover:bg-muted hover:text-foreground"
+                  >
+                    <div className="flex items-center space-x-3">
+                      <item.icon className="w-5 h-5" />
+                      <span>{item.name}</span>
+                    </div>
+                    <ChevronRight className="w-4 h-4 opacity-60" />
+                  </a>
+                ) : (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    onClick={() => handleNavigation(item.href)}
+                    className={`flex items-center justify-between px-4 py-3 rounded-lg text-base font-medium transition-all duration-200 ${
+                      currentPath === item.href
+                        ? 'bg-primary/10 text-primary border border-primary/20'
+                        : 'text-foreground/80 hover:bg-muted hover:text-foreground'
+                    }`}
+                  >
+                    <div className="flex items-center space-x-3">
+                      <item.icon className="w-5 h-5" />
+                      <span>{item.name}</span>
+                    </div>
+                    <ChevronRight className="w-4 h-4 opacity-60" />
+                  </Link>
+                )
               ))}
             </div>
 

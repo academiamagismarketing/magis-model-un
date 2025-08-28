@@ -3,11 +3,11 @@ import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Calendar, MapPin, Users, Clock, ArrowLeft, Filter, Search } from 'lucide-react';
+import { Calendar, MapPin, Users, Clock, ArrowLeft, Filter, Search, MessageSquare } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import studentsImage from '@/assets/students-mun.jpg';
 import eventosImage from '@/assets/imagens/8.jpg';
-import { supabase } from '@/lib/supabase';
+import { eventsApi } from '@/lib/supabase';
 
 // Interface para eventos
 interface Event {
@@ -47,16 +47,8 @@ const Eventos = () => {
     try {
       setLoading(true);
       
-      // Buscar eventos do Supabase
-      const { data, error } = await supabase
-        .from('events')
-        .select('*')
-        .order('date', { ascending: true });
-
-      if (error) {
-        console.error('Erro ao buscar eventos:', error);
-        return;
-      }
+      // Buscar eventos do Supabase com ordenação inteligente
+      const data = await eventsApi.getPublicEvents();
 
       // Mapear dados do Supabase para o formato esperado
       const eventsData: Event[] = (data || []).map(event => ({
@@ -67,7 +59,7 @@ const Eventos = () => {
         location: event.location,
         participants: event.participants,
         image_url: event.image_url || studentsImage, // Usar imagem padrão se não houver
-        status: event.status,
+        status: event.status as 'upcoming' | 'ongoing' | 'completed',
         category: event.category,
         price: event.price ? `R$ ${event.price.toFixed(2).replace('.', ',')}` : 'Gratuito',
         registration_deadline: event.registration_deadline,
@@ -110,6 +102,12 @@ const Eventos = () => {
 
   const handleWhatsApp = (event: Event) => {
     const message = `Olá! Gostaria de me inscrever no evento "${event.title}" que acontece em ${event.date}. Pode me enviar mais informações?`;
+    const encodedMessage = encodeURIComponent(message);
+    window.open(`https://wa.me/553191578389?text=${encodedMessage}`, '_blank');
+  };
+
+  const handleGeneralWhatsApp = () => {
+    const message = `Olá! Gostaria de saber mais sobre os eventos da Academia MAGIS. Pode me enviar informações sobre próximos eventos?`;
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/553191578389?text=${encodedMessage}`, '_blank');
   };
@@ -169,8 +167,6 @@ const Eventos = () => {
           
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
-              
-              
               <h1 className="text-5xl md:text-6xl font-display font-bold mb-6">
                 Nossos Eventos
               </h1>
@@ -260,7 +256,7 @@ const Eventos = () => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {filteredEvents.map((event) => (
+                  {filteredEvents.map((event, index) => (
                     <Card key={event.id} className="group overflow-hidden shadow-diplomatic hover:shadow-elegant transition-diplomatic border-0 bg-card">
                       <div className="relative overflow-hidden">
                         <img 
@@ -316,6 +312,7 @@ const Eventos = () => {
                             variant="outline"
                             className="btn-outline"
                           >
+                            <MessageSquare className="w-4 h-4 mr-2" />
                             Quero Participar
                           </Button>
                           {event.registration_deadline && (
@@ -344,11 +341,12 @@ const Eventos = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
-                onClick={() => window.open('https://wa.me/553191578389?text=Olá! Gostaria de saber sobre eventos personalizados da Academia MAGIS.', '_blank')}
+                onClick={handleGeneralWhatsApp}
                 size="lg"
                 variant="default"
                 className="btn-primary"
               >
+                <MessageSquare className="w-4 h-4 mr-2" />
                 Falar no WhatsApp
               </Button>
               <Button

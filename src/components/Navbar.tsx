@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { 
   Menu, 
@@ -7,7 +8,7 @@ import {
 } from 'lucide-react';
 
 import MobileMenu from '@/components/MobileMenu';
-import { useLocation } from 'react-router-dom';
+import { scrollToTopSmooth } from './ScrollToTop';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -61,19 +62,30 @@ const Navbar = () => {
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-8">
               {navigation.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  target={item.external ? '_blank' : undefined}
-                  rel={item.external ? 'noopener noreferrer' : undefined}
-                  className={`text-sm font-medium transition-colors hover:text-primary ${
-                    location.pathname === item.href 
-                      ? 'text-primary' 
-                      : 'text-foreground/80'
-                  }`}
-                >
-                  {item.name}
-                </a>
+                item.external ? (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm font-medium transition-colors hover:text-primary text-foreground/80"
+                  >
+                    {item.name}
+                  </a>
+                ) : (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    onClick={scrollToTopSmooth}
+                    className={`text-sm font-medium transition-colors hover:text-primary ${
+                      location.pathname === item.href 
+                        ? 'text-primary' 
+                        : 'text-foreground/80'
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
+                )
               ))}
             </div>
 
