@@ -344,43 +344,52 @@ const Sobre = () => {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <div className="bg-background p-8 rounded-2xl shadow-diplomatic text-center card-animate hover-lift">
-                <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+              <div className="bg-background p-8 rounded-2xl shadow-diplomatic text-center card-animate hover-lift group cursor-pointer" onClick={() => navigate('/equipe/diretoria')}>
+                <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
                   <Users className="w-12 h-12 text-primary" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-foreground">Direção Executiva</h3>
+                <h3 className="text-xl font-semibold mb-2 text-foreground group-hover:text-primary transition-colors">Diretoria Executiva</h3>
                 <p className="text-muted-foreground mb-4">
-                  Liderança estratégica e visão de futuro
+                  Responsável pela organização do projeto
                 </p>
-                <p className="text-sm text-muted-foreground">
-                  Responsável pela direção estratégica e desenvolvimento institucional.
+                <p className="text-sm text-muted-foreground mb-4">
+                  Clique e conheça os nossos diretores!
                 </p>
+                <div className="text-primary font-medium text-sm group-hover:underline">
+                  Ver Diretoria →
+                </div>
               </div>
               
-              <div className="bg-background p-8 rounded-2xl shadow-diplomatic text-center card-animate hover-lift">
-                <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+              <div className="bg-background p-8 rounded-2xl shadow-diplomatic text-center card-animate hover-lift group cursor-pointer" onClick={() => navigate('/equipe/voluntarios')}>
+                <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
                   <Award className="w-12 h-12 text-primary" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-foreground">Coordenação Pedagógica</h3>
+                <h3 className="text-xl font-semibold mb-2 text-foreground group-hover:text-primary transition-colors">Voluntários</h3>
                 <p className="text-muted-foreground mb-4">
-                  Excelência acadêmica e metodológica
+                  Pessoas responsáveis por nos ajudar a construir o projeto
                 </p>
-                <p className="text-sm text-muted-foreground">
-                  Desenvolvimento de metodologias e supervisão pedagógica.
+                <p className="text-sm text-muted-foreground mb-4">
+                  Conheça quem nos apoia!
                 </p>
+                <div className="text-primary font-medium text-sm group-hover:underline">
+                  Ver Voluntários →
+                </div>
               </div>
               
-              <div className="bg-background p-8 rounded-2xl shadow-diplomatic text-center card-animate hover-lift">
-                <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+              <div className="bg-background p-8 rounded-2xl shadow-diplomatic text-center card-animate hover-lift group cursor-pointer" onClick={() => navigate('/equipe/mentores')}>
+                <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
                   <Star className="w-12 h-12 text-primary" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-foreground">Mentores Especializados</h3>
+                <h3 className="text-xl font-semibold mb-2 text-foreground group-hover:text-primary transition-colors">Mentores</h3>
                 <p className="text-muted-foreground mb-4">
-                  Experiência e conhecimento prático
+                  Pessoas responsáveis por treinar jovens para eventos acadêmicos
                 </p>
-                <p className="text-sm text-muted-foreground">
-                  Experts com vasta experiência em simulações e diplomacia.
+                <p className="text-sm text-muted-foreground mb-4">
+                  Conheça nossos especialistas!
                 </p>
+                <div className="text-primary font-medium text-sm group-hover:underline">
+                  Ver Mentores →
+                </div>
               </div>
             </div>
           </div>

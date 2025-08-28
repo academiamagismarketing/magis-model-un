@@ -6,6 +6,9 @@ import Sobre from './pages/Sobre';
 import Contato from './pages/Contato';
 import Produtos from './pages/Produtos';
 import Eventos from './pages/Eventos';
+import Diretoria from './pages/equipe/Diretoria';
+import Voluntarios from './pages/equipe/Voluntarios';
+import Mentores from './pages/equipe/Mentores';
 import AdminLogin from './pages/admin/Login';
 import AdminEventos from './pages/admin/Eventos';
 import EventoForm from './pages/admin/EventoForm';
@@ -52,6 +55,24 @@ function App() {
             <div className="public-layout">
               <Navbar />
               <Eventos />
+            </div>
+          } />
+          <Route path="/equipe/diretoria" element={
+            <div className="public-layout">
+              <Navbar />
+              <Diretoria />
+            </div>
+          } />
+          <Route path="/equipe/voluntarios" element={
+            <div className="public-layout">
+              <Navbar />
+              <Voluntarios />
+            </div>
+          } />
+          <Route path="/equipe/mentores" element={
+            <div className="public-layout">
+              <Navbar />
+              <Mentores />
             </div>
           } />
           
