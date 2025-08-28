@@ -39,14 +39,14 @@ const HeroSection = () => {
         <div className="max-w-4xl mx-auto text-center text-white">
           {/* Heading */}
           <h1 className={`text-4xl md:text-6xl lg:text-7xl font-display font-bold mb-6 leading-tight transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
-            Formando <span className="text-gradient-primary">Líderes</span><br />
-            do <span className="text-gradient-primary">Amanhã</span>
+            Formando <span className="text-white">Líderes</span><br />
+            do <span className="text-white">Amanhã</span>
           </h1>
 
           {/* Slogan */}
           <p className={`text-lg md:text-xl font-display italic mb-6 opacity-90 leading-relaxed max-w-3xl mx-auto transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
             "Não queremos realizar sonhos,<br />
-            <span className="text-primary font-semibold">queremos permitir que as pessoas sonhem.</span>"
+            <span className="text-white font-semibold">queremos permitir que as pessoas sonhem.</span>"
           </p>
 
           {/* Description */}
