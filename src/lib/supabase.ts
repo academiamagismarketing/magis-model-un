@@ -26,6 +26,20 @@ export interface Event {
   updated_at: string;
 }
 
+// Interface para produtos
+export interface Product {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  image_url?: string;
+  category: string;
+  status: 'active' | 'inactive' | 'out_of_stock';
+  buy_link: string;
+  created_at: string;
+  updated_at: string;
+}
+
 // API para eventos
 export const eventsApi = {
   // Buscar todos os eventos
@@ -161,6 +175,103 @@ export const eventsApi = {
       .select('*')
       .in('status', ['upcoming', 'ongoing'])
       .order('date', { ascending: true }); // Ordem cronológica
+    
+    if (error) throw error;
+    return data || [];
+  }
+};
+
+// API para produtos
+export const productsApi = {
+  // Buscar todos os produtos
+  async getAllProducts(): Promise<Product[]> {
+    const { data, error } = await supabase
+      .from('products')
+      .select('*')
+      .order('created_at', { ascending: false });
+    
+    if (error) throw error;
+    return data || [];
+  },
+
+  // Buscar produto por ID
+  async getProductById(id: string): Promise<Product | null> {
+    const { data, error } = await supabase
+      .from('products')
+      .select('*')
+      .eq('id', id)
+      .single();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  // Criar novo produto
+  async createProduct(product: Omit<Product, 'id' | 'created_at' | 'updated_at'>): Promise<Product> {
+    const { data, error } = await supabase
+      .from('products')
+      .insert([product])
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  // Atualizar produto
+  async updateProduct(id: string, updates: Partial<Product>): Promise<Product> {
+    const { data, error } = await supabase
+      .from('products')
+      .update(updates)
+      .eq('id', id)
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  // Deletar produto
+  async deleteProduct(id: string): Promise<void> {
+    const { error } = await supabase
+      .from('products')
+      .delete()
+      .eq('id', id);
+    
+    if (error) throw error;
+  },
+
+  // Buscar produtos por status
+  async getProductsByStatus(status: Product['status']): Promise<Product[]> {
+    const { data, error } = await supabase
+      .from('products')
+      .select('*')
+      .eq('status', status)
+      .order('created_at', { ascending: false });
+    
+    if (error) throw error;
+    return data || [];
+  },
+
+  // Buscar produtos por categoria
+  async getProductsByCategory(category: string): Promise<Product[]> {
+    const { data, error } = await supabase
+      .from('products')
+      .select('*')
+      .eq('category', category)
+      .order('created_at', { ascending: false });
+    
+    if (error) throw error;
+    return data || [];
+  },
+
+  // Buscar produtos ativos (para exibição pública)
+  async getActiveProducts(): Promise<Product[]> {
+    const { data, error } = await supabase
+      .from('products')
+      .select('*')
+      .eq('status', 'active')
+      .order('created_at', { ascending: false });
     
     if (error) throw error;
     return data || [];

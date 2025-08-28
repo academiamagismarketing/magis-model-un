@@ -122,3 +122,104 @@ INSERT INTO events (title, description, date, location, participants, status, ca
     95.00,
     '2024-07-10'
 );
+
+-- ========================================
+-- TABELA DE PRODUTOS
+-- ========================================
+
+-- Criação da tabela products
+CREATE TABLE products (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    price DECIMAL(10,2) NOT NULL,
+    image_url TEXT,
+    category VARCHAR(100),
+    status VARCHAR(50) CHECK (status IN ('active', 'inactive', 'out_of_stock')) DEFAULT 'active',
+    buy_link TEXT NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- Índices para performance
+CREATE INDEX idx_products_status ON products(status);
+CREATE INDEX idx_products_category ON products(category);
+CREATE INDEX idx_products_created_at ON products(created_at);
+
+-- Habilitar Row Level Security (RLS)
+ALTER TABLE products ENABLE ROW LEVEL SECURITY;
+
+-- Políticas RLS
+-- Permitir leitura pública
+CREATE POLICY "Allow public read access" ON products
+    FOR SELECT USING (true);
+
+-- Permitir inserção/atualização/exclusão apenas para usuários autenticados
+CREATE POLICY "Allow authenticated insert/update/delete" ON products
+    FOR ALL USING (auth.role() = 'authenticated');
+
+-- Função para atualizar o timestamp updated_at
+CREATE OR REPLACE FUNCTION update_products_updated_at_column()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.updated_at = NOW();
+    RETURN NEW;
+END;
+$$ language 'plpgsql';
+
+-- Trigger para atualizar updated_at automaticamente
+CREATE TRIGGER update_products_updated_at 
+    BEFORE UPDATE ON products 
+    FOR EACH ROW 
+    EXECUTE FUNCTION update_products_updated_at_column();
+
+-- Inserir dados de exemplo para produtos
+INSERT INTO products (name, description, price, category, status, buy_link) VALUES
+(
+    'Manual de Simulação ONU',
+    'Guia completo para participar de simulações da ONU. Inclui técnicas de debate, protocolo diplomático e elaboração de resoluções.',
+    45.00,
+    'Livros',
+    'active',
+    'https://wa.me/553191578389?text=Olá! Gostaria de comprar o Manual de Simulação ONU'
+),
+(
+    'Kit Delegado Premium',
+    'Kit completo para delegados com material de estudo, guias práticos e acesso a conteúdo exclusivo.',
+    89.90,
+    'Kits',
+    'active',
+    'https://wa.me/553191578389?text=Olá! Gostaria de comprar o Kit Delegado Premium'
+),
+(
+    'Curso Online de Diplomacia',
+    'Curso completo online com 20 horas de conteúdo sobre diplomacia, negociação e relações internacionais.',
+    199.00,
+    'Cursos',
+    'active',
+    'https://wa.me/553191578389?text=Olá! Gostaria de comprar o Curso Online de Diplomacia'
+),
+(
+    'Camiseta Academia MAGIS',
+    'Camiseta oficial da Academia MAGIS com design exclusivo. Disponível em várias cores.',
+    35.00,
+    'Vestuário',
+    'active',
+    'https://wa.me/553191578389?text=Olá! Gostaria de comprar a Camiseta Academia MAGIS'
+),
+(
+    'E-book: Guia do Delegado',
+    'E-book digital com dicas e estratégias para se destacar em simulações da ONU.',
+    29.90,
+    'Livros',
+    'active',
+    'https://wa.me/553191578389?text=Olá! Gostaria de comprar o E-book: Guia do Delegado'
+),
+(
+    'Mentoria Individual',
+    'Sessão individual de mentoria com especialistas em simulações da ONU. 1 hora de consultoria personalizada.',
+    150.00,
+    'Serviços',
+    'active',
+    'https://wa.me/553191578389?text=Olá! Gostaria de agendar uma Mentoria Individual'
+);

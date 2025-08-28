@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { supabase } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
 import { 
@@ -11,7 +11,9 @@ import {
   Users,
   BarChart3,
   Menu,
-  X
+  X,
+  Package,
+  ShoppingCart
 } from 'lucide-react';
 
 interface AdminLayoutProps {
@@ -22,33 +24,58 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState<any>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isChecking, setIsChecking] = useState(true);
+
+  // Debug log
+  console.log('AdminLayout render - isChecking:', isChecking, 'user:', !!user);
 
   useEffect(() => {
+    let isMounted = true;
+    console.log('AdminLayout useEffect - checking user');
+
     const checkUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      
-      if (!user) {
-        navigate('/admin/login');
-        return;
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        
+        if (!isMounted) return;
+        
+        if (!user) {
+          console.log('AdminLayout - no user, redirecting to login');
+          navigate('/admin/login');
+          return;
+        }
+
+        // Verificar se o email está na lista de administradores permitidos
+        const allowedEmailsString = import.meta.env.VITE_ADMIN_EMAILS;
+        const allowedEmails = allowedEmailsString 
+          ? allowedEmailsString.split(',').map(email => email.trim())
+          : [
+              'academiamagismarketing@gmail.com',
+              'riannm19@gmail.com',
+              'institucional@academiamagis.com'
+            ];
+
+        if (!allowedEmails.includes(user.email || '')) {
+          console.log('AdminLayout - user not allowed, redirecting to login');
+          await supabase.auth.signOut();
+          navigate('/admin/login');
+          return;
+        }
+
+        if (isMounted) {
+          console.log('AdminLayout - user authenticated:', user.email);
+          setUser(user);
+        }
+      } catch (error) {
+        console.error('Erro ao verificar usuário:', error);
+        if (isMounted) {
+          navigate('/admin/login');
+        }
+      } finally {
+        if (isMounted) {
+          setIsChecking(false);
+        }
       }
-
-      // Verificar se o email está na lista de administradores permitidos
-      const allowedEmailsString = import.meta.env.VITE_ADMIN_EMAILS;
-      const allowedEmails = allowedEmailsString 
-        ? allowedEmailsString.split(',').map(email => email.trim())
-        : [
-            'academiamagismarketing@gmail.com',
-            'riannm19@gmail.com',
-            'institucional@academiamagis.com'
-          ];
-
-      if (!allowedEmails.includes(user.email || '')) {
-        await supabase.auth.signOut();
-        navigate('/admin/login');
-        return;
-      }
-
-      setUser(user);
     };
 
     checkUser();
@@ -56,6 +83,10 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
     // Escutar mudanças na autenticação
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
+        if (!isMounted) return;
+        
+        console.log('AdminLayout - auth state change:', event);
+        
         if (event === 'SIGNED_OUT') {
           navigate('/admin/login');
         } else if (session?.user) {
@@ -64,7 +95,11 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
       }
     );
 
-    return () => subscription.unsubscribe();
+    return () => {
+      console.log('AdminLayout - cleanup');
+      isMounted = false;
+      subscription.unsubscribe();
+    };
   }, [navigate]);
 
   const handleLogout = async () => {
@@ -79,7 +114,9 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
   const navigationItems = [
     { name: 'Dashboard', href: '/admin', icon: Home },
     { name: 'Eventos', href: '/admin/eventos', icon: Calendar },
-    { name: 'Novo Evento', href: '/admin/eventos/novo', icon: Plus }
+    { name: 'Novo Evento', href: '/admin/eventos/novo', icon: Plus },
+    { name: 'Produtos', href: '/admin/produtos', icon: Package },
+    { name: 'Novo Produto', href: '/admin/produtos/novo', icon: ShoppingCart }
   ];
 
   return (
@@ -108,12 +145,13 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
           <nav className="flex-1 px-4 py-6 space-y-2">
             {navigationItems.map((item) => {
               const Icon = item.icon;
-              const isActive = window.location.pathname === item.href;
+              const location = useLocation();
+              const isActive = location.pathname === item.href;
               
               return (
-                <a
+                <Link
                   key={item.name}
-                  href={item.href}
+                  to={item.href}
                   className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors ${
                     isActive 
                       ? 'bg-primary-foreground/20 text-primary-foreground' 
@@ -122,7 +160,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
                 >
                   <Icon className="w-5 h-5" />
                   <span className="font-medium">{item.name}</span>
-                </a>
+                </Link>
               );
             })}
           </nav>
