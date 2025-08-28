@@ -52,10 +52,14 @@ const Login = () => {
 
       if (data.user) {
         // Verificar se o email está na lista de administradores permitidos
-        const allowedEmails = [
-          'academiamagismarketing@gmail.com',
-          'riannm19@gmail.com'
-        ];
+        const allowedEmailsString = import.meta.env.VITE_ADMIN_EMAILS;
+        const allowedEmails = allowedEmailsString 
+          ? allowedEmailsString.split(',').map(email => email.trim())
+          : [
+              'academiamagismarketing@gmail.com',
+              'riannm19@gmail.com',
+              'institucional@academiamagis.com'
+            ];
 
         if (allowedEmails.includes(data.user.email || '')) {
           navigate('/admin/eventos');
