@@ -57,6 +57,76 @@ const TestimonialsSection = () => {
     }
   ];
 
+  return (
+    <section className="py-20 bg-gradient-to-br from-muted/20 to-background">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-display font-bold text-foreground mb-4">
+            O que dizem nossos alunos
+          </h2>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            Depoimentos reais de quem viveu a experiência MAGIS
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          {highlights.map((highlight, index) => {
+            const Icon = highlight.icon;
+            return (
+              <Card key={index} className="text-center p-6 border-primary/20">
+                <CardContent className="p-0">
+                  <Icon className="w-8 h-8 text-primary mx-auto mb-3" />
+                  <h3 className="text-3xl font-bold text-primary mb-1">{highlight.value}</h3>
+                  <h4 className="text-lg font-semibold text-foreground mb-1">{highlight.label}</h4>
+                  <p className="text-muted-foreground text-sm">{highlight.description}</p>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {testimonials.map((testimonial) => (
+            <Card key={testimonial.id} className="p-6 hover:shadow-lg transition-all duration-300 border-primary/20">
+              <CardContent className="p-0">
+                <div className="flex items-center mb-4">
+                  <Quote className="w-8 h-8 text-primary/30 mr-3" />
+                  <div className="flex">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
+                    ))}
+                  </div>
+                </div>
+                
+                <p className="text-muted-foreground mb-6 leading-relaxed">
+                  "{testimonial.content}"
+                </p>
+                
+                <div className="space-y-3">
+                  <div>
+                    <h4 className="font-semibold text-foreground">{testimonial.name}</h4>
+                    <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                    <p className="text-sm text-primary">{testimonial.university}</p>
+                  </div>
+                  
+                  <div className="pt-3 border-t border-border">
+                    <Badge variant="secondary" className="text-xs mb-2 block w-fit">
+                      <Calendar className="w-3 h-3 mr-1" />
+                      {testimonial.event}
+                    </Badge>
+                    <Badge variant="outline" className="text-xs">
+                      <Star className="w-3 h-3 mr-1" />
+                      {testimonial.achievement}
+                    </Badge>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default TestimonialsSection;

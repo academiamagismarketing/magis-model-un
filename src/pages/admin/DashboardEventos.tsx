@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { eventsApi } from '@/lib/supabase';
+import { eventsApi, Event } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { 
@@ -16,19 +16,6 @@ import {
   Trash2,
   ExternalLink
 } from 'lucide-react';
-
-interface Event {
-  id: string;
-  title: string;
-  description: string;
-  date: string;
-  location: string;
-  category: string;
-  status: string;
-  max_participants: number;
-  current_participants: number;
-  created_at: string;
-}
 
 const DashboardEventos: React.FC = () => {
   const navigate = useNavigate();
@@ -62,7 +49,7 @@ const DashboardEventos: React.FC = () => {
       const ongoing = data?.filter(e => e.status === 'ongoing').length || 0;
       const completed = data?.filter(e => e.status === 'completed').length || 0;
       const cancelled = data?.filter(e => e.status === 'cancelled').length || 0;
-      const totalParticipants = data?.reduce((sum, e) => sum + (e.current_participants || 0), 0) || 0;
+      const totalParticipants = data?.reduce((sum, e) => sum + (e.max_participants || 0), 0) || 0;
 
       setStats({
         total,

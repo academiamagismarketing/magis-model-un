@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -16,6 +15,7 @@ import {
 } from 'lucide-react';
 import { eventsApi, Event } from '@/lib/supabase';
 import { useNavigate, useParams } from 'react-router-dom';
+import ImageUpload from '@/components/ImageUpload';
 
 const EventoForm = () => {
   const navigate = useNavigate();
@@ -315,17 +315,14 @@ const EventoForm = () => {
                   />
                 </div>
 
-                {/* URL da Imagem */}
+                {/* Upload de Imagem */}
                 <div className="md:col-span-2">
-                  <Label htmlFor="image_url" className="text-foreground">URL da Imagem</Label>
-                  <Input
-                    id="image_url"
-                    name="image_url"
-                    type="url"
-                    value={formData.image_url}
-                    onChange={handleInputChange}
-                    className="mt-2"
-                    placeholder="https://exemplo.com/imagem.jpg"
+                  <ImageUpload
+                    currentImageUrl={formData.image_url}
+                    onImageChange={(url) => setFormData(prev => ({ ...prev, image_url: url }))}
+                    folder="events"
+                    label="Imagem do Evento"
+                    showUrlInput={true}
                   />
                 </div>
               </div>
