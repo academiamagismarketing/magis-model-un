@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { eventsApi, productsApi } from '@/lib/supabase';
+import { eventsApi, productsApi, Event, Product } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { 
@@ -17,29 +17,6 @@ import {
   DollarSign,
   ShoppingCart
 } from 'lucide-react';
-
-interface Event {
-  id: string;
-  title: string;
-  description: string;
-  date: string;
-  location: string;
-  category: string;
-  status: string;
-  max_participants: number;
-  current_participants: number;
-  created_at: string;
-}
-
-interface Product {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  category: string;
-  status: string;
-  created_at: string;
-}
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
@@ -81,7 +58,7 @@ const Dashboard: React.FC = () => {
       const ongoingEvents = eventsData?.filter(e => e.status === 'ongoing').length || 0;
       const completedEvents = eventsData?.filter(e => e.status === 'completed').length || 0;
       const cancelledEvents = eventsData?.filter(e => e.status === 'cancelled').length || 0;
-      const totalParticipants = eventsData?.reduce((sum, e) => sum + (e.current_participants || 0), 0) || 0;
+      const totalParticipants = eventsData?.reduce((sum, e) => sum + (e.max_participants || 0), 0) || 0;
 
       // Calcular estatísticas de produtos
       const totalProducts = productsData?.length || 0;

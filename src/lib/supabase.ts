@@ -22,6 +22,8 @@ export interface Event {
   category: string;
   price?: number;
   registration_deadline?: string;
+  max_participants?: number;
+  current_participants?: number;
   created_at: string;
   updated_at: string;
 }

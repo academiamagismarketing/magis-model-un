@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { productsApi, Product } from '@/lib/supabase';
 import { useNavigate, useParams } from 'react-router-dom';
+import ImageUpload from '@/components/ImageUpload';
 
 const ProdutoForm = () => {
   const navigate = useNavigate();
@@ -294,22 +295,17 @@ const ProdutoForm = () => {
                 </p>
               </div>
 
-              {/* URL da Imagem */}
+              {/* Upload de Imagem */}
               <div className="md:col-span-2">
-                <Label htmlFor="image_url" className="text-foreground font-medium">
-                  URL da Imagem (opcional)
-                </Label>
-                <div className="relative mt-2">
-                  <Input
-                    id="image_url"
-                    type="url"
-                    value={formData.image_url}
-                    onChange={(e) => handleInputChange('image_url', e.target.value)}
-                    placeholder="https://exemplo.com/imagem.jpg"
-                  />
-                </div>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Deixe em branco para usar imagem padrão
+                <ImageUpload
+                  currentImageUrl={formData.image_url}
+                  onImageChange={(url) => handleInputChange('image_url', url)}
+                  folder="products"
+                  label="Imagem do Produto (opcional)"
+                  showUrlInput={true}
+                />
+                <p className="text-sm text-muted-foreground mt-2">
+                  Faça upload de uma imagem ou use uma URL externa
                 </p>
               </div>
             </div>
