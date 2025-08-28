@@ -1,8 +1,6 @@
 import React from 'react';
 import HeroSection from '@/components/HeroSection';
 import EventsSection from '@/components/EventsSection';
-import StatsSection from '@/components/StatsSection';
-import TestimonialsSection from '@/components/TestimonialsSection';
 import PartnersSection from '@/components/PartnersSection';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
@@ -17,19 +15,19 @@ const Index = () => {
       <HeroSection />
 
       {/* Sobre - Teaser compacto e consistente */}
-      <section className="py-20 bg-background">
+      <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-4xl font-display font-bold mb-4 text-foreground">
               Sobre a Academia MAGIS
             </h2>
-            <p className="text-lg text-muted-foreground mb-10 leading-relaxed">
+            <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
               A Academia MAGIS democratiza o acesso a oportunidades acadêmicas por meio de
-              simulações da ONU, workshops e mentoria para formar as próximas gerações de líderes.
+              simulações da ONU, workshops e mentorias para formar as próximas gerações de líderes.
             </p>
 
             {/* Detalhes rápidos para o usuário */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10 text-left">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 text-left">
               <div className="bg-muted rounded-xl p-4 flex items-start gap-3">
                 <Target className="w-5 h-5 text-primary mt-1" />
                 <div>
@@ -47,7 +45,7 @@ const Index = () => {
               <div className="bg-muted rounded-xl p-4 flex items-start gap-3">
                 <GraduationCap className="w-5 h-5 text-primary mt-1" />
                 <div>
-                  <div className="font-semibold text-foreground">Workshops Profissionais</div>
+                  <div className="font-semibold text-foreground">Workshops</div>
                   <div className="text-sm text-muted-foreground">Habilidades em diplomacia, negociação e liderança.</div>
                 </div>
               </div>
@@ -60,10 +58,8 @@ const Index = () => {
         </div>
       </section>
 
-      <StatsSection />
       <EventsSection />
       <PartnersSection />
-      <TestimonialsSection />
       <Footer />
     </>
   );

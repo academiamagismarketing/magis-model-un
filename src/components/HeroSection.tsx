@@ -93,8 +93,8 @@ const HeroSection = () => {
                 </div>
                 <div className="h-8 w-px bg-white/20" />
                 <div className="flex-1">
-                  <div className="text-2xl md:text-3xl font-bold text-white">15+</div>
-                  <div className="text-xs md:text-sm text-white/80">Países</div>
+                  <div className="text-2xl md:text-3xl font-bold text-white">R$ 9.000+</div>
+                  <div className="text-xs md:text-sm text-white/80">Arrecadados</div>
                 </div>
               </div>
             </div>

@@ -24,40 +24,45 @@ const PartnersSection = () => {
       logo: logoMocs,
       description: 'Model United Nations Conference System',
       category: 'Sistema de Conferências',
-      featured: true
+      featured: true,
+      link: 'https://www.instagram.com/mocscefet/'
     },
     {
       name: 'SIA',
       logo: logoSia,
       description: 'Sistema Internacional de Arbitragem',
       category: 'Arbitragem Internacional',
-      featured: true
+      featured: true,
+      link: 'https://www.instagram.com/siacsabh/'
     },
     {
       name: 'SIS',
       logo: logoSis,
       description: 'Sistema Internacional de Simulações',
       category: 'Simulações',
-      featured: true
+      featured: true,
+      link: 'https://www.instagram.com/sis.sagrado/'
     },
     {
       name: 'SIB',
       logo: logoSib,
       description: 'Sistema Internacional de Debates',
       category: 'Debates',
-      featured: true
+      featured: true,
+      link: 'https://www.instagram.com/sibernou/'
     },
     {
       name: 'TEMAS',
       logo: logoTemas,
       description: 'Temas e Debates Acadêmicos',
       category: 'Debates Acadêmicos',
-      featured: false
+      featured: false,
+      link: 'https://www.instagram.com/temasmg/'
     }
   ];
 
   return (
-    <section id="parceiros" className="py-20 bg-gradient-to-br from-muted/30 to-background">
+    <section id="parceiros" className="py-16 bg-gradient-to-br from-muted/30 to-background">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-16">
@@ -88,22 +93,24 @@ const PartnersSection = () => {
               {partners.map((partner) => (
                 <Card key={partner.name} className="group hover:shadow-lg transition-all duration-300 border-2 hover:border-primary/20 min-w-[200px] max-w-[250px] flex-shrink-0">
                   <CardContent className="p-6 text-center">
-                    <div className="mb-4">
-                      <img 
-                        src={partner.logo} 
-                        alt={`Logo ${partner.name}`}
-                        className="h-16 w-auto mx-auto object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300"
-                      />
-                    </div>
-                    <h4 className="font-semibold text-foreground mb-2">
-                      {partner.name}
-                    </h4>
-                    <p className="text-sm text-muted-foreground mb-3">
-                      {partner.description}
-                    </p>
-                    <Badge variant="secondary" className="text-xs">
-                      {partner.category}
-                    </Badge>
+                    <a href={partner.link} target="_blank" rel="noopener noreferrer" className="block">
+                      <div className="mb-4">
+                        <img 
+                          src={partner.logo} 
+                          alt={`Logo ${partner.name}`}
+                          className="h-16 w-auto mx-auto object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300"
+                        />
+                      </div>
+                      <h4 className="font-semibold text-foreground mb-2">
+                        {partner.name}
+                      </h4>
+                      <p className="text-sm text-muted-foreground mb-3">
+                        {partner.description}
+                      </p>
+                      <Badge variant="secondary" className="text-xs">
+                        {partner.category}
+                      </Badge>
+                    </a>
                   </CardContent>
                 </Card>
               ))}

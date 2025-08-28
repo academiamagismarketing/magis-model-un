@@ -60,7 +60,7 @@ const EventsSection = () => {
 
   if (loading) {
     return (
-      <section id="eventos" className="py-20 bg-gradient-to-br from-background to-muted/20">
+      <section id="eventos" className="py-16 bg-gradient-to-br from-background to-muted/20">
         <div className="container mx-auto px-4">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
@@ -72,7 +72,7 @@ const EventsSection = () => {
   }
 
   return (
-    <section id="eventos" className="py-20 bg-gradient-to-br from-background to-muted/20">
+    <section id="eventos" className="py-16 bg-gradient-to-br from-background to-muted/20">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-16">
