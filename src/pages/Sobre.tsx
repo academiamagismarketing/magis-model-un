@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Users, Target, Award, Heart, Clock, Star, MessageSquare } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useScrollAnimation, useStaggerAnimation } from '@/hooks/useScrollAnimation';
+import { statisticsApi, Statistic } from '@/lib/supabase';
 import sobreImage from '@/assets/imagens/2.jpg';
 import equipeImage from '@/assets/imagens/3.jpg';
 import historiaImage from '@/assets/imagens/4.jpg';
 
 const Sobre = () => {
   const navigate = useNavigate();
+  const [statistics, setStatistics] = useState<Statistic[]>([]);
+  const [timeOfOperation, setTimeOfOperation] = useState(0);
+  const [loading, setLoading] = useState(true);
   
   // Animações
   const { elementRef: heroRef, isVisible: heroVisible } = useScrollAnimation();
@@ -19,11 +23,69 @@ const Sobre = () => {
   const { elementRef: equipeRef, isVisible: equipeVisible } = useScrollAnimation();
   const { elementRef: ctaRef, isVisible: ctaVisible } = useScrollAnimation();
 
+  useEffect(() => {
+    loadStatistics();
+  }, []);
+
+  const loadStatistics = async () => {
+    try {
+      setLoading(true);
+      const data = await statisticsApi.getPublicStatistics();
+      setStatistics(data);
+      
+      // Calcular tempo de atuação
+      const months = statisticsApi.calculateTimeOfOperation();
+      setTimeOfOperation(months);
+    } catch (error) {
+      console.error('Erro ao carregar estatísticas:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const getStatisticValue = (key: string) => {
+    const stat = statistics.find(s => s.key === key);
+    if (!stat) return 0;
+    
+    switch (key) {
+      case 'valores_arrecadados':
+        return stat.value;
+      case 'delegados':
+      case 'eventos_realizados':
+        return Math.floor(stat.value);
+      default:
+        return stat.value;
+    }
+  };
+
+  const formatStatisticValue = (key: string, value: number) => {
+    switch (key) {
+      case 'valores_arrecadados':
+        return `R$ ${value.toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
+      case 'delegados':
+      case 'eventos_realizados':
+        return value.toLocaleString('pt-BR');
+      default:
+        return value.toString();
+    }
+  };
+
   const handleWhatsApp = () => {
     const message = `Olá! Gostaria de saber mais sobre a Academia MAGIS e como posso participar dos eventos.`;
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/553191578389?text=${encodedMessage}`, '_blank');
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Carregando...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen page-transition">
@@ -96,29 +158,37 @@ const Sobre = () => {
                       <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 icon-bounce">
                         <Users className="w-8 h-8 text-primary" />
                       </div>
-                      <h3 className="font-semibold text-foreground mb-2">+500</h3>
-                      <p className="text-sm text-muted-foreground">Estudantes Formados</p>
+                      <h3 className="font-semibold text-foreground mb-2">
+                        {formatStatisticValue('delegados', getStatisticValue('delegados'))}
+                      </h3>
+                      <p className="text-sm text-muted-foreground">Delegados</p>
                     </div>
                     <div className="text-center">
                       <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 icon-bounce">
                         <Award className="w-8 h-8 text-primary" />
                       </div>
-                      <h3 className="font-semibold text-foreground mb-2">50+</h3>
+                      <h3 className="font-semibold text-foreground mb-2">
+                        {formatStatisticValue('eventos_realizados', getStatisticValue('eventos_realizados'))}
+                      </h3>
                       <p className="text-sm text-muted-foreground">Eventos Realizados</p>
                     </div>
                     <div className="text-center">
                       <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 icon-bounce">
                         <Star className="w-8 h-8 text-primary" />
                       </div>
-                      <h3 className="font-semibold text-foreground mb-2">95%</h3>
-                      <p className="text-sm text-muted-foreground">Satisfação</p>
+                      <h3 className="font-semibold text-foreground mb-2">
+                        {formatStatisticValue('valores_arrecadados', getStatisticValue('valores_arrecadados'))}
+                      </h3>
+                      <p className="text-sm text-muted-foreground">Valores Arrecadados</p>
                     </div>
                     <div className="text-center">
                       <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 icon-bounce">
                         <Clock className="w-8 h-8 text-primary" />
                       </div>
-                      <h3 className="font-semibold text-foreground mb-2">5</h3>
-                      <p className="text-sm text-muted-foreground">Anos de Experiência</p>
+                      <h3 className="font-semibold text-foreground mb-2">
+                        {timeOfOperation}
+                      </h3>
+                      <p className="text-sm text-muted-foreground">Meses de Atuação</p>
                     </div>
                   </div>
                 </div>
@@ -235,19 +305,14 @@ const Sobre = () => {
                   Nossa História
                 </h2>
                 <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                  Fundada em 2019, a Academia MAGIS nasceu da visão de criar uma 
-                  instituição de excelência em simulações da ONU e educação em 
-                  relações internacionais no Brasil.
+                Fundada em 2024, a Academia MAGIS nasceu do sonho de democratizar o mundo acadêmico - com destaque para as Simulações da ONU.
+
                 </p>
                 <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                  Ao longo de 5 anos, desenvolvemos uma metodologia única que 
-                  combina teoria e prática, preparando nossos estudantes para 
-                  os desafios globais do século XXI.
+                Ao longo do tempo, desenvolvemos uma metodologia única que combina teoria e práxis, preparando jovens para os desafios do Século XXI.
                 </p>
                 <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                  Hoje, somos referência nacional em simulações da ONU, com 
-                  centenas de estudantes formados e dezenas de eventos realizados 
-                  com sucesso.
+                Hoje somos referência regional em Simulações da ONU, com dezenas de delegados enviados para inúmeros eventos. 
                 </p>
                 <Button
                   onClick={handleWhatsApp}
@@ -310,12 +375,12 @@ const Sobre = () => {
                 <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 icon-bounce">
                   <Star className="w-12 h-12 text-primary" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-foreground">Instrutores Especializados</h3>
+                <h3 className="text-xl font-semibold mb-2 text-foreground">Mentores Especializados</h3>
                 <p className="text-muted-foreground mb-4">
                   Experiência e conhecimento prático
                 </p>
                 <p className="text-sm text-muted-foreground">
-                  Profissionais com vasta experiência em simulações e diplomacia.
+                  Experts com vasta experiência em simulações e diplomacia.
                 </p>
               </div>
             </div>

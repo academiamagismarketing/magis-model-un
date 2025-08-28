@@ -150,8 +150,7 @@ const Produtos = () => {
                 Produtos Exclusivos
               </h1>
               <p className="text-xl md:text-2xl opacity-90 leading-relaxed max-w-3xl mx-auto">
-                Colecione produtos únicos da Academia MAGIS e leve consigo um pedaço 
-                da diplomacia e das relações internacionais.
+              Compre nossos produtos e ajude a manter vivo o nosso projeto!
               </p>
             </div>
           </div>
@@ -346,8 +345,7 @@ const Produtos = () => {
               Adquira Seus Produtos Exclusivos
             </h2>
             <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-              Colecione produtos únicos da Academia MAGIS e leve consigo um pedaço 
-              da diplomacia e das relações internacionais.
+            Compre nossos produtos e ajude a manter vivo o nosso projeto!
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button

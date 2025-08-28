@@ -13,7 +13,8 @@ import {
   Menu,
   X,
   Package,
-  ShoppingCart
+  ShoppingCart,
+  TrendingUp
 } from 'lucide-react';
 
 interface AdminLayoutProps {
@@ -116,7 +117,8 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
     { name: 'Eventos', href: '/admin/eventos', icon: Calendar },
     { name: 'Novo Evento', href: '/admin/eventos/novo', icon: Plus },
     { name: 'Produtos', href: '/admin/produtos', icon: Package },
-    { name: 'Novo Produto', href: '/admin/produtos/novo', icon: ShoppingCart }
+    { name: 'Novo Produto', href: '/admin/produtos/novo', icon: ShoppingCart },
+    { name: 'Status', href: '/admin/status', icon: TrendingUp }
   ];
 
   return (

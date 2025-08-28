@@ -11,6 +11,7 @@ import AdminEventos from './pages/admin/Eventos';
 import EventoForm from './pages/admin/EventoForm';
 import AdminProdutos from './pages/admin/Produtos';
 import ProdutoForm from './pages/admin/ProdutoForm';
+import AdminStatus from './pages/admin/Status';
 import Dashboard from './pages/admin/Dashboard';
 import AdminLayout from './components/admin/AdminLayout';
 import NotFound from './pages/NotFound';
@@ -89,6 +90,11 @@ function App() {
           <Route path="/admin/produtos/:id/editar" element={
             <AdminLayout>
               <ProdutoForm />
+            </AdminLayout>
+          } />
+          <Route path="/admin/status" element={
+            <AdminLayout>
+              <AdminStatus />
             </AdminLayout>
           } />
           

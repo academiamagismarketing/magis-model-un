@@ -179,7 +179,7 @@ INSERT INTO products (name, description, price, category, status, buy_link) VALU
     'Manual de Simulação ONU',
     'Guia completo para participar de simulações da ONU. Inclui técnicas de debate, protocolo diplomático e elaboração de resoluções.',
     45.00,
-    'Livros',
+    'Pins',
     'active',
     'https://wa.me/553191578389?text=Olá! Gostaria de comprar o Manual de Simulação ONU'
 ),
@@ -203,7 +203,7 @@ INSERT INTO products (name, description, price, category, status, buy_link) VALU
     'Camiseta Academia MAGIS',
     'Camiseta oficial da Academia MAGIS com design exclusivo. Disponível em várias cores.',
     35.00,
-    'Vestuário',
+    'Kits',
     'active',
     'https://wa.me/553191578389?text=Olá! Gostaria de comprar a Camiseta Academia MAGIS'
 ),
@@ -211,7 +211,7 @@ INSERT INTO products (name, description, price, category, status, buy_link) VALU
     'E-book: Guia do Delegado',
     'E-book digital com dicas e estratégias para se destacar em simulações da ONU.',
     29.90,
-    'Livros',
+    'Pins',
     'active',
     'https://wa.me/553191578389?text=Olá! Gostaria de comprar o E-book: Guia do Delegado'
 ),
@@ -222,4 +222,70 @@ INSERT INTO products (name, description, price, category, status, buy_link) VALU
     'Serviços',
     'active',
     'https://wa.me/553191578389?text=Olá! Gostaria de agendar uma Mentoria Individual'
+);
+
+-- ========================================
+-- TABELA DE ESTATÍSTICAS
+-- ========================================
+
+-- Criação da tabela statistics
+CREATE TABLE statistics (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    key VARCHAR(100) UNIQUE NOT NULL,
+    value DECIMAL(15,2) NOT NULL,
+    label VARCHAR(255) NOT NULL,
+    description TEXT,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- Índices para performance
+CREATE INDEX idx_statistics_key ON statistics(key);
+
+-- Habilitar Row Level Security (RLS)
+ALTER TABLE statistics ENABLE ROW LEVEL SECURITY;
+
+-- Políticas RLS
+-- Permitir leitura pública
+CREATE POLICY "Allow public read access" ON statistics
+    FOR SELECT USING (true);
+
+-- Permitir inserção/atualização/exclusão apenas para usuários autenticados
+CREATE POLICY "Allow authenticated insert/update/delete" ON statistics
+    FOR ALL USING (auth.role() = 'authenticated');
+
+-- Função para atualizar o timestamp updated_at
+CREATE OR REPLACE FUNCTION update_statistics_updated_at_column()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.updated_at = NOW();
+    RETURN NEW;
+END;
+$$ language 'plpgsql';
+
+-- Trigger para atualizar updated_at automaticamente
+CREATE TRIGGER update_statistics_updated_at 
+    BEFORE UPDATE ON statistics 
+    FOR EACH ROW 
+    EXECUTE FUNCTION update_statistics_updated_at_column();
+
+-- Inserir dados iniciais das estatísticas
+INSERT INTO statistics (key, value, label, description) VALUES
+(
+    'delegados',
+    500,
+    'Delegados',
+    'Número total de delegados formados pela Academia MAGIS'
+),
+(
+    'eventos_realizados',
+    50,
+    'Eventos Realizados',
+    'Total de eventos realizados pela Academia MAGIS'
+),
+(
+    'valores_arrecadados',
+    150000.00,
+    'Valores Arrecadados',
+    'Valor total arrecadado em reais através dos eventos e produtos'
 );

@@ -42,6 +42,17 @@ export interface Product {
   updated_at: string;
 }
 
+// Interface para estatísticas
+export interface Statistic {
+  id: string;
+  key: string;
+  value: number;
+  label: string;
+  description?: string;
+  created_at: string;
+  updated_at: string;
+}
+
 // API para eventos
 export const eventsApi = {
   // Buscar todos os eventos
@@ -277,5 +288,64 @@ export const productsApi = {
     
     if (error) throw error;
     return data || [];
+  }
+};
+
+// API para estatísticas
+export const statisticsApi = {
+  // Buscar todas as estatísticas
+  async getAllStatistics(): Promise<Statistic[]> {
+    const { data, error } = await supabase
+      .from('statistics')
+      .select('*')
+      .order('key', { ascending: true });
+    
+    if (error) throw error;
+    return data || [];
+  },
+
+  // Buscar estatística por chave
+  async getStatisticByKey(key: string): Promise<Statistic | null> {
+    const { data, error } = await supabase
+      .from('statistics')
+      .select('*')
+      .eq('key', key)
+      .single();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  // Atualizar estatística
+  async updateStatistic(key: string, updates: Partial<Statistic>): Promise<Statistic> {
+    const { data, error } = await supabase
+      .from('statistics')
+      .update(updates)
+      .eq('key', key)
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  // Buscar estatísticas públicas (para exibição no site)
+  async getPublicStatistics(): Promise<Statistic[]> {
+    const { data, error } = await supabase
+      .from('statistics')
+      .select('*')
+      .order('key', { ascending: true });
+    
+    if (error) throw error;
+    return data || [];
+  },
+
+  // Calcular tempo de atuação em meses (desde novembro de 2024)
+  calculateTimeOfOperation(): number {
+    const startDate = new Date('2024-11-01');
+    const currentDate = new Date();
+    const diffTime = Math.abs(currentDate.getTime() - startDate.getTime());
+    const diffMonths = Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 30.44)); // Média de dias por mês
+    return diffMonths;
   }
 };

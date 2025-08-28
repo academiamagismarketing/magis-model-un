@@ -171,8 +171,7 @@ const Eventos = () => {
                 Nossos Eventos
               </h1>
               <p className="text-xl md:text-2xl opacity-90 leading-relaxed max-w-3xl mx-auto">
-                Descubra todos os eventos da Academia MAGIS e participe das melhores 
-                simulações da ONU e workshops de diplomacia do Brasil.
+              Descubra os eventos parceiros da Academia MAGIS e participe das melhores oportunidades acadêmicas do Brasil!
               </p>
             </div>
           </div>
