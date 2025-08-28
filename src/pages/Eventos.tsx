@@ -7,6 +7,7 @@ import { Calendar, MapPin, Users, Clock, ArrowLeft, Filter, Search } from 'lucid
 import { useNavigate } from 'react-router-dom';
 import studentsImage from '@/assets/students-mun.jpg';
 import eventosImage from '@/assets/imagens/8.jpg';
+import { supabase } from '@/lib/supabase';
 
 // Interface para eventos
 interface Event {
@@ -45,71 +46,36 @@ const Eventos = () => {
   const loadEvents = async () => {
     try {
       setLoading(true);
-      // Dados mock estáticos
-      const mockEvents: Event[] = [
-        {
-          id: '1',
-          title: "SIMONU São Paulo 2024",
-          description: "Simulação completa da ONU com comitês especializados em questões de segurança internacional e desenvolvimento sustentável. Evento presencial com 200+ delegados.",
-          date: "2024-03-15",
-          location: "Centro de Convenções Rebouças, São Paulo",
-          participants: "200+ delegados",
-          image_url: studentsImage,
-          status: "upcoming",
-          category: "Simulação ONU",
-          price: "R$ 150,00",
-          registration_deadline: "2024-03-10",
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString()
-        },
-        {
-          id: '2',
-          title: "Workshop de Diplomacia",
-          description: "Curso intensivo sobre técnicas de negociação, protocolo diplomático e elaboração de resoluções. Ideal para iniciantes.",
-          date: "2024-04-08",
-          location: "Academia MAGIS - Online",
-          participants: "50 estudantes",
-          image_url: studentsImage,
-          status: "upcoming",
-          category: "Workshop",
-          price: "R$ 80,00",
-          registration_deadline: "2024-04-05",
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString()
-        },
-        {
-          id: '3',
-          title: "MINIMUN Preparatório",
-          description: "Evento preparatório para novos delegados com simulações práticas e mentoria especializada. Perfeito para quem está começando.",
-          date: "2024-05-22",
-          location: "Universidade de São Paulo",
-          participants: "150 participantes",
-          image_url: studentsImage,
-          status: "upcoming",
-          category: "Preparatório",
-          price: "R$ 120,00",
-          registration_deadline: "2024-05-15",
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString()
-        },
-        {
-          id: '4',
-          title: "Conferência de Relações Internacionais",
-          description: "Conferência anual com palestrantes internacionais sobre temas atuais de diplomacia e política internacional.",
-          date: "2024-06-10",
-          location: "Auditório da Academia MAGIS",
-          participants: "300+ participantes",
-          image_url: studentsImage,
-          status: "upcoming",
-          category: "Conferência",
-          price: "R$ 200,00",
-          registration_deadline: "2024-06-01",
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString()
-        }
-      ];
       
-      setEvents(mockEvents);
+      // Buscar eventos do Supabase
+      const { data, error } = await supabase
+        .from('events')
+        .select('*')
+        .order('date', { ascending: true });
+
+      if (error) {
+        console.error('Erro ao buscar eventos:', error);
+        return;
+      }
+
+      // Mapear dados do Supabase para o formato esperado
+      const eventsData: Event[] = (data || []).map(event => ({
+        id: event.id,
+        title: event.title,
+        description: event.description,
+        date: event.date,
+        location: event.location,
+        participants: event.participants,
+        image_url: event.image_url || studentsImage, // Usar imagem padrão se não houver
+        status: event.status,
+        category: event.category,
+        price: event.price ? `R$ ${event.price.toFixed(2).replace('.', ',')}` : 'Gratuito',
+        registration_deadline: event.registration_deadline,
+        created_at: event.created_at,
+        updated_at: event.updated_at
+      }));
+
+      setEvents(eventsData);
     } catch (error) {
       console.error('Erro ao carregar eventos:', error);
     } finally {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -11,46 +11,74 @@ import {
   Clock
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { supabase } from '@/lib/supabase';
 
 const EventsSection = () => {
   const navigate = useNavigate();
+  const [upcomingEvents, setUpcomingEvents] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const upcomingEvents = [
-    {
-      id: 1,
-      title: 'SIMONU São Paulo 2024',
-      date: '15-17 de Novembro',
-      location: 'Centro de Convenções Rebouças',
-      participants: '200+ delegados',
-      category: 'Simulação ONU',
-      status: 'Inscrições Abertas',
-      featured: true
-    },
-    {
-      id: 2,
-      title: 'Workshop de Diplomacia',
-      date: '25 de Outubro',
-      location: 'Auditório Principal',
-      participants: '50 participantes',
-      category: 'Workshop',
-      status: 'Em Breve',
-      featured: false
-    },
-    {
-      id: 3,
-      title: 'Conferência Internacional',
-      date: '10-12 de Dezembro',
-      location: 'Hotel Internacional',
-      participants: '150+ participantes',
-      category: 'Conferência',
-      status: 'Pré-inscrições',
-      featured: false
+  useEffect(() => {
+    loadEvents();
+  }, []);
+
+  const loadEvents = async () => {
+    try {
+      setLoading(true);
+      
+      // Buscar eventos do Supabase (apenas upcoming e ongoing)
+      const { data, error } = await supabase
+        .from('events')
+        .select('*')
+        .in('status', ['upcoming', 'ongoing'])
+        .order('date', { ascending: true })
+        .limit(3);
+
+      if (error) {
+        console.error('Erro ao buscar eventos:', error);
+        return;
+      }
+
+      // Mapear dados do Supabase para o formato esperado
+      const eventsData = (data || []).map((event, index) => ({
+        id: event.id,
+        title: event.title,
+        date: new Date(event.date).toLocaleDateString('pt-BR', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric'
+        }),
+        location: event.location,
+        participants: event.participants,
+        category: event.category,
+        status: event.status === 'upcoming' ? 'Em Breve' : 'Em Andamento',
+        featured: index === 0 // Primeiro evento é destaque
+      }));
+
+      setUpcomingEvents(eventsData);
+    } catch (error) {
+      console.error('Erro ao carregar eventos:', error);
+    } finally {
+      setLoading(false);
     }
-  ];
+  };
 
   const handleWhatsApp = () => {
     window.open('https://wa.me/553191578389?text=Olá! Gostaria de saber mais sobre os eventos da Academia MAGIS.', '_blank');
   };
+
+  if (loading) {
+    return (
+      <section id="eventos" className="py-20 bg-gradient-to-br from-background to-muted/20">
+        <div className="container mx-auto px-4">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+            <p className="text-muted-foreground">Carregando eventos...</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="eventos" className="py-20 bg-gradient-to-br from-background to-muted/20">
@@ -78,7 +106,18 @@ const EventsSection = () => {
             </h3>
           </div>
           
-          {upcomingEvents.filter(e => e.featured).map((event) => (
+          {upcomingEvents.length === 0 ? (
+            <Card className="max-w-4xl mx-auto border-2 border-primary/20">
+              <CardContent className="text-center py-12">
+                <Calendar className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+                <p className="text-muted-foreground mb-4">Nenhum evento programado no momento</p>
+                <Button onClick={handleWhatsApp} variant="outline" className="btn-outline">
+                  Entre em Contato
+                </Button>
+              </CardContent>
+            </Card>
+          ) : (
+            upcomingEvents.filter(e => e.featured).map((event) => (
             <Card key={event.id} className="max-w-4xl mx-auto border-2 border-primary/20 hover:shadow-xl transition-all duration-300">
               <CardHeader className="text-center pb-4">
                 <div className="flex items-center justify-center mb-2">
@@ -117,7 +156,8 @@ const EventsSection = () => {
                 </div>
               </CardContent>
             </Card>
-          ))}
+          ))
+          )}
         </div>
 
         {/* Outros Eventos */}
