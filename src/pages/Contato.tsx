@@ -86,7 +86,7 @@ Enviado através do site da Academia MAGIS`;
       answer: "A maioria dos nossos eventos é aberta a estudantes do ensino médio e superior. Alguns eventos específicos podem ter pré-requisitos que são informados previamente."
     },
     {
-      question: "Como funciona o processo de mentoria individual?",
+      question: "Como funciona o processo de mentoria?",
       answer: "As mentorias em grupo são gratuitas e adaptadas de acordo com as necessidades e objetivos do grupo. Inclui sessões semanais, material de apoio e acompanhamento contínuo para seu desenvolvimento."
     }
   ];
