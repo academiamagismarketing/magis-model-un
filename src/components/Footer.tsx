@@ -9,7 +9,7 @@ import {
   Instagram
 } from 'lucide-react';
 import { scrollToTopSmooth } from './ScrollToTop';
-import logoBranca from '../logo_branca_magis_academia.jpg';
+import logoBranca from '../../logo_branca_magis_academia.jpg';
 
 const Footer = () => {
   const handleWhatsApp = () => {
