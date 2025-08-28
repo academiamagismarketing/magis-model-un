@@ -3,6 +3,7 @@ import { useLocation, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { 
   Menu, 
+  Phone, 
   MessageSquare
 } from 'lucide-react';
 
@@ -86,6 +87,28 @@ const Navbar = () => {
                   </Link>
                 )
               ))}
+            </div>
+
+            {/* Desktop CTA Buttons */}
+            <div className="hidden lg:flex items-center space-x-4">
+              <Button
+                onClick={handleWhatsApp}
+                size="sm"
+                variant="outline"
+                className="btn-outline"
+              >
+                <Phone className="w-4 h-4 mr-2" />
+                Fale Conosco
+              </Button>
+              <Button
+                onClick={handleWhatsApp}
+                size="sm"
+                variant="default"
+                className="btn-primary"
+              >
+                <MessageSquare className="w-4 h-4 mr-2" />
+                WhatsApp
+              </Button>
             </div>
 
             {/* Mobile Menu Button */}

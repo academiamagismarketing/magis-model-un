@@ -7,8 +7,6 @@ import {
   MessageSquare,
   Home,
   Users,
-  Calendar,
-  ShoppingBag,
   Mail,
   MapPin,
   ChevronRight,
@@ -140,30 +138,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, currentPath })
               </div>
             </div>
 
-            {/* Quick Actions */}
-            <div className="mt-6 pt-6 border-t border-border">
-              <h3 className="text-sm font-semibold text-foreground mb-4">
-                Ações Rápidas
-              </h3>
-              <div className="space-y-2">
-                <Button
-                  onClick={() => handleNavigation('/eventos')}
-                  variant="outline"
-                  className="w-full justify-start btn-outline"
-                >
-                  <Calendar className="w-4 h-4 mr-2" />
-                  Ver Eventos
-                </Button>
-                <Button
-                  onClick={() => handleNavigation('/produtos')}
-                  variant="outline"
-                  className="w-full justify-start btn-outline"
-                >
-                  <ShoppingBag className="w-4 h-4 mr-2" />
-                  Comprar Produtos
-                </Button>
-              </div>
-            </div>
+
           </nav>
 
           {/* Footer */}
