@@ -3,7 +3,6 @@ import { useLocation, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { 
   Menu, 
-  Phone, 
   MessageSquare
 } from 'lucide-react';
 
@@ -49,7 +48,7 @@ const Navbar = () => {
   return (
     <>
       {/* Navbar Principal */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border shadow-diplomatic">
+      <nav className="fixed top-0 left-0 right-0 z-40 bg-background/95 backdrop-blur-md border-b border-border shadow-diplomatic">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Brand */}
@@ -89,28 +88,6 @@ const Navbar = () => {
               ))}
             </div>
 
-            {/* Desktop CTA Buttons */}
-            <div className="hidden lg:flex items-center space-x-4">
-              <Button
-                onClick={handleWhatsApp}
-                size="sm"
-                variant="outline"
-                className="btn-outline"
-              >
-                <Phone className="w-4 h-4 mr-2" />
-                Fale Conosco
-              </Button>
-              <Button
-                onClick={handleWhatsApp}
-                size="sm"
-                variant="default"
-                className="btn-primary"
-              >
-                <MessageSquare className="w-4 h-4 mr-2" />
-                WhatsApp
-              </Button>
-            </div>
-
             {/* Mobile Menu Button */}
             <div className="lg:hidden">
               <Button
@@ -134,7 +111,7 @@ const Navbar = () => {
       />
 
       {/* Floating WhatsApp Button - Mobile Only */}
-      <div className="fixed bottom-6 right-6 z-40 lg:hidden">
+      <div className="fixed bottom-6 right-6 z-50 lg:hidden">
         <Button
           onClick={handleWhatsApp}
           size="lg"

@@ -33,15 +33,13 @@ const Footer = () => {
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Logo */}
-          <div className="lg:col-span-1">
-            <div className="text-center lg:text-left">
-              <div className="text-5xl font-display font-bold text-white mb-6">
-                ACADEMIA <span className="text-gradient-primary">MAGIS</span>
-              </div>
+          <div className="lg:col-span-1 text-center lg:text-left">
+            <div className="text-4xl md:text-5xl font-display font-bold text-white mb-6">
+              ACADEMIA <span className="text-gradient-primary">MAGIS</span>
             </div>
             
             {/* Social Links */}
-            <div className="mt-6 flex space-x-4">
+            <div className="mt-6 flex justify-center lg:justify-start space-x-4">
               {socialLinks.map((social) => (
                 <a
                   key={social.name}
@@ -56,7 +54,7 @@ const Footer = () => {
           </div>
 
           {/* Links Rápidos */}
-          <div>
+          <div className="text-center lg:text-left">
             <h3 className="text-lg font-semibold mb-4">Links Rápidos</h3>
             <ul className="space-y-2">
               {quickLinks.map((link) => (
@@ -80,18 +78,18 @@ const Footer = () => {
           </div>
 
           {/* Contato */}
-          <div>
+          <div className="text-center lg:text-left">
             <h3 className="text-lg font-semibold mb-4">Contato</h3>
             <div className="space-y-3">
-              <div className="flex items-center space-x-3">
+              <div className="flex items-center justify-center lg:justify-start space-x-3">
                 <Phone className="w-5 h-5 text-primary-foreground/60" />
                 <span className="text-primary-foreground/80">+55 31 9157-8389</span>
               </div>
-              <div className="flex items-center space-x-3">
+              <div className="flex items-center justify-center lg:justify-start space-x-3">
                 <Mail className="w-5 h-5 text-primary-foreground/60" />
                 <span className="text-primary-foreground/80">institucional@academiamagis.com</span>
               </div>
-              <div className="flex items-center space-x-3">
+              <div className="flex items-center justify-center lg:justify-start space-x-3">
                 <MapPin className="w-5 h-5 text-primary-foreground/60" />
                 <span className="text-primary-foreground/80">Belo Horizonte, BH - Brasil</span>
               </div>
@@ -99,7 +97,7 @@ const Footer = () => {
           </div>
 
           {/* CTA */}
-          <div>
+          <div className="text-center lg:text-left">
             <h3 className="text-lg font-semibold mb-4">Fale Conosco</h3>
             <p className="text-primary-foreground/80 mb-4">
               Entre em contato conosco e descubra como podemos transformar seu futuro.
@@ -107,7 +105,7 @@ const Footer = () => {
             <Button
               onClick={handleWhatsApp}
               variant="outline"
-              className="btn-white w-full"
+              className="btn-white w-full sm:w-auto"
             >
               <MessageSquare className="w-4 h-4 mr-2" />
               WhatsApp
@@ -118,7 +116,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-primary-foreground/20 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0">
-            <p className="text-primary-foreground/60 text-sm">
+            <p className="text-primary-foreground/60 text-sm text-center">
               © 2025 Academia MAGIS. Todos os direitos reservados.
             </p>
           </div>
