@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import AdminLayout from '@/components/admin/AdminLayout';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -132,214 +131,212 @@ const ProdutoForm = () => {
   }
 
   return (
-    <AdminLayout>
-      <div className="max-w-4xl mx-auto space-y-6">
-        {/* Header */}
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <Button
-              onClick={() => navigate('/admin/produtos')}
-              variant="ghost"
-              size="sm"
-            >
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Voltar
-            </Button>
-            <div>
-              <h1 className="text-3xl font-display font-bold text-foreground">
-                {isEditing ? 'Editar Produto' : 'Novo Produto'}
-              </h1>
-              <p className="text-muted-foreground">
-                {isEditing ? 'Edite as informações do produto' : 'Crie um novo produto para a Academia MAGIS'}
-              </p>
-            </div>
+    <div className="max-w-4xl mx-auto space-y-6">
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <Button
+            onClick={() => navigate('/admin/produtos')}
+            variant="ghost"
+            size="sm"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Voltar
+          </Button>
+          <div>
+            <h1 className="text-3xl font-display font-bold text-foreground">
+              {isEditing ? 'Editar Produto' : 'Novo Produto'}
+            </h1>
+            <p className="text-muted-foreground">
+              {isEditing ? 'Edite as informações do produto' : 'Crie um novo produto para a Academia MAGIS'}
+            </p>
           </div>
         </div>
-
-        {/* Formulário */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Package className="w-5 h-5" />
-              Informações do Produto
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              {error && (
-                <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
-                  <p className="text-red-600 text-sm">{error}</p>
-                </div>
-              )}
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Nome do Produto */}
-                <div className="md:col-span-2">
-                  <Label htmlFor="name" className="text-foreground font-medium">
-                    Nome do Produto *
-                  </Label>
-                  <div className="relative mt-2">
-                    <Package className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-                    <Input
-                      id="name"
-                      type="text"
-                      value={formData.name}
-                      onChange={(e) => handleInputChange('name', e.target.value)}
-                      placeholder="Ex: Manual de Simulação ONU"
-                      className="pl-10"
-                      required
-                    />
-                  </div>
-                </div>
-
-                {/* Descrição */}
-                <div className="md:col-span-2">
-                  <Label htmlFor="description" className="text-foreground font-medium">
-                    Descrição *
-                  </Label>
-                  <div className="relative mt-2">
-                    <FileText className="absolute left-3 top-3 text-muted-foreground w-4 h-4" />
-                    <Textarea
-                      id="description"
-                      value={formData.description}
-                      onChange={(e) => handleInputChange('description', e.target.value)}
-                      placeholder="Descreva o produto em detalhes..."
-                      className="pl-10 min-h-[100px]"
-                      required
-                    />
-                  </div>
-                </div>
-
-                {/* Preço */}
-                <div>
-                  <Label htmlFor="price" className="text-foreground font-medium">
-                    Preço (R$) *
-                  </Label>
-                  <div className="relative mt-2">
-                    <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-                    <Input
-                      id="price"
-                      type="number"
-                      step="0.01"
-                      min="0"
-                      value={formData.price}
-                      onChange={(e) => handleInputChange('price', e.target.value)}
-                      placeholder="0,00"
-                      className="pl-10"
-                      required
-                    />
-                  </div>
-                </div>
-
-                {/* Categoria */}
-                <div>
-                  <Label htmlFor="category" className="text-foreground font-medium">
-                    Categoria *
-                  </Label>
-                  <div className="relative mt-2">
-                    <Tag className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-                    <select
-                      id="category"
-                      value={formData.category}
-                      onChange={(e) => handleInputChange('category', e.target.value)}
-                      className="w-full pl-10 pr-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                      required
-                    >
-                      <option value="">Selecione uma categoria</option>
-                      <option value="Pins">Pins</option>
-                      <option value="Kits">Kits</option>
-                      <option value="Cursos">Cursos</option>
-                      <option value="Decorativos">Decorativos</option>
-                      <option value="Serviços">Serviços</option>
-                    </select>
-                  </div>
-                </div>
-
-                {/* Status */}
-                <div>
-                  <Label htmlFor="status" className="text-foreground font-medium">
-                    Status
-                  </Label>
-                  <div className="relative mt-2">
-                    <select
-                      id="status"
-                      value={formData.status}
-                      onChange={(e) => handleInputChange('status', e.target.value)}
-                      className="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                    >
-                      <option value="active">Ativo</option>
-                      <option value="inactive">Inativo</option>
-                      <option value="out_of_stock">Sem Estoque</option>
-                    </select>
-                  </div>
-                </div>
-
-                {/* Link de Compra */}
-                <div className="md:col-span-2">
-                  <Label htmlFor="buy_link" className="text-foreground font-medium">
-                    Link de Compra *
-                  </Label>
-                  <div className="relative mt-2">
-                    <Link className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-                    <Input
-                      id="buy_link"
-                      type="url"
-                      value={formData.buy_link}
-                      onChange={(e) => handleInputChange('buy_link', e.target.value)}
-                      placeholder="https://wa.me/553191578389?text=Olá! Gostaria de comprar..."
-                      className="pl-10"
-                      required
-                    />
-                  </div>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    Link do WhatsApp ou outra plataforma de venda
-                  </p>
-                </div>
-
-                {/* URL da Imagem */}
-                <div className="md:col-span-2">
-                  <Label htmlFor="image_url" className="text-foreground font-medium">
-                    URL da Imagem (opcional)
-                  </Label>
-                  <div className="relative mt-2">
-                    <Input
-                      id="image_url"
-                      type="url"
-                      value={formData.image_url}
-                      onChange={(e) => handleInputChange('image_url', e.target.value)}
-                      placeholder="https://exemplo.com/imagem.jpg"
-                    />
-                  </div>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    Deixe em branco para usar imagem padrão
-                  </p>
-                </div>
-              </div>
-
-              {/* Botões */}
-              <div className="flex gap-4 pt-6 border-t">
-                <Button
-                  type="button"
-                  onClick={() => navigate('/admin/produtos')}
-                  variant="outline"
-                  className="flex-1"
-                >
-                  Cancelar
-                </Button>
-                <Button
-                  type="submit"
-                  className="flex-1 btn-primary"
-                  disabled={saving}
-                >
-                  <Save className="w-4 h-4 mr-2" />
-                  {saving ? 'Salvando...' : (isEditing ? 'Atualizar Produto' : 'Criar Produto')}
-                </Button>
-              </div>
-            </form>
-          </CardContent>
-        </Card>
       </div>
-    </AdminLayout>
+
+      {/* Formulário */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Package className="w-5 h-5" />
+            Informações do Produto
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {error && (
+              <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
+                <p className="text-red-600 text-sm">{error}</p>
+              </div>
+            )}
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Nome do Produto */}
+              <div className="md:col-span-2">
+                <Label htmlFor="name" className="text-foreground font-medium">
+                  Nome do Produto *
+                </Label>
+                <div className="relative mt-2">
+                  <Package className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                  <Input
+                    id="name"
+                    type="text"
+                    value={formData.name}
+                    onChange={(e) => handleInputChange('name', e.target.value)}
+                    placeholder="Ex: Manual de Simulação ONU"
+                    className="pl-10"
+                    required
+                  />
+                </div>
+              </div>
+
+              {/* Descrição */}
+              <div className="md:col-span-2">
+                <Label htmlFor="description" className="text-foreground font-medium">
+                  Descrição *
+                </Label>
+                <div className="relative mt-2">
+                  <FileText className="absolute left-3 top-3 text-muted-foreground w-4 h-4" />
+                  <Textarea
+                    id="description"
+                    value={formData.description}
+                    onChange={(e) => handleInputChange('description', e.target.value)}
+                    placeholder="Descreva o produto em detalhes..."
+                    className="pl-10 min-h-[100px]"
+                    required
+                  />
+                </div>
+              </div>
+
+              {/* Preço */}
+              <div>
+                <Label htmlFor="price" className="text-foreground font-medium">
+                  Preço (R$) *
+                </Label>
+                <div className="relative mt-2">
+                  <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                  <Input
+                    id="price"
+                    type="number"
+                    step="0.01"
+                    min="0"
+                    value={formData.price}
+                    onChange={(e) => handleInputChange('price', e.target.value)}
+                    placeholder="0,00"
+                    className="pl-10"
+                    required
+                  />
+                </div>
+              </div>
+
+              {/* Categoria */}
+              <div>
+                <Label htmlFor="category" className="text-foreground font-medium">
+                  Categoria *
+                </Label>
+                <div className="relative mt-2">
+                  <Tag className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                  <select
+                    id="category"
+                    value={formData.category}
+                    onChange={(e) => handleInputChange('category', e.target.value)}
+                    className="w-full pl-10 pr-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    required
+                  >
+                    <option value="">Selecione uma categoria</option>
+                    <option value="Pins">Pins</option>
+                    <option value="Kits">Kits</option>
+                    <option value="Cursos">Cursos</option>
+                    <option value="Decorativos">Decorativos</option>
+                    <option value="Serviços">Serviços</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Status */}
+              <div>
+                <Label htmlFor="status" className="text-foreground font-medium">
+                  Status
+                </Label>
+                <div className="relative mt-2">
+                  <select
+                    id="status"
+                    value={formData.status}
+                    onChange={(e) => handleInputChange('status', e.target.value)}
+                    className="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  >
+                    <option value="active">Ativo</option>
+                    <option value="inactive">Inativo</option>
+                    <option value="out_of_stock">Sem Estoque</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Link de Compra */}
+              <div className="md:col-span-2">
+                <Label htmlFor="buy_link" className="text-foreground font-medium">
+                  Link de Compra *
+                </Label>
+                <div className="relative mt-2">
+                  <Link className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                  <Input
+                    id="buy_link"
+                    type="url"
+                    value={formData.buy_link}
+                    onChange={(e) => handleInputChange('buy_link', e.target.value)}
+                    placeholder="https://wa.me/553191578389?text=Olá! Gostaria de comprar..."
+                    className="pl-10"
+                    required
+                  />
+                </div>
+                <p className="text-sm text-muted-foreground mt-1">
+                  Link do WhatsApp ou outra plataforma de venda
+                </p>
+              </div>
+
+              {/* URL da Imagem */}
+              <div className="md:col-span-2">
+                <Label htmlFor="image_url" className="text-foreground font-medium">
+                  URL da Imagem (opcional)
+                </Label>
+                <div className="relative mt-2">
+                  <Input
+                    id="image_url"
+                    type="url"
+                    value={formData.image_url}
+                    onChange={(e) => handleInputChange('image_url', e.target.value)}
+                    placeholder="https://exemplo.com/imagem.jpg"
+                  />
+                </div>
+                <p className="text-sm text-muted-foreground mt-1">
+                  Deixe em branco para usar imagem padrão
+                </p>
+              </div>
+            </div>
+
+            {/* Botões */}
+            <div className="flex gap-4 pt-6 border-t">
+              <Button
+                type="button"
+                onClick={() => navigate('/admin/produtos')}
+                variant="outline"
+                className="flex-1"
+              >
+                Cancelar
+              </Button>
+              <Button
+                type="submit"
+                className="flex-1 btn-primary"
+                disabled={saving}
+              >
+                <Save className="w-4 h-4 mr-2" />
+                {saving ? 'Salvando...' : (isEditing ? 'Atualizar Produto' : 'Criar Produto')}
+              </Button>
+            </div>
+          </form>
+        </CardContent>
+      </Card>
+    </div>
   );
 };
 
