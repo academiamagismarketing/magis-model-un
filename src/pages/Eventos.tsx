@@ -217,7 +217,7 @@ const Eventos = () => {
         </section>
 
         {/* Filters Section */}
-        <section className="py-8 bg-muted border-b">
+        <section className="py-8 bg-muted border-b section-decor">
           <div className="container mx-auto px-4">
             <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
               {/* Search */}
@@ -261,7 +261,7 @@ const Eventos = () => {
         </section>
 
         {/* Events Grid */}
-        <section className="py-20 bg-background">
+        <section className="py-20 bg-background section-decor">
           <div className="container mx-auto px-4">
             {filteredEvents.length === 0 ? (
               <div className="text-center py-16">
@@ -319,7 +319,7 @@ const Eventos = () => {
                       </CardHeader>
                       
                       <CardContent className="space-y-4">
-                        <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3">
+                        <p className="text-muted-foreground text-sm leading-relaxed">
                           {event.description}
                         </p>
                         
@@ -368,7 +368,7 @@ const Eventos = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-muted">
+        <section className="py-20 bg-muted section-decor">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-4xl font-display font-bold mb-6 text-foreground">
               Não encontrou o evento ideal?

@@ -41,7 +41,7 @@ const Sobre = () => {
         </section>
 
         {/* Nossa Missão */}
-        <section className="py-20 bg-background">
+        <section className="py-20 bg-background section-decor">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
@@ -104,7 +104,7 @@ const Sobre = () => {
         </section>
 
         {/* Nossos Valores */}
-        <section className="py-20 bg-muted">
+        <section className="py-20 bg-muted section-decor">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-display font-bold mb-6 text-foreground">
@@ -186,7 +186,7 @@ const Sobre = () => {
         </section>
 
         {/* Nossa História */}
-        <section className="py-20 bg-background">
+        <section className="py-20 bg-background section-decor">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div className="relative">
@@ -227,7 +227,7 @@ const Sobre = () => {
         </section>
 
         {/* Nossa Equipe */}
-        <section className="py-20 bg-muted">
+        <section className="py-20 bg-muted section-decor">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-display font-bold mb-6 text-foreground">
@@ -283,7 +283,7 @@ const Sobre = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-muted text-foreground">
+        <section className="py-20 bg-muted text-foreground section-decor">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-4xl font-display font-bold mb-6">
               Faça Parte da Nossa História

@@ -122,7 +122,7 @@ const Produtos = () => {
         </section>
 
         {/* Collections Section */}
-        <section className="py-20 bg-background">
+        <section className="py-20 bg-background section-decor">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-display font-bold mb-6 text-foreground">
@@ -192,7 +192,7 @@ const Produtos = () => {
         </section>
 
         {/* Benefits Section */}
-        <section className="py-20 bg-muted">
+        <section className="py-20 bg-muted section-decor">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-display font-bold mb-6 text-foreground">
@@ -222,7 +222,7 @@ const Produtos = () => {
         </section>
 
         {/* Testimonials Section */}
-        <section className="py-20 bg-background">
+        <section className="py-20 bg-background section-decor">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-display font-bold mb-6 text-foreground">
@@ -261,7 +261,7 @@ const Produtos = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-muted text-foreground">
+        <section className="py-20 bg-muted text-foreground section-decor">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-4xl font-display font-bold mb-6">
               Adquira Seus Produtos Exclusivos
