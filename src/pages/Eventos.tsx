@@ -198,7 +198,7 @@ const Eventos = () => {
               alt="Eventos Academia MAGIS" 
               className="w-full h-full object-cover opacity-10"
             />
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/70 to-primary/50"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-black/60 to-black/40"></div>
           </div>
           
           <div className="container mx-auto px-4 relative z-10">

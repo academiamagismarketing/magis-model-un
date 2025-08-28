@@ -14,10 +14,10 @@ const buttonVariants = cva(
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
           "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
+        ghost: "text-foreground hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         // Academia MAGIS custom variants
-        diplomatic: "bg-gradient-brand text-primary-foreground hover:shadow-brand hover:scale-105 transition-brand font-semibold",
+        diplomatic: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-diplomatic hover:shadow-brand transition-brand font-semibold",
         hero: "bg-primary hover:bg-primary-dark text-primary-foreground shadow-elegant hover:shadow-xl transition-brand font-semibold",
         whatsapp: "bg-green-500 hover:bg-green-600 text-white shadow-diplomatic hover:shadow-brand transition-brand font-medium",
         accent: "bg-accent text-accent-foreground hover:bg-accent-light shadow-diplomatic hover:shadow-brand transition-brand font-semibold",

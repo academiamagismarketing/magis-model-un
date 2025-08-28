@@ -105,7 +105,7 @@ const Produtos = () => {
               alt="Produtos Academia MAGIS" 
               className="w-full h-full object-cover opacity-10"
             />
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/70 to-primary/50"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-black/60 to-black/40"></div>
           </div>
           
           <div className="container mx-auto px-4 relative z-10">
@@ -261,12 +261,12 @@ const Produtos = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-primary text-primary-foreground">
+        <section className="py-20 bg-muted text-foreground">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-4xl font-display font-bold mb-6">
               Adquira Seus Produtos Exclusivos
             </h2>
-            <p className="text-xl opacity-90 mb-8 max-w-3xl mx-auto">
+            <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
               Colecione produtos únicos da Academia MAGIS e leve consigo um pedaço 
               da diplomacia e das relações internacionais.
             </p>
@@ -274,8 +274,7 @@ const Produtos = () => {
               <Button
                 onClick={() => handleWhatsApp("Coleção Diplomática")}
                 size="lg"
-                variant="outline"
-                className="btn-white"
+                className="bg-primary text-primary-foreground hover:bg-primary/90"
               >
                 <MessageSquare className="w-4 h-4 mr-2" />
                 Falar no WhatsApp
@@ -284,7 +283,7 @@ const Produtos = () => {
                 onClick={() => navigate('/contato')}
                 size="lg"
                 variant="outline"
-                className="btn-white"
+                className="border-primary text-primary hover:bg-primary/10"
               >
                 Outras Formas de Contato
               </Button>

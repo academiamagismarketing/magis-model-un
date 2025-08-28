@@ -50,9 +50,21 @@ function App() {
           
           {/* Rotas administrativas sem Navbar */}
           <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin/eventos" element={<AdminEventos />} />
-          <Route path="/admin/eventos/novo" element={<EventoForm />} />
-          <Route path="/admin/eventos/:id/editar" element={<EventoForm />} />
+          <Route path="/admin/eventos" element={
+            <div className="admin-layout">
+              <AdminEventos />
+            </div>
+          } />
+          <Route path="/admin/eventos/novo" element={
+            <div className="admin-layout">
+              <EventoForm />
+            </div>
+          } />
+          <Route path="/admin/eventos/:id/editar" element={
+            <div className="admin-layout">
+              <EventoForm />
+            </div>
+          } />
           
           {/* Rota 404 com Navbar */}
           <Route path="*" element={
