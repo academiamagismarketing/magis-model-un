@@ -18,7 +18,7 @@ import {
   Clock
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { productsApi, Product } from '@/lib/supabase';
+import { productsApi, Product, statisticsApi, Statistic } from '@/lib/supabase';
 import pinsImage from '@/assets/imagens/6.jpg';
 import pinsCollectionImage from '@/assets/imagens/9.jpg';
 
@@ -29,9 +29,12 @@ const Produtos = () => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [categoryFilter, setCategoryFilter] = useState<string>('all');
+  const [statistics, setStatistics] = useState<Statistic[]>([]);
+  const [timeOfOperation, setTimeOfOperation] = useState(0);
 
   useEffect(() => {
     loadProducts();
+    loadStatistics();
   }, []);
 
   useEffect(() => {
@@ -47,6 +50,19 @@ const Produtos = () => {
       console.error('Erro ao carregar produtos:', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const loadStatistics = async () => {
+    try {
+      const data = await statisticsApi.getPublicStatistics();
+      setStatistics(data);
+      
+      // Calcular tempo de atuação
+      const months = statisticsApi.calculateTimeOfOperation();
+      setTimeOfOperation(months);
+    } catch (error) {
+      console.error('Erro ao carregar estatísticas:', error);
     }
   };
 
@@ -133,26 +149,33 @@ const Produtos = () => {
   }
 
   const getStatisticValue = (key: string) => {
+    const stat = statistics.find(s => s.key === key);
+    if (!stat) return 0;
+    
     switch (key) {
-      case 'delegados':
-        return 150; // Placeholder value
-      case 'eventos_realizados':
-        return 100; // Placeholder value
       case 'valores_arrecadados':
-        return 50000; // Placeholder value
+        return stat.value;
+      case 'delegados':
+      case 'eventos_realizados':
+        return Math.floor(stat.value);
       default:
-        return 0;
+        return stat.value;
     }
   };
 
   const formatStatisticValue = (key: string, value: number) => {
-    if (key === 'valores_arrecadados') {
-      return `R$ ${value.toLocaleString('pt-br', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    switch (key) {
+      case 'valores_arrecadados':
+        return `R$ ${value.toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
+      case 'delegados':
+      case 'eventos_realizados':
+        return value.toLocaleString('pt-BR');
+      default:
+        return value.toString();
     }
-    return value.toLocaleString('pt-br');
   };
 
-  const timeOfOperation = 24; // Placeholder value
+
 
   return (
     <div className="min-h-screen">
