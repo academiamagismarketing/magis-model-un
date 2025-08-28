@@ -1,69 +1,48 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowLeft, Star, Linkedin, Mail, MessageSquare, GraduationCap } from 'lucide-react';
+import { ArrowLeft, Star, MessageSquare } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { mentoresApi, Mentor } from '@/lib/supabase';
 
 const Mentores = () => {
   const navigate = useNavigate();
+  const [mentores, setMentores] = useState<Mentor[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const mentores = [
-    {
-      id: 1,
-      nome: "Nome do Mentor 1",
-      especialidade: "Diplomacia e Negociações",
-      foto: "/placeholder-avatar.jpg",
-      bio: "Diplomata de carreira com mais de 15 anos de experiência em negociações internacionais. Especialista em resolução de conflitos e protocolo diplomático.",
-      formacao: "Relações Internacionais - USP",
-      experiencia: "15+ anos como diplomata",
-      eventosMentorados: "50+ simulações",
-      linkedin: "https://linkedin.com/in/mentor1",
-      email: "mentor1@academiamagis.com"
-    },
-    {
-      id: 2,
-      nome: "Nome da Mentora 2",
-      especialidade: "Oratória e Debate",
-      foto: "/placeholder-avatar.jpg",
-      bio: "Professora universitária especializada em comunicação e oratória. Treina nossos delegados em técnicas de argumentação e apresentação em público.",
-      formacao: "Doutorado em Comunicação - UFMG",
-      experiencia: "10+ anos como professora",
-      eventosMentorados: "30+ workshops",
-      linkedin: "https://linkedin.com/in/mentora2",
-      email: "mentora2@academiamagis.com"
-    },
-    {
-      id: 3,
-      nome: "Nome do Mentor 3",
-      especialidade: "Política Internacional",
-      foto: "/placeholder-avatar.jpg",
-      bio: "Pesquisador em Política Internacional com foco em Organizações Internacionais. Especialista em estrutura da ONU e processos de tomada de decisão.",
-      formacao: "Mestrado em Ciência Política - UNB",
-      experiencia: "8+ anos de pesquisa",
-      eventosMentorados: "25+ simulações",
-      linkedin: "https://linkedin.com/in/mentor3",
-      email: "mentor3@academiamagis.com"
-    },
-    {
-      id: 4,
-      nome: "Nome da Mentora 4",
-      especialidade: "Direito Internacional",
-      foto: "/placeholder-avatar.jpg",
-      bio: "Advogada especializada em Direito Internacional Público. Mestra em Direito Internacional e especialista em tribunais internacionais e resolução de disputas.",
-      formacao: "Mestrado em Direito Internacional - UFMG",
-      experiencia: "12+ anos como advogada",
-      eventosMentorados: "40+ simulações",
-      linkedin: "https://linkedin.com/in/mentora4",
-      email: "mentora4@academiamagis.com"
+  useEffect(() => {
+    loadMentores();
+  }, []);
+
+  const loadMentores = async () => {
+    try {
+      setLoading(true);
+      const data = await mentoresApi.getPublicMentores();
+      setMentores(data);
+    } catch (error) {
+      console.error('Erro ao carregar mentores:', error);
+    } finally {
+      setLoading(false);
     }
-  ];
+  };
 
   const handleWhatsApp = () => {
     const message = `Olá! Gostaria de saber mais sobre nossos mentores e programas de mentoria da Academia MAGIS.`;
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/553191578389?text=${encodedMessage}`, '_blank');
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Carregando...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen">
@@ -105,63 +84,62 @@ const Mentores = () => {
               </p>
             </div>
             
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {mentores.map((mentor) => (
-                <Card key={mentor.id} className="group overflow-hidden shadow-diplomatic hover:shadow-elegant transition-all duration-300">
-                  <CardHeader className="text-center pb-4">
-                    <div className="w-32 h-32 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-105 transition-transform">
-                      <Star className="w-16 h-16 text-primary" />
-                    </div>
-                    <CardTitle className="text-2xl font-display font-bold text-foreground">
-                      {mentor.nome}
-                    </CardTitle>
-                    <p className="text-primary font-semibold">{mentor.especialidade}</p>
-                  </CardHeader>
-                  
-                  <CardContent className="space-y-4">
-                    <p className="text-muted-foreground leading-relaxed">
-                      {mentor.bio}
-                    </p>
+            {mentores.length > 0 ? (
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {mentores.map((mentor) => (
+                  <Card key={mentor.id} className="group overflow-hidden shadow-diplomatic hover:shadow-elegant transition-all duration-300 h-full flex flex-col">
+                    <CardHeader className="text-center pb-4">
+                      {mentor.foto_url ? (
+                        <div className="w-32 h-32 rounded-full overflow-hidden mx-auto mb-4 group-hover:scale-105 transition-transform">
+                          <img
+                            src={mentor.foto_url}
+                            alt={mentor.nome}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      ) : (
+                        <div className="w-32 h-32 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-105 transition-transform">
+                          <Star className="w-16 h-16 text-primary" />
+                        </div>
+                      )}
+                      <CardTitle className="text-2xl font-display font-bold text-foreground">
+                        {mentor.nome}
+                      </CardTitle>
+                      <p className="text-primary font-semibold">{mentor.especialidade}</p>
+                    </CardHeader>
                     
-                    <div className="space-y-2">
-                      <div className="flex items-center text-sm">
-                        <span className="font-semibold text-foreground mr-2">Formação:</span>
-                        <span className="text-muted-foreground">{mentor.formacao}</span>
+                    <CardContent className="space-y-4 flex-grow flex flex-col">
+                      <p className="text-muted-foreground leading-relaxed flex-grow">
+                        {mentor.bio}
+                      </p>
+                      
+                      <div className="space-y-2">
+                        <div className="flex items-center text-sm">
+                          <span className="font-semibold text-foreground mr-2">Formação:</span>
+                          <span className="text-muted-foreground">{mentor.formacao}</span>
+                        </div>
+                        <div className="flex items-center text-sm">
+                          <span className="font-semibold text-foreground mr-2">Experiência:</span>
+                          <span className="text-muted-foreground">{mentor.experiencia}</span>
+                        </div>
+                        <div className="flex items-center text-sm">
+                          <span className="font-semibold text-foreground mr-2">Eventos Mentorados:</span>
+                          <span className="text-muted-foreground">{mentor.eventos_mentorados}</span>
+                        </div>
                       </div>
-                      <div className="flex items-center text-sm">
-                        <span className="font-semibold text-foreground mr-2">Experiência:</span>
-                        <span className="text-muted-foreground">{mentor.experiencia}</span>
-                      </div>
-                      <div className="flex items-center text-sm">
-                        <span className="font-semibold text-foreground mr-2">Eventos Mentorados:</span>
-                        <span className="text-muted-foreground">{mentor.eventosMentorados}</span>
-                      </div>
-                    </div>
-                    
-                    <div className="flex gap-3 pt-4">
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => window.open(mentor.linkedin, '_blank')}
-                        className="flex-1"
-                      >
-                        <Linkedin className="w-4 h-4 mr-2" />
-                        LinkedIn
-                      </Button>
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => window.open(`mailto:${mentor.email}`, '_blank')}
-                        className="flex-1"
-                      >
-                        <Mail className="w-4 h-4 mr-2" />
-                        Email
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-12">
+                <Star className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
+                <h3 className="text-xl font-semibold mb-2">Nenhum mentor disponível</h3>
+                <p className="text-muted-foreground">
+                  Em breve divulgaremos nossa equipe de mentores.
+                </p>
+              </div>
+            )}
           </div>
         </section>
 

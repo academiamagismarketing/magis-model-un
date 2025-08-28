@@ -1,54 +1,48 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowLeft, Users, Linkedin, Mail, MessageSquare } from 'lucide-react';
+import { ArrowLeft, Users, MessageSquare } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { diretoriaApi, Diretor } from '@/lib/supabase';
 
 const Diretoria = () => {
   const navigate = useNavigate();
+  const [diretores, setDiretores] = useState<Diretor[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const diretores = [
-    {
-      id: 1,
-      nome: "Nome do Diretor 1",
-      cargo: "Diretor Executivo",
-      foto: "/placeholder-avatar.jpg",
-      bio: "Formado em Relações Internacionais pela Universidade de São Paulo, com especialização em Diplomacia e Negociações Internacionais. Possui mais de 5 anos de experiência em simulações da ONU e coordenação de eventos acadêmicos.",
-      formacao: "Relações Internacionais - USP",
-      experiencia: "5+ anos em simulações da ONU",
-      linkedin: "https://linkedin.com/in/diretor1",
-      email: "diretor1@academiamagis.com"
-    },
-    {
-      id: 2,
-      nome: "Nome da Diretora 2",
-      cargo: "Diretora de Projetos",
-      foto: "/placeholder-avatar.jpg",
-      bio: "Mestra em Ciência Política com foco em Política Internacional. Coordenou mais de 20 eventos acadêmicos e desenvolveu metodologias inovadoras para formação de jovens líderes.",
-      formacao: "Mestrado em Ciência Política - UNB",
-      experiencia: "20+ eventos coordenados",
-      linkedin: "https://linkedin.com/in/diretora2",
-      email: "diretora2@academiamagis.com"
-    },
-    {
-      id: 3,
-      nome: "Nome do Diretor 3",
-      cargo: "Diretor de Comunicação",
-      foto: "/placeholder-avatar.jpg",
-      bio: "Especialista em Comunicação Internacional e Marketing Digital. Responsável pela estratégia de comunicação da Academia MAGIS e pela expansão da nossa presença digital.",
-      formacao: "Comunicação Social - PUC",
-      experiencia: "Especialista em Marketing Digital",
-      linkedin: "https://linkedin.com/in/diretor3",
-      email: "diretor3@academiamagis.com"
+  useEffect(() => {
+    loadDiretores();
+  }, []);
+
+  const loadDiretores = async () => {
+    try {
+      setLoading(true);
+      const data = await diretoriaApi.getPublicDiretores();
+      setDiretores(data);
+    } catch (error) {
+      console.error('Erro ao carregar diretores:', error);
+    } finally {
+      setLoading(false);
     }
-  ];
+  };
 
   const handleWhatsApp = () => {
     const message = `Olá! Gostaria de saber mais sobre a Diretoria da Academia MAGIS.`;
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/553191578389?text=${encodedMessage}`, '_blank');
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Carregando...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen">
@@ -90,59 +84,58 @@ const Diretoria = () => {
               </p>
             </div>
             
-            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
-              {diretores.map((diretor) => (
-                <Card key={diretor.id} className="group overflow-hidden shadow-diplomatic hover:shadow-elegant transition-all duration-300">
-                  <CardHeader className="text-center pb-4">
-                    <div className="w-32 h-32 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-105 transition-transform">
-                      <Users className="w-16 h-16 text-primary" />
-                    </div>
-                    <CardTitle className="text-2xl font-display font-bold text-foreground">
-                      {diretor.nome}
-                    </CardTitle>
-                    <p className="text-primary font-semibold">{diretor.cargo}</p>
-                  </CardHeader>
-                  
-                  <CardContent className="space-y-4">
-                    <p className="text-muted-foreground leading-relaxed">
-                      {diretor.bio}
-                    </p>
+            {diretores.length > 0 ? (
+              <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
+                {diretores.map((diretor) => (
+                  <Card key={diretor.id} className="group overflow-hidden shadow-diplomatic hover:shadow-elegant transition-all duration-300 h-full flex flex-col">
+                    <CardHeader className="text-center pb-4">
+                      {diretor.foto_url ? (
+                        <div className="w-32 h-32 rounded-full overflow-hidden mx-auto mb-4 group-hover:scale-105 transition-transform">
+                          <img
+                            src={diretor.foto_url}
+                            alt={diretor.nome}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      ) : (
+                        <div className="w-32 h-32 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-105 transition-transform">
+                          <Users className="w-16 h-16 text-primary" />
+                        </div>
+                      )}
+                      <CardTitle className="text-2xl font-display font-bold text-foreground">
+                        {diretor.nome}
+                      </CardTitle>
+                      <p className="text-primary font-semibold">{diretor.cargo}</p>
+                    </CardHeader>
                     
-                    <div className="space-y-2">
-                      <div className="flex items-center text-sm">
-                        <span className="font-semibold text-foreground mr-2">Formação:</span>
-                        <span className="text-muted-foreground">{diretor.formacao}</span>
+                    <CardContent className="space-y-4 flex-grow flex flex-col">
+                      <p className="text-muted-foreground leading-relaxed flex-grow">
+                        {diretor.bio}
+                      </p>
+                      
+                      <div className="space-y-2">
+                        <div className="flex items-center text-sm">
+                          <span className="font-semibold text-foreground mr-2">Formação:</span>
+                          <span className="text-muted-foreground">{diretor.formacao}</span>
+                        </div>
+                        <div className="flex items-center text-sm">
+                          <span className="font-semibold text-foreground mr-2">Experiência:</span>
+                          <span className="text-muted-foreground">{diretor.experiencia}</span>
+                        </div>
                       </div>
-                      <div className="flex items-center text-sm">
-                        <span className="font-semibold text-foreground mr-2">Experiência:</span>
-                        <span className="text-muted-foreground">{diretor.experiencia}</span>
-                      </div>
-                    </div>
-                    
-                    <div className="flex gap-3 pt-4">
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => window.open(diretor.linkedin, '_blank')}
-                        className="flex-1"
-                      >
-                        <Linkedin className="w-4 h-4 mr-2" />
-                        LinkedIn
-                      </Button>
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => window.open(`mailto:${diretor.email}`, '_blank')}
-                        className="flex-1"
-                      >
-                        <Mail className="w-4 h-4 mr-2" />
-                        Email
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-12">
+                <Users className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
+                <h3 className="text-xl font-semibold mb-2">Nenhum diretor disponível</h3>
+                <p className="text-muted-foreground">
+                  Em breve divulgaremos nossa diretoria executiva.
+                </p>
+              </div>
+            )}
           </div>
         </section>
 

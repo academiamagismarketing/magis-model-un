@@ -349,3 +349,244 @@ export const statisticsApi = {
     return diffMonths;
   }
 };
+
+export interface Diretor {
+  id: string;
+  nome: string;
+  cargo: string;
+  foto_url?: string;
+  bio: string;
+  formacao: string;
+  experiencia: string;
+  ordem_exibicao: number;
+  ativo: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Voluntario {
+  id: string;
+  nome: string;
+  area: string;
+  foto_url?: string;
+  bio: string;
+  formacao: string;
+  tempo_voluntario: string;
+  ordem_exibicao: number;
+  ativo: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Mentor {
+  id: string;
+  nome: string;
+  especialidade: string;
+  foto_url?: string;
+  bio: string;
+  formacao: string;
+  experiencia: string;
+  eventos_mentorados: string;
+  ordem_exibicao: number;
+  ativo: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export const diretoriaApi = {
+  async getAllDiretores(): Promise<Diretor[]> {
+    const { data, error } = await supabase
+      .from('diretoria')
+      .select('*')
+      .order('ordem_exibicao', { ascending: true });
+    
+    if (error) throw error;
+    return data || [];
+  },
+
+  async getDiretorById(id: string): Promise<Diretor | null> {
+    const { data, error } = await supabase
+      .from('diretoria')
+      .select('*')
+      .eq('id', id)
+      .single();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  async createDiretor(diretor: Omit<Diretor, 'id' | 'created_at' | 'updated_at'>): Promise<Diretor> {
+    const { data, error } = await supabase
+      .from('diretoria')
+      .insert([diretor])
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  async updateDiretor(id: string, updates: Partial<Diretor>): Promise<Diretor> {
+    const { data, error } = await supabase
+      .from('diretoria')
+      .update(updates)
+      .eq('id', id)
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  async deleteDiretor(id: string): Promise<void> {
+    const { error } = await supabase
+      .from('diretoria')
+      .delete()
+      .eq('id', id);
+    
+    if (error) throw error;
+  },
+
+  async getPublicDiretores(): Promise<Diretor[]> {
+    const { data, error } = await supabase
+      .from('diretoria')
+      .select('*')
+      .eq('ativo', true)
+      .order('ordem_exibicao', { ascending: true });
+    
+    if (error) throw error;
+    return data || [];
+  }
+};
+
+export const voluntariosApi = {
+  async getAllVoluntarios(): Promise<Voluntario[]> {
+    const { data, error } = await supabase
+      .from('voluntarios')
+      .select('*')
+      .order('ordem_exibicao', { ascending: true });
+    
+    if (error) throw error;
+    return data || [];
+  },
+
+  async getVoluntarioById(id: string): Promise<Voluntario | null> {
+    const { data, error } = await supabase
+      .from('voluntarios')
+      .select('*')
+      .eq('id', id)
+      .single();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  async createVoluntario(voluntario: Omit<Voluntario, 'id' | 'created_at' | 'updated_at'>): Promise<Voluntario> {
+    const { data, error } = await supabase
+      .from('voluntarios')
+      .insert([voluntario])
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  async updateVoluntario(id: string, updates: Partial<Voluntario>): Promise<Voluntario> {
+    const { data, error } = await supabase
+      .from('voluntarios')
+      .update(updates)
+      .eq('id', id)
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  async deleteVoluntario(id: string): Promise<void> {
+    const { error } = await supabase
+      .from('voluntarios')
+      .delete()
+      .eq('id', id);
+    
+    if (error) throw error;
+  },
+
+  async getPublicVoluntarios(): Promise<Voluntario[]> {
+    const { data, error } = await supabase
+      .from('voluntarios')
+      .select('*')
+      .eq('ativo', true)
+      .order('ordem_exibicao', { ascending: true });
+    
+    if (error) throw error;
+    return data || [];
+  }
+};
+
+export const mentoresApi = {
+  async getAllMentores(): Promise<Mentor[]> {
+    const { data, error } = await supabase
+      .from('mentores')
+      .select('*')
+      .order('ordem_exibicao', { ascending: true });
+    
+    if (error) throw error;
+    return data || [];
+  },
+
+  async getMentorById(id: string): Promise<Mentor | null> {
+    const { data, error } = await supabase
+      .from('mentores')
+      .select('*')
+      .eq('id', id)
+      .single();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  async createMentor(mentor: Omit<Mentor, 'id' | 'created_at' | 'updated_at'>): Promise<Mentor> {
+    const { data, error } = await supabase
+      .from('mentores')
+      .insert([mentor])
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  async updateMentor(id: string, updates: Partial<Mentor>): Promise<Mentor> {
+    const { data, error } = await supabase
+      .from('mentores')
+      .update(updates)
+      .eq('id', id)
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  async deleteMentor(id: string): Promise<void> {
+    const { error } = await supabase
+      .from('mentores')
+      .delete()
+      .eq('id', id);
+    
+    if (error) throw error;
+  },
+
+  async getPublicMentores(): Promise<Mentor[]> {
+    const { data, error } = await supabase
+      .from('mentores')
+      .select('*')
+      .eq('ativo', true)
+      .order('ordem_exibicao', { ascending: true });
+    
+    if (error) throw error;
+    return data || [];
+  }
+};

@@ -16,6 +16,12 @@ import AdminProdutos from './pages/admin/Produtos';
 import ProdutoForm from './pages/admin/ProdutoForm';
 import AdminStatus from './pages/admin/Status';
 import Dashboard from './pages/admin/Dashboard';
+import AdminDiretoria from './pages/admin/Diretoria';
+import DiretoriaForm from './pages/admin/DiretoriaForm';
+import AdminVoluntarios from './pages/admin/Voluntarios';
+import VoluntarioForm from './pages/admin/VoluntarioForm';
+import AdminMentores from './pages/admin/Mentores';
+import MentorForm from './pages/admin/MentorForm';
 import AdminLayout from './components/admin/AdminLayout';
 import NotFound from './pages/NotFound';
 import ScrollToTop from './components/ScrollToTop';
@@ -116,6 +122,51 @@ function App() {
           <Route path="/admin/status" element={
             <AdminLayout>
               <AdminStatus />
+            </AdminLayout>
+          } />
+          <Route path="/admin/diretoria" element={
+            <AdminLayout>
+              <AdminDiretoria />
+            </AdminLayout>
+          } />
+          <Route path="/admin/diretoria/novo" element={
+            <AdminLayout>
+              <DiretoriaForm />
+            </AdminLayout>
+          } />
+          <Route path="/admin/diretoria/:id/editar" element={
+            <AdminLayout>
+              <DiretoriaForm />
+            </AdminLayout>
+          } />
+          <Route path="/admin/voluntarios" element={
+            <AdminLayout>
+              <AdminVoluntarios />
+            </AdminLayout>
+          } />
+          <Route path="/admin/voluntarios/novo" element={
+            <AdminLayout>
+              <VoluntarioForm />
+            </AdminLayout>
+          } />
+          <Route path="/admin/voluntarios/:id/editar" element={
+            <AdminLayout>
+              <VoluntarioForm />
+            </AdminLayout>
+          } />
+          <Route path="/admin/mentores" element={
+            <AdminLayout>
+              <AdminMentores />
+            </AdminLayout>
+          } />
+          <Route path="/admin/mentores/novo" element={
+            <AdminLayout>
+              <MentorForm />
+            </AdminLayout>
+          } />
+          <Route path="/admin/mentores/:id/editar" element={
+            <AdminLayout>
+              <MentorForm />
             </AdminLayout>
           } />
           

@@ -1,65 +1,48 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowLeft, Award, Linkedin, Mail, MessageSquare, Heart } from 'lucide-react';
+import { ArrowLeft, Award, MessageSquare } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { voluntariosApi, Voluntario } from '@/lib/supabase';
 
 const Voluntarios = () => {
   const navigate = useNavigate();
+  const [voluntarios, setVoluntarios] = useState<Voluntario[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const voluntarios = [
-    {
-      id: 1,
-      nome: "Nome do Voluntário 1",
-      area: "Logística e Eventos",
-      foto: "/placeholder-avatar.jpg",
-      bio: "Estudante de Administração apaixonado por organização de eventos. Responsável pela coordenação logística dos nossos eventos e pela experiência dos participantes.",
-      formacao: "Administração - UFMG",
-      tempoVoluntario: "2 anos",
-      linkedin: "https://linkedin.com/in/voluntario1",
-      email: "voluntario1@academiamagis.com"
-    },
-    {
-      id: 2,
-      nome: "Nome da Voluntária 2",
-      area: "Comunicação e Marketing",
-      foto: "/placeholder-avatar.jpg",
-      bio: "Comunicóloga especializada em redes sociais. Gerencia nossa presença digital e cria conteúdo que conecta jovens com oportunidades acadêmicas.",
-      formacao: "Comunicação Social - PUC",
-      tempoVoluntario: "1.5 anos",
-      linkedin: "https://linkedin.com/in/voluntaria2",
-      email: "voluntaria2@academiamagis.com"
-    },
-    {
-      id: 3,
-      nome: "Nome do Voluntário 3",
-      area: "Pedagogia e Treinamento",
-      foto: "/placeholder-avatar.jpg",
-      bio: "Pedagogo com experiência em educação não-formal. Desenvolve metodologias de treinamento para nossos delegados e coordena workshops educativos.",
-      formacao: "Pedagogia - UFOP",
-      tempoVoluntario: "3 anos",
-      linkedin: "https://linkedin.com/in/voluntario3",
-      email: "voluntario3@academiamagis.com"
-    },
-    {
-      id: 4,
-      nome: "Nome da Voluntária 4",
-      area: "Relações Internacionais",
-      foto: "/placeholder-avatar.jpg",
-      bio: "Graduanda em Relações Internacionais e ex-delegada da Academia MAGIS. Apoia na organização de simulações e mentoria de novos participantes.",
-      formacao: "Relações Internacionais - UFMG",
-      tempoVoluntario: "1 ano",
-      linkedin: "https://linkedin.com/in/voluntaria4",
-      email: "voluntaria4@academiamagis.com"
+  useEffect(() => {
+    loadVoluntarios();
+  }, []);
+
+  const loadVoluntarios = async () => {
+    try {
+      setLoading(true);
+      const data = await voluntariosApi.getPublicVoluntarios();
+      setVoluntarios(data);
+    } catch (error) {
+      console.error('Erro ao carregar voluntários:', error);
+    } finally {
+      setLoading(false);
     }
-  ];
+  };
 
   const handleWhatsApp = () => {
     const message = `Olá! Gostaria de saber mais sobre como ser voluntário na Academia MAGIS.`;
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/553191578389?text=${encodedMessage}`, '_blank');
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Carregando...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen">
@@ -101,59 +84,58 @@ const Voluntarios = () => {
               </p>
             </div>
             
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {voluntarios.map((voluntario) => (
-                <Card key={voluntario.id} className="group overflow-hidden shadow-diplomatic hover:shadow-elegant transition-all duration-300">
-                  <CardHeader className="text-center pb-4">
-                    <div className="w-32 h-32 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-105 transition-transform">
-                      <Award className="w-16 h-16 text-primary" />
-                    </div>
-                    <CardTitle className="text-2xl font-display font-bold text-foreground">
-                      {voluntario.nome}
-                    </CardTitle>
-                    <p className="text-primary font-semibold">{voluntario.area}</p>
-                  </CardHeader>
-                  
-                  <CardContent className="space-y-4">
-                    <p className="text-muted-foreground leading-relaxed">
-                      {voluntario.bio}
-                    </p>
+            {voluntarios.length > 0 ? (
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {voluntarios.map((voluntario) => (
+                  <Card key={voluntario.id} className="group overflow-hidden shadow-diplomatic hover:shadow-elegant transition-all duration-300 h-full flex flex-col">
+                    <CardHeader className="text-center pb-4">
+                      {voluntario.foto_url ? (
+                        <div className="w-32 h-32 rounded-full overflow-hidden mx-auto mb-4 group-hover:scale-105 transition-transform">
+                          <img
+                            src={voluntario.foto_url}
+                            alt={voluntario.nome}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      ) : (
+                        <div className="w-32 h-32 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-105 transition-transform">
+                          <Award className="w-16 h-16 text-primary" />
+                        </div>
+                      )}
+                      <CardTitle className="text-2xl font-display font-bold text-foreground">
+                        {voluntario.nome}
+                      </CardTitle>
+                      <p className="text-primary font-semibold">{voluntario.area}</p>
+                    </CardHeader>
                     
-                    <div className="space-y-2">
-                      <div className="flex items-center text-sm">
-                        <span className="font-semibold text-foreground mr-2">Formação:</span>
-                        <span className="text-muted-foreground">{voluntario.formacao}</span>
+                    <CardContent className="space-y-4 flex-grow flex flex-col">
+                      <p className="text-muted-foreground leading-relaxed flex-grow">
+                        {voluntario.bio}
+                      </p>
+                      
+                      <div className="space-y-2">
+                        <div className="flex items-center text-sm">
+                          <span className="font-semibold text-foreground mr-2">Formação:</span>
+                          <span className="text-muted-foreground">{voluntario.formacao}</span>
+                        </div>
+                        <div className="flex items-center text-sm">
+                          <span className="font-semibold text-foreground mr-2">Tempo como Voluntário:</span>
+                          <span className="text-muted-foreground">{voluntario.tempo_voluntario}</span>
+                        </div>
                       </div>
-                      <div className="flex items-center text-sm">
-                        <span className="font-semibold text-foreground mr-2">Tempo como Voluntário:</span>
-                        <span className="text-muted-foreground">{voluntario.tempoVoluntario}</span>
-                      </div>
-                    </div>
-                    
-                    <div className="flex gap-3 pt-4">
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => window.open(voluntario.linkedin, '_blank')}
-                        className="flex-1"
-                      >
-                        <Linkedin className="w-4 h-4 mr-2" />
-                        LinkedIn
-                      </Button>
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => window.open(`mailto:${voluntario.email}`, '_blank')}
-                        className="flex-1"
-                      >
-                        <Mail className="w-4 h-4 mr-2" />
-                        Email
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-12">
+                <Award className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
+                <h3 className="text-xl font-semibold mb-2">Nenhum voluntário disponível</h3>
+                <p className="text-muted-foreground">
+                  Em breve divulgaremos nossa equipe de voluntários.
+                </p>
+              </div>
+            )}
           </div>
         </section>
 
