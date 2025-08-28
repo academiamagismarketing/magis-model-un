@@ -159,42 +159,42 @@ const Sobre = () => {
               </div>
               <div className="relative">
                 <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl p-8 hover-lift">
-                  <div className="grid grid-cols-2 gap-6">
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
                     <div className="text-center">
                       <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 icon-bounce">
                         <Users className="w-8 h-8 text-primary" />
                       </div>
-                      <h3 className="font-semibold text-foreground mb-2">
+                      <h3 className="text-2xl font-bold text-foreground mb-2">
                         {formatStatisticValue('delegados', getStatisticValue('delegados'))}
                       </h3>
-                      <p className="text-sm text-muted-foreground">Delegados</p>
+                      <p className="text-sm text-muted-foreground font-medium">Delegados</p>
                     </div>
                     <div className="text-center">
                       <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 icon-bounce">
                         <Award className="w-8 h-8 text-primary" />
                       </div>
-                      <h3 className="font-semibold text-foreground mb-2">
+                      <h3 className="text-2xl font-bold text-foreground mb-2">
                         {formatStatisticValue('eventos_realizados', getStatisticValue('eventos_realizados'))}
                       </h3>
-                      <p className="text-sm text-muted-foreground">Eventos Realizados</p>
+                      <p className="text-sm text-muted-foreground font-medium">Eventos Realizados</p>
                     </div>
                     <div className="text-center">
                       <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 icon-bounce">
                         <Star className="w-8 h-8 text-primary" />
                       </div>
-                      <h3 className="font-semibold text-foreground mb-2">
+                      <h3 className="text-2xl font-bold text-foreground mb-2">
                         {formatStatisticValue('valores_arrecadados', getStatisticValue('valores_arrecadados'))}
                       </h3>
-                      <p className="text-sm text-muted-foreground">Valores Arrecadados</p>
+                      <p className="text-sm text-muted-foreground font-medium">Valores Arrecadados</p>
                     </div>
                     <div className="text-center">
                       <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 icon-bounce">
                         <Clock className="w-8 h-8 text-primary" />
                       </div>
-                      <h3 className="font-semibold text-foreground mb-2">
+                      <h3 className="text-2xl font-bold text-foreground mb-2">
                         {timeOfOperation}
                       </h3>
-                      <p className="text-sm text-muted-foreground">Meses de Atuação</p>
+                      <p className="text-sm text-muted-foreground font-medium">Meses de Atuação</p>
                     </div>
                   </div>
                 </div>
