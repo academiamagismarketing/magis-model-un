@@ -1,26 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { supabase } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
 import { 
+  Home, 
   LogOut, 
-  Home
+  Calendar, 
+  Plus, 
+  Settings, 
+  Users,
+  BarChart3,
+  Menu,
+  X
 } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
-import { useNavigate, useLocation } from 'react-router-dom';
-
 
 interface AdminLayoutProps {
   children: React.ReactNode;
 }
 
-const AdminLayout = ({ children }: AdminLayoutProps) => {
+const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
   const navigate = useNavigate();
-  const location = useLocation();
   const [user, setUser] = useState<any>(null);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
-    // Verificar se o usuário está autenticado
     const checkUser = async () => {
       const { data: { user } } = await supabase.auth.getUser();
+      
       if (!user) {
         navigate('/admin/login');
         return;
@@ -66,56 +72,114 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
     return null; // Mostrar loading ou redirecionar
   }
 
+  const navigationItems = [
+    { name: 'Dashboard', href: '/admin', icon: Home },
+    { name: 'Eventos', href: '/admin/eventos', icon: Calendar },
+    { name: 'Novo Evento', href: '/admin/eventos/novo', icon: Plus }
+  ];
+
   return (
-    <div className="min-h-screen bg-background admin-layout">
-      {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-[9999] bg-primary text-primary-foreground shadow-sm">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex h-16 items-center justify-between">
-            {/* Brand e Título */}
+    <div className="min-h-screen bg-background flex">
+      {/* Sidebar */}
+      <div className={`fixed inset-y-0 left-0 z-50 w-64 bg-primary text-primary-foreground transform transition-transform duration-300 ease-in-out ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 lg:static lg:inset-0`}>
+        <div className="flex flex-col h-full">
+          {/* Header da Sidebar */}
+          <div className="flex items-center justify-between p-6 border-b border-primary-foreground/20">
             <div className="flex items-center space-x-3">
-              <div className="text-xl font-display font-bold text-primary-foreground">
+              <div className="text-xl font-display font-bold">
                 ACADEMIA <span className="text-primary-foreground/80">MAGIS</span>
               </div>
-              <h1 className="text-lg font-semibold">
-                Eventos
-              </h1>
             </div>
+            <Button
+              onClick={() => setSidebarOpen(false)}
+              variant="ghost"
+              size="sm"
+              className="lg:hidden text-primary-foreground hover:bg-primary-foreground/10"
+            >
+              <X className="w-5 h-5" />
+            </Button>
+          </div>
 
-            {/* Navegação */}
-            <div className="flex items-center space-x-4">
-              <Button
-                onClick={() => navigate('/')}
-                variant="ghost"
-                className="text-primary-foreground hover:bg-primary-foreground/10"
-              >
-                <Home className="w-4 h-4 mr-2" />
-                Página Inicial
-              </Button>
+          {/* Navegação */}
+          <nav className="flex-1 px-4 py-6 space-y-2">
+            {navigationItems.map((item) => {
+              const Icon = item.icon;
+              const isActive = window.location.pathname === item.href;
               
-              <div className="hidden sm:block text-sm text-primary-foreground/80">
-                {user.email}
+              return (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors ${
+                    isActive 
+                      ? 'bg-primary-foreground/20 text-primary-foreground' 
+                      : 'text-primary-foreground/80 hover:bg-primary-foreground/10 hover:text-primary-foreground'
+                  }`}
+                >
+                  <Icon className="w-5 h-5" />
+                  <span className="font-medium">{item.name}</span>
+                </a>
+              );
+            })}
+          </nav>
+
+          {/* Footer da Sidebar */}
+          <div className="p-4 border-t border-primary-foreground/20">
+            <div className="flex items-center space-x-3 mb-4">
+              <div className="w-8 h-8 bg-primary-foreground/20 rounded-full flex items-center justify-center">
+                <Users className="w-4 h-4" />
               </div>
-              
-              <Button
-                onClick={handleLogout}
-                variant="ghost"
-                className="text-primary-foreground hover:bg-primary-foreground/10"
-              >
-                <LogOut className="w-4 h-4 mr-2" />
-                Sair
-              </Button>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-primary-foreground truncate">
+                  {user.email}
+                </p>
+                <p className="text-xs text-primary-foreground/60">
+                  Administrador
+                </p>
+              </div>
             </div>
+            <Button
+              onClick={handleLogout}
+              variant="ghost"
+              className="w-full text-primary-foreground hover:bg-primary-foreground/10"
+            >
+              <LogOut className="w-4 h-4 mr-2" />
+              Sair
+            </Button>
           </div>
         </div>
-      </header>
+      </div>
 
-      {/* Conteúdo da página */}
-      <main className="pt-20 pb-6">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      {/* Overlay para mobile */}
+      {sidebarOpen && (
+        <div 
+          className="fixed inset-0 z-40 bg-black/50 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
+      {/* Conteúdo principal */}
+      <div className="flex-1 flex flex-col lg:ml-0">
+        {/* Header móvel */}
+        <header className="lg:hidden bg-background border-b border-border px-4 py-3">
+          <div className="flex items-center justify-between">
+            <Button
+              onClick={() => setSidebarOpen(true)}
+              variant="ghost"
+              size="sm"
+            >
+              <Menu className="w-5 h-5" />
+            </Button>
+            <div className="text-lg font-semibold">Admin</div>
+            <div className="w-8"></div> {/* Espaçador */}
+          </div>
+        </header>
+
+        {/* Conteúdo da página */}
+        <main className="flex-1 p-6">
           {children}
-        </div>
-      </main>
+        </main>
+      </div>
     </div>
   );
 };

@@ -9,6 +9,8 @@ import Eventos from './pages/Eventos';
 import AdminLogin from './pages/admin/Login';
 import AdminEventos from './pages/admin/Eventos';
 import EventoForm from './pages/admin/EventoForm';
+import DashboardEventos from './pages/admin/DashboardEventos';
+import AdminLayout from './components/admin/AdminLayout';
 import NotFound from './pages/NotFound';
 
 function App() {
@@ -50,20 +52,25 @@ function App() {
           
           {/* Rotas administrativas sem Navbar */}
           <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin" element={
+            <AdminLayout>
+              <DashboardEventos />
+            </AdminLayout>
+          } />
           <Route path="/admin/eventos" element={
-            <div className="admin-layout">
+            <AdminLayout>
               <AdminEventos />
-            </div>
+            </AdminLayout>
           } />
           <Route path="/admin/eventos/novo" element={
-            <div className="admin-layout">
+            <AdminLayout>
               <EventoForm />
-            </div>
+            </AdminLayout>
           } />
           <Route path="/admin/eventos/:id/editar" element={
-            <div className="admin-layout">
+            <AdminLayout>
               <EventoForm />
-            </div>
+            </AdminLayout>
           } />
           
           {/* Rota 404 com Navbar */}

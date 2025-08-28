@@ -117,11 +117,6 @@ All colors MUST be HSL for consistency.
     mix-blend-mode: normal;
   }
 
-  /* Esconder Navbar em páginas administrativas */
-  .admin-layout nav[class*="fixed"]:not([class*="z-[9999]"]) {
-    display: none !important;
-  }
-
   /* Garantir que Navbar só apareça em layouts públicos */
   .public-layout nav[class*="fixed"] {
     display: block !important;
