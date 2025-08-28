@@ -464,64 +464,115 @@ All colors MUST be HSL for consistency.
     background: radial-gradient(circle at 50% 50%, hsl(var(--primary) / 0.08), transparent 60%);
   }
 
-  /* Custom Button Classes */
-  .btn-primary {
-    background-color: hsl(var(--primary));
-    color: white !important;
-    border: 1px solid hsl(var(--primary));
-    font-weight: 600;
-    transition: all 0.3s ease;
-  }
-  
-  .btn-primary:hover {
-    background-color: hsl(var(--primary) / 0.9);
-    color: white !important;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px hsl(var(--primary) / 0.3);
-  }
+  /* Custom Swiper Styles for Partners Section */
+.partner-swiper {
+  padding: 2rem 0;
+}
 
-  .btn-outline {
-    background-color: transparent;
-    color: hsl(var(--primary)) !important;
-    border: 2px solid hsl(var(--primary));
-    font-weight: 600;
-    transition: all 0.3s ease;
-  }
-  
-  .btn-outline:hover {
-    background-color: hsl(var(--primary));
-    color: white !important;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px hsl(var(--primary) / 0.3);
-  }
+.partner-swiper .swiper-button-next,
+.partner-swiper .swiper-button-prev {
+  color: hsl(var(--primary));
+  width: 40px;
+  height: 40px;
+  background: hsl(var(--background));
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
 
-  .btn-white {
-    background-color: white;
-    color: hsl(var(--primary)) !important;
-    border: 1px solid white;
-    font-weight: 600;
-    transition: all 0.3s ease;
-  }
-  
-  .btn-white:hover {
-    background-color: hsl(var(--muted));
-    color: hsl(var(--primary)) !important;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
+.partner-swiper .swiper-button-next:hover,
+.partner-swiper .swiper-button-prev:hover {
+  background: hsl(var(--primary));
+  color: white;
+  transform: scale(1.05);
+}
 
-  .btn-dark {
-    background-color: hsl(var(--foreground));
-    color: white !important;
-    border: 1px solid hsl(var(--foreground));
-    font-weight: 600;
-    transition: all 0.3s ease;
+.partner-swiper .swiper-button-next::after,
+.partner-swiper .swiper-button-prev::after {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.partner-swiper .swiper-pagination-bullet {
+  background: hsl(var(--muted-foreground));
+  opacity: 0.5;
+  width: 10px;
+  height: 10px;
+  transition: all 0.3s ease;
+}
+
+.partner-swiper .swiper-pagination-bullet-active {
+  background: hsl(var(--primary));
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .partner-swiper .swiper-button-next,
+  .partner-swiper .swiper-button-prev {
+    display: none;
   }
-  
-  .btn-dark:hover {
-    background-color: hsl(var(--foreground) / 0.9);
-    color: white !important;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  }
+}
+
+/* Custom Button Classes */
+.btn-primary {
+  background-color: hsl(var(--primary));
+  color: white !important;
+  border: 1px solid hsl(var(--primary));
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: hsl(var(--primary) / 0.9);
+  color: white !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px hsl(var(--primary) / 0.3);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: hsl(var(--primary)) !important;
+  border: 2px solid hsl(var(--primary));
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  background-color: hsl(var(--primary));
+  color: white !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px hsl(var(--primary) / 0.3);
+}
+
+.btn-white {
+  background-color: white;
+  color: hsl(var(--primary)) !important;
+  border: 1px solid white;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-white:hover {
+  background-color: hsl(var(--muted));
+  color: hsl(var(--primary)) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn-dark {
+  background-color: hsl(var(--foreground));
+  color: white !important;
+  border: 1px solid hsl(var(--foreground));
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-dark:hover {
+  background-color: hsl(var(--foreground) / 0.9);
+  color: white !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
 }

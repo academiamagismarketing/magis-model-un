@@ -1,15 +1,59 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Play, Zap } from 'lucide-react';
+import { statisticsApi, Statistic } from '@/lib/supabase';
 
 import heroImage from '../assets/hero-diplomatic.jpg';
 
 const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [statistics, setStatistics] = useState<Statistic[]>([]);
+  const [timeOfOperation, setTimeOfOperation] = useState(0);
 
   useEffect(() => {
     setIsVisible(true);
+    loadStatistics();
   }, []);
+
+  const loadStatistics = async () => {
+    try {
+      const data = await statisticsApi.getPublicStatistics();
+      setStatistics(data);
+      
+      // Calcular tempo de atuação
+      const months = statisticsApi.calculateTimeOfOperation();
+      setTimeOfOperation(months);
+    } catch (error) {
+      console.error('Erro ao carregar estatísticas:', error);
+    }
+  };
+
+  const getStatisticValue = (key: string) => {
+    const stat = statistics.find(s => s.key === key);
+    if (!stat) return 0;
+    
+    switch (key) {
+      case 'valores_arrecadados':
+        return stat.value;
+      case 'delegados':
+      case 'eventos_realizados':
+        return Math.floor(stat.value);
+      default:
+        return stat.value;
+    }
+  };
+
+  const formatStatisticValue = (key: string, value: number) => {
+    switch (key) {
+      case 'valores_arrecadados':
+        return `R$ ${value.toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
+      case 'delegados':
+      case 'eventos_realizados':
+        return value.toLocaleString('pt-BR');
+      default:
+        return value.toString();
+    }
+  };
 
   const handleWhatsApp = () => {
     window.open('https://wa.me/553191578389?text=Olá! Gostaria de saber mais sobre a Academia MAGIS.', '_blank');
@@ -83,17 +127,23 @@ const HeroSection = () => {
             <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl px-6 py-4">
               <div className="flex items-center justify-between text-center gap-4">
                 <div className="flex-1">
-                  <div className="text-2xl md:text-3xl font-bold text-white">500+</div>
-                  <div className="text-xs md:text-sm text-white/80">Estudantes</div>
+                  <div className="text-2xl md:text-3xl font-bold text-white">
+                    {formatStatisticValue('delegados', getStatisticValue('delegados'))}
+                  </div>
+                  <div className="text-xs md:text-sm text-white/80">Delegados</div>
                 </div>
                 <div className="h-8 w-px bg-white/20" />
                 <div className="flex-1">
-                  <div className="text-2xl md:text-3xl font-bold text-white">50+</div>
+                  <div className="text-2xl md:text-3xl font-bold text-white">
+                    {formatStatisticValue('eventos_realizados', getStatisticValue('eventos_realizados'))}
+                  </div>
                   <div className="text-xs md:text-sm text-white/80">Eventos</div>
                 </div>
                 <div className="h-8 w-px bg-white/20" />
                 <div className="flex-1">
-                  <div className="text-2xl md:text-3xl font-bold text-white">R$ 9.000+</div>
+                  <div className="text-2xl md:text-3xl font-bold text-white">
+                    {formatStatisticValue('valores_arrecadados', getStatisticValue('valores_arrecadados'))}
+                  </div>
                   <div className="text-xs md:text-sm text-white/80">Arrecadados</div>
                 </div>
               </div>

@@ -10,6 +10,15 @@ import {
   Star
 } from 'lucide-react';
 
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
 // Importar logos dos parceiros
 import logoMocs from '../assets/parceiros/LOGO - MOCS.png';
 import logoSia from '../assets/parceiros/LOGO - SIA.png';
@@ -78,7 +87,7 @@ const PartnersSection = () => {
           </p>
         </div>
 
-        {/* Todos os Parceiros em Linha Única */}
+        {/* Carousel de Parceiros */}
         <div className="mb-16">
           <div className="flex items-center justify-center mb-8">
             <Star className="w-5 h-5 text-primary mr-2" />
@@ -87,35 +96,59 @@ const PartnersSection = () => {
             </h3>
           </div>
           
-          {/* Container com scroll horizontal para mobile */}
-          <div className="overflow-x-auto">
-            <div className="flex gap-6 min-w-max px-4">
-              {partners.map((partner) => (
-                <Card key={partner.name} className="group hover:shadow-lg transition-all duration-300 border-2 hover:border-primary/20 min-w-[200px] max-w-[250px] flex-shrink-0">
+          {/* Swiper Carousel */}
+          <Swiper
+            modules={[Navigation, Pagination, Autoplay]}
+            spaceBetween={30}
+            slidesPerView={1}
+            breakpoints={{
+              640: {
+                slidesPerView: 2,
+              },
+              768: {
+                slidesPerView: 3,
+              },
+              1024: {
+                slidesPerView: 4,
+              },
+            }}
+            navigation
+            pagination={{ clickable: true }}
+            autoplay={{
+              delay: 5000,
+              disableOnInteraction: false,
+            }}
+            className="partner-swiper"
+          >
+            {partners.map((partner) => (
+              <SwiperSlide key={partner.name}>
+                <Card className="group hover:shadow-lg transition-all duration-300 border-2 hover:border-primary/20 h-full">
                   <CardContent className="p-6 text-center">
-                    <a href={partner.link} target="_blank" rel="noopener noreferrer" className="block">
-                      <div className="mb-4">
-                        <img 
-                          src={partner.logo} 
-                          alt={`Logo ${partner.name}`}
-                          className="h-16 w-auto mx-auto object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300"
-                        />
+                    <a href={partner.link} target="_blank" rel="noopener noreferrer" className="block h-full flex flex-col justify-between">
+                      <div>
+                        <div className="mb-4">
+                          <img 
+                            src={partner.logo} 
+                            alt={`Logo ${partner.name}`}
+                            className="h-16 w-auto mx-auto object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300"
+                          />
+                        </div>
+                        <h4 className="font-semibold text-foreground mb-2 text-center">
+                          {partner.name}
+                        </h4>
+                        <p className="text-sm text-muted-foreground mb-3 text-center">
+                          {partner.description}
+                        </p>
                       </div>
-                      <h4 className="font-semibold text-foreground mb-2">
-                        {partner.name}
-                      </h4>
-                      <p className="text-sm text-muted-foreground mb-3">
-                        {partner.description}
-                      </p>
-                      <Badge variant="secondary" className="text-xs">
+                      <Badge variant="secondary" className="text-xs mt-2 mx-auto">
                         {partner.category}
                       </Badge>
                     </a>
                   </CardContent>
                 </Card>
-              ))}
-            </div>
-          </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </div>
     </section>
