@@ -159,7 +159,7 @@ const Sobre = () => {
               </div>
               <div className="relative">
                 <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl p-8 hover-lift">
-                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+                  <div className="grid grid-cols-2 gap-6">
                     <div className="text-center">
                       <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 icon-bounce">
                         <Users className="w-8 h-8 text-primary" />
@@ -176,7 +176,7 @@ const Sobre = () => {
                       <h3 className="text-2xl font-bold text-foreground mb-2">
                         {formatStatisticValue('eventos_realizados', getStatisticValue('eventos_realizados'))}
                       </h3>
-                      <p className="text-sm text-muted-foreground font-medium">Eventos Realizados</p>
+                      <p className="text-sm text-muted-foreground font-medium">Eventos</p>
                     </div>
                     <div className="text-center">
                       <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 icon-bounce">
@@ -185,7 +185,7 @@ const Sobre = () => {
                       <h3 className="text-2xl font-bold text-foreground mb-2">
                         {formatStatisticValue('valores_arrecadados', getStatisticValue('valores_arrecadados'))}
                       </h3>
-                      <p className="text-sm text-muted-foreground font-medium">Valores Arrecadados</p>
+                      <p className="text-sm text-muted-foreground font-medium">Arrecadados</p>
                     </div>
                     <div className="text-center">
                       <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 icon-bounce">

@@ -12,7 +12,10 @@ import {
   CheckCircle,
   Package,
   Search,
-  Filter
+  Filter,
+  Users,
+  Calendar,
+  Clock
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { productsApi, Product } from '@/lib/supabase';
@@ -128,6 +131,28 @@ const Produtos = () => {
       </div>
     );
   }
+
+  const getStatisticValue = (key: string) => {
+    switch (key) {
+      case 'delegados':
+        return 150; // Placeholder value
+      case 'eventos_realizados':
+        return 100; // Placeholder value
+      case 'valores_arrecadados':
+        return 50000; // Placeholder value
+      default:
+        return 0;
+    }
+  };
+
+  const formatStatisticValue = (key: string, value: number) => {
+    if (key === 'valores_arrecadados') {
+      return `R$ ${value.toLocaleString('pt-br', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    }
+    return value.toLocaleString('pt-br');
+  };
+
+  const timeOfOperation = 24; // Placeholder value
 
   return (
     <div className="min-h-screen">
@@ -260,6 +285,63 @@ const Produtos = () => {
                 ))}
               </div>
             )}
+          </div>
+        </section>
+
+        {/* Statistics Section */}
+        <section className="py-20 bg-muted section-decor">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-display font-bold mb-6 text-foreground">
+                Nossos Números
+              </h2>
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+                Conheça alguns dos nossos principais indicadores e conquistas.
+              </p>
+            </div>
+            
+            <div className="max-w-4xl mx-auto">
+              <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl p-8 hover-lift">
+                <div className="grid grid-cols-2 gap-6">
+                  <div className="text-center">
+                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 icon-bounce">
+                      <Users className="w-8 h-8 text-primary" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-foreground mb-2">
+                      {formatStatisticValue('delegados', getStatisticValue('delegados'))}
+                    </h3>
+                    <p className="text-sm text-muted-foreground font-medium">Delegados</p>
+                  </div>
+                  <div className="text-center">
+                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 icon-bounce">
+                      <Calendar className="w-8 h-8 text-primary" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-foreground mb-2">
+                      {formatStatisticValue('eventos_realizados', getStatisticValue('eventos_realizados'))}
+                    </h3>
+                    <p className="text-sm text-muted-foreground font-medium">Eventos</p>
+                  </div>
+                  <div className="text-center">
+                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 icon-bounce">
+                      <Star className="w-8 h-8 text-primary" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-foreground mb-2">
+                      {formatStatisticValue('valores_arrecadados', getStatisticValue('valores_arrecadados'))}
+                    </h3>
+                    <p className="text-sm text-muted-foreground font-medium">Arrecadados</p>
+                  </div>
+                  <div className="text-center">
+                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 icon-bounce">
+                      <Clock className="w-8 h-8 text-primary" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-foreground mb-2">
+                      {timeOfOperation}
+                    </h3>
+                    <p className="text-sm text-muted-foreground font-medium">Meses de Atuação</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
