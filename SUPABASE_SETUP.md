@@ -1,6 +1,6 @@
-# Configuração do Supabase para Academia Magis - Sistema de Eventos
+# Configuração do Supabase para Academia MAGIS - Sistema de Eventos
 
-Este documento contém as instruções completas para configurar o Supabase para o sistema de gerenciamento de eventos da Academia Magis.
+Este documento contém as instruções completas para configurar o Supabase para o sistema de gerenciamento de eventos da Academia MAGIS.
 
 ## 📋 Pré-requisitos
 
@@ -207,5 +207,5 @@ A tabela `events` possui os seguintes campos:
 ## 📞 Suporte
 
 Para dúvidas ou problemas:
-- Email: contato@academiamagis.com
+- Email: institucional@academiamagis.com
 - WhatsApp: +55 31 9157-8389

@@ -1,4 +1,4 @@
--- Configuração do Supabase para Academia Magis - Sistema de Eventos
+-- Configuração do Supabase para Academia MAGIS - Sistema de Eventos
 -- Execute este script no SQL Editor do Supabase
 
 -- Drop da tabela appointments se existir
@@ -71,7 +71,7 @@ INSERT INTO events (title, description, date, location, participants, status, ca
     'Workshop de Diplomacia',
     'Curso intensivo sobre técnicas de negociação, protocolo diplomático e elaboração de resoluções. Ideal para iniciantes.',
     '2024-04-08',
-    'Academia Magis - Online',
+    'Academia MAGIS - Online',
     '50 estudantes',
     'completed',
     'Workshop',
@@ -93,7 +93,7 @@ INSERT INTO events (title, description, date, location, participants, status, ca
     'Conferência de Relações Internacionais',
     'Conferência anual com palestrantes internacionais sobre temas atuais de diplomacia e política internacional.',
     '2024-06-10',
-    'Auditório da Academia Magis',
+    'Auditório da Academia MAGIS',
     '300+ participantes',
     'upcoming',
     'Conferência',
@@ -115,7 +115,7 @@ INSERT INTO events (title, description, date, location, participants, status, ca
     'Workshop de Oratória e Debate',
     'Workshop especializado em técnicas de oratória, argumentação e debate para simulações da ONU.',
     '2024-07-15',
-    'Academia Magis - Presencial',
+    'Academia MAGIS - Presencial',
     '80 estudantes',
     'upcoming',
     'Workshop',

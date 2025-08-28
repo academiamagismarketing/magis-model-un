@@ -21,13 +21,33 @@ const Login = () => {
     setError('');
 
     try {
+      // Verificar se as variáveis de ambiente estão configuradas
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+      const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+      
+      if (!supabaseUrl || !supabaseKey || supabaseUrl === 'https://seu-projeto.supabase.co') {
+        setError('Configuração do Supabase não encontrada. Verifique o arquivo .env.local');
+        setLoading(false);
+        return;
+      }
+
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
 
       if (error) {
-        throw error;
+        // Tratar erros específicos do Supabase
+        if (error.message.includes('Invalid login credentials')) {
+          setError('Email ou senha incorretos. Verifique suas credenciais.');
+        } else if (error.message.includes('Email not confirmed')) {
+          setError('Email não confirmado. Verifique sua caixa de entrada.');
+        } else if (error.message.includes('Too many requests')) {
+          setError('Muitas tentativas de login. Aguarde alguns minutos.');
+        } else {
+          setError(`Erro de conexão: ${error.message}`);
+        }
+        return;
       }
 
       if (data.user) {
@@ -45,7 +65,13 @@ const Login = () => {
         }
       }
     } catch (error: any) {
-      setError(error.message || 'Erro ao fazer login');
+      console.error('Erro no login:', error);
+      
+      if (error.message?.includes('fetch')) {
+        setError('Erro de conexão com o servidor. Verifique sua conexão com a internet e as configurações do Supabase.');
+      } else {
+        setError(error.message || 'Erro inesperado ao fazer login');
+      }
     } finally {
       setLoading(false);
     }
@@ -59,7 +85,7 @@ const Login = () => {
             Painel Administrativo
           </CardTitle>
           <p className="text-muted-foreground">
-            Academia Magis - Gerenciamento de Eventos
+            Academia MAGIS - Gerenciamento de Eventos
           </p>
         </CardHeader>
         
@@ -128,6 +154,11 @@ const Login = () => {
             <p className="text-sm text-muted-foreground">
               Apenas administradores autorizados podem acessar este painel.
             </p>
+            <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+              <p className="text-sm text-blue-700">
+                <strong>Problemas com login?</strong> Verifique o arquivo <code className="bg-blue-100 px-1 rounded">SUPABASE_CONFIG.md</code> para instruções de configuração.
+              </p>
+            </div>
           </div>
         </CardContent>
       </Card>

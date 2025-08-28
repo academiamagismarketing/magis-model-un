@@ -5,7 +5,7 @@ import {
   Phone, 
   MessageSquare
 } from 'lucide-react';
-import Logo from '@/components/Logo';
+
 import MobileMenu from '@/components/MobileMenu';
 import { useLocation } from 'react-router-dom';
 
@@ -29,15 +29,15 @@ const Navbar = () => {
   }, [location.pathname]);
 
   const handleWhatsApp = () => {
-    window.open('https://wa.me/553191578389?text=Olá! Gostaria de saber mais sobre a Academia Magis.', '_blank');
+    window.open('https://wa.me/553191578389?text=Olá! Gostaria de saber mais sobre a Academia MAGIS.', '_blank');
   };
 
   const navigation = [
     { name: 'Início', href: '/#inicio' },
     { name: 'Sobre', href: '/sobre' },
     { name: 'Eventos', href: '/eventos' },
-    { name: 'Parceiros', href: '/#parceiros' },
-    { name: 'Pins', href: '/pins' },
+    { name: 'Produtos', href: '/produtos' },
+    { name: 'Doações', href: 'https://www.vakinha.com.br/vaquinha/nos-ajude-a-conceder-bolsas-de-estudo-para-jovens', external: true },
     { name: 'Contato', href: '/contato' },
   ];
 
@@ -48,20 +48,14 @@ const Navbar = () => {
   return (
     <>
       {/* Navbar Principal */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-background/95 backdrop-blur-md border-b border-border shadow-diplomatic' 
-          : 'bg-transparent'
-      }`}>
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border shadow-diplomatic">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16 lg:h-20">
-            {/* Logo */}
+            {/* Brand */}
             <div className="flex-shrink-0">
-              <Logo 
-                variant="default"
-                size="sm"
-                className="h-10 w-auto"
-              />
+              <div className="text-2xl font-display font-bold text-foreground">
+                ACADEMIA <span className="text-primary">MAGIS</span>
+              </div>
             </div>
 
             {/* Desktop Navigation */}
@@ -70,6 +64,8 @@ const Navbar = () => {
                 <a
                   key={item.name}
                   href={item.href}
+                  target={item.external ? '_blank' : undefined}
+                  rel={item.external ? 'noopener noreferrer' : undefined}
                   className={`text-sm font-medium transition-colors hover:text-primary ${
                     location.pathname === item.href 
                       ? 'text-primary' 

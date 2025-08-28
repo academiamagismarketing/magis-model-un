@@ -49,7 +49,7 @@ const EventsSection = () => {
   ];
 
   const handleWhatsApp = () => {
-    window.open('https://wa.me/553191578389?text=Olá! Gostaria de saber mais sobre os eventos da Academia Magis.', '_blank');
+    window.open('https://wa.me/553191578389?text=Olá! Gostaria de saber mais sobre os eventos da Academia MAGIS.', '_blank');
   };
 
   return (

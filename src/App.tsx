@@ -4,7 +4,7 @@ import Navbar from './components/Navbar';
 import Index from './pages/Index';
 import Sobre from './pages/Sobre';
 import Contato from './pages/Contato';
-import Pins from './pages/Pins';
+import Produtos from './pages/Produtos';
 import Eventos from './pages/Eventos';
 import AdminLogin from './pages/admin/Login';
 import AdminEventos from './pages/admin/Eventos';
@@ -15,21 +15,53 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen">
-        <Navbar />
-        <main>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/sobre" element={<Sobre />} />
-            <Route path="/contato" element={<Contato />} />
-            <Route path="/pins" element={<Pins />} />
-            <Route path="/eventos" element={<Eventos />} />
-            <Route path="/admin/login" element={<AdminLogin />} />
-            <Route path="/admin/eventos" element={<AdminEventos />} />
-            <Route path="/admin/eventos/novo" element={<EventoForm />} />
-            <Route path="/admin/eventos/:id/editar" element={<EventoForm />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </main>
+        <Routes>
+          {/* Rotas públicas com Navbar */}
+          <Route path="/" element={
+            <div className="public-layout">
+              <Navbar />
+              <Index />
+            </div>
+          } />
+          <Route path="/sobre" element={
+            <div className="public-layout">
+              <Navbar />
+              <Sobre />
+            </div>
+          } />
+          <Route path="/contato" element={
+            <div className="public-layout">
+              <Navbar />
+              <Contato />
+            </div>
+          } />
+          <Route path="/produtos" element={
+            <div className="public-layout">
+              <Navbar />
+              <Produtos />
+            </div>
+          } />
+          <Route path="/eventos" element={
+            <div className="public-layout">
+              <Navbar />
+              <Eventos />
+            </div>
+          } />
+          
+          {/* Rotas administrativas sem Navbar */}
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin/eventos" element={<AdminEventos />} />
+          <Route path="/admin/eventos/novo" element={<EventoForm />} />
+          <Route path="/admin/eventos/:id/editar" element={<EventoForm />} />
+          
+          {/* Rota 404 com Navbar */}
+          <Route path="*" element={
+            <div className="public-layout">
+              <Navbar />
+              <NotFound />
+            </div>
+          } />
+        </Routes>
       </div>
     </Router>
   );

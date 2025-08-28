@@ -16,7 +16,7 @@ const buttonVariants = cva(
           "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        // Academia Magis custom variants
+        // Academia MAGIS custom variants
         diplomatic: "bg-gradient-brand text-primary-foreground hover:shadow-brand hover:scale-105 transition-brand font-semibold",
         hero: "bg-primary hover:bg-primary-dark text-primary-foreground shadow-elegant hover:shadow-xl transition-brand font-semibold",
         whatsapp: "bg-green-500 hover:bg-green-600 text-white shadow-diplomatic hover:shadow-brand transition-brand font-medium",

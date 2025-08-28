@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Academia Magis Design System - Cores profissionais e sérias
+/* Academia MAGIS Design System - Cores profissionais e sérias
 Baseado no estilo da Harvard MUN com paleta neutra e elegante
 All colors MUST be HSL for consistency.
 */
@@ -21,18 +21,18 @@ All colors MUST be HSL for consistency.
     --popover: 0 0% 100%;
     --popover-foreground: 220 13% 18%;
 
-    /* Primary - Academia Magis Blue (#3096cc) */
+    /* Primary - Academia MAGIS Blue (#3096cc) */
     --primary: 204 61% 50%;
     --primary-foreground: 0 0% 98%;
     --primary-light: 204 61% 60%;
     --primary-dark: 204 61% 40%;
 
-    /* Secondary - Academia Magis Beige */
+    /* Secondary - Academia MAGIS Beige */
     --secondary: 45 20% 95%;
     --secondary-foreground: 220 13% 18%;
     --secondary-light: 45 20% 98%;
 
-    /* Accent - Academia Magis Light Blue */
+    /* Accent - Academia MAGIS Light Blue */
     --accent: 210 20% 85%;
     --accent-foreground: 220 13% 18%;
     --accent-light: 210 20% 90%;
@@ -55,7 +55,7 @@ All colors MUST be HSL for consistency.
     /* Radius system */
     --radius: 0.5rem;
 
-    /* Academia Magis Professional Gradients */
+    /* Academia MAGIS Professional Gradients */
     --gradient-primary: linear-gradient(135deg, hsl(204 61% 50%), hsl(204 61% 40%));
     --gradient-brand: linear-gradient(135deg, hsl(45 20% 95%) 0%, hsl(210 20% 85%) 50%, hsl(204 61% 50%) 100%);
     --gradient-hero: linear-gradient(135deg, hsl(204 61% 50%) 0%, hsl(204 61% 40%) 50%, hsl(45 20% 95%) 100%);
@@ -81,6 +81,16 @@ All colors MUST be HSL for consistency.
     --sidebar-accent-foreground: 220 13% 18%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 204 61% 50%;
+  }
+
+  /* Esconder Navbar em páginas administrativas */
+  .admin-layout nav[class*="fixed"]:not([class*="z-[9999]"]) {
+    display: none !important;
+  }
+
+  /* Garantir que Navbar só apareça em layouts públicos */
+  .public-layout nav[class*="fixed"] {
+    display: block !important;
   }
 
   .dark {

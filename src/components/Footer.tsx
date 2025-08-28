@@ -5,16 +5,12 @@ import {
   Mail, 
   MapPin, 
   MessageSquare,
-  Facebook,
-  Instagram,
-  Linkedin,
-  Youtube
+  Instagram
 } from 'lucide-react';
-import Logo from './Logo';
 
 const Footer = () => {
   const handleWhatsApp = () => {
-    window.open('https://wa.me/553191578389?text=Olá! Gostaria de saber mais sobre a Academia Magis.', '_blank');
+    window.open('https://wa.me/553191578389?text=Olá! Gostaria de saber mais sobre a Academia MAGIS.', '_blank');
   };
 
   const quickLinks = [
@@ -22,28 +18,25 @@ const Footer = () => {
     { name: 'Sobre', href: '/sobre' },
     { name: 'Eventos', href: '/eventos' },
     { name: 'Parceiros', href: '/#parceiros' },
-    { name: 'Pins', href: '/pins' },
+    { name: 'Produtos', href: '/produtos' },
     { name: 'Contato', href: '/contato' }
   ];
 
   const socialLinks = [
-    { name: 'Facebook', href: '#', icon: Facebook },
-    { name: 'Instagram', href: '#', icon: Instagram },
-    { name: 'LinkedIn', href: '#', icon: Linkedin },
-    { name: 'YouTube', href: '#', icon: Youtube }
+    { name: 'Instagram', href: '#', icon: Instagram }
   ];
 
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Logo e Descrição */}
+          {/* Logo */}
           <div className="lg:col-span-1">
-            <Logo variant="white" />
-            <p className="mt-4 text-primary-foreground/80 leading-relaxed">
-              Formando líderes diplomáticos e cidadãos globais através da excelência 
-              em simulações da ONU e educação em relações internacionais.
-            </p>
+            <div className="text-center lg:text-left">
+              <div className="text-5xl font-display font-bold text-white mb-6">
+                ACADEMIA <span className="text-gradient-primary">MAGIS</span>
+              </div>
+            </div>
             
             {/* Social Links */}
             <div className="mt-6 flex space-x-4">
@@ -84,7 +77,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-primary-foreground/60" />
-                <span className="text-primary-foreground/80">contato@academiamagis.com</span>
+                <span className="text-primary-foreground/80">institucional@academiamagis.com</span>
               </div>
               <div className="flex items-center space-x-3">
                 <MapPin className="w-5 h-5 text-primary-foreground/60" />
@@ -112,18 +105,10 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="border-t border-primary-foreground/20 mt-12 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+          <div className="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0">
             <p className="text-primary-foreground/60 text-sm">
-              © 2024 Academia Magis. Todos os direitos reservados.
+              © 2025 Academia MAGIS. Todos os direitos reservados.
             </p>
-            <div className="flex space-x-6 text-sm">
-              <a href="#" className="text-primary-foreground/60 hover:text-primary-foreground transition-colors">
-                Política de Privacidade
-              </a>
-              <a href="#" className="text-primary-foreground/60 hover:text-primary-foreground transition-colors">
-                Termos de Uso
-              </a>
-            </div>
           </div>
         </div>
       </div>

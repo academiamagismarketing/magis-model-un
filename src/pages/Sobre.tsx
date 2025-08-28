@@ -1,5 +1,4 @@
 import React from 'react';
-import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Users, Target, Award, Heart, Clock, Star } from 'lucide-react';
@@ -13,16 +12,14 @@ const Sobre = () => {
 
   return (
     <div className="min-h-screen">
-      <Navbar />
-      
       <main>
         {/* Hero Section */}
-        <section className="relative py-32 bg-gradient-to-br from-primary/80 to-primary/60 text-primary-foreground overflow-hidden">
+        <section className="relative pt-40 pb-32 bg-gradient-to-br from-primary/80 to-primary/60 text-primary-foreground overflow-hidden">
           {/* Background Image */}
           <div className="absolute inset-0 z-0">
             <img 
               src={sobreImage} 
-              alt="Sobre Academia Magis" 
+              alt="Sobre Academia MAGIS" 
               className="w-full h-full object-cover opacity-10"
             />
             <div className="absolute inset-0 bg-gradient-to-br from-primary/70 to-primary/50"></div>
@@ -33,11 +30,11 @@ const Sobre = () => {
               
               
               <h1 className="text-5xl md:text-6xl font-display font-bold mb-6">
-                Sobre a Academia Magis
+                Sobre a Academia MAGIS
               </h1>
               <p className="text-xl md:text-2xl opacity-90 leading-relaxed max-w-3xl mx-auto">
-                Formando líderes diplomáticos e cidadãos globais através da excelência 
-                em simulações da ONU e educação em relações internacionais.
+              Buscamos divulgar e facilitar o acesso a oportunidades acadêmicas para toda a comunidade, 
+              tornando estes espaços cada vez mais democráticos e inclusivos
               </p>
             </div>
           </div>
@@ -55,14 +52,11 @@ const Sobre = () => {
                   </h2>
                 </div>
                 <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                  A Academia Magis tem como missão formar líderes diplomáticos e cidadãos 
-                  globais através da excelência em simulações da ONU e educação em 
-                  relações internacionais.
+                A Academia MAGIS tem como missão levar debates acadêmicos para a periferia acadêmica; 
+                para ambientes que sistematicamente são excluídos do centro do debate político.
                 </p>
                 <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                  Buscamos desenvolver habilidades essenciais como negociação, 
-                  diplomacia, pensamento crítico e liderança, preparando nossos 
-                  estudantes para os desafios globais do século XXI.
+                Buscamos desenvolver habilidades essenciais como pensamento crítico e liderança, preparando nossos jovens para os desafios do século XXI.
                 </p>
                 <Button
                   onClick={() => navigate('/eventos')}
@@ -140,7 +134,7 @@ const Sobre = () => {
                 <h3 className="text-xl font-semibold mb-4 text-foreground">Paixão</h3>
                 <p className="text-muted-foreground leading-relaxed">
                   Nossa paixão pela diplomacia e relações internacionais inspira 
-                  e motiva todos os que fazem parte da Academia Magis.
+                  e motiva todos os que fazem parte da Academia MAGIS.
                 </p>
               </div>
               
@@ -198,7 +192,7 @@ const Sobre = () => {
               <div className="relative">
                 <img 
                   src={historiaImage} 
-                  alt="História da Academia Magis" 
+                  alt="História da Academia MAGIS" 
                   className="rounded-2xl shadow-diplomatic"
                 />
               </div>
@@ -207,7 +201,7 @@ const Sobre = () => {
                   Nossa História
                 </h2>
                 <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                  Fundada em 2019, a Academia Magis nasceu da visão de criar uma 
+                  Fundada em 2019, a Academia MAGIS nasceu da visão de criar uma 
                   instituição de excelência em simulações da ONU e educação em 
                   relações internacionais no Brasil.
                 </p>
@@ -240,7 +234,7 @@ const Sobre = () => {
                 Nossa Equipe
               </h2>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Conheça os profissionais dedicados que fazem da Academia Magis 
+                Conheça os profissionais dedicados que fazem da Academia MAGIS 
                 uma instituição de excelência.
               </p>
             </div>
@@ -295,7 +289,7 @@ const Sobre = () => {
               Faça Parte da Nossa História
             </h2>
             <p className="text-xl opacity-90 mb-8 max-w-3xl mx-auto">
-              Junte-se à Academia Magis e descubra o poder da diplomacia, 
+              Junte-se à Academia MAGIS e descubra o poder da diplomacia, 
               da liderança e das relações internacionais.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

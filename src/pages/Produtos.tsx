@@ -1,15 +1,12 @@
 import React from 'react';
-import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { 
-  ArrowLeft, 
   ShoppingCart, 
   Star, 
   Award, 
-  Users, 
   Heart,
   MessageSquare,
   CheckCircle,
@@ -19,20 +16,20 @@ import { useNavigate } from 'react-router-dom';
 import pinsImage from '@/assets/imagens/6.jpg';
 import pinsCollectionImage from '@/assets/imagens/9.jpg';
 
-const Pins = () => {
+const Produtos = () => {
   const navigate = useNavigate();
 
   const handleWhatsApp = (collection: string) => {
-    const message = `Olá! Gostaria de adquirir a coleção de pins "${collection}" da Academia Magis. Pode me enviar mais informações sobre preços e formas de pagamento?`;
+    const message = `Olá! Gostaria de adquirir a coleção de produtos "${collection}" da Academia MAGIS. Pode me enviar mais informações sobre preços e formas de pagamento?`;
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/553191578389?text=${encodedMessage}`, '_blank');
   };
 
-  const pinCollections = [
+  const productCollections = [
     {
       id: 1,
       name: "Coleção Diplomática",
-      description: "Pins exclusivos com símbolos diplomáticos e da ONU",
+      description: "Produtos exclusivos com símbolos diplomáticos e da ONU",
       price: "R$ 45,00",
       items: ["Pin ONU", "Pin Diplomático", "Pin Bandeira Brasileira"],
       badge: "Mais Popular"
@@ -40,7 +37,7 @@ const Pins = () => {
     {
       id: 2,
       name: "Coleção Acadêmica",
-      description: "Pins para estudantes e acadêmicos de relações internacionais",
+      description: "Produtos para estudantes e acadêmicos de relações internacionais",
       price: "R$ 35,00",
       items: ["Pin Graduação", "Pin Mestrado", "Pin Doutorado"],
       badge: "Lançamento"
@@ -48,7 +45,7 @@ const Pins = () => {
     {
       id: 3,
       name: "Coleção Especial",
-      description: "Pins limitados e edições especiais da Academia Magis",
+      description: "Produtos limitados e edições especiais da Academia MAGIS",
       price: "R$ 55,00",
       items: ["Pin Edição Limitada", "Pin Comemorativo", "Pin Especial"],
       badge: "Edição Limitada"
@@ -59,12 +56,12 @@ const Pins = () => {
     {
       icon: Award,
       title: "Qualidade Premium",
-      description: "Pins fabricados com materiais de alta qualidade e acabamento profissional"
+      description: "Produtos fabricados com materiais de alta qualidade e acabamento profissional"
     },
     {
       icon: Heart,
       title: "Design Exclusivo",
-      description: "Criados especialmente para a Academia Magis com designs únicos"
+      description: "Criados especialmente para a Academia MAGIS com designs únicos"
     },
     {
       icon: Package,
@@ -82,32 +79,30 @@ const Pins = () => {
     {
       name: "Maria Silva",
       role: "Estudante de RI",
-      text: "Os pins da Academia Magis são lindos! Qualidade excepcional e design único. Recomendo muito!"
+      text: "Os produtos da Academia MAGIS são lindos! Qualidade excepcional e design único. Recomendo muito!"
     },
     {
       name: "João Santos",
       role: "Delegado",
-      text: "Comprei a coleção diplomática e adorei! Os pins são perfeitos para usar em eventos e simulações."
+      text: "Comprei a coleção diplomática e adorei! Os produtos são perfeitos para usar em eventos e simulações."
     },
     {
       name: "Ana Costa",
       role: "Professora",
-      text: "Excelente qualidade e entrega rápida. Os pins são um ótimo presente para estudantes de relações internacionais."
+      text: "Excelente qualidade e entrega rápida. Os produtos são um ótimo presente para estudantes de relações internacionais."
     }
   ];
 
   return (
     <div className="min-h-screen">
-      <Navbar />
-      
       <main>
         {/* Hero Section */}
-        <section className="relative py-32 bg-gradient-to-br from-primary/80 to-primary/60 text-primary-foreground overflow-hidden">
+        <section className="relative pt-40 pb-32 bg-gradient-to-br from-primary/80 to-primary/60 text-primary-foreground overflow-hidden">
           {/* Background Image */}
           <div className="absolute inset-0 z-0">
             <img 
               src={pinsImage} 
-              alt="Pins Academia Magis" 
+              alt="Produtos Academia MAGIS" 
               className="w-full h-full object-cover opacity-10"
             />
             <div className="absolute inset-0 bg-gradient-to-br from-primary/70 to-primary/50"></div>
@@ -115,13 +110,11 @@ const Pins = () => {
           
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
-              
-              
               <h1 className="text-5xl md:text-6xl font-display font-bold mb-6">
-                Pins Exclusivos
+                Produtos Exclusivos
               </h1>
               <p className="text-xl md:text-2xl opacity-90 leading-relaxed max-w-3xl mx-auto">
-                Colecione pins únicos da Academia Magis e leve consigo um pedaço 
+                Colecione produtos únicos da Academia MAGIS e leve consigo um pedaço 
                 da diplomacia e das relações internacionais.
               </p>
             </div>
@@ -136,13 +129,13 @@ const Pins = () => {
                 Nossas Coleções
               </h2>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Descubra nossas coleções exclusivas de pins, cada uma com designs únicos 
-                que representam a excelência da Academia Magis.
+                Descubra nossas coleções exclusivas de produtos, cada uma com designs únicos 
+                que representam a excelência da Academia MAGIS.
               </p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {pinCollections.map((collection) => (
+              {productCollections.map((collection) => (
                 <Card key={collection.id} className="group overflow-hidden shadow-diplomatic hover:shadow-elegant transition-diplomatic border-0 bg-card">
                   <div className="relative overflow-hidden">
                     <img 
@@ -203,10 +196,10 @@ const Pins = () => {
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-display font-bold mb-6 text-foreground">
-                Por que Escolher Nossos Pins?
+                Por que Escolher Nossos Produtos?
               </h2>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Qualidade, exclusividade e design único em cada pin da Academia Magis.
+                Qualidade, exclusividade e design único em cada produto da Academia MAGIS.
               </p>
             </div>
             
@@ -236,7 +229,7 @@ const Pins = () => {
                 O que Dizem Nossos Clientes
               </h2>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Depoimentos de quem já adquiriu nossos pins exclusivos.
+                Depoimentos de quem já adquiriu nossos produtos exclusivos.
               </p>
             </div>
             
@@ -271,10 +264,10 @@ const Pins = () => {
         <section className="py-20 bg-primary text-primary-foreground">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-4xl font-display font-bold mb-6">
-              Adquira Seus Pins Exclusivos
+              Adquira Seus Produtos Exclusivos
             </h2>
             <p className="text-xl opacity-90 mb-8 max-w-3xl mx-auto">
-              Colecione pins únicos da Academia Magis e leve consigo um pedaço 
+              Colecione produtos únicos da Academia MAGIS e leve consigo um pedaço 
               da diplomacia e das relações internacionais.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -305,4 +298,4 @@ const Pins = () => {
   );
 };
 
-export default Pins;
+export default Produtos;

@@ -147,7 +147,7 @@ const EventoForm = () => {
                 {isEditing ? 'Editar Evento' : 'Novo Evento'}
               </h1>
               <p className="text-muted-foreground">
-                {isEditing ? 'Edite as informações do evento' : 'Crie um novo evento para a Academia Magis'}
+                {isEditing ? 'Edite as informações do evento' : 'Crie um novo evento para a Academia MAGIS'}
               </p>
             </div>
           </div>

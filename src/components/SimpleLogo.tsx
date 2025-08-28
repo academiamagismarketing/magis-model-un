@@ -52,7 +52,7 @@ const SimpleLogo: React.FC<SimpleLogoProps> = ({
     <div className={`flex items-center justify-center ${className}`}>
       <img 
         src={imagePath} 
-        alt={`Logo Academia Magis - ${type}`} 
+        alt={`Logo Academia MAGIS - ${type}`} 
         className={`${sizes} object-contain`}
       />
     </div>

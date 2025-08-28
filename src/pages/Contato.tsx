@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -40,7 +39,7 @@ const Contato = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    const message = `*Nova mensagem do site Academia Magis*
+    const message = `*Nova mensagem do site Academia MAGIS*
 
 *Nome:* ${formData.name}
 *Email:* ${formData.email}
@@ -51,7 +50,7 @@ const Contato = () => {
 ${formData.message}
 
 ---
-Enviado através do site da Academia Magis`;
+Enviado através do site da Academia MAGIS`;
 
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/553191578389?text=${encodedMessage}`, '_blank');
@@ -68,8 +67,8 @@ Enviado através do site da Academia Magis`;
 
   const faqs = [
     {
-      question: "Como posso participar dos eventos da Academia Magis?",
-      answer: "Você pode se inscrever através do nosso site, entrando em contato via WhatsApp ou preenchendo o formulário de contato. Nossa equipe entrará em contato para fornecer todas as informações necessárias."
+      question: "Como posso participar dos eventos da Academia MAGIS?",
+      answer: "Você pode solicitar inscrição através do nosso WhatsApp. Nossa equipe entrará em contato para fornecer todas as informações necessárias."
     },
     {
       question: "Os eventos são presenciais ou online?",
@@ -81,22 +80,20 @@ Enviado através do site da Academia Magis`;
     },
     {
       question: "Como funciona o processo de mentoria individual?",
-      answer: "A mentoria individual é personalizada de acordo com suas necessidades e objetivos. Inclui sessões semanais, material de apoio e acompanhamento contínuo para seu desenvolvimento."
+      answer: "As mentorias em grupo são gratuitas e adaptadas de acordo com as necessidades e objetivos do grupo. Inclui sessões semanais, material de apoio e acompanhamento contínuo para seu desenvolvimento."
     }
   ];
 
   return (
     <div className="min-h-screen">
-      <Navbar />
-      
       <main>
         {/* Hero Section */}
-        <section className="relative py-32 bg-gradient-to-br from-primary/80 to-primary/60 text-primary-foreground overflow-hidden">
+        <section className="relative pt-40 pb-32 bg-gradient-to-br from-primary/80 to-primary/60 text-primary-foreground overflow-hidden">
           {/* Background Image */}
           <div className="absolute inset-0 z-0">
             <img 
               src={contatoImage} 
-              alt="Contato Academia Magis" 
+              alt="Contato Academia MAGIS" 
               className="w-full h-full object-cover opacity-10"
             />
             <div className="absolute inset-0 bg-gradient-to-br from-primary/70 to-primary/50"></div>
@@ -227,7 +224,7 @@ Enviado através do site da Academia Magis`;
                     </div>
                     <div>
                       <h3 className="font-semibold text-foreground mb-2">Email</h3>
-                      <p className="text-muted-foreground">contato@academiamagis.com</p>
+                      <p className="text-muted-foreground">institucional@academiamagis.com</p>
                       <p className="text-sm text-muted-foreground">Resposta em até 24h</p>
                     </div>
                   </div>
@@ -320,12 +317,12 @@ Enviado através do site da Academia Magis`;
               Pronto para Começar?
             </h2>
             <p className="text-xl opacity-90 mb-8 max-w-3xl mx-auto">
-              Entre em contato conosco e descubra como a Academia Magis pode 
+              Entre em contato conosco e descubra como a Academia MAGIS pode 
               transformar sua jornada na diplomacia e relações internacionais.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
-                onClick={() => window.open('https://wa.me/553191578389?text=Olá! Gostaria de saber mais sobre a Academia Magis.', '_blank')}
+                onClick={() => window.open('https://wa.me/553191578389?text=Olá! Gostaria de saber mais sobre a Academia MAGIS.', '_blank')}
                 size="lg"
                 variant="outline"
                 className="btn-white"

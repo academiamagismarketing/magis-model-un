@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -68,7 +67,7 @@ const Eventos = () => {
           title: "Workshop de Diplomacia",
           description: "Curso intensivo sobre técnicas de negociação, protocolo diplomático e elaboração de resoluções. Ideal para iniciantes.",
           date: "2024-04-08",
-          location: "Academia Magis - Online",
+          location: "Academia MAGIS - Online",
           participants: "50 estudantes",
           image_url: studentsImage,
           status: "upcoming",
@@ -98,7 +97,7 @@ const Eventos = () => {
           title: "Conferência de Relações Internacionais",
           description: "Conferência anual com palestrantes internacionais sobre temas atuais de diplomacia e política internacional.",
           date: "2024-06-10",
-          location: "Auditório da Academia Magis",
+          location: "Auditório da Academia MAGIS",
           participants: "300+ participantes",
           image_url: studentsImage,
           status: "upcoming",
@@ -177,7 +176,6 @@ const Eventos = () => {
   if (loading) {
     return (
       <div className="min-h-screen">
-        <Navbar />
         <div className="flex items-center justify-center min-h-screen">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
@@ -190,16 +188,14 @@ const Eventos = () => {
 
   return (
     <div className="min-h-screen">
-      <Navbar />
-      
       <main>
         {/* Hero Section */}
-        <section className="relative py-32 bg-gradient-to-br from-primary/80 to-primary/60 text-primary-foreground overflow-hidden">
+        <section className="relative pt-40 pb-32 bg-gradient-to-br from-primary/80 to-primary/60 text-primary-foreground overflow-hidden">
           {/* Background Image */}
           <div className="absolute inset-0 z-0">
             <img 
               src={eventosImage} 
-              alt="Eventos Academia Magis" 
+              alt="Eventos Academia MAGIS" 
               className="w-full h-full object-cover opacity-10"
             />
             <div className="absolute inset-0 bg-gradient-to-br from-primary/70 to-primary/50"></div>
@@ -213,7 +209,7 @@ const Eventos = () => {
                 Nossos Eventos
               </h1>
               <p className="text-xl md:text-2xl opacity-90 leading-relaxed max-w-3xl mx-auto">
-                Descubra todos os eventos da Academia Magis e participe das melhores 
+                Descubra todos os eventos da Academia MAGIS e participe das melhores 
                 simulações da ONU e workshops de diplomacia do Brasil.
               </p>
             </div>
@@ -375,15 +371,14 @@ const Eventos = () => {
         <section className="py-20 bg-muted">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-4xl font-display font-bold mb-6 text-foreground">
-              Não Encontrou o Evento Ideal?
+              Não encontrou o evento ideal?
             </h2>
             <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-              Entre em contato conosco e descubra sobre eventos personalizados, 
-              workshops corporativos ou simulações específicas para sua instituição.
+            Entre em contato conosco e descubra sobre eventos personalizados, workshops corporativos ou simulações específicas para sua instituição.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
-                onClick={() => window.open('https://wa.me/553191578389?text=Olá! Gostaria de saber sobre eventos personalizados da Academia Magis.', '_blank')}
+                onClick={() => window.open('https://wa.me/553191578389?text=Olá! Gostaria de saber sobre eventos personalizados da Academia MAGIS.', '_blank')}
                 size="lg"
                 variant="default"
                 className="btn-primary"

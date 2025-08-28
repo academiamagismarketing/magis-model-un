@@ -135,7 +135,7 @@ const AdminEventos = () => {
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
             <h1 className="text-3xl font-display font-bold text-foreground">Gerenciar Eventos</h1>
-            <p className="text-muted-foreground">Gerencie todos os eventos da Academia Magis</p>
+            <p className="text-muted-foreground">Gerencie todos os eventos da Academia MAGIS</p>
           </div>
           <Button
             onClick={() => navigate('/admin/eventos/novo')}

@@ -11,9 +11,9 @@ import {
   Mail,
   MapPin,
   ChevronRight,
-  Handshake
+  Heart
 } from 'lucide-react';
-import Logo from '@/components/Logo';
+
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -23,7 +23,7 @@ interface MobileMenuProps {
 
 const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, currentPath }) => {
   const handleWhatsApp = () => {
-    window.open('https://wa.me/553191578389?text=Olá! Gostaria de saber mais sobre a Academia Magis.', '_blank');
+    window.open('https://wa.me/553191578389?text=Olá! Gostaria de saber mais sobre a Academia MAGIS.', '_blank');
     onClose();
   };
 
@@ -31,8 +31,8 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, currentPath })
     { name: 'Início', href: '/#inicio', icon: Home },
     { name: 'Sobre', href: '/sobre', icon: Users },
     { name: 'Eventos', href: '/eventos', icon: Calendar },
-    { name: 'Parceiros', href: '/#parceiros', icon: Handshake },
-    { name: 'Pins', href: '/pins', icon: ShoppingBag },
+    { name: 'Produtos', href: '/produtos', icon: ShoppingBag },
+    { name: 'Doações', href: 'https://www.vakinha.com.br/vaquinha/nos-ajude-a-conceder-bolsas-de-estudo-para-jovens', icon: Heart, external: true },
     { name: 'Contato', href: '/contato', icon: Mail },
   ];
 
@@ -62,7 +62,9 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, currentPath })
         <div className="flex flex-col h-full">
           {/* Header */}
           <div className="flex items-center justify-between p-6 border-b border-border">
-            <Logo variant="default" />
+            <div className="text-xl font-display font-bold text-foreground">
+              ACADEMIA <span className="text-primary">MAGIS</span>
+            </div>
             <Button
               onClick={onClose}
               variant="ghost"
@@ -80,7 +82,9 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, currentPath })
                 <a
                   key={item.name}
                   href={item.href}
-                  onClick={() => handleNavigation(item.href)}
+                  target={item.external ? '_blank' : undefined}
+                  rel={item.external ? 'noopener noreferrer' : undefined}
+                  onClick={() => !item.external && handleNavigation(item.href)}
                   className={`flex items-center justify-between px-4 py-3 rounded-lg text-base font-medium transition-all duration-200 ${
                     currentPath === item.href
                       ? 'bg-primary/10 text-primary border border-primary/20'
@@ -108,7 +112,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, currentPath })
                 </div>
                 <div className="flex items-center space-x-3 text-sm text-muted-foreground">
                   <Mail className="w-4 h-4" />
-                  <span>contato@academiamagis.com</span>
+                  <span>institucional@academiamagis.com</span>
                 </div>
                 <div className="flex items-center space-x-3 text-sm text-muted-foreground">
                   <MapPin className="w-4 h-4" />
@@ -132,12 +136,12 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, currentPath })
                   Ver Eventos
                 </Button>
                 <Button
-                  onClick={() => handleNavigation('/pins')}
+                  onClick={() => handleNavigation('/produtos')}
                   variant="outline"
                   className="w-full justify-start btn-outline"
                 >
                   <ShoppingBag className="w-4 h-4 mr-2" />
-                  Comprar Pins
+                  Comprar Produtos
                 </Button>
               </div>
             </div>

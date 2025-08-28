@@ -12,12 +12,12 @@ const AboutSection = () => {
   };
 
   return (
-    <section className="relative py-24 overflow-hidden">
+    <section className="relative py-32 overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
         <img 
           src={aboutImage} 
-          alt="Academia Magis - Sobre Nós"
+          alt="Academia MAGIS - Sobre Nós"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/50"></div>

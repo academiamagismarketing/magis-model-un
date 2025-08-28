@@ -1,6 +1,6 @@
-# Academia Magis - Site Oficial
+# Academia MAGIS - Site Oficial
 
-Site oficial da Academia Magis - Preparando jovens para simulações da ONU.
+Site oficial da Academia MAGIS - Preparando jovens para simulações da ONU.
 
 ## Como posso editar este código?
 
