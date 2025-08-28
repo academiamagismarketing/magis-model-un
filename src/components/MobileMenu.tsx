@@ -10,7 +10,9 @@ import {
   Mail,
   MapPin,
   ChevronRight,
-  Heart
+  Heart,
+  Calendar,
+  ShoppingBag
 } from 'lucide-react';
 import { scrollToTopSmooth } from './ScrollToTop';
 

@@ -9,6 +9,7 @@ import {
   Instagram
 } from 'lucide-react';
 import { scrollToTopSmooth } from './ScrollToTop';
+import logoBranca from '../logo_branca_magis_academia.jpg';
 
 const Footer = () => {
   const handleWhatsApp = () => {
@@ -34,8 +35,12 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Logo */}
           <div className="lg:col-span-1 text-center lg:text-left">
-            <div className="text-4xl md:text-5xl font-display font-bold text-white mb-6">
-              ACADEMIA <span className="text-gradient-primary">MAGIS</span>
+            <div className="mb-6">
+              <img 
+                src={logoBranca} 
+                alt="Academia MAGIS" 
+                className="h-16 md:h-20 mx-auto lg:mx-0 object-contain"
+              />
             </div>
             
             {/* Social Links */}
