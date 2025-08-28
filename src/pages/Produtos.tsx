@@ -181,7 +181,7 @@ const Produtos = () => {
     <div className="min-h-screen">
       <main>
         {/* Hero Section */}
-        <section className="relative pt-40 pb-32 bg-gradient-to-br from-primary/80 to-primary/60 text-primary-foreground overflow-hidden">
+        <section className="relative pt-32 md:pt-40 pb-20 md:pb-32 bg-gradient-to-br from-primary/80 to-primary/60 text-primary-foreground overflow-hidden">
           {/* Background Image */}
           <div className="absolute inset-0 z-0">
             <img 
@@ -194,10 +194,10 @@ const Produtos = () => {
           
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-5xl md:text-6xl font-display font-bold mb-6">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4 md:mb-6 px-4">
                 Produtos Exclusivos
               </h1>
-              <p className="text-xl md:text-2xl opacity-90 leading-relaxed max-w-3xl mx-auto">
+              <p className="text-lg md:text-xl lg:text-2xl opacity-90 leading-relaxed max-w-3xl mx-auto px-4">
               Compre nossos produtos e ajude a manter vivo o nosso projeto!
               </p>
             </div>
@@ -205,13 +205,13 @@ const Produtos = () => {
         </section>
 
         {/* Products Section */}
-        <section className="py-20 bg-background section-decor">
+        <section className="py-16 md:py-20 bg-background section-decor">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-display font-bold mb-6 text-foreground">
+            <div className="text-center mb-12 md:mb-16">
+              <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 md:mb-6 text-foreground">
                 Nossos Produtos
               </h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto px-4">
                 Descubra nossos produtos exclusivos, cada um com designs únicos 
                 que representam a excelência da Academia MAGIS.
               </p>
@@ -402,13 +402,13 @@ const Produtos = () => {
         </section>
 
         {/* Testimonials Section */}
-        <section className="py-20 bg-background section-decor">
+        <section className="py-16 md:py-20 bg-background section-decor">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-display font-bold mb-6 text-foreground">
+            <div className="text-center mb-12 md:mb-16">
+              <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 md:mb-6 text-foreground">
                 O que Dizem Nossos Clientes
               </h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto px-4">
                 Depoimentos de quem já adquiriu nossos produtos exclusivos.
               </p>
             </div>
@@ -444,19 +444,19 @@ const Produtos = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-muted text-foreground section-decor">
+        <section className="py-16 md:py-20 bg-muted text-foreground section-decor">
           <div className="container mx-auto px-4 text-center">
-            <h2 className="text-4xl font-display font-bold mb-6">
+            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 md:mb-6">
               Adquira Seus Produtos Exclusivos
             </h2>
-            <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl text-muted-foreground mb-6 md:mb-8 max-w-3xl mx-auto px-4">
             Compre nossos produtos e ajude a manter vivo o nosso projeto!
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center px-4">
               <Button
                 onClick={() => window.open('https://wa.me/553191578389?text=Olá! Gostaria de saber mais sobre os produtos da Academia MAGIS', '_blank')}
                 size="lg"
-                className="bg-primary text-primary-foreground hover:bg-primary/90"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 w-full sm:w-auto"
               >
                 <MessageSquare className="w-4 h-4 mr-2" />
                 Falar no WhatsApp
@@ -465,7 +465,7 @@ const Produtos = () => {
                 onClick={() => navigate('/contato')}
                 size="lg"
                 variant="outline"
-                className="border-primary text-primary hover:bg-primary/10"
+                className="border-primary text-primary hover:bg-primary/10 w-full sm:w-auto"
               >
                 Outras Formas de Contato
               </Button>

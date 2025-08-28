@@ -103,7 +103,7 @@ const Sobre = () => {
         {/* Hero Section */}
         <section 
           // ref={heroRef}
-          className="relative pt-40 pb-32 bg-gradient-to-br from-primary/80 to-primary/60 text-primary-foreground overflow-hidden transition-all duration-700"
+          className="relative pt-32 md:pt-40 pb-20 md:pb-32 bg-gradient-to-br from-primary/80 to-primary/60 text-primary-foreground overflow-hidden transition-all duration-700"
         >
           {/* Background Image */}
           <div className="absolute inset-0 z-0">
@@ -117,10 +117,10 @@ const Sobre = () => {
           
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-5xl md:text-6xl font-display font-bold mb-6">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4 md:mb-6 px-4">
                 Sobre a Academia MAGIS
               </h1>
-              <p className="text-xl md:text-2xl opacity-90 leading-relaxed max-w-3xl mx-auto">
+              <p className="text-lg md:text-xl lg:text-2xl opacity-90 leading-relaxed max-w-3xl mx-auto px-4">
                 Buscamos divulgar e facilitar o acesso a oportunidades acadêmicas para toda a comunidade, 
                 tornando estes espaços cada vez mais democráticos e inclusivos
               </p>
@@ -131,70 +131,70 @@ const Sobre = () => {
         {/* Nossa Missão */}
         <section 
           // ref={missaoRef}
-          className="py-20 bg-background section-decor transition-all duration-700"
+          className="py-16 md:py-20 bg-background section-decor transition-all duration-700"
         >
           <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
               <div className="">
-                <div className="flex items-center mb-6">
-                  <Target className="w-8 h-8 text-primary mr-3" />
-                  <h2 className="text-3xl font-display font-bold text-foreground">
+                <div className="flex items-center mb-4 md:mb-6">
+                  <Target className="w-6 h-6 md:w-8 md:h-8 text-primary mr-3" />
+                  <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground">
                     Nossa Missão
                   </h2>
                 </div>
-                <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
+                <p className="text-base md:text-lg text-muted-foreground mb-4 md:mb-6 leading-relaxed">
                   A Academia MAGIS tem como missão levar debates acadêmicos para a periferia acadêmica; 
                   para ambientes que sistematicamente são excluídos do centro do debate político.
                 </p>
-                <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+                <p className="text-base md:text-lg text-muted-foreground mb-6 md:mb-8 leading-relaxed">
                   Buscamos desenvolver habilidades essenciais como pensamento crítico e liderança, preparando nossos jovens para os desafios do século XXI.
                 </p>
                 <Button
                   onClick={handleWhatsApp}
-                  className="btn-primary btn-animate hover-glow"
+                  className="btn-primary btn-animate hover-glow w-full sm:w-auto"
                 >
                   <MessageSquare className="w-4 h-4 mr-2" />
                   Fale Conosco
                 </Button>
               </div>
               <div className="relative">
-                <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl p-8 hover-lift">
-                  <div className="grid grid-cols-2 gap-6">
+                <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl p-4 md:p-8 hover-lift">
+                  <div className="grid grid-cols-2 gap-4 md:gap-6">
                     <div className="text-center">
-                      <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 icon-bounce">
-                        <Users className="w-8 h-8 text-primary" />
+                      <div className="w-12 h-12 md:w-16 md:h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4 icon-bounce">
+                        <Users className="w-6 h-6 md:w-8 md:h-8 text-primary" />
                       </div>
-                      <h3 className="text-2xl font-bold text-foreground mb-2">
+                      <h3 className="text-lg md:text-2xl font-bold text-foreground mb-1 md:mb-2">
                         {formatStatisticValue('delegados', getStatisticValue('delegados'))}
                       </h3>
-                      <p className="text-sm text-muted-foreground font-medium">Delegados</p>
+                      <p className="text-xs md:text-sm text-muted-foreground font-medium">Delegados</p>
                     </div>
                     <div className="text-center">
-                      <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 icon-bounce">
-                        <Award className="w-8 h-8 text-primary" />
+                      <div className="w-12 h-12 md:w-16 md:h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4 icon-bounce">
+                        <Award className="w-6 h-6 md:w-8 md:h-8 text-primary" />
                       </div>
-                      <h3 className="text-2xl font-bold text-foreground mb-2">
+                      <h3 className="text-lg md:text-2xl font-bold text-foreground mb-1 md:mb-2">
                         {formatStatisticValue('eventos_realizados', getStatisticValue('eventos_realizados'))}
                       </h3>
-                      <p className="text-sm text-muted-foreground font-medium">Eventos</p>
+                      <p className="text-xs md:text-sm text-muted-foreground font-medium">Eventos</p>
                     </div>
                     <div className="text-center">
-                      <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 icon-bounce">
-                        <Star className="w-8 h-8 text-primary" />
+                      <div className="w-12 h-12 md:w-16 md:h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4 icon-bounce">
+                        <Star className="w-6 h-6 md:w-8 md:h-8 text-primary" />
                       </div>
-                      <h3 className="text-2xl font-bold text-foreground mb-2">
+                      <h3 className="text-lg md:text-2xl font-bold text-foreground mb-1 md:mb-2">
                         {formatStatisticValue('valores_arrecadados', getStatisticValue('valores_arrecadados'))}
                       </h3>
-                      <p className="text-sm text-muted-foreground font-medium">Arrecadados</p>
+                      <p className="text-xs md:text-sm text-muted-foreground font-medium">Arrecadados</p>
                     </div>
                     <div className="text-center">
-                      <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 icon-bounce">
-                        <Clock className="w-8 h-8 text-primary" />
+                      <div className="w-12 h-12 md:w-16 md:h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4 icon-bounce">
+                        <Clock className="w-6 h-6 md:w-8 md:h-8 text-primary" />
                       </div>
-                      <h3 className="text-2xl font-bold text-foreground mb-2">
+                      <h3 className="text-lg md:text-2xl font-bold text-foreground mb-1 md:mb-2">
                         {timeOfOperation}
                       </h3>
-                      <p className="text-sm text-muted-foreground font-medium">Meses de Atuação</p>
+                      <p className="text-xs md:text-sm text-muted-foreground font-medium">Meses de Atuação</p>
                     </div>
                   </div>
                 </div>
@@ -330,64 +330,64 @@ const Sobre = () => {
         {/* Nossa Equipe */}
         <section 
           // ref={equipeRef}
-          className="py-20 bg-muted section-decor transition-all duration-700"
+          className="py-16 md:py-20 bg-muted section-decor transition-all duration-700"
         >
           <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-display font-bold mb-6 text-foreground">
+            <div className="text-center mb-12 md:mb-16">
+              <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 md:mb-6 text-foreground">
                 Nossa Equipe
               </h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto px-4">
                 Conheça os profissionais dedicados que fazem da Academia MAGIS 
                 uma instituição de excelência.
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <div className="bg-background p-8 rounded-2xl shadow-diplomatic text-center card-animate hover-lift group cursor-pointer" onClick={() => navigate('/equipe/diretoria')}>
-                <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                  <Users className="w-12 h-12 text-primary" />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+              <div className="bg-background p-6 md:p-8 rounded-2xl shadow-diplomatic text-center card-animate hover-lift group cursor-pointer" onClick={() => navigate('/equipe/diretoria')}>
+                <div className="w-20 h-20 md:w-24 md:h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 group-hover:scale-110 transition-transform">
+                  <Users className="w-10 h-10 md:w-12 md:h-12 text-primary" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-foreground group-hover:text-primary transition-colors">Diretoria Executiva</h3>
-                <p className="text-muted-foreground mb-4">
+                <h3 className="text-lg md:text-xl font-semibold mb-2 text-foreground group-hover:text-primary transition-colors">Diretoria Executiva</h3>
+                <p className="text-sm md:text-base text-muted-foreground mb-3 md:mb-4">
                   Responsável pela organização do projeto
                 </p>
-                <p className="text-sm text-muted-foreground mb-4">
+                <p className="text-xs md:text-sm text-muted-foreground mb-3 md:mb-4">
                   Clique e conheça os nossos diretores!
                 </p>
-                <div className="text-primary font-medium text-sm group-hover:underline">
+                <div className="text-primary font-medium text-xs md:text-sm group-hover:underline">
                   Ver Diretoria →
                 </div>
               </div>
               
-              <div className="bg-background p-8 rounded-2xl shadow-diplomatic text-center card-animate hover-lift group cursor-pointer" onClick={() => navigate('/equipe/voluntarios')}>
-                <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                  <Award className="w-12 h-12 text-primary" />
+              <div className="bg-background p-6 md:p-8 rounded-2xl shadow-diplomatic text-center card-animate hover-lift group cursor-pointer" onClick={() => navigate('/equipe/voluntarios')}>
+                <div className="w-20 h-20 md:w-24 md:h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 group-hover:scale-110 transition-transform">
+                  <Award className="w-10 h-10 md:w-12 md:h-12 text-primary" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-foreground group-hover:text-primary transition-colors">Voluntários</h3>
-                <p className="text-muted-foreground mb-4">
+                <h3 className="text-lg md:text-xl font-semibold mb-2 text-foreground group-hover:text-primary transition-colors">Voluntários</h3>
+                <p className="text-sm md:text-base text-muted-foreground mb-3 md:mb-4">
                   Pessoas responsáveis por nos ajudar a construir o projeto
                 </p>
-                <p className="text-sm text-muted-foreground mb-4">
+                <p className="text-xs md:text-sm text-muted-foreground mb-3 md:mb-4">
                   Conheça quem nos apoia!
                 </p>
-                <div className="text-primary font-medium text-sm group-hover:underline">
+                <div className="text-primary font-medium text-xs md:text-sm group-hover:underline">
                   Ver Voluntários →
                 </div>
               </div>
               
-              <div className="bg-background p-8 rounded-2xl shadow-diplomatic text-center card-animate hover-lift group cursor-pointer" onClick={() => navigate('/equipe/mentores')}>
-                <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                  <Star className="w-12 h-12 text-primary" />
+              <div className="bg-background p-6 md:p-8 rounded-2xl shadow-diplomatic text-center card-animate hover-lift group cursor-pointer" onClick={() => navigate('/equipe/mentores')}>
+                <div className="w-20 h-20 md:w-24 md:h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 group-hover:scale-110 transition-transform">
+                  <Star className="w-10 h-10 md:w-12 md:h-12 text-primary" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-foreground group-hover:text-primary transition-colors">Mentores</h3>
-                <p className="text-muted-foreground mb-4">
+                <h3 className="text-lg md:text-xl font-semibold mb-2 text-foreground group-hover:text-primary transition-colors">Mentores</h3>
+                <p className="text-sm md:text-base text-muted-foreground mb-3 md:mb-4">
                   Pessoas responsáveis por treinar jovens para eventos acadêmicos
                 </p>
-                <p className="text-sm text-muted-foreground mb-4">
+                <p className="text-xs md:text-sm text-muted-foreground mb-3 md:mb-4">
                   Conheça nossos especialistas!
                 </p>
-                <div className="text-primary font-medium text-sm group-hover:underline">
+                <div className="text-primary font-medium text-xs md:text-sm group-hover:underline">
                   Ver Mentores →
                 </div>
               </div>
