@@ -1,15 +1,24 @@
 {
   "short_name": "Academia MAGIS",
-  "name": "Academia MAGIS - Diplomacia Internacional",
+  "name": "Academia MAGIS - Simulações da ONU",
+  "description": "Preparando jovens para simulações da ONU. Não queremos realizar sonhos, queremos permitir que as pessoas sonhem.",
   "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
     {
       "src": "favicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#1e40af",
+  "background_color": "#ffffff",
+  "orientation": "portrait",
+  "scope": "/",
+  "lang": "pt-BR"
 }
