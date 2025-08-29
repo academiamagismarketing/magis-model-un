@@ -368,39 +368,6 @@ const Produtos = () => {
           </div>
         </section>
 
-        {/* Benefits Section */}
-        <section className="py-20 bg-muted section-decor">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-display font-bold mb-6 text-foreground">
-                Por que Escolher Nossos Produtos?
-              </h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Qualidade, exclusividade e design único em cada produto da Academia MAGIS.
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {benefits.map((benefit, index) => (
-                <div 
-                  key={index} 
-                  className="bg-background p-8 rounded-2xl shadow-diplomatic text-center"
-                >
-                  <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <benefit.icon className="w-8 h-8 text-primary" />
-                  </div>
-                  <h3 className="text-xl font-semibold mb-4 text-foreground">
-                    {benefit.title}
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {benefit.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Testimonials Section */}
         <section className="py-16 md:py-20 bg-background section-decor">
           <div className="container mx-auto px-4">

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
-import { X, Package, ShoppingCart, TrendingUp, Users, Award, Star, ChevronDown, ChevronRight, Home, Calendar, Plus, Menu } from 'lucide-react';
+import { X, Package, ShoppingCart, TrendingUp, Users, Award, Star, ChevronDown, ChevronRight, Home, Calendar, Plus, Menu, Handshake } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/lib/supabase';
 
@@ -22,7 +22,8 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
     { name: 'Novo Evento', href: '/admin/eventos/novo', icon: Plus },
     { name: 'Produtos', href: '/admin/produtos', icon: Package },
     { name: 'Novo Produto', href: '/admin/produtos/novo', icon: ShoppingCart },
-    { name: 'Status', href: '/admin/status', icon: TrendingUp }
+    { name: 'Status', href: '/admin/status', icon: TrendingUp },
+    { name: 'Patrocinadores', href: '/admin/patrocinadores', icon: Handshake }
   ];
 
   const equipeItems = [

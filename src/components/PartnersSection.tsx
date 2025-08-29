@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -9,6 +9,7 @@ import {
   Globe,
   Star
 } from 'lucide-react';
+import { patrocinadoresApi, Patrocinador } from '@/lib/supabase';
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -19,56 +20,42 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-// Importar logos dos parceiros
-import logoMocs from '../assets/parceiros/LOGO - MOCS.png';
-import logoSia from '../assets/parceiros/LOGO - SIA.png';
-import logoSis from '../assets/parceiros/LOGO - SIS.png';
-import logoSib from '../assets/parceiros/LOGO - SIB.png';
-import logoTemas from '../assets/parceiros/LOGO - TEMAS.png';
-
 const PartnersSection = () => {
-  const partners = [
-    {
-      name: 'MOCS',
-      logo: logoMocs,
-      description: 'Model United Nations Conference System',
-      category: 'Sistema de Conferências',
-      featured: true,
-      link: 'https://www.instagram.com/mocscefet/'
-    },
-    {
-      name: 'SIA',
-      logo: logoSia,
-      description: 'Sistema Internacional de Arbitragem',
-      category: 'Arbitragem Internacional',
-      featured: true,
-      link: 'https://www.instagram.com/siacsabh/'
-    },
-    {
-      name: 'SIS',
-      logo: logoSis,
-      description: 'Sistema Internacional de Simulações',
-      category: 'Simulações',
-      featured: true,
-      link: 'https://www.instagram.com/sis.sagrado/'
-    },
-    {
-      name: 'SIB',
-      logo: logoSib,
-      description: 'Sistema Internacional de Debates',
-      category: 'Debates',
-      featured: true,
-      link: 'https://www.instagram.com/sibernou/'
-    },
-    {
-      name: 'TEMAS',
-      logo: logoTemas,
-      description: 'Temas e Debates Acadêmicos',
-      category: 'Debates Acadêmicos',
-      featured: false,
-      link: 'https://www.instagram.com/temasmg/'
+  const [patrocinadores, setPatrocinadores] = useState<Patrocinador[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    loadPatrocinadores();
+  }, []);
+
+  const loadPatrocinadores = async () => {
+    try {
+      setLoading(true);
+      const data = await patrocinadoresApi.getPublicPatrocinadores();
+      setPatrocinadores(data);
+    } catch (error) {
+      console.error('Erro ao carregar patrocinadores:', error);
+    } finally {
+      setLoading(false);
     }
-  ];
+  };
+
+  if (loading) {
+    return (
+      <section id="parceiros" className="py-16 bg-gradient-to-br from-muted/30 to-background">
+        <div className="container mx-auto px-4">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+            <p className="text-muted-foreground">Carregando parceiros...</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (patrocinadores.length === 0) {
+    return null; // Não exibe a seção se não há patrocinadores
+  }
 
   return (
     <section id="parceiros" className="py-16 bg-gradient-to-br from-muted/30 to-background">
@@ -120,28 +107,46 @@ const PartnersSection = () => {
             }}
             className="partner-swiper"
           >
-            {partners.map((partner) => (
-              <SwiperSlide key={partner.name}>
+            {patrocinadores.map((patrocinador) => (
+              <SwiperSlide key={patrocinador.id}>
                 <Card className="group hover:shadow-lg transition-all duration-300 border-2 hover:border-primary/20 h-full">
                   <CardContent className="p-6 text-center">
-                    <a href={partner.link} target="_blank" rel="noopener noreferrer" className="block h-full flex flex-col justify-between">
+                    <a 
+                      href={patrocinador.link || '#'} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="block h-full flex flex-col justify-between"
+                      onClick={(e) => {
+                        if (!patrocinador.link) {
+                          e.preventDefault();
+                        }
+                      }}
+                    >
                       <div>
                         <div className="mb-4">
-                          <img 
-                            src={partner.logo} 
-                            alt={`Logo ${partner.name}`}
-                            className="h-16 w-auto mx-auto object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300"
-                          />
+                          {patrocinador.logo_url ? (
+                            <img 
+                              src={patrocinador.logo_url} 
+                              alt={`Logo ${patrocinador.nome}`}
+                              className="h-16 w-auto mx-auto object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300"
+                            />
+                          ) : (
+                            <div className="h-16 w-auto mx-auto flex items-center justify-center">
+                              <span className="text-2xl font-bold text-muted-foreground">
+                                {patrocinador.nome}
+                              </span>
+                            </div>
+                          )}
                         </div>
                         <h4 className="font-semibold text-foreground mb-2 text-center">
-                          {partner.name}
+                          {patrocinador.nome}
                         </h4>
                         <p className="text-sm text-muted-foreground mb-3 text-center">
-                          {partner.description}
+                          {patrocinador.descricao || patrocinador.nome_completo}
                         </p>
                       </div>
                       <Badge variant="secondary" className="text-xs mt-2 mx-auto">
-                        {partner.category}
+                        {patrocinador.categoria}
                       </Badge>
                     </a>
                   </CardContent>

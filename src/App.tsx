@@ -22,6 +22,8 @@ import AdminVoluntarios from './pages/admin/Voluntarios';
 import VoluntarioForm from './pages/admin/VoluntarioForm';
 import AdminMentores from './pages/admin/Mentores';
 import MentorForm from './pages/admin/MentorForm';
+import AdminPatrocinadores from './pages/admin/Patrocinadores';
+import PatrocinadorForm from './pages/admin/PatrocinadorForm';
 import AdminLayout from './components/admin/AdminLayout';
 import NotFound from './pages/NotFound';
 import ScrollToTop from './components/ScrollToTop';
@@ -124,6 +126,21 @@ function App() {
           <Route path="/admin/status" element={
             <AdminLayout>
               <AdminStatus />
+            </AdminLayout>
+          } />
+          <Route path="/admin/patrocinadores" element={
+            <AdminLayout>
+              <AdminPatrocinadores />
+            </AdminLayout>
+          } />
+          <Route path="/admin/patrocinadores/novo" element={
+            <AdminLayout>
+              <PatrocinadorForm />
+            </AdminLayout>
+          } />
+          <Route path="/admin/patrocinadores/:id/editar" element={
+            <AdminLayout>
+              <PatrocinadorForm />
             </AdminLayout>
           } />
           <Route path="/admin/diretoria" element={

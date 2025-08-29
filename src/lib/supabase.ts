@@ -684,3 +684,85 @@ export const heartbeatApi = {
     }
   }
 };
+
+// ===== PATROCINADORES API =====
+
+export interface Patrocinador {
+  id: string;
+  nome: string;
+  nome_completo: string;
+  descricao?: string;
+  categoria: string;
+  logo_url?: string;
+  link?: string;
+  ordem_exibicao: number;
+  ativo: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export const patrocinadoresApi = {
+  async getAllPatrocinadores(): Promise<Patrocinador[]> {
+    const { data, error } = await supabase
+      .from('patrocinadores')
+      .select('*')
+      .order('ordem_exibicao', { ascending: true });
+    
+    if (error) throw error;
+    return data || [];
+  },
+
+  async getPatrocinadorById(id: string): Promise<Patrocinador | null> {
+    const { data, error } = await supabase
+      .from('patrocinadores')
+      .select('*')
+      .eq('id', id)
+      .single();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  async createPatrocinador(patrocinador: Omit<Patrocinador, 'id' | 'created_at' | 'updated_at'>): Promise<Patrocinador> {
+    const { data, error } = await supabase
+      .from('patrocinadores')
+      .insert([patrocinador])
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  async updatePatrocinador(id: string, updates: Partial<Patrocinador>): Promise<Patrocinador> {
+    const { data, error } = await supabase
+      .from('patrocinadores')
+      .update(updates)
+      .eq('id', id)
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  async deletePatrocinador(id: string): Promise<void> {
+    const { error } = await supabase
+      .from('patrocinadores')
+      .delete()
+      .eq('id', id);
+    
+    if (error) throw error;
+  },
+
+  async getPublicPatrocinadores(): Promise<Patrocinador[]> {
+    const { data, error } = await supabase
+      .from('patrocinadores')
+      .select('*')
+      .eq('ativo', true)
+      .order('ordem_exibicao', { ascending: true });
+    
+    if (error) throw error;
+    return data || [];
+  }
+};
