@@ -5,6 +5,10 @@
       <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
     </linearGradient>
   </defs>
-  <rect width="32" height="32" rx="6" fill="url(#grad)"/>
-  <text x="16" y="22" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="white">AM</text>
+  
+  <!-- Background -->
+  <rect width="32" height="32" rx="4" fill="url(#grad)"/>
+  
+  <!-- AM Logo -->
+  <text x="16" y="22" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="white">AM</text>
 </svg>
