@@ -15,6 +15,7 @@ import {
   ShoppingBag
 } from 'lucide-react';
 import { scrollToTopSmooth } from './ScrollToTop';
+import logoPreta from '../../logo_preta_correta_mobile_sidebar.png';
 
 
 interface MobileMenuProps {
@@ -67,8 +68,12 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, currentPath })
         <div className="flex flex-col h-full">
           {/* Header */}
           <div className="flex items-center justify-between p-6 border-b border-border">
-            <div className="text-xl font-display font-bold text-foreground">
-              ACADEMIA <span className="text-primary">MAGIS</span>
+            <div className="flex items-center">
+              <img 
+                src={logoPreta} 
+                alt="Academia MAGIS" 
+                className="h-10 w-auto object-contain"
+              />
             </div>
             <Button
               onClick={onClose}
