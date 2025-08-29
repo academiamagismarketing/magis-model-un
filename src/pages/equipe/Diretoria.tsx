@@ -5,18 +5,11 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft, Users, MessageSquare } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { diretoriaApi, Diretor } from '@/lib/supabase';
-import { useScrollAnimation, useStaggerAnimation } from '@/hooks/useScrollAnimation';
 
 const Diretoria = () => {
   const navigate = useNavigate();
   const [diretores, setDiretores] = useState<Diretor[]>([]);
   const [loading, setLoading] = useState(true);
-
-  // Animações
-  const { elementRef: heroRef, isVisible: heroVisible } = useScrollAnimation();
-  const { elementRef: diretoresRef, isVisible: diretoresVisible } = useScrollAnimation();
-  const { elementRef: ctaRef, isVisible: ctaVisible } = useScrollAnimation();
-  const visibleItems = useStaggerAnimation(diretores, 0.1);
 
   useEffect(() => {
     loadDiretores();
@@ -25,7 +18,9 @@ const Diretoria = () => {
   const loadDiretores = async () => {
     try {
       setLoading(true);
+      console.log('Carregando diretores...');
       const data = await diretoriaApi.getPublicDiretores();
+      console.log('Diretores carregados:', data);
       setDiretores(data);
     } catch (error) {
       console.error('Erro ao carregar diretores:', error);
@@ -55,12 +50,7 @@ const Diretoria = () => {
     <div className="min-h-screen page-transition">
       <main>
         {/* Hero Section */}
-        <section 
-          ref={heroRef}
-          className={`relative pt-32 md:pt-40 pb-20 md:pb-32 bg-gradient-to-br from-primary/80 to-primary/60 text-primary-foreground overflow-hidden transition-all duration-700 ${
-            heroVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-4'
-          }`}
-        >
+        <section className="relative pt-32 md:pt-40 pb-20 md:pb-32 bg-gradient-to-br from-primary/80 to-primary/60 text-primary-foreground overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-black/60 to-black/40"></div>
           
           <div className="container mx-auto px-4 relative z-10">
@@ -85,12 +75,7 @@ const Diretoria = () => {
         </section>
 
         {/* Diretores Section */}
-        <section 
-          ref={diretoresRef}
-          className={`py-16 md:py-20 bg-background section-decor transition-all duration-700 ${
-            diretoresVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-4'
-          }`}
-        >
+        <section className="py-16 md:py-20 bg-background section-decor">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12 md:mb-16">
               <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 md:mb-6 text-foreground">
@@ -103,12 +88,10 @@ const Diretoria = () => {
             
             {diretores.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                {diretores.map((diretor, index) => (
+                {diretores.map((diretor) => (
                   <Card 
                     key={diretor.id} 
-                    className={`group overflow-hidden shadow-diplomatic hover:shadow-elegant transition-all duration-300 h-full flex flex-col animate-fade-in-up animate-delay-${Math.min(index * 100, 500)} ${
-                      visibleItems.includes(index) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                    }`}
+                    className="group overflow-hidden shadow-diplomatic hover:shadow-elegant transition-all duration-300 h-full flex flex-col"
                   >
                     <CardHeader className="text-center pb-4">
                       {diretor.foto_url ? (
@@ -162,12 +145,7 @@ const Diretoria = () => {
         </section>
 
         {/* CTA Section */}
-        <section 
-          ref={ctaRef}
-          className={`py-16 md:py-20 bg-muted text-foreground section-decor transition-all duration-700 ${
-            ctaVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-4'
-          }`}
-        >
+        <section className="py-16 md:py-20 bg-muted text-foreground section-decor">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 md:mb-6">
               Entre em Contato com Nossa Diretoria

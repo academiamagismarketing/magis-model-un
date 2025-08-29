@@ -5,18 +5,11 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft, Award, MessageSquare } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { voluntariosApi, Voluntario } from '@/lib/supabase';
-import { useScrollAnimation, useStaggerAnimation } from '@/hooks/useScrollAnimation';
 
 const Voluntarios = () => {
   const navigate = useNavigate();
   const [voluntarios, setVoluntarios] = useState<Voluntario[]>([]);
   const [loading, setLoading] = useState(true);
-
-  // Animações
-  const { elementRef: heroRef, isVisible: heroVisible } = useScrollAnimation();
-  const { elementRef: voluntariosRef, isVisible: voluntariosVisible } = useScrollAnimation();
-  const { elementRef: ctaRef, isVisible: ctaVisible } = useScrollAnimation();
-  const visibleItems = useStaggerAnimation(voluntarios, 0.1);
 
   useEffect(() => {
     loadVoluntarios();
@@ -25,7 +18,9 @@ const Voluntarios = () => {
   const loadVoluntarios = async () => {
     try {
       setLoading(true);
+      console.log('Carregando voluntários...');
       const data = await voluntariosApi.getPublicVoluntarios();
+      console.log('Voluntários carregados:', data);
       setVoluntarios(data);
     } catch (error) {
       console.error('Erro ao carregar voluntários:', error);
@@ -55,12 +50,7 @@ const Voluntarios = () => {
     <div className="min-h-screen page-transition">
       <main>
         {/* Hero Section */}
-        <section 
-          ref={heroRef}
-          className={`relative pt-32 md:pt-40 pb-20 md:pb-32 bg-gradient-to-br from-primary/80 to-primary/60 text-primary-foreground overflow-hidden transition-all duration-700 ${
-            heroVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-4'
-          }`}
-        >
+        <section className="relative pt-32 md:pt-40 pb-20 md:pb-32 bg-gradient-to-br from-primary/80 to-primary/60 text-primary-foreground overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-black/60 to-black/40"></div>
           
           <div className="container mx-auto px-4 relative z-10">
@@ -78,37 +68,30 @@ const Voluntarios = () => {
                 Nossos Voluntários
               </h1>
               <p className="text-lg md:text-xl lg:text-2xl opacity-90 leading-relaxed max-w-3xl mx-auto px-4">
-                Pessoas dedicadas que nos ajudam a construir e desenvolver o projeto da Academia MAGIS
+                Pessoas dedicadas que nos ajudam a construir um futuro melhor através da educação
               </p>
             </div>
           </div>
         </section>
 
         {/* Voluntários Section */}
-        <section 
-          ref={voluntariosRef}
-          className={`py-16 md:py-20 bg-background section-decor transition-all duration-700 ${
-            voluntariosVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-4'
-          }`}
-        >
+        <section className="py-16 md:py-20 bg-background section-decor">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12 md:mb-16">
               <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 md:mb-6 text-foreground">
                 Nossa Equipe de Voluntários
               </h2>
               <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto px-4">
-                Pessoas responsáveis por nos ajudar a construir o projeto e fazer a diferença na vida dos jovens
+                Profissionais comprometidos que dedicam seu tempo e conhecimento para apoiar nossa missão
               </p>
             </div>
             
             {voluntarios.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                {voluntarios.map((voluntario, index) => (
+                {voluntarios.map((voluntario) => (
                   <Card 
                     key={voluntario.id} 
-                    className={`group overflow-hidden shadow-diplomatic hover:shadow-elegant transition-all duration-300 h-full flex flex-col animate-fade-in-up animate-delay-${Math.min(index * 100, 500)} ${
-                      visibleItems.includes(index) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                    }`}
+                    className="group overflow-hidden shadow-diplomatic hover:shadow-elegant transition-all duration-300 h-full flex flex-col"
                   >
                     <CardHeader className="text-center pb-4">
                       {voluntario.foto_url ? (
@@ -141,7 +124,7 @@ const Voluntarios = () => {
                           <span className="text-muted-foreground">{voluntario.formacao}</span>
                         </div>
                         <div className="flex flex-col sm:flex-row sm:items-center text-sm">
-                          <span className="font-semibold text-foreground mr-2">Tempo como Voluntário:</span>
+                          <span className="font-semibold text-foreground mr-2">Tempo de Voluntariado:</span>
                           <span className="text-muted-foreground">{voluntario.tempo_voluntario}</span>
                         </div>
                       </div>
@@ -162,18 +145,13 @@ const Voluntarios = () => {
         </section>
 
         {/* CTA Section */}
-        <section 
-          ref={ctaRef}
-          className={`py-16 md:py-20 bg-muted text-foreground section-decor transition-all duration-700 ${
-            ctaVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-4'
-          }`}
-        >
+        <section className="py-16 md:py-20 bg-muted text-foreground section-decor">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 md:mb-6">
               Quer Ser Voluntário?
             </h2>
             <p className="text-lg md:text-xl text-muted-foreground mb-6 md:mb-8 max-w-3xl mx-auto px-4">
-              Junte-se à nossa equipe e ajude-nos a fazer a diferença na vida dos jovens!
+              Junte-se à nossa equipe de voluntários e ajude-nos a transformar vidas através da educação!
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center px-4">
               <Button
