@@ -590,3 +590,97 @@ export const mentoresApi = {
     return data || [];
   }
 };
+
+// ===== HEARTBEAT API - Manter Supabase Ativo =====
+
+export interface Heartbeat {
+  id: number;
+  numero: number;
+  timestamp: string;
+  status: string;
+  created_at: string;
+}
+
+export interface HeartbeatStatus {
+  is_active: boolean;
+  last_update: string;
+  total_records: number;
+}
+
+export const heartbeatApi = {
+  // Função para inserir novo registro de heartbeat
+  async updateHeartbeat(): Promise<void> {
+    try {
+      const { error } = await supabase.rpc('update_heartbeat');
+      if (error) {
+        console.error('Erro ao atualizar heartbeat:', error);
+        throw error;
+      }
+      console.log('Heartbeat atualizado com sucesso:', new Date().toISOString());
+    } catch (error) {
+      console.error('Falha ao atualizar heartbeat:', error);
+      throw error;
+    }
+  },
+
+  // Função para verificar status do heartbeat
+  async checkHeartbeat(): Promise<HeartbeatStatus> {
+    try {
+      const { data, error } = await supabase.rpc('check_heartbeat');
+      if (error) {
+        console.error('Erro ao verificar heartbeat:', error);
+        throw error;
+      }
+      return data[0] || { is_active: false, last_update: '', total_records: 0 };
+    } catch (error) {
+      console.error('Falha ao verificar heartbeat:', error);
+      throw error;
+    }
+  },
+
+  // Função para inserir registro manual (fallback)
+  async insertHeartbeat(): Promise<Heartbeat> {
+    try {
+      const { data, error } = await supabase
+        .from('heartbeat')
+        .insert([{ 
+          numero: Math.floor(Math.random() * 1000) + 1,
+          status: 'active' 
+        }])
+        .select()
+        .single();
+      
+      if (error) {
+        console.error('Erro ao inserir heartbeat:', error);
+        throw error;
+      }
+      
+      console.log('Heartbeat inserido manualmente:', data);
+      return data;
+    } catch (error) {
+      console.error('Falha ao inserir heartbeat:', error);
+      throw error;
+    }
+  },
+
+  // Função para obter últimos registros
+  async getRecentHeartbeats(limit: number = 10): Promise<Heartbeat[]> {
+    try {
+      const { data, error } = await supabase
+        .from('heartbeat')
+        .select('*')
+        .order('created_at', { ascending: false })
+        .limit(limit);
+      
+      if (error) {
+        console.error('Erro ao buscar heartbeats:', error);
+        throw error;
+      }
+      
+      return data || [];
+    } catch (error) {
+      console.error('Falha ao buscar heartbeats:', error);
+      throw error;
+    }
+  }
+};

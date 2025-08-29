@@ -25,11 +25,13 @@ import MentorForm from './pages/admin/MentorForm';
 import AdminLayout from './components/admin/AdminLayout';
 import NotFound from './pages/NotFound';
 import ScrollToTop from './components/ScrollToTop';
+import Heartbeat from './components/Heartbeat';
 
 function App() {
   return (
     <Router>
       <ScrollToTop />
+      <Heartbeat />
       <div className="min-h-screen">
         <Routes>
           {/* Rotas públicas com Navbar */}
