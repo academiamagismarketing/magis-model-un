@@ -72,7 +72,7 @@ export default {
 				}
 			},
 			fontFamily: {
-				'display': ['Playfair Display', 'serif'],
+				'display': ['Siffon', 'serif'],
 				'montserrat': ['Montserrat', 'sans-serif'],
 				'sans': ['Montserrat', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif']
 			},

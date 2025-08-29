@@ -2,6 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Fontes personalizadas */
+@font-face {
+  font-family: 'Siffon';
+  src: url('./assets/fonts/SIFONN_PRO.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('./assets/fonts/Montserrat-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Animações suaves */
 @keyframes fadeInUp {
   from {
