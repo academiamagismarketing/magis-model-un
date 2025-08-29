@@ -9,6 +9,7 @@ import {
 
 import MobileMenu from '@/components/MobileMenu';
 import { scrollToTopSmooth } from './ScrollToTop';
+import logoPreta from '../../logo_preta_correta_mobile_sidebar.png';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -54,9 +55,11 @@ const Navbar = () => {
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Brand */}
             <div className="flex-shrink-0">
-              <div className="text-2xl font-display font-bold text-foreground">
-                ACADEMIA <span className="text-primary">MAGIS</span>
-              </div>
+              <img 
+                src={logoPreta} 
+                alt="Academia MAGIS" 
+                className="h-8 md:h-10 w-auto object-contain"
+              />
             </div>
 
             {/* Desktop Navigation */}
