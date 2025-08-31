@@ -386,8 +386,12 @@ All colors MUST be HSL for consistency.
   }
 
   .font-montserrat {
-    font-family: 'Montserrat', sans-serif;
-  }
+  font-family: 'Montserrat', sans-serif;
+}
+
+.font-sifonn {
+  font-family: 'Siffon', sans-serif;
+}
 }
 
 @layer utilities {

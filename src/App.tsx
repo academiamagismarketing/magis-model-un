@@ -9,6 +9,7 @@ import Eventos from './pages/Eventos';
 import Diretoria from './pages/equipe/Diretoria';
 import Voluntarios from './pages/equipe/Voluntarios';
 import Mentores from './pages/equipe/Mentores';
+import LinkPage from './pages/Link';
 import AdminLogin from './pages/admin/Login';
 import AdminEventos from './pages/admin/Eventos';
 import EventoForm from './pages/admin/EventoForm';
@@ -85,6 +86,9 @@ function App() {
               <Mentores />
             </div>
           } />
+          
+          {/* Página de links (sem header e footer) */}
+          <Route path="/link" element={<LinkPage />} />
           
           {/* Rotas administrativas sem Navbar */}
           <Route path="/admin/login" element={<AdminLogin />} />
