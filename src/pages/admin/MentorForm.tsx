@@ -22,7 +22,6 @@ const MentorForm = () => {
     bio: '',
     formacao: '',
     experiencia: '',
-    eventos_mentorados: '',
     ordem_exibicao: 0,
     ativo: true
   });
@@ -52,7 +51,6 @@ const MentorForm = () => {
           bio: mentor.bio,
           formacao: mentor.formacao,
           experiencia: mentor.experiencia,
-          eventos_mentorados: mentor.eventos_mentorados,
           ordem_exibicao: mentor.ordem_exibicao,
           ativo: mentor.ativo
         });
@@ -111,7 +109,7 @@ const MentorForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!formData.nome || !formData.especialidade || !formData.bio || !formData.formacao || !formData.experiencia || !formData.eventos_mentorados) {
+    if (!formData.nome || !formData.especialidade || !formData.bio || !formData.formacao || !formData.experiencia) {
       alert('Por favor, preencha todos os campos obrigatórios');
       return;
     }
@@ -224,16 +222,7 @@ const MentorForm = () => {
                   </div>
                 </div>
 
-                <div>
-                  <Label htmlFor="eventos_mentorados">Eventos Mentorados *</Label>
-                  <Input
-                    id="eventos_mentorados"
-                    value={formData.eventos_mentorados}
-                    onChange={(e) => handleInputChange('eventos_mentorados', e.target.value)}
-                    placeholder="Ex: 50+ simulações"
-                    required
-                  />
-                </div>
+
 
                 <div>
                   <Label htmlFor="bio">Biografia *</Label>

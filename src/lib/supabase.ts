@@ -386,7 +386,6 @@ export interface Mentor {
   bio: string;
   formacao: string;
   experiencia: string;
-  eventos_mentorados: string;
   ordem_exibicao: number;
   ativo: boolean;
   created_at: string;

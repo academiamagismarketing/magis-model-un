@@ -133,10 +133,7 @@ const Mentores = () => {
                           <span className="font-semibold text-foreground mr-2">Experiência:</span>
                           <span className="text-muted-foreground">{mentor.experiencia}</span>
                         </div>
-                        <div className="flex flex-col sm:flex-row sm:items-center text-sm">
-                          <span className="font-semibold text-foreground mr-2">Eventos Mentorados:</span>
-                          <span className="text-muted-foreground">{mentor.eventos_mentorados}</span>
-                        </div>
+
                       </div>
                     </CardContent>
                   </Card>

@@ -181,10 +181,7 @@ const AdminMentores = () => {
                   <Label className="text-xs font-medium text-muted-foreground">Experiência</Label>
                   <p className="text-sm">{mentor.experiencia}</p>
                 </div>
-                <div>
-                  <Label className="text-xs font-medium text-muted-foreground">Eventos Mentorados</Label>
-                  <p className="text-sm">{mentor.eventos_mentorados}</p>
-                </div>
+
                 <div>
                   <Label className="text-xs font-medium text-muted-foreground">Biografia</Label>
                   <p className="text-sm text-muted-foreground line-clamp-3">
