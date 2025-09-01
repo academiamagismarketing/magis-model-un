@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, Users, Target, Award, Heart, Clock, Star, MessageSquare } from 'lucide-react';
+import { ArrowLeft, Users, Target, Award, Heart, Clock, Star, MessageSquare, ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 // Removendo temporariamente os hooks de animação para testar se é isso que está causando o problema
 // import { useScrollAnimation, useStaggerAnimation } from '@/hooks/useScrollAnimation';
@@ -330,65 +330,109 @@ const Sobre = () => {
         {/* Nossa Equipe */}
         <section 
           // ref={equipeRef}
-          className="py-16 md:py-20 bg-muted section-decor transition-all duration-700"
+          className="py-20 md:py-24 bg-gradient-to-br from-primary/5 to-primary/10 section-decor transition-all duration-700"
         >
           <div className="container mx-auto px-4">
-            <div className="text-center mb-12 md:mb-16">
-              <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 md:mb-6 text-foreground">
+            <div className="text-center mb-16 md:mb-20">
+              <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-foreground">
                 Nossa Equipe
               </h2>
-              <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto px-4">
+              <p className="text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto px-4 leading-relaxed">
                 Conheça os profissionais dedicados que fazem da Academia MAGIS 
-                uma instituição de excelência.
+                uma instituição de excelência e transformação.
               </p>
+              <div className="mt-8">
+                <p className="text-lg text-primary font-medium">
+                  Clique em cada seção para conhecer nossa equipe completa!
+                </p>
+              </div>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-              <div className="bg-background p-6 md:p-8 rounded-2xl shadow-diplomatic text-center card-animate hover-lift group cursor-pointer" onClick={() => navigate('/equipe/diretoria')}>
-                <div className="w-20 h-20 md:w-24 md:h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 group-hover:scale-110 transition-transform">
-                  <Users className="w-10 h-10 md:w-12 md:h-12 text-primary" />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+              <div className="bg-background p-8 md:p-10 rounded-3xl shadow-diplomatic text-center card-animate hover-lift group cursor-pointer border-2 border-transparent hover:border-primary/20 transition-all duration-300" onClick={() => navigate('/equipe/diretoria')}>
+                <div className="w-24 h-24 md:w-28 md:h-28 bg-gradient-to-br from-primary/20 to-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 md:mb-8 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                  <Users className="w-12 h-12 md:w-14 md:h-14 text-primary" />
                 </div>
-                <h3 className="text-lg md:text-xl font-semibold mb-2 text-foreground group-hover:text-primary transition-colors">Diretoria Executiva</h3>
-                <p className="text-sm md:text-base text-muted-foreground mb-3 md:mb-4">
-                  Responsável pela organização do projeto
+                <h3 className="text-xl md:text-2xl font-bold mb-4 text-foreground group-hover:text-primary transition-colors">Diretoria Executiva</h3>
+                <p className="text-base md:text-lg text-muted-foreground mb-4 leading-relaxed">
+                  Liderança estratégica responsável pela organização e direcionamento do projeto
                 </p>
-                <p className="text-xs md:text-sm text-muted-foreground mb-3 md:mb-4">
-                  Clique e conheça os nossos diretores!
-                </p>
-                <div className="text-primary font-medium text-xs md:text-sm group-hover:underline">
-                  Ver Diretoria →
+                <div className="bg-primary/5 rounded-xl p-4 mb-6">
+                  <p className="text-sm md:text-base text-primary font-semibold">
+                    Clique e conheça nossos diretores!
+                  </p>
                 </div>
-              </div>
-              
-              <div className="bg-background p-6 md:p-8 rounded-2xl shadow-diplomatic text-center card-animate hover-lift group cursor-pointer" onClick={() => navigate('/equipe/voluntarios')}>
-                <div className="w-20 h-20 md:w-24 md:h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 group-hover:scale-110 transition-transform">
-                  <Award className="w-10 h-10 md:w-12 md:h-12 text-primary" />
-                </div>
-                <h3 className="text-lg md:text-xl font-semibold mb-2 text-foreground group-hover:text-primary transition-colors">Voluntários</h3>
-                <p className="text-sm md:text-base text-muted-foreground mb-3 md:mb-4">
-                  Pessoas responsáveis por nos ajudar a construir o projeto
-                </p>
-                <p className="text-xs md:text-sm text-muted-foreground mb-3 md:mb-4">
-                  Conheça quem nos apoia!
-                </p>
-                <div className="text-primary font-medium text-xs md:text-sm group-hover:underline">
-                  Ver Voluntários →
+                <div className="text-primary font-bold text-base md:text-lg group-hover:underline flex items-center justify-center space-x-2">
+                  <span>Ver Diretoria</span>
+                  <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
               
-              <div className="bg-background p-6 md:p-8 rounded-2xl shadow-diplomatic text-center card-animate hover-lift group cursor-pointer" onClick={() => navigate('/equipe/mentores')}>
-                <div className="w-20 h-20 md:w-24 md:h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 group-hover:scale-110 transition-transform">
-                  <Star className="w-10 h-10 md:w-12 md:h-12 text-primary" />
+              <div className="bg-background p-8 md:p-10 rounded-3xl shadow-diplomatic text-center card-animate hover-lift group cursor-pointer border-2 border-transparent hover:border-primary/20 transition-all duration-300" onClick={() => navigate('/equipe/voluntarios')}>
+                <div className="w-24 h-24 md:w-28 md:h-28 bg-gradient-to-br from-primary/20 to-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 md:mb-8 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                  <Award className="w-12 h-12 md:w-14 md:h-14 text-primary" />
                 </div>
-                <h3 className="text-lg md:text-xl font-semibold mb-2 text-foreground group-hover:text-primary transition-colors">Mentores</h3>
-                <p className="text-sm md:text-base text-muted-foreground mb-3 md:mb-4">
-                  Pessoas responsáveis por treinar jovens para eventos acadêmicos
+                <h3 className="text-xl md:text-2xl font-bold mb-4 text-foreground group-hover:text-primary transition-colors">Voluntários</h3>
+                <p className="text-base md:text-lg text-muted-foreground mb-4 leading-relaxed">
+                  Pessoas dedicadas que nos ajudam a construir e expandir o projeto
                 </p>
-                <p className="text-xs md:text-sm text-muted-foreground mb-3 md:mb-4">
-                  Conheça nossos especialistas!
+                <div className="bg-primary/5 rounded-xl p-4 mb-6">
+                  <p className="text-sm md:text-base text-primary font-semibold">
+                    Conheça quem nos apoia!
+                  </p>
+                </div>
+                <div className="text-primary font-bold text-base md:text-lg group-hover:underline flex items-center justify-center space-x-2">
+                  <span>Ver Voluntários</span>
+                  <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </div>
+              
+              <div className="bg-background p-8 md:p-10 rounded-3xl shadow-diplomatic text-center card-animate hover-lift group cursor-pointer border-2 border-transparent hover:border-primary/20 transition-all duration-300" onClick={() => navigate('/equipe/mentores')}>
+                <div className="w-24 h-24 md:w-28 md:h-28 bg-gradient-to-br from-primary/20 to-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 md:mb-8 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                  <Star className="w-12 h-12 md:w-14 md:h-14 text-primary" />
+                </div>
+                <h3 className="text-xl md:text-2xl font-bold mb-4 text-foreground group-hover:text-primary transition-colors">Mentores</h3>
+                <p className="text-base md:text-lg text-muted-foreground mb-4 leading-relaxed">
+                  Especialistas responsáveis por treinar jovens para eventos acadêmicos
                 </p>
-                <div className="text-primary font-medium text-xs md:text-sm group-hover:underline">
-                  Ver Mentores →
+                <div className="bg-primary/5 rounded-xl p-4 mb-6">
+                  <p className="text-sm md:text-base text-primary font-semibold">
+                    Conheça nossos especialistas!
+                  </p>
+                </div>
+                <div className="text-primary font-bold text-base md:text-lg group-hover:underline flex items-center justify-center space-x-2">
+                  <span>Ver Mentores</span>
+                  <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </div>
+            </div>
+
+            {/* Call to Action adicional */}
+            <div className="mt-16 md:mt-20 text-center">
+              <div className="bg-background/80 backdrop-blur-sm rounded-2xl p-8 md:p-10 border border-primary/10 shadow-diplomatic">
+                <h3 className="text-2xl md:text-3xl font-bold mb-4 text-foreground">
+                  Quer fazer parte da nossa equipe?
+                </h3>
+                <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
+                  Junte-se a nós e ajude a transformar vidas através da educação e da diplomacia.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Button
+                    onClick={handleWhatsApp}
+                    size="lg"
+                    className="btn-primary btn-animate hover-glow"
+                  >
+                    <MessageSquare className="w-4 h-4 mr-2" />
+                    Falar Conosco
+                  </Button>
+                  <Button
+                    onClick={() => navigate('/eventos')}
+                    size="lg"
+                    variant="outline"
+                    className="btn-outline btn-animate"
+                  >
+                    Conhecer Eventos
+                  </Button>
                 </div>
               </div>
             </div>

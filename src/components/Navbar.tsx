@@ -4,8 +4,19 @@ import { Button } from '@/components/ui/button';
 import { 
   Menu, 
   Phone, 
-  MessageSquare
+  MessageSquare,
+  ChevronDown,
+  Users,
+  Award,
+  Star
 } from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+  DropdownMenuSeparator,
+} from '@/components/ui/dropdown-menu';
 
 import MobileMenu from '@/components/MobileMenu';
 import { scrollToTopSmooth } from './ScrollToTop';
@@ -36,7 +47,6 @@ const Navbar = () => {
 
   const navigation = [
     { name: 'Início', href: '/#inicio' },
-    { name: 'Sobre', href: '/sobre' },
     { name: 'Eventos', href: '/eventos' },
     { name: 'Produtos', href: '/produtos' },
     { name: 'Doações', href: 'https://www.vakinha.com.br/vaquinha/nos-ajude-a-conceder-bolsas-de-estudo-para-jovens', external: true },
@@ -46,6 +56,9 @@ const Navbar = () => {
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
   };
+
+  const isSobreActive = location.pathname === '/sobre' || 
+                       location.pathname.startsWith('/equipe/');
 
   return (
     <>
@@ -64,32 +77,109 @@ const Navbar = () => {
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-8">
-              {navigation.map((item) => (
-                item.external ? (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm font-medium transition-colors hover:text-primary text-foreground/80"
-                  >
-                    {item.name}
-                  </a>
-                ) : (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    onClick={scrollToTopSmooth}
-                    className={`text-sm font-medium transition-colors hover:text-primary ${
-                      location.pathname === item.href 
-                        ? 'text-primary' 
-                        : 'text-foreground/80'
+              {/* Início */}
+              <Link
+                to="/#inicio"
+                onClick={scrollToTopSmooth}
+                className={`text-sm font-medium transition-colors hover:text-primary ${
+                  location.pathname === '/#inicio' 
+                    ? 'text-primary' 
+                    : 'text-foreground/80'
+                }`}
+              >
+                Início
+              </Link>
+
+              {/* Eventos */}
+              <Link
+                to="/eventos"
+                onClick={scrollToTopSmooth}
+                className={`text-sm font-medium transition-colors hover:text-primary ${
+                  location.pathname === '/eventos' 
+                    ? 'text-primary' 
+                    : 'text-foreground/80'
+                }`}
+              >
+                Eventos
+              </Link>
+
+              {/* Sobre Dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    className={`text-sm font-medium transition-colors hover:text-primary flex items-center space-x-1 ${
+                      isSobreActive ? 'text-primary' : 'text-foreground/80'
                     }`}
                   >
-                    {item.name}
-                  </Link>
-                )
-              ))}
+                    <span>Sobre</span>
+                    <ChevronDown className="w-4 h-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="center" className="w-48">
+                  <DropdownMenuItem asChild>
+                    <Link to="/sobre" onClick={scrollToTopSmooth} className="flex items-center space-x-2">
+                      <Users className="w-4 h-4" />
+                      <span>Sobre Nós</span>
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem asChild>
+                    <Link to="/equipe/diretoria" onClick={scrollToTopSmooth} className="flex items-center space-x-2">
+                      <Users className="w-4 h-4" />
+                      <span>Diretores</span>
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/equipe/mentores" onClick={scrollToTopSmooth} className="flex items-center space-x-2">
+                      <Star className="w-4 h-4" />
+                      <span>Mentores</span>
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/equipe/voluntarios" onClick={scrollToTopSmooth} className="flex items-center space-x-2">
+                      <Award className="w-4 h-4" />
+                      <span>Voluntários</span>
+                    </Link>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              {/* Produtos */}
+              <Link
+                to="/produtos"
+                onClick={scrollToTopSmooth}
+                className={`text-sm font-medium transition-colors hover:text-primary ${
+                  location.pathname === '/produtos' 
+                    ? 'text-primary' 
+                    : 'text-foreground/80'
+                }`}
+              >
+                Produtos
+              </Link>
+
+              {/* Doações */}
+              <a
+                href="https://www.vakinha.com.br/vaquinha/nos-ajude-a-conceder-bolsas-de-estudo-para-jovens"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-medium transition-colors hover:text-primary text-foreground/80"
+              >
+                Doações
+              </a>
+
+              {/* Contato */}
+              <Link
+                to="/contato"
+                onClick={scrollToTopSmooth}
+                className={`text-sm font-medium transition-colors hover:text-primary ${
+                  location.pathname === '/contato' 
+                    ? 'text-primary' 
+                    : 'text-foreground/80'
+                }`}
+              >
+                Contato
+              </Link>
             </div>
 
             {/* Desktop CTA Buttons */}
