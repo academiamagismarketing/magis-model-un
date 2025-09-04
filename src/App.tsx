@@ -33,11 +33,11 @@ import AdminLayout from './components/admin/AdminLayout';
 import NotFound from './pages/NotFound';
 import ScrollToTop from './components/ScrollToTop';
 import Heartbeat from './components/Heartbeat';
-import usePerformance from './hooks/usePerformance';
+// import usePerformance from './hooks/usePerformance';
 
 function App() {
-  // Hook de otimização de performance
-  usePerformance();
+  // Hook de otimização de performance - temporariamente desabilitado
+  // usePerformance();
 
   return (
     <Router>

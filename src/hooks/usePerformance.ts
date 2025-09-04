@@ -65,13 +65,11 @@ export const usePerformance = () => {
               if (entry.entryType === 'largest-contentful-paint') {
                 console.log('LCP:', entry.startTime);
               }
-              if (entry.entryType === 'first-input') {
-                console.log('FID:', entry.processingStart - entry.startTime);
-              }
+              // FID measurement removed due to TypeScript compatibility
             }
           });
           
-          observer.observe({ entryTypes: ['largest-contentful-paint', 'first-input'] });
+          observer.observe({ entryTypes: ['largest-contentful-paint'] });
         } catch (e) {
           console.warn('PerformanceObserver não suportado');
         }
@@ -81,8 +79,8 @@ export const usePerformance = () => {
       window.addEventListener('load', () => {
         const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
         if (navigation) {
-          console.log('Tempo total de carregamento:', navigation.loadEventEnd - navigation.navigationStart);
-          console.log('Tempo até DOM Content Loaded:', navigation.domContentLoadedEventEnd - navigation.navigationStart);
+          console.log('Tempo total de carregamento:', navigation.loadEventEnd - navigation.fetchStart);
+          console.log('Tempo até DOM Content Loaded:', navigation.domContentLoadedEventEnd - navigation.fetchStart);
         }
       });
     }

@@ -18,7 +18,7 @@ import {
   Linkedin,
   Copy
 } from 'lucide-react';
-import { blogApi, BlogPost } from '@/lib/supabase';
+import { blogApi, type BlogPost as BlogPostType } from '@/lib/supabase';
 import blogHeroImage from '@/assets/imagens/14-MENTORIA.jpg';
 import { useToast } from '@/hooks/use-toast';
 import SeoHead from '@/components/SeoHead';
@@ -30,9 +30,9 @@ const BlogPost = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { toast } = useToast();
-  const [post, setPost] = useState<BlogPost | null>(null);
+  const [post, setPost] = useState<BlogPostType | null>(null);
   const [loading, setLoading] = useState(true);
-  const [relatedPosts, setRelatedPosts] = useState<BlogPost[]>([]);
+  const [relatedPosts, setRelatedPosts] = useState<BlogPostType[]>([]);
 
   useEffect(() => {
     if (id) {
