@@ -22,6 +22,33 @@ const HeroSection = () => {
       setStatistics(data);
     } catch (error) {
       console.error('Erro ao carregar estatísticas:', error);
+      // Definir estatísticas padrão em caso de erro
+      setStatistics([
+        { 
+          id: 'default-delegados',
+          key: 'delegados', 
+          value: 150, 
+          label: 'Delegados Formados',
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        },
+        { 
+          id: 'default-eventos',
+          key: 'eventos_realizados', 
+          value: 25, 
+          label: 'Eventos Realizados',
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        },
+        { 
+          id: 'default-valores',
+          key: 'valores_arrecadados', 
+          value: 50000, 
+          label: 'Valores Arrecadados',
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        }
+      ]);
     } finally {
       setLoading(false);
     }

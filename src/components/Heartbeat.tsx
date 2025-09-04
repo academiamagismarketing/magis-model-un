@@ -21,6 +21,7 @@ const Heartbeat: React.FC = () => {
         console.log('✅ Heartbeat manual executado com sucesso:', new Date().toISOString());
       } catch (fallbackError) {
         console.error('❌ Falha total no heartbeat:', fallbackError);
+        // Não falhar a aplicação por causa do heartbeat
       }
     }
   };
@@ -37,6 +38,7 @@ const Heartbeat: React.FC = () => {
       }
     } catch (error) {
       console.error('❌ Erro ao verificar status:', error);
+      // Não falhar a aplicação por causa do heartbeat
     }
   };
 

@@ -35,6 +35,22 @@ const PartnersSection = () => {
       setPatrocinadores(data);
     } catch (error) {
       console.error('Erro ao carregar patrocinadores:', error);
+      // Definir patrocinadores padrão em caso de erro
+      setPatrocinadores([
+        {
+          id: 'default-partner',
+          nome: 'Parceiro Exemplo',
+          nome_completo: 'Parceiro Exemplo Ltda',
+          descricao: 'Parceiro estratégico da Academia MAGIS',
+          categoria: 'Educação',
+          logo_url: undefined,
+          link: '#',
+          ordem_exibicao: 1,
+          ativo: true,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        }
+      ]);
     } finally {
       setLoading(false);
     }

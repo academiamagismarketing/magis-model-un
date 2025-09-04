@@ -2,33 +2,6 @@ import { useEffect, useCallback } from 'react';
 
 // Hook para otimizações de performance
 export const usePerformance = () => {
-  // Preload de recursos críticos
-  const preloadCriticalResources = useCallback(() => {
-    // Preload de fontes críticas
-    const fontLink = document.createElement('link');
-    fontLink.rel = 'preload';
-    fontLink.href = '/Montserrat-Regular.ttf';
-    fontLink.as = 'font';
-    fontLink.type = 'font/ttf';
-    fontLink.crossOrigin = 'anonymous';
-    document.head.appendChild(fontLink);
-
-    // Preload de CSS crítico
-    const cssLink = document.createElement('link');
-    cssLink.rel = 'preload';
-    cssLink.href = '/src/index.css';
-    cssLink.as = 'style';
-    document.head.appendChild(cssLink);
-  }, []);
-
-  // Defer de scripts não críticos
-  const deferNonCriticalScripts = useCallback(() => {
-    const scripts = document.querySelectorAll('script[data-defer]');
-    scripts.forEach((script) => {
-      script.setAttribute('defer', 'true');
-    });
-  }, []);
-
   // Otimização de imagens
   const optimizeImages = useCallback(() => {
     const images = document.querySelectorAll('img[data-src]');
@@ -117,8 +90,6 @@ export const usePerformance = () => {
 
   useEffect(() => {
     // Aplicar otimizações quando o componente montar
-    preloadCriticalResources();
-    deferNonCriticalScripts();
     optimizeImages();
     prefetchRoutes();
     
@@ -128,11 +99,9 @@ export const usePerformance = () => {
     return () => {
       cleanupScroll();
     };
-  }, [preloadCriticalResources, deferNonCriticalScripts, optimizeImages, prefetchRoutes, optimizeScroll, monitorPerformance]);
+  }, [optimizeImages, prefetchRoutes, optimizeScroll, monitorPerformance]);
 
   return {
-    preloadCriticalResources,
-    deferNonCriticalScripts,
     optimizeImages,
     prefetchRoutes,
     optimizeScroll,

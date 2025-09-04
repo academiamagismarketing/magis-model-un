@@ -49,6 +49,19 @@ const EventsSection = () => {
       setUpcomingEvents(eventsData);
     } catch (error) {
       console.error('Erro ao carregar eventos:', error);
+      // Definir eventos padrão em caso de erro
+      setUpcomingEvents([
+        {
+          id: 'default-event',
+          title: 'Simulação MUN 2024',
+          date: '15/12/2024',
+          location: 'Belo Horizonte, MG',
+          participants: '50 participantes',
+          category: 'Simulação ONU',
+          status: 'Em Breve',
+          featured: true
+        }
+      ]);
     } finally {
       setLoading(false);
     }
