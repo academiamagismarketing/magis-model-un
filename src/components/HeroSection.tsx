@@ -89,7 +89,7 @@ const HeroSection = () => {
           {/* Slogan */}
           <p className={`text-lg md:text-xl font-display italic mb-6 opacity-90 leading-relaxed max-w-3xl mx-auto transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
             "Não queremos realizar sonhos,<br />
-            <span className="text-white font-semibold">queremos permitir que as pessoas sonhem.</span>"
+            <span className="text-white font-semibold">mas queremos permitir que as pessoas possam sonhar</span>"
           </p>
 
           {/* Description */}
