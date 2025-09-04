@@ -53,6 +53,25 @@ export interface Statistic {
   updated_at: string;
 }
 
+// Interface para posts do blog
+export interface BlogPost {
+  id: string;
+  title: string;
+  subtitle?: string;
+  keywords: string;
+  excerpt: string;
+  content: string;
+  references?: string;
+  author: string;
+  image_url?: string;
+  category: string;
+  tags: string[];
+  status: 'published' | 'draft' | 'archived';
+  published_at?: string;
+  created_at: string;
+  updated_at: string;
+}
+
 // API para eventos
 export const eventsApi = {
   // Buscar todos os eventos
@@ -760,6 +779,106 @@ export const patrocinadoresApi = {
       .select('*')
       .eq('ativo', true)
       .order('ordem_exibicao', { ascending: true });
+    
+    if (error) throw error;
+    return data || [];
+  }
+};
+
+// ===== BLOG API =====
+
+export const blogApi = {
+  // Buscar todos os posts do blog
+  async getAllBlogPosts(): Promise<BlogPost[]> {
+    const { data, error } = await supabase
+      .from('blog_posts')
+      .select('*')
+      .order('created_at', { ascending: false });
+    
+    if (error) throw error;
+    return data || [];
+  },
+
+  // Buscar post por ID
+  async getBlogPostById(id: string): Promise<BlogPost | null> {
+    const { data, error } = await supabase
+      .from('blog_posts')
+      .select('*')
+      .eq('id', id)
+      .single();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  // Criar novo post
+  async createBlogPost(post: Omit<BlogPost, 'id' | 'created_at' | 'updated_at'>): Promise<BlogPost> {
+    const { data, error } = await supabase
+      .from('blog_posts')
+      .insert([post])
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  // Atualizar post
+  async updateBlogPost(id: string, updates: Partial<BlogPost>): Promise<BlogPost> {
+    const { data, error } = await supabase
+      .from('blog_posts')
+      .update(updates)
+      .eq('id', id)
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  // Deletar post
+  async deleteBlogPost(id: string): Promise<void> {
+    const { error } = await supabase
+      .from('blog_posts')
+      .delete()
+      .eq('id', id);
+    
+    if (error) throw error;
+  },
+
+  // Buscar posts públicos (apenas publicados)
+  async getPublicBlogPosts(): Promise<BlogPost[]> {
+    const { data, error } = await supabase
+      .from('blog_posts')
+      .select('*')
+      .eq('status', 'published')
+      .order('published_at', { ascending: false });
+    
+    if (error) throw error;
+    return data || [];
+  },
+
+  // Buscar posts por categoria
+  async getBlogPostsByCategory(category: string): Promise<BlogPost[]> {
+    const { data, error } = await supabase
+      .from('blog_posts')
+      .select('*')
+      .eq('status', 'published')
+      .eq('category', category)
+      .order('published_at', { ascending: false });
+    
+    if (error) throw error;
+    return data || [];
+  },
+
+  // Buscar posts por tag
+  async getBlogPostsByTag(tag: string): Promise<BlogPost[]> {
+    const { data, error } = await supabase
+      .from('blog_posts')
+      .select('*')
+      .eq('status', 'published')
+      .contains('tags', [tag])
+      .order('published_at', { ascending: false });
     
     if (error) throw error;
     return data || [];

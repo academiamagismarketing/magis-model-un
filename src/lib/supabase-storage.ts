@@ -1,7 +1,7 @@
 import { supabase } from './supabase';
 
 // Função para fazer upload de uma imagem para o Supabase Storage
-export const uploadImage = async (file: File, folder: 'events' | 'products'): Promise<string> => {
+export const uploadImage = async (file: File, folder: 'events' | 'products' | 'blog'): Promise<string> => {
   // Gerar nome único para o arquivo
   const fileExt = file.name.split('.').pop();
   const fileName = `${Math.random().toString(36).substring(2)}_${Date.now()}.${fileExt}`;

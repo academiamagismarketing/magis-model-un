@@ -12,7 +12,7 @@ import { uploadImage, validateImageFile } from '@/lib/supabase-storage';
 interface ImageUploadProps {
   currentImageUrl?: string;
   onImageChange: (imageUrl: string) => void;
-  folder: 'events' | 'products';
+  folder: 'events' | 'products' | 'blog';
   label?: string;
   showUrlInput?: boolean;
 }

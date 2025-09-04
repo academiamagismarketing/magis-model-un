@@ -25,6 +25,10 @@ import AdminMentores from './pages/admin/Mentores';
 import MentorForm from './pages/admin/MentorForm';
 import AdminPatrocinadores from './pages/admin/Patrocinadores';
 import PatrocinadorForm from './pages/admin/PatrocinadorForm';
+import Blog from './pages/Blog';
+import BlogPost from './pages/BlogPost';
+import AdminBlog from './pages/admin/Blog';
+import BlogForm from './pages/admin/BlogForm.tsx';
 import AdminLayout from './components/admin/AdminLayout';
 import NotFound from './pages/NotFound';
 import ScrollToTop from './components/ScrollToTop';
@@ -66,6 +70,18 @@ function App() {
             <div className="public-layout">
               <Navbar />
               <Eventos />
+            </div>
+          } />
+          <Route path="/publicacoes" element={
+            <div className="public-layout">
+              <Navbar />
+              <Blog />
+            </div>
+          } />
+          <Route path="/publicacoes/:id" element={
+            <div className="public-layout">
+              <Navbar />
+              <BlogPost />
             </div>
           } />
           <Route path="/equipe/diretoria" element={
@@ -125,6 +141,21 @@ function App() {
           <Route path="/admin/produtos/:id/editar" element={
             <AdminLayout>
               <ProdutoForm />
+            </AdminLayout>
+          } />
+          <Route path="/admin/publicacoes" element={
+            <AdminLayout>
+              <AdminBlog />
+            </AdminLayout>
+          } />
+          <Route path="/admin/publicacoes/novo" element={
+            <AdminLayout>
+              <BlogForm />
+            </AdminLayout>
+          } />
+          <Route path="/admin/publicacoes/editar/:id" element={
+            <AdminLayout>
+              <BlogForm />
             </AdminLayout>
           } />
           <Route path="/admin/status" element={

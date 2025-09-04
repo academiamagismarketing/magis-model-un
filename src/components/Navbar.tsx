@@ -49,6 +49,7 @@ const Navbar = () => {
     { name: 'Início', href: '/#inicio' },
     { name: 'Eventos', href: '/eventos' },
     { name: 'Produtos', href: '/produtos' },
+    { name: 'Publicações', href: '/publicacoes' },
     { name: 'Doações', href: 'https://www.vakinha.com.br/vaquinha/nos-ajude-a-conceder-bolsas-de-estudo-para-jovens', external: true },
     { name: 'Contato', href: '/contato' },
   ];
@@ -156,6 +157,19 @@ const Navbar = () => {
                 }`}
               >
                 Produtos
+              </Link>
+
+                            {/* Publicações */}
+              <Link
+                to="/publicacoes"
+                onClick={scrollToTopSmooth}
+                className={`text-sm font-medium transition-colors hover:text-primary ${
+                  location.pathname === '/publicacoes'
+                    ? 'text-primary'
+                    : 'text-foreground/80'
+                }`}
+              >
+                Publicações
               </Link>
 
               {/* Doações */}

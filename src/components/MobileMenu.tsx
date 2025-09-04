@@ -39,6 +39,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, currentPath })
     { name: 'Início', href: '/#inicio', icon: Home },
     { name: 'Eventos', href: '/eventos', icon: Calendar },
     { name: 'Produtos', href: '/produtos', icon: ShoppingBag },
+    { name: 'Publicações', href: '/publicacoes', icon: MessageSquare },
     { name: 'Doações', href: 'https://www.vakinha.com.br/vaquinha/nos-ajude-a-conceder-bolsas-de-estudo-para-jovens', icon: Heart, external: true },
     { name: 'Contato', href: '/contato', icon: Mail },
   ];
