@@ -1,14 +1,34 @@
+# Academia MAGIS - Robots.txt
+# https://academiamagis.com.br
+
+# Sitemap
+Sitemap: https://academiamagis.com.br/sitemap.xml
+
+# Googlebot
 User-agent: Googlebot
 Allow: /
+Crawl-delay: 1
 
+# Bingbot
 User-agent: Bingbot
 Allow: /
+Crawl-delay: 1
 
+# Twitterbot
 User-agent: Twitterbot
 Allow: /
 
+# Facebook
 User-agent: facebookexternalhit
 Allow: /
 
+# Todos os outros bots
 User-agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /private/
+
+# Crawl delay para todos os bots
+Crawl-delay: 1

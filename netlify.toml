@@ -128,3 +128,17 @@
   [headers.values]
     Cache-Control = "public, max-age=86400"
     Content-Type = "application/xml"
+
+# Headers para robots.txt
+[[headers]]
+  for = "/robots.txt"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+    Content-Type = "text/plain"
+
+# Headers para verificação Google
+[[headers]]
+  for = "/google*.html"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+    Content-Type = "text/html"
