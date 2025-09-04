@@ -36,45 +36,206 @@ import Heartbeat from './components/Heartbeat';
 // import usePerformance from './hooks/usePerformance';
 
 function App() {
-  console.log('🚀 App component iniciando...');
-  
-  try {
-    console.log('✅ App render iniciado');
-    
-    return (
-      <div style={{ margin: 0, padding: 0, minHeight: '100vh', backgroundColor: 'blue', color: 'white' }}>
-        <h1 style={{ padding: '20px' }}>APP FUNCIONANDO - Teste de Renderização</h1>
-        <Router>
-          <ScrollToTop />
-          <Heartbeat />
-          <div className="min-h-screen">
-            <Routes>
-              <Route path="/" element={
-                <div className="public-layout">
-                  <p style={{ padding: '20px' }}>Rota "/" funcionando!</p>
-                  <Index />
-                </div>
-              } />
-              <Route path="*" element={
-                <div style={{ padding: '20px' }}>
-                  <h2>Página 404 - Rota não encontrada</h2>
-                </div>
-              } />
-            </Routes>
-          </div>
-        </Router>
+  return (
+    <Router>
+      <ScrollToTop />
+      <Heartbeat />
+      <div className="min-h-screen">
+        <Routes>
+          {/* Rotas públicas com Navbar */}
+          <Route path="/" element={
+            <div className="public-layout">
+              <Navbar />
+              <Index />
+            </div>
+          } />
+          <Route path="/sobre" element={
+            <div className="public-layout">
+              <Navbar />
+              <Sobre />
+            </div>
+          } />
+          <Route path="/contato" element={
+            <div className="public-layout">
+              <Navbar />
+              <Contato />
+            </div>
+          } />
+          <Route path="/produtos" element={
+            <div className="public-layout">
+              <Navbar />
+              <Produtos />
+            </div>
+          } />
+          <Route path="/eventos" element={
+            <div className="public-layout">
+              <Navbar />
+              <Eventos />
+            </div>
+          } />
+          <Route path="/publicacoes" element={
+            <div className="public-layout">
+              <Navbar />
+              <Blog />
+            </div>
+          } />
+          <Route path="/publicacoes/:id" element={
+            <div className="public-layout">
+              <Navbar />
+              <BlogPost />
+            </div>
+          } />
+          <Route path="/equipe/diretoria" element={
+            <div className="public-layout">
+              <Navbar />
+              <Diretoria />
+            </div>
+          } />
+          <Route path="/equipe/voluntarios" element={
+            <div className="public-layout">
+              <Navbar />
+              <Voluntarios />
+            </div>
+          } />
+          <Route path="/equipe/mentores" element={
+            <div className="public-layout">
+              <Navbar />
+              <Mentores />
+            </div>
+          } />
+          
+          {/* Página de links (sem header e footer) */}
+          <Route path="/link" element={<LinkPage />} />
+          
+          {/* Rotas administrativas sem Navbar */}
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin" element={
+            <AdminLayout>
+              <Dashboard />
+            </AdminLayout>
+          } />
+          <Route path="/admin/eventos" element={
+            <AdminLayout>
+              <AdminEventos />
+            </AdminLayout>
+          } />
+          <Route path="/admin/eventos/novo" element={
+            <AdminLayout>
+              <EventoForm />
+            </AdminLayout>
+          } />
+          <Route path="/admin/eventos/:id/editar" element={
+            <AdminLayout>
+              <EventoForm />
+            </AdminLayout>
+          } />
+          <Route path="/admin/produtos" element={
+            <AdminLayout>
+              <AdminProdutos />
+            </AdminLayout>
+          } />
+          <Route path="/admin/produtos/novo" element={
+            <AdminLayout>
+              <ProdutoForm />
+            </AdminLayout>
+          } />
+          <Route path="/admin/produtos/:id/editar" element={
+            <AdminLayout>
+              <ProdutoForm />
+            </AdminLayout>
+          } />
+          <Route path="/admin/publicacoes" element={
+            <AdminLayout>
+              <AdminBlog />
+            </AdminLayout>
+          } />
+          <Route path="/admin/publicacoes/novo" element={
+            <AdminLayout>
+              <BlogForm />
+            </AdminLayout>
+          } />
+          <Route path="/admin/publicacoes/editar/:id" element={
+            <AdminLayout>
+              <BlogForm />
+            </AdminLayout>
+          } />
+          <Route path="/admin/status" element={
+            <AdminLayout>
+              <AdminStatus />
+            </AdminLayout>
+          } />
+          <Route path="/admin/patrocinadores" element={
+            <AdminLayout>
+              <AdminPatrocinadores />
+            </AdminLayout>
+          } />
+          <Route path="/admin/patrocinadores/novo" element={
+            <AdminLayout>
+              <PatrocinadorForm />
+            </AdminLayout>
+          } />
+          <Route path="/admin/patrocinadores/:id/editar" element={
+            <AdminLayout>
+              <PatrocinadorForm />
+            </AdminLayout>
+          } />
+          <Route path="/admin/diretoria" element={
+            <AdminLayout>
+              <AdminDiretoria />
+            </AdminLayout>
+          } />
+          <Route path="/admin/diretoria/novo" element={
+            <AdminLayout>
+              <DiretoriaForm />
+            </AdminLayout>
+          } />
+          <Route path="/admin/diretoria/:id/editar" element={
+            <AdminLayout>
+              <DiretoriaForm />
+            </AdminLayout>
+          } />
+          <Route path="/admin/voluntarios" element={
+            <AdminLayout>
+              <AdminVoluntarios />
+            </AdminLayout>
+          } />
+          <Route path="/admin/voluntarios/novo" element={
+            <AdminLayout>
+              <VoluntarioForm />
+            </AdminLayout>
+          } />
+          <Route path="/admin/voluntarios/:id/editar" element={
+            <AdminLayout>
+              <VoluntarioForm />
+            </AdminLayout>
+          } />
+          <Route path="/admin/mentores" element={
+            <AdminLayout>
+              <AdminMentores />
+            </AdminLayout>
+          } />
+          <Route path="/admin/mentores/novo" element={
+            <AdminLayout>
+              <MentorForm />
+            </AdminLayout>
+          } />
+          <Route path="/admin/mentores/:id/editar" element={
+            <AdminLayout>
+              <MentorForm />
+            </AdminLayout>
+          } />
+          
+          {/* Rota 404 com Navbar */}
+          <Route path="*" element={
+            <div className="public-layout">
+              <Navbar />
+              <NotFound />
+            </div>
+          } />
+        </Routes>
       </div>
-    );
-  } catch (error) {
-    console.error('❌ Erro no App:', error);
-    return (
-      <div style={{ backgroundColor: 'red', color: 'white', padding: '20px', minHeight: '100vh' }}>
-        <h1>ERRO CRÍTICO NO APP</h1>
-        <p>Erro: {error?.toString()}</p>
-        <pre>{error?.stack}</pre>
-      </div>
-    );
-  }
+    </Router>
+  );
 }
 
 export default App;
