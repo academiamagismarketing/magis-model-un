@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Users, Target, Award, Heart, Clock, Star, MessageSquare, ChevronRight } from 'lucide-react';
@@ -98,13 +99,55 @@ const Sobre = () => {
   console.log('Renderizando página Sobre', { statistics, timeOfOperation, loading });
 
   return (
-    <div className="min-h-screen page-transition">
-      <main>
-        {/* Hero Section */}
-        <section 
-          // ref={heroRef}
-          className="relative pt-32 md:pt-40 pb-20 md:pb-32 bg-gradient-to-br from-primary/80 to-primary/60 text-primary-foreground overflow-hidden transition-all duration-700"
-        >
+    <>
+      {/* SEO Head */}
+      <Helmet>
+        <title>Sobre a Academia MAGIS | História, Missão e Valores | Simulações Acadêmicas</title>
+        <meta name="description" content="Conheça a história da Academia MAGIS, nossa missão de democratizar simulações acadêmicas e MUN, e como formamos líderes diplomáticos do futuro." />
+        <meta name="keywords" content="história academia MAGIS, missão valores, simulações ONU, MUN Brasil, diplomacia acadêmica, liderança internacional, academia MAGIS sobre" />
+        <meta name="author" content="Academia MAGIS" />
+        <meta name="robots" content="index, follow" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Sobre a Academia MAGIS | História, Missão e Valores" />
+        <meta property="og:description" content="Conheça a história da Academia MAGIS, nossa missão de democratizar simulações acadêmicas e MUN, e como formamos líderes diplomáticos do futuro." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://academiamagis.com.br/sobre" />
+        <meta property="og:image" content="https://academiamagis.com.br/og-image.jpg" />
+        
+        {/* Twitter Cards */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Sobre a Academia MAGIS | História, Missão e Valores" />
+        <meta name="twitter:description" content="Conheça a história da Academia MAGIS, nossa missão de democratizar simulações acadêmicas e MUN, e como formamos líderes diplomáticos do futuro." />
+        
+        {/* Schema.org */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Academia MAGIS",
+            "description": "Academia especializada em simulações acadêmicas e MUN",
+            "url": "https://academiamagis.com.br",
+            "foundingDate": "2023",
+            "mission": "Democratizar o acesso a simulações acadêmicas e formar líderes diplomáticos",
+            "address": {
+              "@type": "PostalAddress",
+              "addressCountry": "BR"
+            }
+          })}
+        </script>
+        
+        {/* Canonical */}
+        <link rel="canonical" href="https://academiamagis.com.br/sobre" />
+      </Helmet>
+
+      <div className="min-h-screen page-transition">
+        <main>
+          {/* Hero Section */}
+          <section 
+            // ref={heroRef}
+            className="relative pt-32 md:pt-40 pb-20 md:pb-32 bg-gradient-to-br from-primary/80 to-primary/60 text-primary-foreground overflow-hidden transition-all duration-700"
+          >
           {/* Background Image */}
           <div className="absolute inset-0 z-0">
             <img 
@@ -476,6 +519,7 @@ const Sobre = () => {
       
       <Footer />
     </div>
+    </>
   );
 };
 

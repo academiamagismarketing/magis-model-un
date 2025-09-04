@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -151,10 +152,50 @@ const Eventos = () => {
   }
 
   return (
-    <div className="min-h-screen">
-      <main>
-        {/* Hero Section */}
-        <section className="relative pt-40 pb-32 bg-gradient-to-br from-primary/80 to-primary/60 text-primary-foreground overflow-hidden">
+    <>
+      {/* SEO Head */}
+      <Helmet>
+        <title>Eventos Academia MAGIS | Simulações MUN, Workshops e Conferências Acadêmicas</title>
+        <meta name="description" content="Descubra os eventos parceiros da Academia MAGIS: simulações MUN, workshops de diplomacia, conferências acadêmicas e oportunidades únicas para estudantes." />
+        <meta name="keywords" content="eventos academia MAGIS, simulações MUN, workshops diplomacia, conferências acadêmicas, eventos acadêmicos Brasil, MUN eventos" />
+        <meta name="author" content="Academia MAGIS" />
+        <meta name="robots" content="index, follow" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Eventos Academia MAGIS | Simulações MUN e Workshops" />
+        <meta property="og:description" content="Descubra os eventos parceiros da Academia MAGIS: simulações MUN, workshops de diplomacia e conferências acadêmicas." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://academiamagis.com.br/eventos" />
+        <meta property="og:image" content="https://academiamagis.com.br/og-image.jpg" />
+        
+        {/* Twitter Cards */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Eventos Academia MAGIS | Simulações MUN e Workshops" />
+        <meta name="twitter:description" content="Descubra os eventos parceiros da Academia MAGIS: simulações MUN, workshops de diplomacia e conferências acadêmicas." />
+        
+        {/* Schema.org */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Event",
+            "name": "Eventos Academia MAGIS",
+            "description": "Simulações MUN, workshops de diplomacia e conferências acadêmicas",
+            "organizer": {
+              "@type": "Organization",
+              "name": "Academia MAGIS"
+            },
+            "url": "https://academiamagis.com.br/eventos"
+          })}
+        </script>
+        
+        {/* Canonical */}
+        <link rel="canonical" href="https://academiamagis.com.br/eventos" />
+      </Helmet>
+
+      <div className="min-h-screen">
+        <main>
+          {/* Hero Section */}
+          <section className="relative pt-40 pb-32 bg-gradient-to-br from-primary/80 to-primary/60 text-primary-foreground overflow-hidden">
           {/* Background Image */}
           <div className="absolute inset-0 z-0">
             <img 
@@ -363,6 +404,7 @@ const Eventos = () => {
       
       <Footer />
     </div>
+    </>
   );
 };
 
