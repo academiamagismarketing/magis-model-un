@@ -159,7 +159,7 @@ const Navbar = () => {
                 Produtos
               </Link>
 
-                            {/* Publicações */}
+              {/* Publicações */}
               <Link
                 to="/publicacoes"
                 onClick={scrollToTopSmooth}

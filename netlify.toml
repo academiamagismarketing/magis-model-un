@@ -1,29 +1,130 @@
 [build]
-  command = "npm run build"
   publish = "dist"
-  functions = "netlify/functions"
+  command = "npm run build"
 
-[dev]
-  command = "npm run dev"
-  port = 8888
-  targetPort = 8080
+[build.environment]
+  NODE_VERSION = "18"
 
-[functions]
-  directory = "netlify/functions"
+# Headers para otimização de performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
 
+# Headers para assets estáticos (cache longo)
+[[headers]]
+  for = "/assets/**"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    X-Content-Type-Options = "nosniff"
+
+# Headers para imagens (cache longo)
+[[headers]]
+  for = "*.{jpg,jpeg,png,gif,webp,avif,svg,ico}"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    X-Content-Type-Options = "nosniff"
+
+# Headers para fontes (cache longo)
+[[headers]]
+  for = "*.{woff,woff2,ttf,otf,eot}"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    X-Content-Type-Options = "nosniff"
+    Access-Control-Allow-Origin = "*"
+
+# Headers para CSS e JS (cache longo)
+[[headers]]
+  for = "*.{css,js}"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    X-Content-Type-Options = "nosniff"
+
+# Headers para HTML (cache curto)
+[[headers]]
+  for = "*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Headers para API (sem cache)
+[[headers]]
+  for = "/api/**"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+    Pragma = "no-cache"
+    Expires = "0"
+
+# Redirecionamentos para HTTPS
+[[redirects]]
+  from = "http://academiamagis.com.br/*"
+  to = "https://academiamagis.com.br/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.academiamagis.com.br/*"
+  to = "https://academiamagis.com.br/:splat"
+  status = 301
+  force = true
+
+# Redirecionamento de www para non-www
+[[redirects]]
+  from = "https://www.academiamagis.com.br/*"
+  to = "https://academiamagis.com.br/:splat"
+  status = 301
+  force = true
+
+# SPA fallback para React Router
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
 
+# Headers de segurança adicionais
 [[headers]]
-  for = "/manifest.webmanifest"
+  for = "/*"
   [headers.values]
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"
+
+# Otimizações de performance
+[context.production.environment]
+  NODE_ENV = "production"
+
+# Compressão GZIP e Brotli
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Encoding = "gzip, br"
+
+# Headers para Service Worker
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+    Service-Worker-Allowed = "/"
+
+# Headers para manifest
+[[headers]]
+  for = "/manifest.json"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
     Content-Type = "application/manifest+json"
 
+# Headers para robots.txt
 [[headers]]
-  for = "/assets/*"
+  for = "/robots.txt"
   [headers.values]
-    cache-control = '''
-    max-age=31536000,
-    immutable'''
+    Cache-Control = "public, max-age=86400"
+    Content-Type = "text/plain"
+
+# Headers para sitemap
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+    Content-Type = "application/xml"

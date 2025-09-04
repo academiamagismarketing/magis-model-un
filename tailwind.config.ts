@@ -9,6 +9,21 @@ export default {
 		"./src/**/*.{ts,tsx}",
 	],
 	prefix: "",
+	// Otimizações de performance
+	corePlugins: {
+		// Desabilitar plugins não utilizados
+		preflight: true,
+		container: true,
+		accessibility: false, // Desabilitar se não usar
+	},
+	// Purge CSS para remover estilos não utilizados
+	safelist: [
+		// Classes que devem ser mantidas mesmo se não detectadas
+		'btn-primary',
+		'btn-secondary',
+		'text-primary',
+		'bg-primary',
+	],
 	theme: {
 		container: {
 			center: true,

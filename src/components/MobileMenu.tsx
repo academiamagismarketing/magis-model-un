@@ -136,6 +136,23 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, currentPath })
                 <ChevronRight className="w-4 h-4 opacity-60" />
               </Link>
 
+              {/* Publicações */}
+              <Link
+                to="/publicacoes"
+                onClick={() => handleNavigation('/publicacoes')}
+                className={`flex items-center justify-between px-4 py-3 rounded-lg text-base font-medium transition-all duration-200 ${
+                  currentPath === '/publicacoes'
+                    ? 'bg-primary/10 text-primary border border-primary/20'
+                    : 'text-foreground/80 hover:bg-muted hover:text-foreground'
+                }`}
+              >
+                <div className="flex items-center space-x-3">
+                  <MessageSquare className="w-5 h-5" />
+                  <span>Publicações</span>
+                </div>
+                <ChevronRight className="w-4 h-4 opacity-60" />
+              </Link>
+
               {/* Sobre Dropdown */}
               <div className="space-y-1">
                 <button
