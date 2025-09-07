@@ -74,10 +74,20 @@ const HeroSection = () => {
           src={heroImage} 
           alt="Academia MAGIS - Diplomacia Internacional"
           className="w-full h-full object-cover"
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            display: 'block',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            zIndex: 1
+          }}
           onLoad={() => console.log('Imagem carregada com sucesso')}
           onError={() => console.log('Erro ao carregar imagem')}
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/50 to-primary/30"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/50 to-primary/30" style={{ zIndex: 2 }}></div>
       </div>
 
       {/* Content */}
