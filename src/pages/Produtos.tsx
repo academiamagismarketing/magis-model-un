@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Footer from '@/components/Footer';
+import SchemaMarkup from '@/components/SchemaMarkup';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -20,6 +21,7 @@ import {
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { productsApi, Product, statisticsApi, Statistic } from '@/lib/supabase';
+import { generateProductSchema, generateOrganizationSchema, MAGIS_ORGANIZATION_DATA } from '@/utils/schemaMarkup';
 import pinsImage from '@/assets/imagens/6.jpg';
 import pinsCollectionImage from '@/assets/imagens/9.jpg';
 
@@ -32,6 +34,7 @@ const Produtos = () => {
   const [categoryFilter, setCategoryFilter] = useState<string>('all');
   const [statistics, setStatistics] = useState<Statistic[]>([]);
   const [timeOfOperation, setTimeOfOperation] = useState(0);
+  const [schemas, setSchemas] = useState<any[]>([]);
 
   useEffect(() => {
     loadProducts();
@@ -47,6 +50,29 @@ const Produtos = () => {
       setLoading(true);
       const data = await productsApi.getActiveProducts();
       setProducts(data);
+      
+      // Gerar schemas para microdata
+      const productSchemas = data.map(product => generateProductSchema({
+        name: product.name,
+        description: product.description,
+        image: product.image_url || pinsCollectionImage,
+        brand: {
+          name: "Academia MAGIS"
+        },
+        offers: {
+          price: product.price.toString(),
+          priceCurrency: "BRL",
+          availability: product.availability === 'pronta_entrega' ? 'https://schema.org/InStock' : 'https://schema.org/PreOrder',
+          seller: {
+            name: "Academia MAGIS"
+          }
+        },
+        category: product.category,
+        sku: product.id
+      }));
+      
+      const organizationSchema = generateOrganizationSchema(MAGIS_ORGANIZATION_DATA);
+      setSchemas([organizationSchema, ...productSchemas]);
     } catch (error) {
       console.error('Erro ao carregar produtos:', error);
     } finally {
@@ -201,8 +227,11 @@ const Produtos = () => {
         <meta name="twitter:description" content="Confira nossa linha de produtos exclusivos: pins, kits de delegado, materiais de estudo e itens personalizados da Academia MAGIS." />
         
         {/* Canonical */}
-        <link rel="canonical" href="https://academiamagis.com.br/produtos" />
+        <link rel="canonical" href="https://academiamagis.com/produtos" />
       </Helmet>
+
+      {/* Schema.org Microdata */}
+      <SchemaMarkup schemas={schemas} />
 
       <div className="min-h-screen">
       <main>

@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Footer from '@/components/Footer';
+import SchemaMarkup from '@/components/SchemaMarkup';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Users, Target, Award, Heart, Clock, Star, MessageSquare, ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 // Removendo temporariamente os hooks de animação para testar se é isso que está causando o problema
 // import { useScrollAnimation, useStaggerAnimation } from '@/hooks/useScrollAnimation';
 import { statisticsApi, Statistic } from '@/lib/supabase';
+import { generateOrganizationSchema, MAGIS_ORGANIZATION_DATA } from '@/utils/schemaMarkup';
 import sobreImage from '@/assets/imagens/2.jpg';
 import equipeImage from '@/assets/imagens/3.jpg';
 import historiaImage from '@/assets/imagens/4.jpg';
@@ -120,26 +122,13 @@ const Sobre = () => {
         <meta name="twitter:title" content="Sobre a Academia MAGIS | História, Missão e Valores" />
         <meta name="twitter:description" content="Conheça a história da Academia MAGIS, nossa missão de democratizar simulações acadêmicas e MUN, e como formamos líderes diplomáticos do futuro." />
         
-        {/* Schema.org */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            "name": "Academia MAGIS",
-            "description": "Academia especializada em simulações acadêmicas e MUN",
-            "url": "https://academiamagis.com.br",
-            "foundingDate": "2023",
-            "mission": "Democratizar o acesso a simulações acadêmicas e formar líderes diplomáticos",
-            "address": {
-              "@type": "PostalAddress",
-              "addressCountry": "BR"
-            }
-          })}
-        </script>
         
         {/* Canonical */}
-        <link rel="canonical" href="https://academiamagis.com.br/sobre" />
+        <link rel="canonical" href="https://academiamagis.com/sobre" />
       </Helmet>
+
+      {/* Schema.org Microdata */}
+      <SchemaMarkup schemas={[generateOrganizationSchema(MAGIS_ORGANIZATION_DATA)]} />
 
       <div className="min-h-screen page-transition">
         <main>

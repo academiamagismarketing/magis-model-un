@@ -4,12 +4,15 @@ import HeroSection from '@/components/HeroSection';
 import EventsSection from '@/components/EventsSection';
 import PartnersSection from '@/components/PartnersSection';
 import Footer from '@/components/Footer';
+import SchemaMarkup from '@/components/SchemaMarkup';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
 import { Target, MessageSquare, GraduationCap } from 'lucide-react';
+import { generateHomepageSchemas } from '@/utils/schemaMarkup';
 
 const Index = () => {
   const navigate = useNavigate();
+  const schemas = generateHomepageSchemas();
 
   return (
     <>
@@ -25,8 +28,8 @@ const Index = () => {
         <meta property="og:title" content="Academia MAGIS - Simulações & Mentorias Acadêmicas" />
         <meta property="og:description" content="Descubra como participar de simulações acadêmicas, mentorias educacionais e atividades MUN na Academia MAGIS." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://academiamagis.com.br" />
-        <meta property="og:image" content="https://academiamagis.com.br/og-image.jpg" />
+        <meta property="og:url" content="https://academiamagis.com" />
+        <meta property="og:image" content="https://academiamagis.com/og-image.jpg" />
         <meta property="og:site_name" content="Academia MAGIS" />
         <meta property="og:locale" content="pt_BR" />
         
@@ -34,35 +37,14 @@ const Index = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Academia MAGIS - Simulações & Mentorias Acadêmicas" />
         <meta name="twitter:description" content="Descubra como participar de simulações acadêmicas, mentorias educacionais e atividades MUN na Academia MAGIS." />
-        <meta name="twitter:image" content="https://academiamagis.com.br/og-image.jpg" />
-        
-        {/* Schema.org */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "EducationalOrganization",
-            "name": "Academia MAGIS",
-            "description": "Academia especializada em simulações acadêmicas, mentorias educacionais e atividades MUN",
-            "url": "https://academiamagis.com.br",
-            "logo": "https://academiamagis.com.br/logo_magis.svg",
-            "address": {
-              "@type": "PostalAddress",
-              "addressCountry": "BR"
-            },
-            "sameAs": [
-              "https://www.instagram.com/academiamagis",
-              "https://www.linkedin.com/company/academiamagis"
-            ],
-            "offers": {
-              "@type": "Offer",
-              "description": "Simulações acadêmicas, mentorias e workshops gratuitos"
-            }
-          })}
-        </script>
+        <meta name="twitter:image" content="https://academiamagis.com/og-image.jpg" />
         
         {/* Canonical */}
-        <link rel="canonical" href="https://academiamagis.com.br" />
+        <link rel="canonical" href="https://academiamagis.com" />
       </Helmet>
+
+      {/* Schema.org Microdata */}
+      <SchemaMarkup schemas={schemas} />
 
       <HeroSection />
 

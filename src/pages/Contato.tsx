@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Footer from '@/components/Footer';
+import SchemaMarkup from '@/components/SchemaMarkup';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -18,6 +19,7 @@ import {
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useScrollAnimation, useStaggerAnimation } from '@/hooks/useScrollAnimation';
+import { generateLocalBusinessSchema, generateFAQSchema, MAGIS_ORGANIZATION_DATA } from '@/utils/schemaMarkup';
 import contatoImage from '@/assets/imagens/5.jpg';
 
 const Contato = () => {
@@ -92,6 +94,18 @@ Enviado através do site da Academia MAGIS`;
     }
   ];
 
+  // Gerar schemas para microdata
+  const localBusinessSchema = generateLocalBusinessSchema(MAGIS_ORGANIZATION_DATA);
+  const faqSchema = generateFAQSchema({
+    mainEntity: faqs.map(faq => ({
+      name: faq.question,
+      acceptedAnswer: {
+        text: faq.answer
+      }
+    }))
+  });
+  const schemas = [localBusinessSchema, faqSchema];
+
   return (
     <>
       {/* SEO Head */}
@@ -110,8 +124,11 @@ Enviado através do site da Academia MAGIS`;
         <meta property="og:image" content="https://academiamagis.com.br/og-image.jpg" />
         
         {/* Canonical */}
-        <link rel="canonical" href="https://academiamagis.com.br/contato" />
+        <link rel="canonical" href="https://academiamagis.com/contato" />
       </Helmet>
+
+      {/* Schema.org Microdata */}
+      <SchemaMarkup schemas={schemas} />
 
       <div className="min-h-screen page-transition">
       <main>

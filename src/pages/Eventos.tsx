@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Footer from '@/components/Footer';
+import SchemaMarkup from '@/components/SchemaMarkup';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -9,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import studentsImage from '@/assets/students-mun.jpg';
 import eventosImage from '@/assets/imagens/8.jpg';
 import { eventsApi } from '@/lib/supabase';
+import { generateEventPageSchemas } from '@/utils/schemaMarkup';
 
 // Interface para eventos
 interface Event {
@@ -40,6 +42,7 @@ const Eventos = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [categoryFilter, setCategoryFilter] = useState<string>('all');
+  const [schemas, setSchemas] = useState<any[]>([]);
 
   useEffect(() => {
     loadEvents();
@@ -79,6 +82,10 @@ const Eventos = () => {
       }));
 
       setEvents(eventsData);
+      
+      // Gerar schemas para microdata
+      const eventSchemas = generateEventPageSchemas(eventsData);
+      setSchemas(eventSchemas);
     } catch (error) {
       console.error('Erro ao carregar eventos:', error);
     } finally {
@@ -239,24 +246,13 @@ const Eventos = () => {
         <meta name="twitter:title" content="Eventos Academia MAGIS | Simulações MUN e Workshops" />
         <meta name="twitter:description" content="Confira os próximos eventos que a Academia MAGIS irá participar!" />
         
-        {/* Schema.org */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Event",
-            "name": "Eventos Academia MAGIS",
-            "description": "Simulações MUN, workshops de diplomacia e conferências acadêmicas",
-            "organizer": {
-              "@type": "Organization",
-              "name": "Academia MAGIS"
-            },
-            "url": "https://academiamagis.com.br/eventos"
-          })}
-        </script>
         
         {/* Canonical */}
-        <link rel="canonical" href="https://academiamagis.com.br/eventos" />
+        <link rel="canonical" href="https://academiamagis.com/eventos" />
       </Helmet>
+
+      {/* Schema.org Microdata */}
+      <SchemaMarkup schemas={schemas} />
 
       <div className="min-h-screen">
         <main>
