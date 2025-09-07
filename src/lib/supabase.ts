@@ -15,6 +15,8 @@ export interface Event {
   title: string;
   description: string;
   date: string;
+  start_date?: string;
+  end_date?: string;
   location: string;
   participants: string;
   image_url?: string;
@@ -22,6 +24,9 @@ export interface Event {
   category: string;
   price?: number;
   registration_deadline?: string;
+  registration_start_date?: string;
+  is_partner_event?: boolean;
+  event_link?: string;
   max_participants?: number;
   current_participants?: number;
   created_at: string;

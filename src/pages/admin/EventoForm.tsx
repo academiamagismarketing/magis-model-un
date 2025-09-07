@@ -26,13 +26,18 @@ const EventoForm = () => {
     title: '',
     description: '',
     date: '',
+    start_date: '',
+    end_date: '',
     location: '',
     participants: '',
     image_url: '',
     status: 'upcoming' as Event['status'],
     category: '',
     price: '',
-    registration_deadline: ''
+    registration_deadline: '',
+    registration_start_date: '',
+    is_partner_event: false,
+    event_link: ''
   });
 
   const [loading, setLoading] = useState(false);
@@ -54,13 +59,18 @@ const EventoForm = () => {
           title: event.title,
           description: event.description,
           date: event.date,
+          start_date: event.start_date || event.date || '',
+          end_date: event.end_date || '',
           location: event.location,
           participants: event.participants,
           image_url: event.image_url || '',
           status: event.status,
           category: event.category,
           price: event.price?.toString() || '',
-          registration_deadline: event.registration_deadline || ''
+          registration_deadline: event.registration_deadline || '',
+          registration_start_date: event.registration_start_date || '',
+          is_partner_event: event.is_partner_event || false,
+          event_link: event.event_link || ''
         });
       }
     } catch (error) {
@@ -73,10 +83,19 @@ const EventoForm = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    setFormData(prev => {
+      const newData = {
+        ...prev,
+        [name]: value
+      };
+      
+      // Sincronizar start_date com date para compatibilidade
+      if (name === 'start_date') {
+        newData.date = value;
+      }
+      
+      return newData;
+    });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -90,13 +109,18 @@ const EventoForm = () => {
         title: formData.title,
         description: formData.description,
         date: formData.date,
+        start_date: formData.start_date || null,
+        end_date: formData.end_date || null,
         location: formData.location,
         participants: formData.participants,
         image_url: formData.image_url || null,
         status: formData.status,
         category: formData.category,
         price: formData.price ? parseFloat(formData.price) : null,
-        registration_deadline: formData.registration_deadline || null
+        registration_deadline: formData.registration_deadline || null,
+        registration_start_date: formData.registration_start_date || null,
+        is_partner_event: formData.is_partner_event,
+        event_link: formData.event_link || null
       };
 
       if (isEditing) {
@@ -114,7 +138,7 @@ const EventoForm = () => {
     }
   };
 
-  const categories = ['Simulação ONU', 'Workshop', 'Preparatório', 'Conferência'];
+  const categories = ['Simulação ONU', 'Workshop', 'Preparatório', 'Conferência', 'Congresso', 'Outros'];
   const statuses = [
     { value: 'upcoming', label: 'Em Breve' },
     { value: 'ongoing', label: 'Em Andamento' },
@@ -196,19 +220,35 @@ const EventoForm = () => {
                   />
                 </div>
 
-                {/* Data */}
+                {/* Data de Início */}
                 <div>
-                  <Label htmlFor="date" className="text-foreground flex items-center gap-2">
+                  <Label htmlFor="start_date" className="text-foreground flex items-center gap-2">
                     <Calendar className="w-4 h-4" />
-                    Data do Evento *
+                    Data de Início *
                   </Label>
                   <Input
-                    id="date"
-                    name="date"
+                    id="start_date"
+                    name="start_date"
                     type="date"
-                    value={formData.date}
+                    value={formData.start_date}
                     onChange={handleInputChange}
                     required
+                    className="mt-2"
+                  />
+                </div>
+
+                {/* Data de Término */}
+                <div>
+                  <Label htmlFor="end_date" className="text-foreground flex items-center gap-2">
+                    <Calendar className="w-4 h-4" />
+                    Data de Término
+                  </Label>
+                  <Input
+                    id="end_date"
+                    name="end_date"
+                    type="date"
+                    value={formData.end_date}
+                    onChange={handleInputChange}
                     className="mt-2"
                   />
                 </div>
@@ -302,7 +342,20 @@ const EventoForm = () => {
                   </select>
                 </div>
 
-                {/* Data de Inscrição */}
+                {/* Início das Inscrições */}
+                <div>
+                  <Label htmlFor="registration_start_date" className="text-foreground">Início das Inscrições</Label>
+                  <Input
+                    id="registration_start_date"
+                    name="registration_start_date"
+                    type="date"
+                    value={formData.registration_start_date}
+                    onChange={handleInputChange}
+                    className="mt-2"
+                  />
+                </div>
+
+                {/* Data Limite de Inscrição */}
                 <div>
                   <Label htmlFor="registration_deadline" className="text-foreground">Data Limite de Inscrição</Label>
                   <Input
@@ -312,6 +365,35 @@ const EventoForm = () => {
                     value={formData.registration_deadline}
                     onChange={handleInputChange}
                     className="mt-2"
+                  />
+                </div>
+
+                {/* Evento Parceiro */}
+                <div>
+                  <Label htmlFor="is_partner_event" className="text-foreground">Tipo de Participação</Label>
+                  <select
+                    id="is_partner_event"
+                    name="is_partner_event"
+                    value={formData.is_partner_event ? 'true' : 'false'}
+                    onChange={(e) => setFormData(prev => ({ ...prev, is_partner_event: e.target.value === 'true' }))}
+                    className="w-full mt-2 px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                  >
+                    <option value="false">Presença Confirmada</option>
+                    <option value="true">Evento Parceiro</option>
+                  </select>
+                </div>
+
+                {/* Link do Evento */}
+                <div>
+                  <Label htmlFor="event_link" className="text-foreground">Link (WhatsApp/Inscrição)</Label>
+                  <Input
+                    id="event_link"
+                    name="event_link"
+                    type="url"
+                    value={formData.event_link}
+                    onChange={handleInputChange}
+                    className="mt-2"
+                    placeholder="https://wa.me/5511999999999?text=..."
                   />
                 </div>
 

@@ -156,14 +156,14 @@ const Eventos = () => {
       {/* SEO Head */}
       <Helmet>
         <title>Eventos Academia MAGIS | Simulações MUN, Workshops e Conferências Acadêmicas</title>
-        <meta name="description" content="Descubra os eventos parceiros da Academia MAGIS: simulações MUN, workshops de diplomacia, conferências acadêmicas e oportunidades únicas para estudantes." />
+        <meta name="description" content="Confira os próximos eventos que a Academia MAGIS irá participar!" />
         <meta name="keywords" content="eventos academia MAGIS, simulações MUN, workshops diplomacia, conferências acadêmicas, eventos acadêmicos Brasil, MUN eventos" />
         <meta name="author" content="Academia MAGIS" />
         <meta name="robots" content="index, follow" />
         
         {/* Open Graph */}
         <meta property="og:title" content="Eventos Academia MAGIS | Simulações MUN e Workshops" />
-        <meta property="og:description" content="Descubra os eventos parceiros da Academia MAGIS: simulações MUN, workshops de diplomacia e conferências acadêmicas." />
+        <meta property="og:description" content="Confira os próximos eventos que a Academia MAGIS irá participar!" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://academiamagis.com.br/eventos" />
         <meta property="og:image" content="https://academiamagis.com.br/og-image.jpg" />
@@ -171,7 +171,7 @@ const Eventos = () => {
         {/* Twitter Cards */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Eventos Academia MAGIS | Simulações MUN e Workshops" />
-        <meta name="twitter:description" content="Descubra os eventos parceiros da Academia MAGIS: simulações MUN, workshops de diplomacia e conferências acadêmicas." />
+        <meta name="twitter:description" content="Confira os próximos eventos que a Academia MAGIS irá participar!" />
         
         {/* Schema.org */}
         <script type="application/ld+json">
@@ -209,10 +209,10 @@ const Eventos = () => {
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
               <h1 className="text-5xl md:text-6xl font-display font-bold mb-6">
-                Nossos Eventos
+                Eventos
               </h1>
               <p className="text-xl md:text-2xl opacity-90 leading-relaxed max-w-3xl mx-auto">
-              Descubra os eventos parceiros da Academia MAGIS e participe das melhores oportunidades acadêmicas do Brasil!
+              Confira os próximos eventos que a Academia MAGIS irá participar!
               </p>
             </div>
           </div>
