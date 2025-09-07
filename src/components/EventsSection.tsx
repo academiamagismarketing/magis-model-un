@@ -83,8 +83,7 @@ const EventsSection = () => {
             </h2>
           </div>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Participe dos nossos eventos exclusivos e desenvolva habilidades 
-            de liderança, diplomacia e debate.
+          Confira os próximos eventos que a Academia MAGIS irá participar!
           </p>
         </div>
 
