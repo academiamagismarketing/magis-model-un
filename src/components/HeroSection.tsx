@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Play, Zap } from 'lucide-react';
 import { statisticsApi, Statistic } from '@/lib/supabase';
 import OptimizedImage from './OptimizedImage';
+import { useMobileOptimization } from '../hooks/useMobileOptimization';
 
 import heroImage from '../assets/hero-diplomatic.jpg';
 
@@ -10,11 +11,16 @@ const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [statistics, setStatistics] = useState<Statistic[]>([]);
   const [loading, setLoading] = useState(true);
+  const { isMobile, isSlowConnection } = useMobileOptimization();
 
   useEffect(() => {
     setIsVisible(true);
-    loadStatistics();
-  }, []);
+    // Carregar estatísticas de forma não bloqueante - mais delay em mobile
+    const delay = isMobile ? 500 : 100;
+    setTimeout(() => {
+      loadStatistics();
+    }, delay);
+  }, [isMobile]);
 
   const loadStatistics = async () => {
     try {
@@ -84,6 +90,9 @@ const HeroSection = () => {
             left: 0,
             zIndex: 1
           }}
+          loading="eager"
+          fetchPriority="high"
+          decoding="sync"
           onLoad={() => console.log('Imagem carregada com sucesso')}
           onError={() => console.log('Erro ao carregar imagem')}
         />
@@ -94,19 +103,19 @@ const HeroSection = () => {
       <div className="relative z-10 container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center text-white">
           {/* Heading */}
-          <h1 className={`text-4xl md:text-6xl lg:text-7xl font-display font-bold mb-6 leading-tight transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
+          <h1 className={`text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-display font-bold mb-6 leading-tight transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
             Formando <span className="text-white">Líderes</span><br />
             do <span className="text-white">Amanhã</span>
           </h1>
 
           {/* Slogan */}
-          <p className={`text-lg md:text-xl font-display italic mb-6 opacity-90 leading-relaxed max-w-3xl mx-auto transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
+          <p className={`text-base sm:text-lg md:text-xl font-display italic mb-6 opacity-90 leading-relaxed max-w-3xl mx-auto transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
             "Não queremos realizar sonhos,<br />
             <span className="text-white font-semibold">mas queremos permitir que as pessoas possam sonhar</span>"
           </p>
 
           {/* Description */}
-          <p className={`text-base md:text-lg mb-8 max-w-2xl mx-auto leading-relaxed opacity-95 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
+          <p className={`text-sm sm:text-base md:text-lg mb-8 max-w-2xl mx-auto leading-relaxed opacity-95 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
             Acreditamos que o mundo acadêmico deve ser acessível para todos. 
             Lutamos para democratizar estes espaços e torná-los cada vez mais diversos.
           </p>
@@ -134,29 +143,29 @@ const HeroSection = () => {
             </Button>
           </div>
 
-          {/* Compact Stats with subtle background */}
+          {/* Compact Stats with subtle background - Mobile Optimized */}
           <div className={`mx-auto max-w-xl transition-all duration-700 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
-            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl px-6 py-4">
-              <div className="flex items-center justify-between text-center gap-4">
+            <div className={`bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl ${isMobile ? 'px-4 py-3' : 'px-6 py-4'}`}>
+              <div className={`flex items-center justify-between text-center ${isMobile ? 'gap-2' : 'gap-4'}`}>
                 <div className="flex-1">
-                  <div className="text-2xl md:text-3xl font-bold text-white">
+                  <div className={`${isMobile ? 'text-xl' : 'text-2xl md:text-3xl'} font-bold text-white`}>
                     {loading ? '...' : formatStatisticValue('delegados', getStatisticValue('delegados'))}
                   </div>
-                  <div className="text-xs md:text-sm text-white/80">Delegados</div>
+                  <div className={`${isMobile ? 'text-xs' : 'text-xs md:text-sm'} text-white/80`}>Delegados</div>
                 </div>
-                <div className="h-8 w-px bg-white/20" />
+                <div className={`${isMobile ? 'h-6' : 'h-8'} w-px bg-white/20`} />
                 <div className="flex-1">
-                  <div className="text-2xl md:text-3xl font-bold text-white">
+                  <div className={`${isMobile ? 'text-xl' : 'text-2xl md:text-3xl'} font-bold text-white`}>
                     {loading ? '...' : formatStatisticValue('eventos_realizados', getStatisticValue('eventos_realizados'))}
                   </div>
-                  <div className="text-xs md:text-sm text-white/80">Eventos</div>
+                  <div className={`${isMobile ? 'text-xs' : 'text-xs md:text-sm'} text-white/80`}>Eventos</div>
                 </div>
-                <div className="h-8 w-px bg-white/20" />
+                <div className={`${isMobile ? 'h-6' : 'h-8'} w-px bg-white/20`} />
                 <div className="flex-1">
-                  <div className="text-2xl md:text-3xl font-bold text-white">
+                  <div className={`${isMobile ? 'text-xl' : 'text-2xl md:text-3xl'} font-bold text-white`}>
                     {loading ? '...' : formatStatisticValue('valores_arrecadados', getStatisticValue('valores_arrecadados'))}
                   </div>
-                  <div className="text-xs md:text-sm text-white/80">Arrecadados</div>
+                  <div className={`${isMobile ? 'text-xs' : 'text-xs md:text-sm'} text-white/80`}>Arrecadados</div>
                 </div>
               </div>
             </div>
