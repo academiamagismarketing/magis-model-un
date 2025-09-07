@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -119,7 +120,27 @@ const Blog = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <>
+      {/* SEO Head */}
+      <Helmet>
+        <title>Blog Academia MAGIS | Artigos e Conteúdo Acadêmico</title>
+        <meta name="description" content="Acesse nosso blog com artigos sobre simulações MUN, diplomacia, relações internacionais e dicas para estudantes acadêmicos." />
+        <meta name="keywords" content="blog academia MAGIS, artigos MUN, simulações ONU, diplomacia, relações internacionais, conteúdo acadêmico" />
+        <meta name="author" content="Academia MAGIS" />
+        <meta name="robots" content="index, follow" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Blog Academia MAGIS | Artigos e Conteúdo Acadêmico" />
+        <meta property="og:description" content="Acesse nosso blog com artigos sobre simulações MUN, diplomacia, relações internacionais e dicas para estudantes acadêmicos." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://academiamagis.com.br/blog" />
+        <meta property="og:image" content="https://academiamagis.com.br/og-image.jpg" />
+        
+        {/* Canonical */}
+        <link rel="canonical" href="https://academiamagis.com.br/blog" />
+      </Helmet>
+
+      <div className="min-h-screen bg-background">
       {/* Hero Section */}
       <section className="pt-24 md:pt-32 pb-12 md:pb-16 bg-gradient-to-br from-primary/10 via-primary/5 to-background">
         <div className="container mx-auto px-4">
@@ -299,7 +320,8 @@ const Blog = () => {
       </section>
 
       <Footer />
-    </div>
+      </div>
+    </>
   );
 };
 

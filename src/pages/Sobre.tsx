@@ -102,7 +102,7 @@ const Sobre = () => {
     <>
       {/* SEO Head */}
       <Helmet>
-        <title>Sobre a Academia MAGIS | História, Missão e Valores | Simulações Acadêmicas</title>
+        <title>Sobre a Academia MAGIS | História, Missão e Valores</title>
         <meta name="description" content="Conheça a história da Academia MAGIS, nossa missão de democratizar simulações acadêmicas e MUN, e como formamos líderes diplomáticos do futuro." />
         <meta name="keywords" content="história academia MAGIS, missão valores, simulações ONU, MUN Brasil, diplomacia acadêmica, liderança internacional, academia MAGIS sobre" />
         <meta name="author" content="Academia MAGIS" />

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -178,7 +179,32 @@ const Produtos = () => {
 
 
   return (
-    <div className="min-h-screen">
+    <>
+      {/* SEO Head */}
+      <Helmet>
+        <title>Produtos Academia MAGIS | Pins, Kits e Materiais MUN</title>
+        <meta name="description" content="Confira nossa linha de produtos exclusivos: pins, kits de delegado, materiais de estudo e itens personalizados da Academia MAGIS." />
+        <meta name="keywords" content="produtos academia MAGIS, pins MUN, kits delegado, materiais simulação ONU, produtos acadêmicos, academia MAGIS loja" />
+        <meta name="author" content="Academia MAGIS" />
+        <meta name="robots" content="index, follow" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Produtos Academia MAGIS | Pins, Kits e Materiais MUN" />
+        <meta property="og:description" content="Confira nossa linha de produtos exclusivos: pins, kits de delegado, materiais de estudo e itens personalizados da Academia MAGIS." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://academiamagis.com.br/produtos" />
+        <meta property="og:image" content="https://academiamagis.com.br/og-image.jpg" />
+        
+        {/* Twitter Cards */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Produtos Academia MAGIS | Pins, Kits e Materiais MUN" />
+        <meta name="twitter:description" content="Confira nossa linha de produtos exclusivos: pins, kits de delegado, materiais de estudo e itens personalizados da Academia MAGIS." />
+        
+        {/* Canonical */}
+        <link rel="canonical" href="https://academiamagis.com.br/produtos" />
+      </Helmet>
+
+      <div className="min-h-screen">
       <main>
         {/* Hero Section */}
         <section className="relative pt-32 md:pt-40 pb-20 md:pb-32 bg-gradient-to-br from-primary/80 to-primary/60 text-primary-foreground overflow-hidden">
@@ -400,7 +426,8 @@ const Produtos = () => {
       </main>
       
       <Footer />
-    </div>
+      </div>
+    </>
   );
 };
 

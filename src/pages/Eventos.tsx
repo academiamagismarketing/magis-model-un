@@ -221,7 +221,7 @@ const Eventos = () => {
     <>
       {/* SEO Head */}
       <Helmet>
-        <title>Eventos Academia MAGIS | Simulações MUN, Workshops e Conferências Acadêmicas</title>
+        <title>Eventos Academia MAGIS | Simulações MUN e Workshops</title>
         <meta name="description" content="Confira os próximos eventos que a Academia MAGIS irá participar!" />
         <meta name="keywords" content="eventos academia MAGIS, simulações MUN, workshops diplomacia, conferências acadêmicas, eventos acadêmicos Brasil, MUN eventos" />
         <meta name="author" content="Academia MAGIS" />

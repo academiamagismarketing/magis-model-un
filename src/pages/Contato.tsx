@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -92,7 +93,27 @@ Enviado através do site da Academia MAGIS`;
   ];
 
   return (
-    <div className="min-h-screen page-transition">
+    <>
+      {/* SEO Head */}
+      <Helmet>
+        <title>Contato Academia MAGIS | Fale Conosco</title>
+        <meta name="description" content="Entre em contato com a Academia MAGIS. Tire suas dúvidas sobre simulações MUN, mentorias e participe de nossos eventos acadêmicos." />
+        <meta name="keywords" content="contato academia MAGIS, fale conosco, simulações MUN, mentorias acadêmicas, eventos acadêmicos" />
+        <meta name="author" content="Academia MAGIS" />
+        <meta name="robots" content="index, follow" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Contato Academia MAGIS | Fale Conosco" />
+        <meta property="og:description" content="Entre em contato com a Academia MAGIS. Tire suas dúvidas sobre simulações MUN, mentorias e participe de nossos eventos acadêmicos." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://academiamagis.com.br/contato" />
+        <meta property="og:image" content="https://academiamagis.com.br/og-image.jpg" />
+        
+        {/* Canonical */}
+        <link rel="canonical" href="https://academiamagis.com.br/contato" />
+      </Helmet>
+
+      <div className="min-h-screen page-transition">
       <main>
         {/* Hero Section */}
         <section 
@@ -370,7 +391,8 @@ Enviado através do site da Academia MAGIS`;
       </main>
       
       <Footer />
-    </div>
+      </div>
+    </>
   );
 };
 

@@ -15,7 +15,7 @@ const Index = () => {
     <>
       {/* SEO Head */}
       <Helmet>
-        <title>Academia MAGIS - Simulações & Mentorias Acadêmicas | Líderes do Futuro</title>
+        <title>Academia MAGIS | Simulações MUN e Mentorias Acadêmicas</title>
         <meta name="description" content="Descubra como participar de simulações acadêmicas, mentorias educacionais e atividades MUN na Academia MAGIS. Formamos as próximas gerações de líderes diplomáticos e internacionais." />
         <meta name="keywords" content="simulações acadêmicas, mentorias educacionais, MUN, Modelo das Nações Unidas, diplomacia, relações internacionais, academia MAGIS, workshops, liderança acadêmica" />
         <meta name="author" content="Academia MAGIS" />
