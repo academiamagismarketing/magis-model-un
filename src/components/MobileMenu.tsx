@@ -78,7 +78,13 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, currentPath })
       />
       
       {/* Sidebar */}
-      <div className="fixed right-0 top-0 h-full w-80 max-w-[85vw] bg-background shadow-2xl transform transition-transform duration-300 ease-in-out">
+      <div 
+        id="mobile-menu"
+        className="fixed right-0 top-0 h-full w-80 max-w-[85vw] bg-background shadow-2xl transform transition-transform duration-300 ease-in-out"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="mobile-menu-title"
+      >
         <div className="flex flex-col h-full">
           {/* Header */}
           <div className="flex items-center justify-between p-6 border-b border-border">
@@ -88,12 +94,15 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, currentPath })
                 alt="Academia MAGIS" 
                 className="h-10 w-auto object-contain"
               />
+              <h2 id="mobile-menu-title" className="sr-only">Menu de Navegação</h2>
             </div>
             <Button
               onClick={onClose}
               variant="ghost"
               size="sm"
               className="text-foreground hover:bg-muted"
+              aria-label="Fechar menu de navegação"
+              aria-expanded={isOpen}
             >
               <X className="w-6 h-6" />
             </Button>
@@ -145,6 +154,9 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, currentPath })
                       ? 'bg-primary/10 text-primary border border-primary/20'
                       : 'text-foreground/80 hover:bg-muted hover:text-foreground'
                   }`}
+                  aria-label={`${sobreExpanded ? 'Recolher' : 'Expandir'} seção Sobre`}
+                  aria-expanded={sobreExpanded}
+                  aria-controls="sobre-submenu"
                 >
                   <div className="flex items-center space-x-3">
                     <Users className="w-5 h-5" />
@@ -158,7 +170,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, currentPath })
                 </button>
                 
                 {sobreExpanded && (
-                  <div className="ml-4 space-y-1 border-l-2 border-muted pl-4">
+                  <div id="sobre-submenu" className="ml-4 space-y-1 border-l-2 border-muted pl-4" role="region" aria-label="Submenu Sobre">
                     {sobreLinks.map((item) => (
                       <Link
                         key={item.name}
@@ -260,6 +272,8 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, currentPath })
               onClick={handleWhatsApp}
               variant="default"
               className="w-full btn-primary"
+              aria-label="Conversar pelo WhatsApp"
+              title="Falar no WhatsApp"
             >
               <MessageSquare className="w-4 h-4 mr-2" />
               Falar no WhatsApp
@@ -268,6 +282,8 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, currentPath })
               onClick={handleWhatsApp}
               variant="outline"
               className="w-full btn-outline"
+              aria-label="Entrar em contato por telefone"
+              title="Ligar Agora"
             >
               <Phone className="w-4 h-4 mr-2" />
               Ligar Agora

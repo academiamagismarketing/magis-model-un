@@ -112,6 +112,8 @@ const Navbar = () => {
                     className={`text-sm font-medium transition-colors hover:text-primary flex items-center space-x-1 ${
                       isSobreActive ? 'text-primary' : 'text-foreground/80'
                     }`}
+                    aria-label="Menu Sobre - Informações sobre a Academia MAGIS"
+                    aria-haspopup="true"
                   >
                     <span>Sobre</span>
                     <ChevronDown className="w-4 h-4" />
@@ -203,6 +205,8 @@ const Navbar = () => {
                 size="sm"
                 variant="outline"
                 className="btn-outline"
+                aria-label="Entrar em contato por telefone"
+                title="Fale Conosco"
               >
                 <Phone className="w-4 h-4 mr-2" />
                 Fale Conosco
@@ -212,6 +216,8 @@ const Navbar = () => {
                 size="sm"
                 variant="default"
                 className="btn-primary"
+                aria-label="Conversar pelo WhatsApp"
+                title="WhatsApp"
               >
                 <MessageSquare className="w-4 h-4 mr-2" />
                 WhatsApp
@@ -225,6 +231,9 @@ const Navbar = () => {
                 variant="ghost"
                 size="sm"
                 className="text-foreground hover:bg-muted"
+                aria-label="Abrir menu de navegação"
+                aria-expanded={isMobileMenuOpen}
+                aria-controls="mobile-menu"
               >
                 <Menu className="w-6 h-6" />
               </Button>
@@ -246,6 +255,8 @@ const Navbar = () => {
           onClick={handleWhatsApp}
           size="lg"
           className="w-14 h-14 rounded-full bg-green-600 hover:bg-green-700 text-white shadow-lg"
+          aria-label="Falar no WhatsApp - Contato direto"
+          title="Falar no WhatsApp"
         >
           <MessageSquare className="w-6 h-6" />
         </Button>

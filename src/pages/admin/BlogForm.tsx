@@ -361,7 +361,13 @@ const BlogForm = () => {
                       placeholder="Adicionar tag"
                       onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddTag())}
                     />
-                    <Button type="button" onClick={handleAddTag} variant="outline">
+                    <Button 
+                      type="button" 
+                      onClick={handleAddTag} 
+                      variant="outline"
+                      aria-label="Adicionar tag"
+                      title="Adicionar tag"
+                    >
                       <Plus className="w-4 h-4" />
                     </Button>
                   </div>
