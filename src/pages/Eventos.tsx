@@ -4,7 +4,7 @@ import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Calendar, MapPin, Users, Clock, ArrowLeft, Filter, Search, MessageSquare } from 'lucide-react';
+import { Calendar, MapPin, Users, DollarSign, ArrowLeft, Filter, Search, MessageSquare, ExternalLink } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import studentsImage from '@/assets/students-mun.jpg';
 import eventosImage from '@/assets/imagens/8.jpg';
@@ -16,6 +16,8 @@ interface Event {
   title: string;
   description: string;
   date: string;
+  start_date?: string;
+  end_date?: string;
   location: string;
   participants: string;
   image_url?: string;
@@ -23,6 +25,9 @@ interface Event {
   category: string;
   price?: string;
   registration_deadline?: string;
+  registration_start_date?: string;
+  is_partner_event?: boolean;
+  event_link?: string;
   created_at: string;
   updated_at: string;
 }
@@ -57,6 +62,8 @@ const Eventos = () => {
         title: event.title,
         description: event.description,
         date: event.date,
+        start_date: event.start_date,
+        end_date: event.end_date,
         location: event.location,
         participants: event.participants,
         image_url: event.image_url || studentsImage, // Usar imagem padrão se não houver
@@ -64,6 +71,9 @@ const Eventos = () => {
         category: event.category,
         price: event.price ? `R$ ${event.price.toFixed(2).replace('.', ',')}` : 'Gratuito',
         registration_deadline: event.registration_deadline,
+        registration_start_date: event.registration_start_date,
+        is_partner_event: event.is_partner_event,
+        event_link: event.event_link,
         created_at: event.created_at,
         updated_at: event.updated_at
       }));
@@ -135,7 +145,7 @@ const Eventos = () => {
     });
   };
 
-  const categories = ['Simulação ONU', 'Workshop', 'Preparatório', 'Conferência'];
+  const categories = ['Simulação ONU', 'Workshop', 'Preparatório', 'Conferência', 'Congresso', 'Outros'];
   const statuses = ['upcoming', 'ongoing', 'completed'];
 
   if (loading) {
@@ -326,35 +336,97 @@ const Eventos = () => {
                         </p>
                         
                         <div className="space-y-2 text-sm">
+                          {/* Data do Evento */}
                           <div className="flex items-center text-muted-foreground">
                             <Calendar className="w-4 h-4 mr-2" />
-                            {formatDate(event.date)}
+                            {event.start_date && event.end_date ? (
+                              <span>
+                                {formatDate(event.start_date)} - {formatDate(event.end_date)}
+                              </span>
+                            ) : (
+                              <span>{formatDate(event.date)}</span>
+                            )}
                           </div>
+                          
+                          {/* Localização */}
                           <div className="flex items-center text-muted-foreground">
                             <MapPin className="w-4 h-4 mr-2" />
                             {event.location}
                           </div>
+                          
+                          {/* Participantes */}
                           <div className="flex items-center text-muted-foreground">
                             <Users className="w-4 h-4 mr-2" />
                             {event.participants}
                           </div>
+                          
+                          {/* Tipo de Participação */}
+                          <div className={`flex items-center text-sm font-medium ${
+                            event.is_partner_event 
+                              ? 'text-blue-600' 
+                              : 'text-gray-600'
+                          }`}>
+                            <div className={`w-3 h-3 rounded-full mr-2 ${
+                              event.is_partner_event 
+                                ? 'bg-blue-500' 
+                                : 'bg-gray-500'
+                            }`}></div>
+                            {event.is_partner_event ? 'Evento Parceiro' : 'Presença Confirmada'}
+                          </div>
+                          
+                          {/* Preço */}
                           {event.price && (
                             <div className="flex items-center text-primary font-semibold">
-                              <Clock className="w-4 h-4 mr-2" />
+                              <DollarSign className="w-4 h-4 mr-2" />
                               {event.price}
+                            </div>
+                          )}
+                          
+                          {/* Início das Inscrições */}
+                          {event.registration_start_date && (
+                            <div className="flex items-center text-muted-foreground text-xs">
+                              <Calendar className="w-3 h-3 mr-2" />
+                              Inscrições a partir de {formatDate(event.registration_start_date)}
                             </div>
                           )}
                         </div>
                         
                         <div className="flex flex-col gap-2">
-                          <Button 
-                            onClick={() => handleWhatsApp(event)}
-                            variant="outline"
-                            className="btn-outline"
-                          >
-                            <MessageSquare className="w-4 h-4 mr-2" />
-                            Quero Participar
-                          </Button>
+                          {/* Botão principal baseado no tipo de evento */}
+                          {event.event_link ? (
+                            <Button 
+                              onClick={() => window.open(event.event_link, '_blank')}
+                              variant="default"
+                              className="btn-primary"
+                            >
+                              <ExternalLink className="w-4 h-4 mr-2" />
+                              Acessar Evento
+                            </Button>
+                          ) : (
+                            <Button 
+                              onClick={() => handleWhatsApp(event)}
+                              variant="outline"
+                              className="btn-outline"
+                            >
+                              <MessageSquare className="w-4 h-4 mr-2" />
+                              Quero Participar
+                            </Button>
+                          )}
+                          
+                          {/* Botão secundário para WhatsApp se houver link */}
+                          {event.event_link && (
+                            <Button 
+                              onClick={() => handleWhatsApp(event)}
+                              variant="outline"
+                              size="sm"
+                              className="btn-outline"
+                            >
+                              <MessageSquare className="w-4 h-4 mr-2" />
+                              Mais Informações
+                            </Button>
+                          )}
+                          
+                          {/* Data limite de inscrições */}
                           {event.registration_deadline && (
                             <p className="text-xs text-muted-foreground text-center">
                               Inscrições até {formatDate(event.registration_deadline)}

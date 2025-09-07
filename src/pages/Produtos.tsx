@@ -368,48 +368,6 @@ const Produtos = () => {
           </div>
         </section>
 
-        {/* Testimonials Section */}
-        <section className="py-16 md:py-20 bg-background section-decor">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12 md:mb-16">
-              <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 md:mb-6 text-foreground">
-                O que Dizem Nossos Clientes
-              </h2>
-              <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto px-4">
-                Depoimentos de quem já adquiriu nossos produtos exclusivos.
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {testimonials.map((testimonial, index) => (
-                <div 
-                  key={index} 
-                  className="bg-muted p-8 rounded-2xl"
-                >
-                  <div className="flex items-center mb-4">
-                    <div className="flex text-yellow-400">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-5 h-5 fill-current" />
-                      ))}
-                    </div>
-                  </div>
-                  <p className="text-muted-foreground mb-6 leading-relaxed">
-                    "{testimonial.text}"
-                  </p>
-                  <div>
-                    <div className="font-semibold text-foreground">
-                      {testimonial.name}
-                    </div>
-                    <div className="text-sm text-muted-foreground">
-                      {testimonial.role}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* CTA Section */}
         <section className="py-16 md:py-20 bg-muted text-foreground section-decor">
           <div className="container mx-auto px-4 text-center">
