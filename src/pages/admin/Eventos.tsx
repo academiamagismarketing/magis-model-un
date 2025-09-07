@@ -62,7 +62,7 @@ const AdminEventos = () => {
 
     // Filtrar por status
     if (statusFilter !== 'all') {
-      filtered = filtered.filter(event => event.status === statusFilter);
+      filtered = filtered.filter(event => getEventStatus(event) === statusFilter);
     }
 
     // Filtrar por categoria
@@ -84,7 +84,55 @@ const AdminEventos = () => {
     }
   };
 
-  const getStatusBadge = (status: string) => {
+  // Função para criar data local sem problemas de fuso horário
+  const createLocalDate = (dateString: string): Date => {
+    if (dateString.match(/^\d{4}-\d{2}-\d{2}$/)) {
+      const [year, month, day] = dateString.split('-').map(Number);
+      return new Date(year, month - 1, day); // month é 0-indexed
+    }
+    return new Date(dateString);
+  };
+
+  // Função para determinar o status baseado nas datas
+  const getEventStatus = (event: Event): 'upcoming' | 'ongoing' | 'completed' | 'cancelled' => {
+    // Se o evento foi cancelado manualmente, manter como cancelado
+    if (event.status === 'cancelled') {
+      return 'cancelled';
+    }
+    
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Zerar horas para comparação apenas de data
+    
+    // Se tem start_date e end_date, usar essas datas
+    if (event.start_date && event.end_date) {
+      const startDate = createLocalDate(event.start_date);
+      const endDate = createLocalDate(event.end_date);
+      startDate.setHours(0, 0, 0, 0);
+      endDate.setHours(23, 59, 59, 999); // Final do dia
+      
+      if (today < startDate) {
+        return 'upcoming';
+      } else if (today >= startDate && today <= endDate) {
+        return 'ongoing';
+      } else {
+        return 'completed';
+      }
+    }
+    
+    // Fallback para data única (compatibilidade com eventos antigos)
+    const eventDate = createLocalDate(event.date);
+    eventDate.setHours(0, 0, 0, 0);
+    
+    if (today < eventDate) {
+      return 'upcoming';
+    } else if (today.getTime() === eventDate.getTime()) {
+      return 'ongoing';
+    } else {
+      return 'completed';
+    }
+  };
+
+  const getStatusBadge = (status: 'upcoming' | 'ongoing' | 'completed' | 'cancelled') => {
     switch (status) {
       case 'upcoming':
         return <Badge className="bg-blue-100 text-blue-800">Em Breve</Badge>;
@@ -100,6 +148,19 @@ const AdminEventos = () => {
   };
 
   const formatDate = (dateString: string) => {
+    // Corrigir problema de fuso horário
+    // Se a string está no formato YYYY-MM-DD, criar a data localmente
+    if (dateString.match(/^\d{4}-\d{2}-\d{2}$/)) {
+      const [year, month, day] = dateString.split('-').map(Number);
+      const date = new Date(year, month - 1, day); // month é 0-indexed
+      return date.toLocaleDateString('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+      });
+    }
+    
+    // Fallback para outros formatos
     const date = new Date(dateString);
     return date.toLocaleDateString('pt-BR', {
       day: '2-digit',
@@ -113,7 +174,7 @@ const AdminEventos = () => {
     return `R$ ${price.toFixed(2).replace('.', ',')}`;
   };
 
-  const categories = ['Simulação ONU', 'Workshop', 'Preparatório', 'Conferência'];
+  const categories = ['Simulação ONU', 'Workshop', 'Preparatório', 'Conferência', 'Congresso', 'Outros'];
   const statuses = ['upcoming', 'ongoing', 'completed', 'cancelled'];
 
   if (loading) {
@@ -259,7 +320,7 @@ const AdminEventos = () => {
                           {event.title}
                         </CardTitle>
                         <div className="flex items-center gap-2 mt-2">
-                          {getStatusBadge(event.status)}
+                          {getStatusBadge(getEventStatus(event))}
                           <Badge variant="outline">{event.category}</Badge>
                         </div>
                       </div>
@@ -291,7 +352,13 @@ const AdminEventos = () => {
                     <div className="space-y-2 text-sm">
                       <div className="flex items-center text-muted-foreground">
                         <Calendar className="w-4 h-4 mr-2" />
-                        {formatDate(event.date)}
+                        {event.start_date && event.end_date ? (
+                          <span>
+                            {formatDate(event.start_date)} a {formatDate(event.end_date)}
+                          </span>
+                        ) : (
+                          <span>{formatDate(event.date)}</span>
+                        )}
                       </div>
                       <div className="flex items-center text-muted-foreground">
                         <MapPin className="w-4 h-4 mr-2" />
