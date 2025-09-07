@@ -142,17 +142,27 @@ const Blog = () => {
 
       <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="pt-24 md:pt-32 pb-12 md:pb-16 bg-gradient-to-br from-primary/10 via-primary/5 to-background">
-        <div className="container mx-auto px-4">
-          <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 md:mb-6">
-              Publicações da Academia MAGIS
+      <section className="relative pt-32 pb-20 bg-gradient-to-br from-primary/80 to-primary/60 text-primary-foreground overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src={blogHeroImage} 
+            alt="Blog Academia MAGIS" 
+            className="w-full h-full object-cover opacity-10"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-black/60 to-black/40"></div>
+        </div>
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-5xl md:text-6xl font-display font-bold mb-6">
+              Publicações
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground mb-6 md:mb-8">
+            <p className="text-xl md:text-2xl opacity-90 leading-relaxed max-w-3xl mx-auto">
               Descubra insights, notícias e reflexões sobre diplomacia, 
               relações internacionais e o mundo MUN.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 text-sm text-muted-foreground">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 text-sm text-primary-foreground/80 mt-8">
               <div className="flex items-center space-x-2">
                 <BookOpen className="w-4 h-4" />
                 <span>{posts.length} artigos publicados</span>
