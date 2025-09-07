@@ -10,6 +10,7 @@ import {
   Star
 } from 'lucide-react';
 import { patrocinadoresApi, Patrocinador } from '@/lib/supabase';
+import OptimizedImage from './OptimizedImage';
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -125,10 +126,15 @@ const PartnersSection = () => {
                       <div>
                         <div className="mb-4">
                           {patrocinador.logo_url ? (
-                            <img 
-                              src={patrocinador.logo_url} 
+                            <OptimizedImage
+                              src={patrocinador.logo_url}
                               alt={`Logo ${patrocinador.nome}`}
                               className="h-16 w-auto mx-auto object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300"
+                              width={64}
+                              height={64}
+                              quality={85}
+                              sizes="64px"
+                              loading="lazy"
                             />
                           ) : (
                             <div className="h-16 w-auto mx-auto flex items-center justify-center">

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Play, Zap } from 'lucide-react';
 import { statisticsApi, Statistic } from '@/lib/supabase';
+import OptimizedImage from './OptimizedImage';
 
 import heroImage from '../assets/hero-diplomatic.jpg';
 
@@ -66,13 +67,15 @@ const HeroSection = () => {
   };
 
   return (
-    <section id="inicio" className="relative min-h-[100svh] flex items-center justify-center overflow-hidden pt-24 md:pt-20 pb-12 md:pb-0">
-      {/* Background */}
+    <section id="inicio" className="relative min-h-[100svh] flex items-center justify-center overflow-hidden pt-24 md:pt-20 pb-12 md:pb-0 bg-gray-800">
+      {/* Background - Imagem de Fundo */}
       <div className="absolute inset-0">
         <img 
           src={heroImage} 
           alt="Academia MAGIS - Diplomacia Internacional"
           className="w-full h-full object-cover"
+          onLoad={() => console.log('Imagem carregada com sucesso')}
+          onError={() => console.log('Erro ao carregar imagem')}
         />
         <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/50 to-primary/30"></div>
       </div>

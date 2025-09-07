@@ -1,4 +1,5 @@
 import React from 'react';
+import OptimizedImage from './OptimizedImage';
 import imagotipoLogo from '../assets/logo/IMAGOTIPO - ACADEMIA MAGIS.png';
 import tipograficaLogo from '../assets/logo/TIPOGRAFICA - ACADEMIA MAGIS.png';
 import logoPretaSvg from '../assets/logo/LOGO PRETA - ACADEMIA MAGIS.svg';
@@ -50,10 +51,14 @@ const SimpleLogo: React.FC<SimpleLogoProps> = ({
 
   return (
     <div className={`flex items-center justify-center ${className}`}>
-      <img 
-        src={imagePath} 
-        alt={`Logo Academia MAGIS - ${type}`} 
+      <OptimizedImage
+        src={imagePath}
+        alt={`Logo Academia MAGIS - ${type}`}
         className={`${sizes} object-contain`}
+        priority={true}
+        loading="eager"
+        quality={90}
+        sizes="(max-width: 768px) 40px, 60px"
       />
     </div>
   );
