@@ -29,6 +29,7 @@ const ProdutoForm = () => {
     image_url: '',
     category: '',
     status: 'active' as Product['status'],
+    availability: 'pronta_entrega' as Product['availability'],
     buy_link: ''
   });
 
@@ -54,6 +55,7 @@ const ProdutoForm = () => {
           image_url: product.image_url || '',
           category: product.category,
           status: product.status,
+          availability: product.availability,
           buy_link: product.buy_link
         });
       }
@@ -78,6 +80,7 @@ const ProdutoForm = () => {
         image_url: formData.image_url.trim() || null,
         category: formData.category.trim(),
         status: formData.status,
+        availability: formData.availability,
         buy_link: formData.buy_link.trim()
       };
 
@@ -271,6 +274,27 @@ const ProdutoForm = () => {
                     <option value="out_of_stock">Sem Estoque</option>
                   </select>
                 </div>
+              </div>
+
+              {/* Disponibilidade */}
+              <div>
+                <Label htmlFor="availability" className="text-foreground font-medium">
+                  Disponibilidade
+                </Label>
+                <div className="relative mt-2">
+                  <select
+                    id="availability"
+                    value={formData.availability}
+                    onChange={(e) => handleInputChange('availability', e.target.value)}
+                    className="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  >
+                    <option value="pronta_entrega">Pronta Entrega</option>
+                    <option value="somente_encomenda">Somente por Encomenda</option>
+                  </select>
+                </div>
+                <p className="text-sm text-muted-foreground mt-1">
+                  Define se o produto está disponível imediatamente ou precisa ser encomendado
+                </p>
               </div>
 
               {/* Link de Compra */}

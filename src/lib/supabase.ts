@@ -42,6 +42,7 @@ export interface Product {
   image_url?: string;
   category: string;
   status: 'active' | 'inactive' | 'out_of_stock';
+  availability: 'pronta_entrega' | 'somente_encomenda';
   buy_link: string;
   created_at: string;
   updated_at: string;
