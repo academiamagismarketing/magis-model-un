@@ -202,7 +202,7 @@ export const eventsApi = {
     return data || [];
   },
 
-  // Buscar eventos públicos (apenas upcoming e ongoing)
+  // Buscar eventos públicos (upcoming, ongoing e completed)
   async getPublicEvents(): Promise<Event[]> {
     // Primeiro atualizar status automaticamente
     await this.updateEventStatuses();
@@ -211,7 +211,7 @@ export const eventsApi = {
     const { data, error } = await supabase
       .from('events')
       .select('*')
-      .in('status', ['upcoming', 'ongoing'])
+      .in('status', ['upcoming', 'ongoing', 'completed'])
       .order('date', { ascending: true }); // Ordem cronológica
     
     if (error) throw error;
