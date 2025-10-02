@@ -81,10 +81,21 @@ const Eventos = () => {
         updated_at: event.updated_at
       }));
 
-      setEvents(eventsData);
+      // Ordenar eventos por prioridade: upcoming > ongoing > completed
+      const sortedEvents = eventsData.sort((a, b) => {
+        const statusPriority = {
+          'upcoming': 1,
+          'ongoing': 2,
+          'completed': 3
+        };
+        
+        return statusPriority[getEventStatus(a)] - statusPriority[getEventStatus(b)];
+      });
+
+      setEvents(sortedEvents);
       
       // Gerar schemas para microdata
-      const eventSchemas = generateEventPageSchemas(eventsData);
+      const eventSchemas = generateEventPageSchemas(sortedEvents);
       setSchemas(eventSchemas);
     } catch (error) {
       console.error('Erro ao carregar eventos:', error);
@@ -115,7 +126,18 @@ const Eventos = () => {
       filtered = filtered.filter(event => event.category === categoryFilter);
     }
 
-    setFilteredEvents(filtered);
+    // Ordenar eventos filtrados por prioridade: upcoming > ongoing > completed
+    const sortedFiltered = filtered.sort((a, b) => {
+      const statusPriority = {
+        'upcoming': 1,
+        'ongoing': 2,
+        'completed': 3
+      };
+      
+      return statusPriority[getEventStatus(a)] - statusPriority[getEventStatus(b)];
+    });
+
+    setFilteredEvents(sortedFiltered);
   };
 
   const handleWhatsApp = (event: Event) => {
