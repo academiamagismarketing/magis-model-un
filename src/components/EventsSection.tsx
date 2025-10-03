@@ -31,7 +31,7 @@ const EventsSection = () => {
       const data = await eventsApi.getPublicEvents();
 
       // Mapear dados do Supabase para o formato esperado
-      const eventsData = (data || []).map((event, index) => ({
+      const mappedEvents = (data || []).map((event) => ({
         id: event.id,
         title: event.title,
         date: new Date(event.date).toLocaleDateString('pt-BR', {
@@ -42,9 +42,33 @@ const EventsSection = () => {
         location: event.location,
         participants: event.participants,
         category: event.category,
-        status: event.status === 'upcoming' ? 'Em Breve' : 'Em Andamento',
-        featured: index === 0 // Primeiro evento é destaque
+        status: event.status === 'upcoming' ? 'Em Breve' : 
+                event.status === 'ongoing' ? 'Em Andamento' : 'Concluído',
+        statusValue: event.status, // Preservar o valor original para ordenação
+        createdAt: event.created_at // Para encontrar o mais recente
       }));
+
+      // Encontrar o evento em destaque: o mais recentemente adicionado que seja 'upcoming'
+      const upcomingEvents = mappedEvents.filter(event => event.statusValue === 'upcoming');
+      const featuredEvent = upcomingEvents.length > 0 
+        ? upcomingEvents.reduce((latest, current) => {
+            return new Date(current.createdAt) > new Date(latest.createdAt) ? current : latest;
+          })
+        : null;
+
+      // Marcar o evento destaque e ordenar eventos por prioridade: upcoming > ongoing > completed
+      const eventsData = mappedEvents.map(event => ({
+        ...event,
+        featured: featuredEvent ? event.id === featuredEvent.id : false
+      })).sort((a, b) => {
+        const statusPriority = {
+          'upcoming': 1,
+          'ongoing': 2,
+          'completed': 3
+        };
+        
+        return statusPriority[a.statusValue] - statusPriority[b.statusValue];
+      });
 
       setUpcomingEvents(eventsData);
     } catch (error) {
