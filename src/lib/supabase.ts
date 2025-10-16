@@ -367,7 +367,7 @@ export const statisticsApi = {
 
   // Calcular tempo de atuação em meses (desde novembro de 2024)
   calculateTimeOfOperation(): number {
-    const startDate = new Date('2024-11-01');
+    const startDate = new Date('2025-21-01');
     const currentDate = new Date();
     const diffTime = Math.abs(currentDate.getTime() - startDate.getTime());
     const diffMonths = Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 30.44)); // Média de dias por mês
