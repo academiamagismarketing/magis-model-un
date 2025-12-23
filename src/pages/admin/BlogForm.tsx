@@ -6,11 +6,11 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { 
-  ArrowLeft, 
-  Save, 
-  Eye, 
-  Plus, 
+import {
+  ArrowLeft,
+  Save,
+  Eye,
+  Plus,
   X
 } from 'lucide-react';
 import { blogApi, BlogPost } from '@/lib/supabase';
@@ -124,8 +124,8 @@ const BlogForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!formData.title.trim() || !formData.keywords.trim() || !formData.excerpt.trim() || !formData.content.trim()) {
+
+    if (!formData.title.trim() || !formData.keywords.trim() || !formData.excerpt.trim() || !formData.content.trim() || !formData.author.trim() || !formData.category) {
       toast({
         title: "Erro",
         description: "Por favor, preencha todos os campos obrigatórios.",
@@ -136,10 +136,14 @@ const BlogForm = () => {
 
     try {
       setSaving(true);
-      
+
       const postData = {
         ...formData,
-        published_at: formData.status === 'published' ? (formData.published_at || new Date().toISOString()) : null
+        published_at: formData.status === 'published'
+          ? (formData.published_at
+            ? new Date(formData.published_at).toISOString()
+            : new Date().toISOString())
+          : null
       };
 
       if (isEditing) {
@@ -155,13 +159,13 @@ const BlogForm = () => {
           description: "Publicação criada com sucesso!",
         });
       }
-      
+
       navigate('/admin/publicacoes');
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erro ao salvar publicação:', error);
       toast({
         title: "Erro",
-        description: "Não foi possível salvar a publicação.",
+        description: error.message || "Não foi possível salvar a publicação.",
         variant: "destructive",
       });
     } finally {
@@ -191,8 +195,8 @@ const BlogForm = () => {
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center space-x-4">
-          <Button 
-            variant="ghost" 
+          <Button
+            variant="ghost"
             onClick={() => navigate('/admin/publicacoes')}
             className="flex items-center space-x-2"
           >
@@ -208,9 +212,9 @@ const BlogForm = () => {
             </p>
           </div>
         </div>
-        
-        <Button 
-          variant="outline" 
+
+        <Button
+          variant="outline"
           onClick={togglePreview}
           className="flex items-center space-x-2"
         >
@@ -347,8 +351,8 @@ const BlogForm = () => {
                     {formData.tags.map((tag, index) => (
                       <Badge key={index} variant="secondary" className="flex items-center space-x-1">
                         <span>{tag}</span>
-                        <X 
-                          className="w-3 h-3 cursor-pointer" 
+                        <X
+                          className="w-3 h-3 cursor-pointer"
                           onClick={() => handleRemoveTag(tag)}
                         />
                       </Badge>
@@ -361,9 +365,9 @@ const BlogForm = () => {
                       placeholder="Adicionar tag"
                       onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddTag())}
                     />
-                    <Button 
-                      type="button" 
-                      onClick={handleAddTag} 
+                    <Button
+                      type="button"
+                      onClick={handleAddTag}
                       variant="outline"
                       aria-label="Adicionar tag"
                       title="Adicionar tag"
@@ -407,9 +411,9 @@ const BlogForm = () => {
                     <Save className="w-4 h-4 mr-2" />
                     {saving ? 'Salvando...' : (isEditing ? 'Atualizar' : 'Criar')}
                   </Button>
-                  <Button 
-                    type="button" 
-                    variant="outline" 
+                  <Button
+                    type="button"
+                    variant="outline"
                     onClick={() => navigate('/admin/publicacoes')}
                   >
                     Cancelar
@@ -447,32 +451,32 @@ const BlogForm = () => {
               <CardContent>
                 <div className="space-y-4">
                   {formData.image_url && (
-                    <img 
-                      src={formData.image_url} 
+                    <img
+                      src={formData.image_url}
                       alt={formData.title}
                       className="w-full h-48 object-cover rounded-md"
                     />
                   )}
-                  
+
                   <div>
                     <h2 className="text-2xl font-bold mb-2">{formData.title}</h2>
                     {formData.subtitle && (
                       <h3 className="text-lg text-muted-foreground mb-4">{formData.subtitle}</h3>
                     )}
                     <p className="text-muted-foreground mb-4">{formData.excerpt}</p>
-                    
+
                     {formData.keywords && (
                       <div className="mb-4">
                         <p className="text-sm font-medium mb-2">Palavras-chave:</p>
                         <p className="text-sm text-muted-foreground">{formData.keywords}</p>
                       </div>
                     )}
-                    
-                    <div 
+
+                    <div
                       className="prose max-w-none"
                       dangerouslySetInnerHTML={{ __html: formData.content }}
                     />
-                    
+
                     {formData.references && (
                       <div className="mt-6 pt-6 border-t">
                         <h4 className="font-semibold mb-2">Referências:</h4>
