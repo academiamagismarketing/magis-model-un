@@ -825,7 +825,10 @@ export const blogApi = {
       .select()
       .single();
     
-    if (error) throw error;
+    if (error) {
+      console.error('Erro ao criar post:', error);
+      throw new Error(error.message || 'Erro ao criar publicação. Verifique as permissões RLS no Supabase.');
+    }
     return data;
   },
 
@@ -838,7 +841,10 @@ export const blogApi = {
       .select()
       .single();
     
-    if (error) throw error;
+    if (error) {
+      console.error('Erro ao atualizar post:', error);
+      throw new Error(error.message || 'Erro ao atualizar publicação. Verifique as permissões RLS no Supabase.');
+    }
     return data;
   },
 

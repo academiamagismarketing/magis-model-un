@@ -16,6 +16,8 @@ import {
 import { blogApi, BlogPost } from '@/lib/supabase';
 import { useToast } from '@/hooks/use-toast';
 import ImageUpload from '@/components/ImageUpload';
+import RichTextEditor from '@/components/admin/RichTextEditor';
+import { Switch } from '@/components/ui/switch';
 
 const BlogForm = () => {
   const navigate = useNavigate();
@@ -35,9 +37,9 @@ const BlogForm = () => {
     author: '',
     category: '',
     tags: [] as string[],
-    status: 'draft' as 'draft' | 'published' | 'archived',
+    status: 'published' as 'draft' | 'published' | 'archived',
     image_url: '',
-    published_at: ''
+    published_at: new Date().toISOString()
   });
 
   const [newTag, setNewTag] = useState('');
@@ -137,13 +139,11 @@ const BlogForm = () => {
     try {
       setSaving(true);
 
+
       const postData = {
         ...formData,
-        published_at: formData.status === 'published'
-          ? (formData.published_at
-            ? new Date(formData.published_at).toISOString()
-            : new Date().toISOString())
-          : null
+        status: formData.status,
+        published_at: formData.status === 'published' ? (formData.published_at || new Date().toISOString()) : null
       };
 
       if (isEditing) {
@@ -163,9 +163,26 @@ const BlogForm = () => {
       navigate('/admin/publicacoes');
     } catch (error: any) {
       console.error('Erro ao salvar publicação:', error);
+      
+      // Mensagem de erro mais detalhada
+      let errorMessage = "Não foi possível salvar a publicação.";
+      
+      if (error?.message) {
+        errorMessage = error.message;
+      } else if (error?.error?.message) {
+        errorMessage = error.error.message;
+      } else if (typeof error === 'string') {
+        errorMessage = error;
+      }
+      
+      // Verificar se é erro de permissão RLS
+      if (errorMessage.includes('permission') || errorMessage.includes('policy') || errorMessage.includes('RLS')) {
+        errorMessage = "Erro de permissão. Verifique as políticas RLS no Supabase. Execute o script fix-blog-rls-admin.sql";
+      }
+      
       toast({
-        title: "Erro",
-        description: error.message || "Não foi possível salvar a publicação.",
+        title: "Erro ao salvar",
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {
@@ -287,17 +304,12 @@ const BlogForm = () => {
                 {/* Corpo de Texto (Obrigatório) */}
                 <div>
                   <Label htmlFor="content">Corpo de Texto *</Label>
-                  <Textarea
+                  <RichTextEditor
                     id="content"
                     value={formData.content}
-                    onChange={(e) => handleInputChange('content', e.target.value)}
-                    placeholder="Digite o conteúdo completo da publicação (HTML suportado)"
-                    rows={15}
-                    required
+                    onChange={(value) => handleInputChange('content', value)}
+                    placeholder="Digite o conteúdo da publicação..."
                   />
-                  <p className="text-sm text-muted-foreground mt-1">
-                    Você pode usar HTML para formatação (h2, h3, p, ul, ol, strong, em, etc.)
-                  </p>
                 </div>
 
                 {/* Referências (Opcional) */}
@@ -377,33 +389,25 @@ const BlogForm = () => {
                   </div>
                 </div>
 
-                {/* Status */}
-                <div>
-                  <Label htmlFor="status">Status</Label>
-                  <select
-                    id="status"
-                    value={formData.status}
-                    onChange={(e) => handleInputChange('status', e.target.value)}
-                    className="w-full px-3 py-2 border border-input rounded-md bg-background"
-                  >
-                    <option value="draft">Rascunho</option>
-                    <option value="published">Publicado</option>
-                    <option value="archived">Arquivado</option>
-                  </select>
-                </div>
-
-                {/* Data de Publicação */}
-                {formData.status === 'published' && (
-                  <div>
-                    <Label htmlFor="published_at">Data de Publicação</Label>
-                    <Input
-                      id="published_at"
-                      type="datetime-local"
-                      value={formData.published_at}
-                      onChange={(e) => handleInputChange('published_at', e.target.value)}
+                {/* Status e Publicação */}
+                <div className="flex items-center space-x-4 p-4 border rounded-md bg-muted/20">
+                  <div className="flex items-center space-x-2">
+                    <Switch
+                      id="status-mode"
+                      checked={formData.status === 'published'}
+                      onCheckedChange={(checked) => {
+                        setFormData(prev => ({
+                          ...prev,
+                          status: checked ? 'published' : 'draft',
+                          published_at: checked ? (prev.published_at || new Date().toISOString()) : ''
+                        }));
+                      }}
                     />
+                    <Label htmlFor="status-mode" className="cursor-pointer">
+                      {formData.status === 'published' ? 'Publicado (Visível no site)' : 'Rascunho (Oculto)'}
+                    </Label>
                   </div>
-                )}
+                </div>
 
                 {/* Botões de Ação */}
                 <div className="flex space-x-4">
