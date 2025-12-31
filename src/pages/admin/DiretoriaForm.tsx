@@ -216,7 +216,7 @@ const DiretoriaForm = () => {
                       id="experiencia"
                       value={formData.experiencia}
                       onChange={(e) => handleInputChange('experiencia', e.target.value)}
-                      placeholder="Ex: 5+ anos em simulações da ONU"
+                      placeholder="Ex: 5+ anos em Simulações Termáticas"
                       required
                     />
                   </div>

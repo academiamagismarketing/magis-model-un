@@ -230,7 +230,7 @@ const Eventos = () => {
     });
   };
 
-  const categories = ['Simulação ONU', 'Workshop', 'Preparatório', 'Conferência', 'Congresso', 'Outros'];
+  const categories = ['Simulações Termáticas', 'Workshop', 'Preparatório', 'Conferência', 'Congresso', 'Outros'];
   const statuses = ['upcoming', 'ongoing', 'completed'];
 
   if (loading) {
@@ -250,14 +250,14 @@ const Eventos = () => {
     <>
       {/* SEO Head */}
       <Helmet>
-        <title>Eventos Academia MAGIS | Simulações MUN e Workshops</title>
+        <title>Eventos Academia MAGIS | Simulações Termáticas e Workshops</title>
         <meta name="description" content="Confira os próximos eventos que a Academia MAGIS irá participar!" />
-        <meta name="keywords" content="eventos academia MAGIS, simulações MUN, workshops diplomacia, conferências acadêmicas, eventos acadêmicos Brasil, MUN eventos" />
+        <meta name="keywords" content="eventos academia MAGIS, Simulações Termáticas, workshops diplomacia, conferências acadêmicas, eventos acadêmicos Brasil" />
         <meta name="author" content="Academia MAGIS" />
         <meta name="robots" content="index, follow" />
         
         {/* Open Graph */}
-        <meta property="og:title" content="Eventos Academia MAGIS | Simulações MUN e Workshops" />
+        <meta property="og:title" content="Eventos Academia MAGIS | Simulações Termáticas e Workshops" />
         <meta property="og:description" content="Confira os próximos eventos que a Academia MAGIS irá participar!" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://academiamagis.com.br/eventos" />
@@ -265,7 +265,7 @@ const Eventos = () => {
         
         {/* Twitter Cards */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Eventos Academia MAGIS | Simulações MUN e Workshops" />
+        <meta name="twitter:title" content="Eventos Academia MAGIS | Simulações Termáticas e Workshops" />
         <meta name="twitter:description" content="Confira os próximos eventos que a Academia MAGIS irá participar!" />
         
         

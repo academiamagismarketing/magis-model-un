@@ -141,8 +141,8 @@ export const generateOrganizationSchema = (data: OrganizationSchema) => {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
-            "name": "Simulações MUN",
-            "description": "Simulações do Modelo das Nações Unidas"
+            "name": "Simulações Termáticas",
+            "description": "Simulações acadêmicas educacionais"
           }
         },
         {
@@ -212,7 +212,7 @@ export const generateEventListSchema = (events: EventSchema[]) => {
     "@context": "https://schema.org",
     "@type": "ItemList",
     "name": "Eventos Academia MAGIS",
-    "description": "Lista de eventos, simulações MUN e workshops da Academia MAGIS",
+    "description": "Lista de eventos, Simulações Termáticas e workshops da Academia MAGIS",
     "numberOfItems": events.length,
     "itemListElement": events.map((event, index) => ({
       "@type": "ListItem",
@@ -416,7 +416,7 @@ export const generateServiceSchema = (name: string, description: string, provide
  */
 export const MAGIS_ORGANIZATION_DATA: OrganizationSchema = {
   name: "Academia MAGIS",
-  description: "Academia especializada em simulações acadêmicas, mentorias educacionais e atividades MUN para democratizar o acesso à educação de qualidade",
+  description: "Academia especializada em Simulações Termáticas, mentorias educacionais e atividades acadêmicas para democratizar o acesso à educação de qualidade",
   url: "https://academiamagis.com",
   logo: "https://academiamagis.com/logo_magis.svg",
   address: {
@@ -447,7 +447,7 @@ export const generateHomepageSchemas = () => {
   const websiteSchema = generateWebsiteSchema(
     "https://academiamagis.com",
     "Academia MAGIS",
-    "Simulações MUN, mentorias e workshops de diplomacia"
+    "Simulações Termáticas, mentorias e workshops de diplomacia"
   );
   
   return [organizationSchema, websiteSchema];

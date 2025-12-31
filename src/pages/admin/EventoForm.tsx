@@ -138,7 +138,7 @@ const EventoForm = () => {
     }
   };
 
-  const categories = ['Simulação ONU', 'Workshop', 'Preparatório', 'Conferência', 'Congresso', 'Outros'];
+  const categories = ['Simulações Termáticas', 'Workshop', 'Preparatório', 'Conferência', 'Congresso', 'Outros'];
   const statuses = [
     { value: 'upcoming', label: 'Em Breve' },
     { value: 'ongoing', label: 'Em Andamento' },

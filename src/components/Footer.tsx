@@ -59,7 +59,7 @@ const Footer = () => {
               />
             </div>
             <p className="text-primary-foreground/80 mb-6 max-w-md mx-auto sm:mx-0">
-              Transformando jovens em líderes diplomáticos através de simulações da ONU e educação de excelência.
+              Transformando jovens em líderes diplomáticos através de Simulações Termáticas e educação de excelência.
             </p>
             
             {/* Social Links */}

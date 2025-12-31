@@ -105,14 +105,14 @@ const Sobre = () => {
       {/* SEO Head */}
       <Helmet>
         <title>Sobre a Academia MAGIS | História, Missão e Valores</title>
-        <meta name="description" content="Conheça a história da Academia MAGIS, nossa missão de democratizar simulações acadêmicas e MUN, e como formamos líderes diplomáticos do futuro." />
-        <meta name="keywords" content="história academia MAGIS, missão valores, simulações ONU, MUN Brasil, diplomacia acadêmica, liderança internacional, academia MAGIS sobre" />
+        <meta name="description" content="Conheça a história da Academia MAGIS, nossa missão de democratizar Simulações Termáticas e atividades acadêmicas, e como formamos líderes diplomáticos do futuro." />
+        <meta name="keywords" content="história academia MAGIS, missão valores, Simulações Termáticas, atividades acadêmicas, diplomacia acadêmica, liderança internacional, academia MAGIS sobre" />
         <meta name="author" content="Academia MAGIS" />
         <meta name="robots" content="index, follow" />
         
         {/* Open Graph */}
         <meta property="og:title" content="Sobre a Academia MAGIS | História, Missão e Valores" />
-        <meta property="og:description" content="Conheça a história da Academia MAGIS, nossa missão de democratizar simulações acadêmicas e MUN, e como formamos líderes diplomáticos do futuro." />
+        <meta property="og:description" content="Conheça a história da Academia MAGIS, nossa missão de democratizar Simulações Termáticas e atividades acadêmicas, e como formamos líderes diplomáticos do futuro." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://academiamagis.com.br/sobre" />
         <meta property="og:image" content="https://academiamagis.com.br/og-image.jpg" />
@@ -120,7 +120,7 @@ const Sobre = () => {
         {/* Twitter Cards */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Sobre a Academia MAGIS | História, Missão e Valores" />
-        <meta name="twitter:description" content="Conheça a história da Academia MAGIS, nossa missão de democratizar simulações acadêmicas e MUN, e como formamos líderes diplomáticos do futuro." />
+        <meta name="twitter:description" content="Conheça a história da Academia MAGIS, nossa missão de democratizar Simulações Termáticas e atividades acadêmicas, e como formamos líderes diplomáticos do futuro." />
         
         
         {/* Canonical */}
@@ -339,13 +339,13 @@ const Sobre = () => {
                   Nossa História
                 </h2>
                 <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                  Fundada em 2024, a Academia MAGIS nasceu do sonho de democratizar o mundo acadêmico - com destaque para as Simulações da ONU.
+                  Fundada em 2024, a Academia MAGIS nasceu do sonho de democratizar o mundo acadêmico - com destaque para as Simulações Termáticas.
                 </p>
                 <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
                   Ao longo do tempo, desenvolvemos uma metodologia única que combina teoria e práxis, preparando jovens para os desafios do Século XXI.
                 </p>
                 <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                  Hoje somos referência regional em Simulações da ONU, com dezenas de delegados enviados para inúmeros eventos. 
+                  Hoje somos referência regional em Simulações Termáticas, com dezenas de delegados enviados para inúmeros eventos.
                 </p>
                 <Button
                   onClick={handleWhatsApp}

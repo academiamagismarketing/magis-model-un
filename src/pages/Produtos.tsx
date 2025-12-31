@@ -208,14 +208,14 @@ const Produtos = () => {
     <>
       {/* SEO Head */}
       <Helmet>
-        <title>Produtos Academia MAGIS | Pins, Kits e Materiais MUN</title>
+        <title>Produtos Academia MAGIS | Pins, Kits e Materiais de Simulações Termáticas</title>
         <meta name="description" content="Confira nossa linha de produtos exclusivos: pins, kits de delegado, materiais de estudo e itens personalizados da Academia MAGIS." />
-        <meta name="keywords" content="produtos academia MAGIS, pins MUN, kits delegado, materiais simulação ONU, produtos acadêmicos, academia MAGIS loja" />
+        <meta name="keywords" content="produtos academia MAGIS, pins Simulações Termáticas, kits delegado, materiais educacionais, produtos acadêmicos, academia MAGIS loja" />
         <meta name="author" content="Academia MAGIS" />
         <meta name="robots" content="index, follow" />
         
         {/* Open Graph */}
-        <meta property="og:title" content="Produtos Academia MAGIS | Pins, Kits e Materiais MUN" />
+        <meta property="og:title" content="Produtos Academia MAGIS | Pins, Kits e Materiais de Simulações Termáticas" />
         <meta property="og:description" content="Confira nossa linha de produtos exclusivos: pins, kits de delegado, materiais de estudo e itens personalizados da Academia MAGIS." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://academiamagis.com.br/produtos" />
@@ -223,7 +223,7 @@ const Produtos = () => {
         
         {/* Twitter Cards */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Produtos Academia MAGIS | Pins, Kits e Materiais MUN" />
+        <meta name="twitter:title" content="Produtos Academia MAGIS | Pins, Kits e Materiais de Simulações Termáticas" />
         <meta name="twitter:description" content="Confira nossa linha de produtos exclusivos: pins, kits de delegado, materiais de estudo e itens personalizados da Academia MAGIS." />
         
         {/* Canonical */}

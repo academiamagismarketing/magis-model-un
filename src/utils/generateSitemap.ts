@@ -232,7 +232,7 @@ export const updateSitemap = async (
   products: any[] = [],
   blogPosts: any[] = [],
   categories: string[] = ['simulacoes', 'workshops', 'congressos'],
-  tags: string[] = ['mun', 'diplomacia', 'onu', 'estudantes']
+  tags: string[] = ['simulacoes-termaticas', 'diplomacia', 'conferencias', 'estudantes']
 ): Promise<string> => {
   const sitemapXML = generateSitemapXML(events, products, blogPosts, categories, tags);
   await saveSitemap(sitemapXML);

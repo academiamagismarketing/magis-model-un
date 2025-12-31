@@ -28,10 +28,10 @@ const SeoHead: React.FC<SeoHeadProps> = ({
   const seoTitle = `${title} | Academia MAGIS - Simulações & Mentorias Acadêmicas`;
   
   // Otimizar descrição para incluir palavras-chave acadêmicas
-  const seoDescription = `${description} Descubra como participar de simulações acadêmicas, mentorias educacionais e atividades MUN na Academia MAGIS.`;
+  const seoDescription = `${description} Descubra como participar de Simulações Termáticas, mentorias educacionais e atividades acadêmicas na Academia MAGIS.`;
   
   // Expandir palavras-chave com termos relacionados
-  const expandedKeywords = `${keywords}, simulações acadêmicas, mentorias educacionais, MUN, atividades extracurriculares, diplomacia, relações internacionais, academia MAGIS`;
+  const expandedKeywords = `${keywords}, Simulações Termáticas, mentorias educacionais, atividades acadêmicas, diplomacia, relações internacionais, academia MAGIS`;
 
   return (
     <Helmet>
@@ -87,12 +87,12 @@ const SeoHead: React.FC<SeoHeadProps> = ({
           "keywords": expandedKeywords,
           "articleSection": category,
           "about": [
-            "Simulações acadêmicas",
-            "Mentorias educacionais", 
-            "MUN - Model United Nations",
+            "Simulações Termáticas",
+            "Mentorias educacionais",
+            "Atividades acadêmicas",
             "Diplomacia",
             "Relações internacionais",
-            "Atividades extracurriculares"
+            "Educação superior"
           ],
           "audience": {
             "@type": "Audience",
