@@ -5,7 +5,7 @@ export const seoConfig = {
   site: {
     name: 'Academia MAGIS',
     title: 'Academia MAGIS - Simulações & Mentorias Acadêmicas',
-    description: 'Portal de referência nacional sobre Simulações Termáticas, mentorias educacionais e atividades acadêmicas. Descubra como participar de simulações diplomáticas e desenvolver habilidades internacionais.',
+    description: 'Portal de referência nacional sobre Simulações Temáticas, mentorias educacionais e atividades acadêmicas. Descubra como participar de simulações diplomáticas e desenvolver habilidades internacionais.',
     url: 'https://academiamagis.com.br',
     language: 'pt-BR',
     locale: 'pt_BR',
@@ -15,7 +15,7 @@ export const seoConfig = {
   // Palavras-chave principais para ranqueamento
   keywords: {
     primary: [
-      'Simulações Termáticas',
+      'Simulações Temáticas',
       'mentorias educacionais',
       'diplomacia',
       'relações internacionais',
@@ -26,7 +26,7 @@ export const seoConfig = {
     ],
     secondary: [
       'academia MAGIS',
-      'Simulações Termáticas',
+      'Simulações Temáticas',
       'mentorias universitárias',
       'programas educacionais',
       'desenvolvimento de liderança',
@@ -37,13 +37,13 @@ export const seoConfig = {
       'desenvolvimento sustentável'
     ],
     longTail: [
-      'como participar de Simulações Termáticas',
+      'como participar de Simulações Temáticas',
       'mentorias para estudantes de relações internacionais',
-      'Simulações Termáticas no Brasil',
+      'Simulações Temáticas no Brasil',
       'simulações diplomáticas para jovens',
       'atividades extracurriculares universitárias',
       'desenvolvimento de habilidades diplomáticas',
-      'Simulações Termáticas no Brasil',
+      'Simulações Temáticas no Brasil',
       'mentorias educacionais internacionais',
       'programas de liderança acadêmica',
       'simulações de política externa'
@@ -73,23 +73,23 @@ export const seoConfig = {
   pages: {
     home: {
       title: 'Academia MAGIS - Simulações & Mentorias Acadêmicas | Portal de Referência Nacional',
-      description: 'Descubra como participar de Simulações Termáticas, mentorias educacionais e atividades acadêmicas. Portal de referência nacional sobre diplomacia e relações internacionais.',
-      keywords: 'Simulações Termáticas, mentorias educacionais, diplomacia, relações internacionais, academia MAGIS'
+      description: 'Descubra como participar de Simulações Temáticas, mentorias educacionais e atividades acadêmicas. Portal de referência nacional sobre diplomacia e relações internacionais.',
+      keywords: 'Simulações Temáticas, mentorias educacionais, diplomacia, relações internacionais, academia MAGIS'
     },
     publications: {
       title: 'Publicações Acadêmicas | Simulações, Mentorias e Atividades Acadêmicas | Academia MAGIS',
-      description: 'Artigos especializados sobre Simulações Termáticas, mentorias educacionais e atividades acadêmicas. Conteúdo de autoridade para estudantes e educadores.',
-      keywords: 'publicações acadêmicas, artigos Simulações Termáticas, simulações diplomáticas, mentorias educacionais, conteúdo acadêmico'
+      description: 'Artigos especializados sobre Simulações Temáticas, mentorias educacionais e atividades acadêmicas. Conteúdo de autoridade para estudantes e educadores.',
+      keywords: 'publicações acadêmicas, artigos Simulações Temáticas, simulações diplomáticas, mentorias educacionais, conteúdo acadêmico'
     },
     about: {
       title: 'Sobre a Academia MAGIS | Simulações e Mentorias Acadêmicas',
-      description: 'Conheça a Academia MAGIS, instituição de referência em Simulações Termáticas e mentorias educacionais no Brasil.',
-      keywords: 'sobre academia MAGIS, história, missão, valores, Simulações Termáticas'
+      description: 'Conheça a Academia MAGIS, instituição de referência em Simulações Temáticas e mentorias educacionais no Brasil.',
+      keywords: 'sobre academia MAGIS, história, missão, valores, Simulações Temáticas'
     },
     contact: {
       title: 'Contato | Academia MAGIS - Simulações & Mentorias',
-      description: 'Entre em contato com a Academia MAGIS para informações sobre Simulações Termáticas, mentorias e atividades acadêmicas.',
-      keywords: 'contato academia MAGIS, informações, Simulações Termáticas, mentorias'
+      description: 'Entre em contato com a Academia MAGIS para informações sobre Simulações Temáticas, mentorias e atividades acadêmicas.',
+      keywords: 'contato academia MAGIS, informações, Simulações Temáticas, mentorias'
     }
   },
 
@@ -98,7 +98,7 @@ export const seoConfig = {
     organization: {
       "@type": "EducationalOrganization",
       "name": "Academia MAGIS",
-      "description": "Instituição de referência em Simulações Termáticas e mentorias educacionais",
+      "description": "Instituição de referência em Simulações Temáticas e mentorias educacionais",
       "url": "https://academiamagis.com.br",
       "logo": "https://academiamagis.com.br/logo.png",
       "sameAs": [
@@ -119,7 +119,7 @@ export const seoConfig = {
       },
       "areaServed": "BR",
       "serviceType": [
-        "Simulações Termáticas",
+        "Simulações Temáticas",
         "Mentorias educacionais",
         "Atividades acadêmicas",
         "Programas de liderança"

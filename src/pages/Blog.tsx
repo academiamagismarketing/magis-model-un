@@ -124,14 +124,14 @@ const Blog = () => {
       {/* SEO Head */}
       <Helmet>
         <title>Blog Academia MAGIS | Artigos e Conteúdo Acadêmico</title>
-        <meta name="description" content="Acesse nosso blog com artigos sobre Simulações Termáticas, diplomacia, relações internacionais e dicas para estudantes acadêmicos." />
-        <meta name="keywords" content="blog academia MAGIS, artigos Simulações Termáticas, diplomacia, relações internacionais, conteúdo acadêmico" />
+        <meta name="description" content="Acesse nosso blog com artigos sobre Simulações Temáticas, diplomacia, relações internacionais e dicas para estudantes acadêmicos." />
+        <meta name="keywords" content="blog academia MAGIS, artigos Simulações Temáticas, diplomacia, relações internacionais, conteúdo acadêmico" />
         <meta name="author" content="Academia MAGIS" />
         <meta name="robots" content="index, follow" />
         
         {/* Open Graph */}
         <meta property="og:title" content="Blog Academia MAGIS | Artigos e Conteúdo Acadêmico" />
-        <meta property="og:description" content="Acesse nosso blog com artigos sobre Simulações Termáticas, diplomacia, relações internacionais e dicas para estudantes acadêmicos." />
+        <meta property="og:description" content="Acesse nosso blog com artigos sobre Simulações Temáticas, diplomacia, relações internacionais e dicas para estudantes acadêmicos." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://academiamagis.com.br/blog" />
         <meta property="og:image" content="https://academiamagis.com.br/og-image.jpg" />
@@ -160,7 +160,7 @@ const Blog = () => {
             </h1>
             <p className="text-xl md:text-2xl opacity-90 leading-relaxed max-w-3xl mx-auto">
               Descubra insights, notícias e reflexões sobre diplomacia,
-              relações internacionais e as Simulações Termáticas.
+              relações internacionais e as Simulações Temáticas.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 text-sm text-primary-foreground/80 mt-8">
               <div className="flex items-center space-x-2">
@@ -320,7 +320,7 @@ const Blog = () => {
             Quer contribuir com o blog?
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground mb-6 md:mb-8 max-w-2xl mx-auto">
-            Se você tem experiência em diplomacia, relações internacionais ou Simulações Termáticas,
+            Se você tem experiência em diplomacia, relações internacionais ou Simulações Temáticas,
             compartilhe seu conhecimento conosco!
           </p>
           <Button size="lg" className="bg-primary hover:bg-primary/90">

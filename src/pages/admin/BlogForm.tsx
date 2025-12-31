@@ -47,7 +47,7 @@ const BlogForm = () => {
   const categories = [
     'Diplomacia',
     'Relações Internacionais',
-    'Simulações Termáticas',
+    'Simulações Temáticas',
     'Política Externa',
     'Cooperação Internacional',
     'Direito Internacional',

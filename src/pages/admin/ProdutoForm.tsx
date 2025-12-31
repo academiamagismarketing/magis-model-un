@@ -187,7 +187,7 @@ const ProdutoForm = () => {
                     type="text"
                     value={formData.name}
                     onChange={(e) => handleInputChange('name', e.target.value)}
-                    placeholder="Ex: Manual de Simulações Termáticas"
+                    placeholder="Ex: Manual de Simulações Temáticas"
                     className="pl-10"
                     required
                   />

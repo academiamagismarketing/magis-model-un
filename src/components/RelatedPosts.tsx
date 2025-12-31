@@ -26,7 +26,7 @@ const RelatedPosts: React.FC<RelatedPostsProps> = ({ posts, currentPostId, categ
           Artigos Relacionados sobre {category}
         </h2>
         <p className="text-muted-foreground">
-          Continue explorando conteúdo sobre Simulações Termáticas e mentorias educacionais
+          Continue explorando conteúdo sobre Simulações Temáticas e mentorias educacionais
         </p>
       </div>
 
@@ -139,7 +139,7 @@ const RelatedPosts: React.FC<RelatedPostsProps> = ({ posts, currentPostId, categ
           Ver todas as publicações
         </Link>
         <p className="text-sm text-muted-foreground mt-2">
-          Descubra mais sobre Simulações Termáticas, mentorias e atividades acadêmicas
+          Descubra mais sobre Simulações Temáticas, mentorias e atividades acadêmicas
         </p>
       </div>
     </section>

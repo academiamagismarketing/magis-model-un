@@ -18,15 +18,15 @@ const Index = () => {
     <>
       {/* SEO Head */}
       <Helmet>
-        <title>Academia MAGIS | Simulações Termáticas e Mentorias Acadêmicas</title>
-        <meta name="description" content="Descubra como participar de Simulações Termáticas, mentorias educacionais e atividades acadêmicas na Academia MAGIS. Formamos as próximas gerações de líderes diplomáticos e internacionais." />
-        <meta name="keywords" content="Simulações Termáticas, mentorias educacionais, diplomacia, relações internacionais, academia MAGIS, workshops, liderança acadêmica" />
+        <title>Academia MAGIS | Simulações Temáticas e Mentorias Acadêmicas</title>
+        <meta name="description" content="Descubra como participar de Simulações Temáticas, mentorias educacionais e atividades acadêmicas na Academia MAGIS. Formamos as próximas gerações de líderes diplomáticos e internacionais." />
+        <meta name="keywords" content="Simulações Temáticas, mentorias educacionais, diplomacia, relações internacionais, academia MAGIS, workshops, liderança acadêmica" />
         <meta name="author" content="Academia MAGIS" />
         <meta name="robots" content="index, follow" />
         
         {/* Open Graph */}
         <meta property="og:title" content="Academia MAGIS - Simulações & Mentorias Acadêmicas" />
-        <meta property="og:description" content="Descubra como participar de Simulações Termáticas, mentorias educacionais e atividades acadêmicas na Academia MAGIS." />
+        <meta property="og:description" content="Descubra como participar de Simulações Temáticas, mentorias educacionais e atividades acadêmicas na Academia MAGIS." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://academiamagis.com" />
         <meta property="og:image" content="https://academiamagis.com/og-image.jpg" />
@@ -36,7 +36,7 @@ const Index = () => {
         {/* Twitter Cards */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Academia MAGIS - Simulações & Mentorias Acadêmicas" />
-        <meta name="twitter:description" content="Descubra como participar de Simulações Termáticas, mentorias educacionais e atividades acadêmicas na Academia MAGIS." />
+        <meta name="twitter:description" content="Descubra como participar de Simulações Temáticas, mentorias educacionais e atividades acadêmicas na Academia MAGIS." />
         <meta name="twitter:image" content="https://academiamagis.com/og-image.jpg" />
         
         {/* Canonical */}
@@ -57,7 +57,7 @@ const Index = () => {
             </h2>
             <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
               A Academia MAGIS democratiza o acesso a oportunidades acadêmicas por meio de
-              Simulações Termáticas, workshops e mentorias para formar as próximas gerações de líderes.
+              Simulações Temáticas, workshops e mentorias para formar as próximas gerações de líderes.
             </p>
 
             {/* Detalhes rápidos para o usuário */}
@@ -65,7 +65,7 @@ const Index = () => {
               <div className="bg-muted rounded-xl p-4 flex items-start gap-3">
                 <Target className="w-5 h-5 text-primary mt-1" />
                 <div>
-                  <div className="font-semibold text-foreground">Simulações Termáticas</div>
+                  <div className="font-semibold text-foreground">Simulações Temáticas</div>
                   <div className="text-sm text-muted-foreground">Simulações acadêmicas educacionais para desenvolvimento de habilidades.</div>
                 </div>
               </div>

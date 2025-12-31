@@ -27,7 +27,7 @@ const StatsSection = () => {
       icon: Calendar,
       value: '10+',
       label: 'Eventos Participados',
-      description: 'Simulações Termáticas e outros eventos'
+      description: 'Simulações Temáticas e outros eventos'
     }
   ];
 

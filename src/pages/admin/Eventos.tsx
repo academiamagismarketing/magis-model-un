@@ -174,7 +174,7 @@ const AdminEventos = () => {
     return `R$ ${price.toFixed(2).replace('.', ',')}`;
   };
 
-  const categories = ['Simulações Termáticas', 'Workshop', 'Preparatório', 'Conferência', 'Congresso', 'Outros'];
+  const categories = ['Simulações Temáticas', 'Workshop', 'Preparatório', 'Conferência', 'Congresso', 'Outros'];
   const statuses = ['upcoming', 'ongoing', 'completed', 'cancelled'];
 
   if (loading) {

@@ -111,14 +111,14 @@ Enviado através do site da Academia MAGIS`;
       {/* SEO Head */}
       <Helmet>
         <title>Contato Academia MAGIS | Fale Conosco</title>
-        <meta name="description" content="Entre em contato com a Academia MAGIS. Tire suas dúvidas sobre Simulações Termáticas, mentorias e participe de nossos eventos acadêmicos." />
-        <meta name="keywords" content="contato academia MAGIS, fale conosco, Simulações Termáticas, mentorias acadêmicas, eventos acadêmicos" />
+        <meta name="description" content="Entre em contato com a Academia MAGIS. Tire suas dúvidas sobre Simulações Temáticas, mentorias e participe de nossos eventos acadêmicos." />
+        <meta name="keywords" content="contato academia MAGIS, fale conosco, Simulações Temáticas, mentorias acadêmicas, eventos acadêmicos" />
         <meta name="author" content="Academia MAGIS" />
         <meta name="robots" content="index, follow" />
         
         {/* Open Graph */}
         <meta property="og:title" content="Contato Academia MAGIS | Fale Conosco" />
-        <meta property="og:description" content="Entre em contato com a Academia MAGIS. Tire suas dúvidas sobre Simulações Termáticas, mentorias e participe de nossos eventos acadêmicos." />
+        <meta property="og:description" content="Entre em contato com a Academia MAGIS. Tire suas dúvidas sobre Simulações Temáticas, mentorias e participe de nossos eventos acadêmicos." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://academiamagis.com.br/contato" />
         <meta property="og:image" content="https://academiamagis.com.br/og-image.jpg" />
